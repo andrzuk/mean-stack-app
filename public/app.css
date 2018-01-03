@@ -20,6 +20,5 @@ button.action {
 }
 section#main-content {
     text-align: center;
-    width: 100vw;
-    min-height: calc(100vh - 220px);
+    min-height: calc(100vh - 264px);
 }
