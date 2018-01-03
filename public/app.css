@@ -1,0 +1,25 @@
+body {
+    color: #777;
+}
+.table-bordered>thead>tr>th,
+.table-bordered>tbody>tr>th,
+.table-bordered>tfoot>tr>th {
+    font-size: 1.0em;
+    padding: 15px 8px;
+    background-color: #def;
+}
+.table-bordered>thead>tr>td,
+.table-bordered>tbody>tr>td,
+.table-bordered>tfoot>tr>td {
+    font-size: 0.9em;
+    padding: 8px 8px;
+    vertical-align: middle;
+}
+button.action {
+    width: 50px;
+}
+section#main-content {
+    text-align: center;
+    width: 100vw;
+    min-height: calc(100vh - 220px);
+}
