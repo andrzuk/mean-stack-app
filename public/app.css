@@ -17,6 +17,11 @@ header {
 p.lead {
     font-size: 1.75em;
 }
+img#page-logo {
+    width: auto;
+    height: 50px;
+    margin: 2px;
+}
 .table-bordered>thead>tr>th,
 .table-bordered>tbody>tr>th,
 .table-bordered>tfoot>tr>th {
