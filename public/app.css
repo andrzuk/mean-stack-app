@@ -23,6 +23,7 @@ p.lead {
     font-size: 1.0em;
     padding: 15px 8px;
     background-color: #def;
+    border-color: #bbb;
 }
 .table-bordered>thead>tr>td,
 .table-bordered>tbody>tr>td,
@@ -30,9 +31,10 @@ p.lead {
     font-size: 0.9em;
     padding: 8px 8px;
     vertical-align: middle;
+    border-color: #ccc;
 }
 button.action {
-    width: 50px;
+    width: 70px;
 }
 section#main-content {
     text-align: center;
