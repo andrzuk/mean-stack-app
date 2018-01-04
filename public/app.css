@@ -1,5 +1,21 @@
 body {
     color: #777;
+    padding-top: 54px;
+}
+nav.bg-dark {
+    background-color: #004085!important;
+}
+footer.bg-dark {
+    background-color: #d0d0d0!important;
+}
+p.text-white {
+    color: #505050!important;
+}
+header {
+    padding: 20px 0 2px 0;
+}
+p.lead {
+    font-size: 1.75em;
 }
 .table-bordered>thead>tr>th,
 .table-bordered>tbody>tr>th,
@@ -20,5 +36,5 @@ button.action {
 }
 section#main-content {
     text-align: center;
-    min-height: calc(100vh - 264px);
+    min-height: calc(100vh - 310px);
 }
