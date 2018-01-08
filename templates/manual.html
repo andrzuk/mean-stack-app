@@ -3,32 +3,29 @@
     <style>
         div#manual-title {
             font-size: 1.5em;
-        }
-        
+            margin-bottom: 1.0em;
+        }        
         div#manual-picture {
-            height: 600px;
-        }
-        
+        }        
         img#manual-image {
-            width: auto;
-            height: 560px;
-        }
-        
+            width: 100%;
+            height: auto;
+            padding: 1px;
+            border: 1px solid #ccc;
+        }        
         div#manual-buttons {
-            position: absolute;
-            bottom: 40px;
-        }
-        
+            margin: 1.0em 0;
+        }        
         span#manual-page {
-            width: 50px;
+            width: 100px;
             text-align: center;
             font-weight: bold;
-        }
-        
+            display: inline-block;
+        }        
         div#manual-description {
             font-size: 1.0em;
+            margin: 1.0em 0;
         }
-
     </style>
 
     <div class="col-lg-10 offset-lg-1">
@@ -38,9 +35,9 @@
         <div id="manual-picture">
             <img src="img/1.png" id="manual-image" alt="MEAN Stack Application">
             <div id="manual-buttons">
-                <button class="btn btn-success" id="manual-prev"> &larr; </button>
-                <span id="manual-page">1</span>
-                <button class="btn btn-success" id="manual-next"> &rarr; </button>
+                <button class="btn btn-success" id="manual-prev"> &#8678; </button>
+                <span id="manual-page">1 z 23</span>
+                <button class="btn btn-success" id="manual-next"> &#8680; </button>
             </div>
         </div>
         <div id="manual-description">
@@ -51,6 +48,103 @@
     <script>
         var pageId = 1;
         const pagesCount = 23;
+        
+        const manual = {
+            pages: [
+                { 
+                    title: 'Krok 1. Tworzymy nowy projekt',
+                    description: 'Po zalogowaniu na swoje konto w serwisie OpenShift widzimy ekran powitalny z przyciskiem utworzenia nowego projektu. Klikamy na ten przycisk.',
+                },
+                { 
+                    title: 'Krok 2. Nadajemy nazwę i opis',
+                    description: 'Otwiera nam się formularz, w którym wpisujemy unikalną nazwę projektu, przyjazną nazwę projektu oraz jego opis.',
+                },
+                { 
+                    title: '',
+                    description: '',
+                },
+                { 
+                    title: '',
+                    description: '',
+                },
+                { 
+                    title: '',
+                    description: '',
+                },
+                { 
+                    title: '',
+                    description: '',
+                },
+                { 
+                    title: '',
+                    description: '',
+                },
+                { 
+                    title: '',
+                    description: '',
+                },
+                { 
+                    title: '',
+                    description: '',
+                },
+                { 
+                    title: '',
+                    description: '',
+                },
+                { 
+                    title: '',
+                    description: '',
+                },
+                { 
+                    title: '',
+                    description: '',
+                },
+                { 
+                    title: '',
+                    description: '',
+                },
+                { 
+                    title: '',
+                    description: '',
+                },
+                { 
+                    title: '',
+                    description: '',
+                },
+                { 
+                    title: '',
+                    description: '',
+                },
+                { 
+                    title: '',
+                    description: '',
+                },
+                { 
+                    title: '',
+                    description: '',
+                },
+                { 
+                    title: '',
+                    description: '',
+                },
+                { 
+                    title: '',
+                    description: '',
+                },
+                { 
+                    title: '',
+                    description: '',
+                },
+                { 
+                    title: '',
+                    description: '',
+                },
+                { 
+                    title: '',
+                    description: '',
+                },
+            ],
+        };
 
         $('button#manual-prev').unbind('click').on('click', function() {
             if (pageId > 1) pageId--;
@@ -68,12 +162,15 @@
             var $img = imageObj;
             $img.fadeOut(function() {
                 $img.attr('src', 'img/' + id + '.png');
-                $img.fadeIn(function() {
-                    $('span#manual-page').text(id);
+                $img.on('load', function() {
+                    $img.fadeIn(function() {
+                        $('span#manual-page').text(id + ' z ' + pagesCount);
+                    });
                 });
+                $('div#manual-title').text(manual.pages[id - 1].title);
+                $('div#manual-description').html(manual.pages[id - 1].description);
             });
         }
-
     </script>
 
 </div>
