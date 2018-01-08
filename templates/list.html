@@ -22,6 +22,9 @@
                     <button class="btn btn-danger action" ng-click="deleteTodo(todo._id)">Delete</button>
                 </td>
             </tr>
+            <tr ng-if="todos.length == 0">
+                <td colspan="7">No ToDo items found.</td>
+            </tr>
         </table>
     </div>
 </div>

@@ -12,7 +12,7 @@ p.text-white {
     color: #505050!important;
 }
 header {
-    padding: 20px 0 2px 0;
+    padding: 40px 0 2px 0;
 }
 p.lead {
     font-size: 1.75em;
@@ -43,5 +43,5 @@ button.action {
 }
 section#main-content {
     text-align: center;
-    min-height: calc(100vh - 310px);
+    min-height: calc(100vh - 330px);
 }

@@ -79,7 +79,7 @@ app.get('/api/todo/:id', function (req, res) {
 app.post('/api/todo', function (req, res) {
     db.collection('todos').insertOne({
         text: req.body.text,
-        ip: req.ip,
+        ip: req.body.ip,
         date: Date.now()
     }, function (err, result) {
         res.send(result);
@@ -92,7 +92,7 @@ app.put('/api/todo/:id', function (req, res) {
     }, {
         $set: {
             text: req.body.text,
-            ip: req.ip,
+            ip: req.body.ip,
             date: Date.now()
         }
     }, function (err, result) {

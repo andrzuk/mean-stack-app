@@ -1,11 +1,13 @@
 <div id="todo-form" class="row" ng-show="action == 'new'">
     <div class="col-lg-8 offset-lg-2">
         <form>
+            <input type="hidden" ng-model="formData.ip">
             <div class="form-group">
                 <label>New item:</label>
-                <textarea class="form-control" rows="16" ng-model="formData.text"></textarea>
+                <textarea class="form-control" rows="14" ng-model="formData.text"></textarea>
             </div>
-            <button type="submit" class="btn btn-primary btn-block" ng-click="createTodo()">Insert</button>
+            <button type="submit" class="btn btn-primary" ng-click="createTodo()">Insert</button>
+            <button type="submit" class="btn btn-warning" ng-click="cancelTodo()">Cancel</button>
         </form>
     </div>
 </div>
@@ -13,11 +15,13 @@
 <div id="todo-form" class="row" ng-show="action == 'edit'">
     <div class="col-lg-8 offset-lg-2">
         <form>
+            <input type="hidden" ng-model="formData.ip">
             <div class="form-group">
                 <label>Edit item:</label>
-                <textarea class="form-control" rows="16" ng-model="formData.text"></textarea>
+                <textarea class="form-control" rows="14" ng-model="formData.text"></textarea>
             </div>
-            <button type="submit" class="btn btn-primary btn-block" ng-click="updateTodo(formData._id)">Update</button>
+            <button type="submit" class="btn btn-primary" ng-click="updateTodo(formData._id)">Update</button>
+            <button type="submit" class="btn btn-warning" ng-click="cancelTodo()">Cancel</button>
         </form>
     </div>
 </div>
