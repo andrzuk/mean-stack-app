@@ -6,6 +6,7 @@
             margin-bottom: 1.0em;
         }        
         div#manual-picture {
+            min-height: 708px;
         }        
         img#manual-image {
             width: 100%;
@@ -34,11 +35,11 @@
         </div>
         <div id="manual-picture">
             <img src="img/1.png" id="manual-image" alt="MEAN Stack Application">
-            <div id="manual-buttons">
-                <button class="btn btn-success" id="manual-prev"> &#8678; </button>
-                <span id="manual-page">1 z 23</span>
-                <button class="btn btn-success" id="manual-next"> &#8680; </button>
-            </div>
+        </div>
+        <div id="manual-buttons">
+            <button class="btn btn-success" id="manual-prev"> &#8678; </button>
+            <span id="manual-page">1 z 23</span>
+            <button class="btn btn-success" id="manual-next"> &#8680; </button>
         </div>
         <div id="manual-description">
             Description
@@ -46,6 +47,7 @@
     </div>
 
     <script>
+        
         var pageId = 1;
         const pagesCount = 23;
         
@@ -171,6 +173,9 @@
                 $('div#manual-description').html(manual.pages[id - 1].description);
             });
         }
+        
+        changeImage($('img#manual-image'), pageId);
+        
     </script>
 
 </div>
