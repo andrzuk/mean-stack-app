@@ -25,17 +25,14 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#demo" ng-click="getTodos()">Demo</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
+                        <a class="nav-link" href="#manual" ng-click="getManual()">Instrukcja</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
+                        <a class="nav-link" href="#contact" ng-click="getContact()">Kontakt</a>
                     </li>
                 </ul>
             </div>
@@ -56,6 +53,8 @@
                 <div ng-include="layout.list"></div>
                 <div ng-include="layout.form"></div>
                 <div ng-include="layout.stats"></div>
+                <div ng-include="layout.manual"></div>
+                <div ng-include="layout.contact"></div>
             </div>
         </div>
     </section>

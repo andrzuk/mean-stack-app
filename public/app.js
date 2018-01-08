@@ -8,6 +8,8 @@ var myApp = angular.module('myApp', [])
             list: '../templates/list',
             form: '../templates/form',
             stats: '../templates/stats',
+            manual: '../templates/manual',
+            contact: '../templates/contact'
         };
         $scope.action = null;
 
@@ -20,6 +22,7 @@ var myApp = angular.module('myApp', [])
 
         $scope.newTodo = function (id) {
             $scope.action = 'new';
+            $scope.formData = {};
             $http.get('http://ipv4.myexternalip.com/json').then(function (response) {
                 $scope.formData.ip = response.data.ip;
             });
@@ -60,6 +63,14 @@ var myApp = angular.module('myApp', [])
 
         $scope.cancelTodo = function () {
             $scope.action = 'list';
+        };
+
+        $scope.getManual = function () {
+            $scope.action = 'manual';
+        };
+
+        $scope.getContact = function () {
+            $scope.action = 'contact';
         };
 
         $scope.getTodos();

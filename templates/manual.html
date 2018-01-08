@@ -1,0 +1,79 @@
+<div class="row" ng-show="action == 'manual'">
+
+    <style>
+        div#manual-title {
+            font-size: 1.5em;
+        }
+        
+        div#manual-picture {
+            height: 600px;
+        }
+        
+        img#manual-image {
+            width: auto;
+            height: 560px;
+        }
+        
+        div#manual-buttons {
+            position: absolute;
+            bottom: 40px;
+        }
+        
+        span#manual-page {
+            width: 50px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        div#manual-description {
+            font-size: 1.0em;
+        }
+
+    </style>
+
+    <div class="col-lg-10 offset-lg-1">
+        <div id="manual-title">
+            Tytuł
+        </div>
+        <div id="manual-picture">
+            <img src="img/1.png" id="manual-image" alt="MEAN Stack Application">
+            <div id="manual-buttons">
+                <button class="btn btn-success" id="manual-prev"> &larr; </button>
+                <span id="manual-page">1</span>
+                <button class="btn btn-success" id="manual-next"> &rarr; </button>
+            </div>
+        </div>
+        <div id="manual-description">
+            Description
+        </div>
+    </div>
+
+    <script>
+        var pageId = 1;
+        const pagesCount = 23;
+
+        $('button#manual-prev').unbind('click').on('click', function() {
+            if (pageId > 1) pageId--;
+            else pageId = pagesCount;
+            changeImage($('img#manual-image'), pageId);
+        });
+
+        $('button#manual-next').unbind('click').on('click', function() {
+            if (pageId < pagesCount) pageId++;
+            else pageId = 1;
+            changeImage($('img#manual-image'), pageId);
+        });
+
+        function changeImage(imageObj, id) {
+            var $img = imageObj;
+            $img.fadeOut(function() {
+                $img.attr('src', 'img/' + id + '.png');
+                $img.fadeIn(function() {
+                    $('span#manual-page').text(id);
+                });
+            });
+        }
+
+    </script>
+
+</div>

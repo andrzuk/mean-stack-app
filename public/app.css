@@ -41,6 +41,9 @@ img#page-logo {
 button.action {
     width: 70px;
 }
+form>button {
+    width: 100px;
+}
 section#main-content {
     text-align: center;
     min-height: calc(100vh - 330px);
