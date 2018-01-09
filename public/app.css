@@ -45,3 +45,13 @@ section#main-content {
     text-align: center;
     min-height: calc(100vh - 330px);
 }
+p.lead>b {
+    font-weight: 500;
+    color: yellow;
+}
+textarea.form-control {
+    min-height: 300px;
+}
+button.submit>i.fa {
+    margin: 0 0.4em 0 0;
+}

@@ -16,6 +16,9 @@
         }
         div#start-button button {
             width: 100px;
+            position: absolute;
+            top: 200px;
+            left: calc(50% - 50px);
         }
     </style>
     
@@ -23,10 +26,10 @@
         <div id="start-image">
             <img src="img/start.png" alt="MEAN Stack Application">
         </div>
-        <div id="start-content">Welcome!</div>
         <div id="start-button">
             <button class="btn btn-success" ng-click="getTodos()">Start</button>
         </div>
+        <div id="start-content">Welcome to MEAN Stack Application!</div>
     </div>
     
     <script>

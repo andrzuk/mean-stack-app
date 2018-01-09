@@ -3,11 +3,11 @@
         <form>
             <input type="hidden" ng-model="formData.ip">
             <div class="form-group text-left">
-                <label>New item:</label>
+                <label>Nowe zadanie:</label>
                 <textarea class="form-control" rows="14" ng-model="formData.text"></textarea>
             </div>
-            <button type="submit" class="btn btn-primary" ng-click="createTodo()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
-            <button type="submit" class="btn btn-warning" ng-click="cancelTodo()"><i class="fa fa-ban" aria-hidden="true"></i> Cancel</button>
+            <button type="submit" class="btn btn-primary" ng-click="createTodo()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Zapisz</button>
+            <button type="submit" class="btn btn-warning" ng-click="cancelTodo()"><i class="fa fa-ban" aria-hidden="true"></i> Anuluj</button>
         </form>
     </div>
 </div>
@@ -17,11 +17,11 @@
         <form>
             <input type="hidden" ng-model="formData.ip">
             <div class="form-group text-left">
-                <label>Edit item:</label>
+                <label>Edycja zadania:</label>
                 <textarea class="form-control" rows="14" ng-model="formData.text"></textarea>
             </div>
-            <button type="submit" class="btn btn-primary" ng-click="updateTodo(formData._id)"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
-            <button type="submit" class="btn btn-warning" ng-click="cancelTodo()"><i class="fa fa-ban" aria-hidden="true"></i> Cancel</button>
+            <button type="submit" class="btn btn-primary" ng-click="updateTodo(formData._id)"><i class="fa fa-floppy-o" aria-hidden="true"></i> Zapisz</button>
+            <button type="submit" class="btn btn-warning" ng-click="cancelTodo()"><i class="fa fa-ban" aria-hidden="true"></i> Anuluj</button>
         </form>
     </div>
 </div>
