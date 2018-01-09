@@ -38,11 +38,8 @@ img#page-logo {
     vertical-align: middle;
     border-color: #ccc;
 }
-button.action {
-    width: 70px;
-}
 form>button {
-    width: 100px;
+    width: 150px;
 }
 section#main-content {
     text-align: center;

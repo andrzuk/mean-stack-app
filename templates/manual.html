@@ -1,4 +1,4 @@
-<div class="row" ng-show="action == 'manual'">
+<div class="py-4 row" ng-show="action == 'manual'">
 
     <style>
         div#manual-title {
@@ -13,6 +13,13 @@
             height: auto;
             padding: 1px;
             border: 1px solid #ccc;
+            z-index: 1;
+        }        
+        img#manual-loader {
+            position: absolute;
+            left: calc(50% - 20px);
+            top: calc(50% - 20px);
+            z-index: 0;
         }        
         div#manual-buttons {
             margin: 1.0em 0;
@@ -26,6 +33,7 @@
         div#manual-description {
             font-size: 1.0em;
             margin: 1.0em 0;
+            text-align: justify;
         }
     </style>
 
@@ -35,6 +43,7 @@
         </div>
         <div id="manual-picture">
             <img src="img/1.png" id="manual-image" alt="MEAN Stack Application">
+            <img src="loader.gif" id="manual-loader" alt="MEAN Stack Loader">
         </div>
         <div id="manual-buttons">
             <button class="btn btn-success" id="manual-prev"> <i class="fa fa-arrow-left" aria-hidden="true"></i> </button>
