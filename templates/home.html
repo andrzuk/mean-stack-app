@@ -33,8 +33,10 @@
     </div>
     
     <script>
-        $.getJSON('/api/subpage/index', function(response) {
-            $('div#start-content').html(response.description);
+        $(document).ready(function() {
+            $.getJSON('/api/subpage/index', function(response) {
+                $('div#start-content').html(response.description);
+            });
         });
     </script>
     
