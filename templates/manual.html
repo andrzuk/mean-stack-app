@@ -72,18 +72,13 @@
                         $('span#manual-page').text(id + ' z ' + pagesCount);
                     });
                 });
-                $('div#manual-title').html(getSubpage('manual-' + id).title);
-                $('div#manual-description').html(getSubpage('manual-' + id).description);
+                $.getJSON('/api/subpage/manual-' + id, function(response) {
+                    $('div#manual-title').html(response.title);
+                    $('div#manual-description').html(response.description);
+                });
             });
         }
 
-        function getSubpage(index) {
-            $.getJSON('/api/subpage/' + index, function(response) {
-                console.log(response);
-                return response.data;
-            });
-        }
-        
         changeImage($('img#manual-image'), pageId);
         
     </script>

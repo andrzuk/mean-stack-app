@@ -1,4 +1,4 @@
-<div class="row" ng-show="action == 'home'">
+<div class="py-4 row" ng-show="action == 'home'">
 
     <style>
         div#start-image {
@@ -30,13 +30,9 @@
     </div>
     
     <script>
-        function getSubpage(index) {
-            $.getJSON('/api/subpage/' + index, function(response) {
-                console.log(response);
-                return response.data;
-            });
-        }
-        $('div#start-content').html(getSubpage('index').description);
+        $.getJSON('/api/subpage/index', function(response) {
+            $('div#start-content').html(response.description);
+        });
     </script>
     
 </div>
