@@ -30,7 +30,13 @@
     </div>
     
     <script>
-        $('div#start-content').html($scope.getSubpage('index').description);
+        function getSubpage(index) {
+            $.getJSON('/api/subpage/' + index, function(response) {
+                console.log(response);
+                return response.data;
+            });
+        }
+        $('div#start-content').html(getSubpage('index').description);
     </script>
     
 </div>

@@ -72,8 +72,15 @@
                         $('span#manual-page').text(id + ' z ' + pagesCount);
                     });
                 });
-                $('div#manual-title').html($scope.getSubpage('manual-' + id).title);
-                $('div#manual-description').html($scope.getSubpage('manual-' + id).description);
+                $('div#manual-title').html(getSubpage('manual-' + id).title);
+                $('div#manual-description').html(getSubpage('manual-' + id).description);
+            });
+        }
+
+        function getSubpage(index) {
+            $.getJSON('/api/subpage/' + index, function(response) {
+                console.log(response);
+                return response.data;
             });
         }
         
