@@ -13,13 +13,12 @@
             height: auto;
             padding: 1px;
             border: 1px solid #ccc;
-            z-index: 1;
         }        
         img#manual-loader {
             position: absolute;
             left: calc(50% - 20px);
-            top: calc(50% - 20px);
-            z-index: 0;
+            top: 400px;
+            display: none;
         }        
         div#manual-buttons {
             margin: 1.0em 0;
@@ -75,9 +74,11 @@
         function changeImage(imageObj, id) {
             var $img = imageObj;
             $img.fadeOut(function() {
+                $('img#manual-loader').show();
                 $img.attr('src', 'img/' + id + '.png');
                 $img.on('load', function() {
                     $img.fadeIn(function() {
+                        $('img#manual-loader').hide();
                         $('span#manual-page').text(id + ' z ' + pagesCount);
                     });
                 });
