@@ -1,5 +1,5 @@
 body {
-    color: #777;
+    color: #555;
     padding-top: 54px;
 }
 nav.bg-dark {
@@ -52,6 +52,6 @@ p.lead>b {
 textarea.form-control {
     min-height: 300px;
 }
-button.submit>i.fa {
+button.font-awesome>i.fa {
     margin: 0 0.4em 0 0;
 }
