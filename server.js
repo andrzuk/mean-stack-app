@@ -58,6 +58,60 @@ app.get('/templates/:name', function (req, res) {
     res.sendFile(__dirname + '/templates/' + req.params.name + '.html');
 });
 
+app.get('/api/page/:id', function (req, res) {
+    db.collection('pages', function (err, collection) {
+        collection.findOne({
+            index: req.params.id
+        }, function (err, result) {
+            res.send(result);
+        });
+    });
+});
+
+app.get('/api/pages', function (req, res) {
+    db.collection('pages', function (err, collection) {
+        collection.find().toArray(function (err, result) {
+            res.send(result);
+        });
+    });
+});
+
+app.post('/api/page', function (req, res) {
+    db.collection('pages').insertOne({
+        index: req.body.index,
+        title: req.body.title,
+        description: req.body.description,
+        ip: req.body.ip,
+        date: Date.now()
+    }, function (err, result) {
+        res.send(result);
+    });
+});
+
+app.put('/api/page/:id', function (req, res) {
+    db.collection('pages').updateOne({
+        _id: new ObjectID(req.params.id)
+    }, {
+        $set: {
+            index: req.body.index,
+            title: req.body.title,
+            description: req.body.description,
+            ip: req.body.ip,
+            date: Date.now()
+        }
+    }, function (err, result) {
+        res.send(result);
+    });
+});
+
+app.delete('/api/page/:id', function (req, res) {
+    db.collection('pages').removeOne({
+        _id: new ObjectID(req.params.id)
+    }, function (err, result) {
+        res.send(result);
+    });
+});
+
 app.get('/api/todos', function (req, res) {
     db.collection('todos', function (err, collection) {
         collection.find().toArray(function (err, result) {

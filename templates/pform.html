@@ -1,0 +1,35 @@
+<div id="todo-form" class="row" ng-show="action == 'pnew'">
+    <div class="col-lg-10 offset-lg-1">
+        <form>
+            <input type="hidden" ng-model="formData.ip">
+            <div class="form-group">
+                Index:
+                <input type="text" class="form-control" ng-model="formData.index"> 
+                Title:
+                <input type="text" class="form-control" ng-model="formData.title"> 
+                Content:
+                <textarea class="form-control" rows="14" ng-model="formData.description"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" ng-click="createPage()">Insert</button>
+            <button type="submit" class="btn btn-warning" ng-click="cancelPage()">Cancel</button>
+        </form>
+    </div>
+</div>
+
+<div id="todo-form" class="row" ng-show="action == 'pedit'">
+    <div class="col-lg-8 offset-lg-2">
+        <form>
+            <input type="hidden" ng-model="formData.ip">
+            <div class="form-group">
+                Index:
+                <input type="text" class="form-control" ng-model="formData.index"> 
+                Title:
+                <input type="text" class="form-control" ng-model="formData.title"> 
+                Content:
+                <textarea class="form-control" rows="14" ng-model="formData.description"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" ng-click="updatePage(formData._id)">Update</button>
+            <button type="submit" class="btn btn-warning" ng-click="cancelPage()">Cancel</button>
+        </form>
+    </div>
+</div>

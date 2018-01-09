@@ -37,9 +37,9 @@
             <img src="img/1.png" id="manual-image" alt="MEAN Stack Application">
         </div>
         <div id="manual-buttons">
-            <button class="btn btn-success" id="manual-prev"> &#8678; </button>
+            <button class="btn btn-success" id="manual-prev"> <i class="fa fa-arrow-left" aria-hidden="true"></i> </button>
             <span id="manual-page">1 z 23</span>
-            <button class="btn btn-success" id="manual-next"> &#8680; </button>
+            <button class="btn btn-success" id="manual-next"> <i class="fa fa-arrow-right" aria-hidden="true"></i> </button>
         </div>
         <div id="manual-description">
             Description
@@ -51,103 +51,6 @@
         var pageId = 1;
         const pagesCount = 23;
         
-        const manual = {
-            pages: [
-                { 
-                    title: 'Krok 1. Tworzymy nowy projekt',
-                    description: 'Po zalogowaniu na swoje konto w serwisie OpenShift widzimy ekran powitalny z przyciskiem utworzenia nowego projektu. Klikamy na ten przycisk.',
-                },
-                { 
-                    title: 'Krok 2. Nadajemy nazwę i opis',
-                    description: 'Otwiera nam się formularz, w którym wpisujemy unikalną nazwę projektu, przyjazną nazwę projektu oraz jego opis.',
-                },
-                { 
-                    title: '',
-                    description: '',
-                },
-                { 
-                    title: '',
-                    description: '',
-                },
-                { 
-                    title: '',
-                    description: '',
-                },
-                { 
-                    title: '',
-                    description: '',
-                },
-                { 
-                    title: '',
-                    description: '',
-                },
-                { 
-                    title: '',
-                    description: '',
-                },
-                { 
-                    title: '',
-                    description: '',
-                },
-                { 
-                    title: '',
-                    description: '',
-                },
-                { 
-                    title: '',
-                    description: '',
-                },
-                { 
-                    title: '',
-                    description: '',
-                },
-                { 
-                    title: '',
-                    description: '',
-                },
-                { 
-                    title: '',
-                    description: '',
-                },
-                { 
-                    title: '',
-                    description: '',
-                },
-                { 
-                    title: '',
-                    description: '',
-                },
-                { 
-                    title: '',
-                    description: '',
-                },
-                { 
-                    title: '',
-                    description: '',
-                },
-                { 
-                    title: '',
-                    description: '',
-                },
-                { 
-                    title: '',
-                    description: '',
-                },
-                { 
-                    title: '',
-                    description: '',
-                },
-                { 
-                    title: '',
-                    description: '',
-                },
-                { 
-                    title: '',
-                    description: '',
-                },
-            ],
-        };
-
         $('button#manual-prev').unbind('click').on('click', function() {
             if (pageId > 1) pageId--;
             else pageId = pagesCount;
@@ -169,8 +72,8 @@
                         $('span#manual-page').text(id + ' z ' + pagesCount);
                     });
                 });
-                $('div#manual-title').text(manual.pages[id - 1].title);
-                $('div#manual-description').html(manual.pages[id - 1].description);
+                $('div#manual-title').html(getPage('manual-' + id).title);
+                $('div#manual-description').html(getPage('manual-' + id).description);
             });
         }
         
