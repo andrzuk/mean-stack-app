@@ -5,10 +5,8 @@ var myApp = angular.module('myApp', [])
     $scope.formData = {};
     $scope.layout = {
         home: '../templates/home',
-        pbutton: '../templates/pbutton',
         plist: '../templates/plist',
         pform: '../templates/pform',
-        button: '../templates/button',
         list: '../templates/list',
         form: '../templates/form',
         manual: '../templates/manual',
@@ -20,6 +18,12 @@ var myApp = angular.module('myApp', [])
         $scope.action = 'home';
     };
     
+    $scope.getSubpage = function(index) {
+        $http.get('/api/subpage/' + index).then(function(response) {
+            return response.data;
+        });
+    };
+
     $scope.getPage = function(id) {
         $http.get('/api/page/' + id).then(function(response) {
             return response.data;
@@ -138,6 +142,6 @@ var myApp = angular.module('myApp', [])
         $scope.action = 'contact';
     };
 
-    $scope.getTodos();
+    $scope.getHome();
 
 }]);

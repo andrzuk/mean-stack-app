@@ -58,10 +58,10 @@ app.get('/templates/:name', function (req, res) {
     res.sendFile(__dirname + '/templates/' + req.params.name + '.html');
 });
 
-app.get('/api/page/:id', function (req, res) {
+app.get('/api/subpage/:index', function (req, res) {
     db.collection('pages', function (err, collection) {
         collection.findOne({
-            index: req.params.id
+            index: req.params.index
         }, function (err, result) {
             res.send(result);
         });
@@ -71,6 +71,16 @@ app.get('/api/page/:id', function (req, res) {
 app.get('/api/pages', function (req, res) {
     db.collection('pages', function (err, collection) {
         collection.find().toArray(function (err, result) {
+            res.send(result);
+        });
+    });
+});
+
+app.get('/api/page/:id', function (req, res) {
+    db.collection('pages', function (err, collection) {
+        collection.findOne({
+            _id: new ObjectID(req.params.id)
+        }, function (err, result) {
             res.send(result);
         });
     });

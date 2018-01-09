@@ -72,8 +72,8 @@
                         $('span#manual-page').text(id + ' z ' + pagesCount);
                     });
                 });
-                $('div#manual-title').html(getPage('manual-' + id).title);
-                $('div#manual-description').html(getPage('manual-' + id).description);
+                $('div#manual-title').html($scope.getSubpage('manual-' + id).title);
+                $('div#manual-description').html($scope.getSubpage('manual-' + id).description);
             });
         }
         

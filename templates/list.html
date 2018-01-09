@@ -1,5 +1,8 @@
 <div id="todo-list" class="row" ng-show="action == 'list'">
     <div class="col-lg-12">
+        <div class="py-1 text-right">
+            <button class="btn btn-success" ng-click="newTodo()">Add new ToDo</button>
+        </div>
         <table class="table table-bordered table-striped">
             <tr>
                 <th>Id</th>
@@ -26,8 +29,8 @@
                 <td colspan="7">No items found.</td>
             </tr>
         </table>
-    </div>
-    <div class="py-3 text-center">
-        Stats: <b>{{ todos.length }}</b> rows
+        <div class="py-3 text-center">
+            Stats: <b>{{ todos.length }}</b> rows
+        </div>
     </div>
 </div>
