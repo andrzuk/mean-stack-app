@@ -78,8 +78,8 @@
                 $('img#manual-loader').show();
                 $img.attr('src', 'img/' + id + '.png');
                 $img.on('load', function() {
+                    $('img#manual-loader').hide();
                     $img.fadeIn(function() {
-                        $('img#manual-loader').hide();
                         $('span#manual-page').text(id + ' z ' + pagesCount);
                     });
                 });

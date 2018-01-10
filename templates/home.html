@@ -5,10 +5,8 @@
             margin: 0 0 1.0em 0;
         }        
         div#start-image img {
-            padding: 1px;
-            border: 1px solid #ccc;
             width: 100%;
-            height: auto;
+            max-height: 400px;
         }
         div#start-content {
             margin: 1.0em 0;
@@ -22,14 +20,19 @@
         }
     </style>
     
-    <div class="col-lg-10 offset-lg-1">
-        <div id="start-image">
-            <img src="img/start.png" alt="MEAN Stack Application">
+    <div id="start-image">
+        <img src="img/start.png" alt="MEAN Stack Application">
+    </div>
+    <div id="start-button">
+        <button class="btn btn-success" ng-click="getTodos()">Start</button>
+    </div>
+        
+    <div class="container">
+        <div id="page-content">
+            <div class="col-lg-10 offset-lg-1">
+                <div id="start-content">Welcome to MEAN Stack Application!</div>
+            </div>
         </div>
-        <div id="start-button">
-            <button class="btn btn-success" ng-click="getTodos()">Start</button>
-        </div>
-        <div id="start-content">Welcome to MEAN Stack Application!</div>
     </div>
     
     <script>
