@@ -1,97 +1,99 @@
-<div class="py-4 row" ng-show="action == 'manual'">
+<div class="container" ng-show="action == 'manual'">
+    <div class="py-4 row">
 
-    <style>
-        div#manual-title {
-            font-size: 1.5em;
-            margin-bottom: 1.0em;
-            text-align: left;
-        }        
-        div#manual-picture {
-            min-height: 708px;
-        }        
-        img#manual-image {
-            width: 100%;
-            height: auto;
-            padding: 1px;
-            border: 1px solid #ccc;
-        }        
-        img#manual-loader {
-            position: absolute;
-            left: calc(50% - 20px);
-            top: 400px;
-            display: none;
-        }        
-        div#manual-buttons {
-            margin: 1.0em 0;
-        }        
-        span#manual-page {
-            width: 100px;
-            text-align: center;
-            font-weight: bold;
-            display: inline-block;
-        }        
-        div#manual-description {
-            font-size: 1.0em;
-            margin: 1.0em 0;
-            text-align: justify;
-        }
-    </style>
+        <style>
+            div#manual-title {
+                font-size: 1.5em;
+                margin-bottom: 1.0em;
+                text-align: left;
+            }        
+            div#manual-picture {
+                min-height: 708px;
+            }        
+            img#manual-image {
+                width: 100%;
+                height: auto;
+                padding: 1px;
+                border: 1px solid #ccc;
+            }        
+            img#manual-loader {
+                position: absolute;
+                left: calc(50% - 20px);
+                top: 400px;
+                display: none;
+            }        
+            div#manual-buttons {
+                margin: 1.0em 0;
+            }        
+            span#manual-page {
+                width: 100px;
+                text-align: center;
+                font-weight: bold;
+                display: inline-block;
+            }        
+            div#manual-description {
+                font-size: 1.0em;
+                margin: 1.0em 0;
+                text-align: justify;
+            }
+        </style>
 
-    <div class="col-lg-10 offset-lg-1">
-        <div id="manual-title">
-            Tytuł
+        <div class="col-lg-10 offset-lg-1">
+            <div id="manual-title">
+                Tytuł
+            </div>
+            <div id="manual-picture">
+                <img src="img/1.png" id="manual-image" alt="MEAN Stack Application">
+                <img src="loader.gif" id="manual-loader" alt="MEAN Stack Loader">
+            </div>
+            <div id="manual-buttons">
+                <button class="btn btn-success" id="manual-prev"> <i class="fa fa-arrow-left" aria-hidden="true"></i> </button>
+                <span id="manual-page">1 z 23</span>
+                <button class="btn btn-success" id="manual-next"> <i class="fa fa-arrow-right" aria-hidden="true"></i> </button>
+            </div>
+            <div id="manual-description">
+                Description
+            </div>
         </div>
-        <div id="manual-picture">
-            <img src="img/1.png" id="manual-image" alt="MEAN Stack Application">
-            <img src="loader.gif" id="manual-loader" alt="MEAN Stack Loader">
-        </div>
-        <div id="manual-buttons">
-            <button class="btn btn-success" id="manual-prev"> <i class="fa fa-arrow-left" aria-hidden="true"></i> </button>
-            <span id="manual-page">1 z 23</span>
-            <button class="btn btn-success" id="manual-next"> <i class="fa fa-arrow-right" aria-hidden="true"></i> </button>
-        </div>
-        <div id="manual-description">
-            Description
-        </div>
-    </div>
 
-    <script>
-        
-        var pageId = 1;
-        const pagesCount = 23;
-        
-        $('button#manual-prev').unbind('click').on('click', function() {
-            if (pageId > 1) pageId--;
-            else pageId = pagesCount;
-            changeImage($('img#manual-image'), pageId);
-        });
+        <script>
 
-        $('button#manual-next').unbind('click').on('click', function() {
-            if (pageId < pagesCount) pageId++;
-            else pageId = 1;
-            changeImage($('img#manual-image'), pageId);
-        });
+            var pageId = 1;
+            const pagesCount = 23;
 
-        function changeImage(imageObj, id) {
-            var $img = imageObj;
-            $img.fadeOut(function() {
-                $('img#manual-loader').show();
-                $img.attr('src', 'img/' + id + '.png');
-                $img.on('load', function() {
-                    $('img#manual-loader').hide();
-                    $img.fadeIn(function() {
-                        $('span#manual-page').text(id + ' z ' + pagesCount);
+            $('button#manual-prev').unbind('click').on('click', function() {
+                if (pageId > 1) pageId--;
+                else pageId = pagesCount;
+                changeImage($('img#manual-image'), pageId);
+            });
+
+            $('button#manual-next').unbind('click').on('click', function() {
+                if (pageId < pagesCount) pageId++;
+                else pageId = 1;
+                changeImage($('img#manual-image'), pageId);
+            });
+
+            function changeImage(imageObj, id) {
+                var $img = imageObj;
+                $img.fadeOut(function() {
+                    $('img#manual-loader').show();
+                    $img.attr('src', 'img/' + id + '.png');
+                    $img.on('load', function() {
+                        $('img#manual-loader').hide();
+                        $img.fadeIn(function() {
+                            $('span#manual-page').text(id + ' z ' + pagesCount);
+                        });
+                    });
+                    $.getJSON('/api/subpage/manual-' + id, function(response) {
+                        $('div#manual-title').html(response.title);
+                        $('div#manual-description').html(response.description);
                     });
                 });
-                $.getJSON('/api/subpage/manual-' + id, function(response) {
-                    $('div#manual-title').html(response.title);
-                    $('div#manual-description').html(response.description);
-                });
-            });
-        }
+            }
 
-        changeImage($('img#manual-image'), pageId);
-        
-    </script>
+            changeImage($('img#manual-image'), pageId);
 
+        </script>
+
+    </div>
 </div>

@@ -1,20 +1,22 @@
-<div class="py-4 row" ng-show="action == 'contact'">
+<div class="container" ng-show="action == 'contact'">
+    <div class="py-4 row">
 
-    <style>
-        div#contact-content {
-            margin: 1.0em 0;
-            text-align: left;
-        }
-    </style>
-    
-    <div class="col-lg-10 offset-lg-1">
-        <div id="contact-content">Contact</div>
+        <style>
+            div#contact-content {
+                margin: 1.0em 0;
+                text-align: left;
+            }
+        </style>
+
+        <div class="col-lg-10 offset-lg-1">
+            <div id="contact-content">Contact</div>
+        </div>
+
+        <script>
+            $.getJSON('/api/subpage/contact', function(response) {
+                $('div#contact-content').html(response.description);
+            });
+        </script>
+
     </div>
-    
-    <script>
-        $.getJSON('/api/subpage/contact', function(response) {
-            $('div#contact-content').html(response.description);
-        });
-    </script>
-    
 </div>
