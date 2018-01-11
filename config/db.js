@@ -32,7 +32,6 @@ mongodb.connect(mongoURL, function (err, conn) {
     dbDetails.databaseName = database.databaseName;
     dbDetails.url = mongoURLLabel;
     dbDetails.type = 'MongoDB';
-    console.log('Connected to MongoDB at: %s', mongoURL);
+    module.exports = { db: database, port: port, ip: ip, url: mongoURL };
 });
 
-module.exports = { db: database, port: port, ip: ip };

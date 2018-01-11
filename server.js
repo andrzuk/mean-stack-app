@@ -143,6 +143,7 @@ app.delete('/api/todo/:id', function (req, res) {
 app.listen(connection.port, connection.ip);
 
 console.log('Server running on http://%s:%s', connection.ip, connection.port);
+console.log('Connected to MongoDB at: %s', connection.url);
 console.log('Database connection: ', connection.db);
 
 module.exports = app;
