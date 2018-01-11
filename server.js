@@ -2,7 +2,7 @@ var express = require('express');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 
-var connection = require('./public/db.js');
+var connection = require('./config/db.js');
 
 var ObjectID = require('mongodb').ObjectID;
 
@@ -140,8 +140,9 @@ app.delete('/api/todo/:id', function (req, res) {
     });
 });
 
-app.listen(port, ip);
+app.listen(connection.port, connection.ip);
 
-console.log('Server running on http://%s:%s', ip, port);
+console.log('Server running on http://%s:%s', connection.ip, connection.port);
+console.log('Database connection: ', connection.db);
 
 module.exports = app;

@@ -35,4 +35,4 @@ mongodb.connect(mongoURL, function (err, conn) {
     console.log('Connected to MongoDB at: %s', mongoURL);
 });
 
-module.exports = { db: database };
+module.exports = { db: database, port: port, ip: ip };
