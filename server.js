@@ -2,6 +2,8 @@ var express = require('express');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 
+var connection = require('public/db.js');
+
 var ObjectID = require('mongodb').ObjectID;
 
 Object.assign = require('object-assign');
@@ -15,8 +17,6 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(morgan('combined'));
-
-var connection = require('./db.js');
 
 app.get('/', function (req, res) {
     res.sendFile('index.html');
