@@ -21,27 +21,27 @@
         }
     </style>
     
-    <div id="start-image">
-        <img src="img/start.png" alt="MEAN Stack Application">
-    </div>
-    <div id="start-button">
-        <button class="btn btn-success" ng-click="getTodos()">Start</button>
-    </div>
-        
-    <div class="container">
-        <div id="page-content">
-            <div class="col-lg-10 offset-lg-1">
-                <div id="start-content">Welcome to MEAN Stack Application!</div>
+    <div ng-show="status == 'ready'">
+        <div id="start-image">
+            <img src="img/start.png" alt="MEAN Stack Application">
+        </div>
+        <div id="start-button">
+            <button class="btn btn-success" ng-click="getTodos()">Start</button>
+        </div>
+
+        <div class="container">
+            <div id="page-content">
+                <div class="col-lg-10 offset-lg-1">
+                    <div id="start-content">{{ pageData.description }}</div>
+                </div>
             </div>
         </div>
     </div>
     
-    <script>
-        $(document).ready(function() {
-            $.getJSON('/api/subpage/index', function(response) {
-                $('div#start-content').html(response.description);
-            });
-        });
-    </script>
+    <div ng-show="status == 'loading'">
+        <div id="load-icon">
+            <img src="loader.gif" id="page-loader" alt="MEAN Stack Loader">
+        </div>
+    </div>
     
 </div>

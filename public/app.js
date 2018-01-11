@@ -3,6 +3,7 @@ var myApp = angular.module('myApp', [])
 .controller('mainController', ['$scope', '$http', function ($scope, $http) {
 
     $scope.formData = {};
+    $scope.pageData = {};
     $scope.layout = {
         home: '../templates/home',
         plist: '../templates/plist',
@@ -13,9 +14,15 @@ var myApp = angular.module('myApp', [])
         contact: '../templates/contact'
     };
     $scope.action = null;
+    $scope.status = null;
     
     $scope.getHome = function() {
         $scope.action = 'home';
+        $scope.status = 'loading';
+        $http.get('/api/subpage/index').then(function(response) {
+            $scope.pageData = response.data;
+            $scope.status = 'ready';
+        });
     };
     
     $scope.getSubpage = function(index) {

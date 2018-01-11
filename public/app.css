@@ -55,3 +55,11 @@ textarea.form-control {
 button.font-awesome>i.fa {
     margin: 0 0.4em 0 0;
 }
+div#load-icon {
+    height: 100vh;
+}
+img#page-loader {
+    position: absolute;
+    left: calc(50% - 20px);
+    top: calc(50% - 20px);
+}        
