@@ -2,7 +2,8 @@ var express = require('express');
 
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     ip = process.env.IP || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0',
-    mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL;
+    mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL,
+    mongoURLLabel = "";
 
 if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
     var mongoServiceName = process.env.DATABASE_SERVICE_NAME.toUpperCase(),
@@ -13,11 +14,13 @@ if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
         mongoUser = process.env[mongoServiceName + '_USER'];
 
     if (mongoHost && mongoPort && mongoDatabase) {
+        mongoURLLabel = mongoURL = 'mongodb://';
         if (mongoUser && mongoPassword) {
             mongoURL += mongoUser + ':' + mongoPassword + '@';
         }
+        mongoURLLabel += mongoHost + ':' + mongoPort + '/' + mongoDatabase;
         mongoURL += mongoHost + ':' + mongoPort + '/' + mongoDatabase;
     }
 }
 
-module.exports = { port: port, ip: ip, url: mongoURL };
+module.exports = { port: port, ip: ip, url: mongoURL, label: mongoURLLabel };

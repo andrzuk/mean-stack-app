@@ -3,8 +3,6 @@ var mongodb = require('mongodb');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 
-var ObjectID = mongodb.ObjectID;
-
 Object.assign = require('object-assign');
 
 var app = express();
@@ -18,11 +16,16 @@ app.use(bodyParser.urlencoded({
 app.use(morgan('combined'));
 
 var db = null;
+var dbDetails = new Object();
+var ObjectID = mongodb.ObjectID;
 
 var connection = require('./config/db.js');
 
 mongodb.connect(connection.url, function (err, conn) {
     db = conn;
+    dbDetails.databaseName = db.databaseName;
+    dbDetails.url = connection.label;
+    dbDetails.type = 'MongoDB';
     console.log('Connected to MongoDB at: %s', connection.url);
     console.log('Database: ', db);
 });
