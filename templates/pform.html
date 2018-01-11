@@ -9,7 +9,7 @@
                     Tytuł:
                     <input type="text" class="form-control" ng-model="formData.title"> 
                     Treść strony:
-                    <textarea class="form-control" rows="14" ng-model="formData.description"></textarea>
+                    <textarea class="form-control" rows="14" ng-model="formData.description" spellcheck="false"></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary font-awesome" ng-click="createPage()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Zapisz</button>
                 <button type="submit" class="btn btn-warning font-awesome" ng-click="cancelPage()"><i class="fa fa-ban" aria-hidden="true"></i> Anuluj</button>
@@ -20,7 +20,7 @@
 
 <div class="container" ng-show="action == 'pedit'">
     <div class="py-4 row">
-        <div class="col-lg-8 offset-lg-2">
+        <div class="col-lg-10 offset-lg-1">
             <form>
                 <input type="hidden" ng-model="formData.ip">
                 <div class="form-group text-left">
@@ -29,7 +29,7 @@
                     Tytuł:
                     <input type="text" class="form-control" ng-model="formData.title"> 
                     Treść strony:
-                    <textarea class="form-control" rows="14" ng-model="formData.description"></textarea>
+                    <textarea class="form-control" rows="14" ng-model="formData.description" spellcheck="false"></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary font-awesome" ng-click="updatePage(formData._id)"><i class="fa fa-floppy-o" aria-hidden="true"></i> Zapisz</button>
                 <button type="submit" class="btn btn-warning font-awesome" ng-click="cancelPage()"><i class="fa fa-ban" aria-hidden="true"></i> Anuluj</button>
