@@ -1,6 +1,6 @@
-var myApp = angular.module('myApp', [])
+var myApp = angular.module('myApp', ['ngSanitize'])
 
-.controller('mainController', ['$scope', '$http', function ($scope, $http) {
+.controller('mainController', ['$scope', '$http', '$sce', function ($scope, $http, $sce) {
 
     $scope.formData = {};
     $scope.pageData = {};
@@ -18,16 +18,20 @@ var myApp = angular.module('myApp', [])
     
     $scope.getHome = function() {
         $scope.action = 'home';
-        $scope.status = 'loading';
-        $http.get('/api/subpage/index').then(function(response) {
-            $scope.pageData = response.data;
-            $scope.status = 'ready';
-        });
+        $scope.getSubpage('index');
     };
     
-    $scope.getSubpage = function(index) {
+    $scope.getContact = function () {
+        $scope.action = 'contact';
+        $scope.getSubpage('contact');
+    };
+
+    $scope.getSubpage = function (index) {
+        $scope.status = 'loading';
         $http.get('/api/subpage/' + index).then(function(response) {
-            return response.data;
+            $scope.pageData = response.data;
+            $scope.pageData.description = $sce.trustAsHtml($scope.pageData.description);
+            $scope.status = 'ready';
         });
     };
 
@@ -143,10 +147,6 @@ var myApp = angular.module('myApp', [])
 
     $scope.getManual = function () {
         $scope.action = 'manual';
-    };
-
-    $scope.getContact = function () {
-        $scope.action = 'contact';
     };
 
     $scope.getHome();

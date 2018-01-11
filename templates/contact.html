@@ -1,6 +1,7 @@
 <div class="container" ng-show="action == 'contact'">
+   
     <div class="py-4 row">
-
+       
         <style>
             div#contact-content {
                 margin: 1.0em 0;
@@ -8,15 +9,18 @@
             }
         </style>
 
-        <div class="col-lg-10 offset-lg-1">
-            <div id="contact-content">Contact</div>
+        <div ng-show="status == 'ready'">
+            <div class="col-lg-10 offset-lg-1">
+                <div id="contact-content">{{ pageData.description }}</div>
+            </div>
         </div>
 
-        <script>
-            $.getJSON('/api/subpage/contact', function(response) {
-                $('div#contact-content').html(response.description);
-            });
-        </script>
+        <div ng-show="status == 'loading'">
+            <div id="load-icon">
+                <img src="loader.gif" id="page-loader" alt="MEAN Stack Loader">
+            </div>
+        </div>
 
     </div>
+
 </div>
