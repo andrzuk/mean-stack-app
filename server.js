@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(morgan('combined'));
 
-connection = require('db');
+var connection = require('./db.js');
 
 app.get('/', function (req, res) {
     res.sendFile('index.html');
