@@ -2,7 +2,7 @@ var express = require('express');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 
-var connection = require('public/db.js');
+var connection = require('./public/db.js');
 
 var ObjectID = require('mongodb').ObjectID;
 
