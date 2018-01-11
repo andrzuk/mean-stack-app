@@ -1,10 +1,9 @@
 var express = require('express');
+var mongodb = require('mongodb');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 
-var connection = require('./config/db.js');
-
-var ObjectID = require('mongodb').ObjectID;
+var ObjectID = mongodb.ObjectID;
 
 Object.assign = require('object-assign');
 
@@ -18,6 +17,16 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(morgan('combined'));
 
+var db = null;
+
+var connection = require('./config/db.js');
+
+mongodb.connect(connection.url, function (err, conn) {
+    db = conn;
+    console.log('Connected to MongoDB at: %s', connection.url);
+    console.log('Database: ', db);
+});
+
 app.get('/', function (req, res) {
     res.sendFile('index.html');
 });
@@ -27,7 +36,7 @@ app.get('/templates/:name', function (req, res) {
 });
 
 app.get('/api/subpage/:index', function (req, res) {
-    connection.db.collection('pages', function (err, collection) {
+    db.collection('pages', function (err, collection) {
         collection.findOne({
             index: req.params.index
         }, function (err, result) {
@@ -37,7 +46,7 @@ app.get('/api/subpage/:index', function (req, res) {
 });
 
 app.get('/api/pages', function (req, res) {
-    connection.db.collection('pages', function (err, collection) {
+    db.collection('pages', function (err, collection) {
         collection.find().toArray(function (err, result) {
             res.send(result);
         });
@@ -45,7 +54,7 @@ app.get('/api/pages', function (req, res) {
 });
 
 app.get('/api/page/:id', function (req, res) {
-    connection.db.collection('pages', function (err, collection) {
+    db.collection('pages', function (err, collection) {
         collection.findOne({
             _id: new ObjectID(req.params.id)
         }, function (err, result) {
@@ -55,7 +64,7 @@ app.get('/api/page/:id', function (req, res) {
 });
 
 app.post('/api/page', function (req, res) {
-    connection.db.collection('pages').insertOne({
+    db.collection('pages').insertOne({
         index: req.body.index,
         title: req.body.title,
         description: req.body.description,
@@ -67,7 +76,7 @@ app.post('/api/page', function (req, res) {
 });
 
 app.put('/api/page/:id', function (req, res) {
-    connection.db.collection('pages').updateOne({
+    db.collection('pages').updateOne({
         _id: new ObjectID(req.params.id)
     }, {
         $set: {
@@ -83,7 +92,7 @@ app.put('/api/page/:id', function (req, res) {
 });
 
 app.delete('/api/page/:id', function (req, res) {
-    connection.db.collection('pages').removeOne({
+    db.collection('pages').removeOne({
         _id: new ObjectID(req.params.id)
     }, function (err, result) {
         res.send(result);
@@ -91,7 +100,7 @@ app.delete('/api/page/:id', function (req, res) {
 });
 
 app.get('/api/todos', function (req, res) {
-    connection.db.collection('todos', function (err, collection) {
+    db.collection('todos', function (err, collection) {
         collection.find().toArray(function (err, result) {
             res.send(result);
         });
@@ -99,7 +108,7 @@ app.get('/api/todos', function (req, res) {
 });
 
 app.get('/api/todo/:id', function (req, res) {
-    connection.db.collection('todos', function (err, collection) {
+    db.collection('todos', function (err, collection) {
         collection.findOne({
             _id: new ObjectID(req.params.id)
         }, function (err, result) {
@@ -109,7 +118,7 @@ app.get('/api/todo/:id', function (req, res) {
 });
 
 app.post('/api/todo', function (req, res) {
-    connection.db.collection('todos').insertOne({
+    db.collection('todos').insertOne({
         text: req.body.text,
         ip: req.body.ip,
         date: Date.now()
@@ -119,7 +128,7 @@ app.post('/api/todo', function (req, res) {
 });
 
 app.put('/api/todo/:id', function (req, res) {
-    connection.db.collection('todos').updateOne({
+    db.collection('todos').updateOne({
         _id: new ObjectID(req.params.id)
     }, {
         $set: {
@@ -133,7 +142,7 @@ app.put('/api/todo/:id', function (req, res) {
 });
 
 app.delete('/api/todo/:id', function (req, res) {
-    connection.db.collection('todos').removeOne({
+    db.collection('todos').removeOne({
         _id: new ObjectID(req.params.id)
     }, function (err, result) {
         res.send(result);
@@ -143,7 +152,5 @@ app.delete('/api/todo/:id', function (req, res) {
 app.listen(connection.port, connection.ip);
 
 console.log('Server running on http://%s:%s', connection.ip, connection.port);
-console.log('Connected to MongoDB at: %s', connection.url);
-console.log('Database connection: ', connection.db);
 
 module.exports = app;

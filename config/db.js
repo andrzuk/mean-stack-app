@@ -1,13 +1,8 @@
 var express = require('express');
-var mongodb = require('mongodb');
-
-var database = null;
-var dbDetails = new Object();
 
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     ip = process.env.IP || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0',
-    mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL,
-    mongoURLLabel = "";
+    mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL;
 
 if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
     var mongoServiceName = process.env.DATABASE_SERVICE_NAME.toUpperCase(),
@@ -18,20 +13,11 @@ if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
         mongoUser = process.env[mongoServiceName + '_USER'];
 
     if (mongoHost && mongoPort && mongoDatabase) {
-        mongoURLLabel = mongoURL = 'mongodb://';
         if (mongoUser && mongoPassword) {
             mongoURL += mongoUser + ':' + mongoPassword + '@';
         }
-        mongoURLLabel += mongoHost + ':' + mongoPort + '/' + mongoDatabase;
         mongoURL += mongoHost + ':' + mongoPort + '/' + mongoDatabase;
     }
 }
 
-mongodb.connect(mongoURL, function (err, conn) {
-    database = conn;
-    dbDetails.databaseName = database.databaseName;
-    dbDetails.url = mongoURLLabel;
-    dbDetails.type = 'MongoDB';
-    module.exports = { db: database, port: port, ip: ip, url: mongoURL };
-});
-
+module.exports = { port: port, ip: ip, url: mongoURL };
