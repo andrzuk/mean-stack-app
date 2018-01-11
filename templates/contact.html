@@ -11,7 +11,7 @@
 
         <div ng-show="status == 'ready'">
             <div class="col-lg-10 offset-lg-1">
-                <div id="contact-content">{{ pageData.description }}</div>
+                <div id="contact-content" ng-bind-html="pageData.description"></div>
             </div>
         </div>
 
