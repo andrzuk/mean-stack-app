@@ -27,9 +27,13 @@ mongodb.connect(connection.url, function (err, conn) {
     console.log('Connected to MongoDB at: %s', connection.url);
 });
 
-var todos = require('./routes/todos.js');
+var todos = require('./routes/todos.js')({ database: db });
 
 app.use('/todos', todos);
+
+var pages = require('./routes/pages.js')({ database: db });
+
+app.use('/pages', pages);
 
 app.get('/', function (req, res) {
     res.sendFile('index.html');
@@ -46,60 +50,6 @@ app.get('/api/subpage/:index', function (req, res) {
         }, function (err, result) {
             res.send(result);
         });
-    });
-});
-
-app.get('/api/pages', function (req, res) {
-    db.collection('pages', function (err, collection) {
-        collection.find().toArray(function (err, result) {
-            res.send(result);
-        });
-    });
-});
-
-app.get('/api/page/:id', function (req, res) {
-    db.collection('pages', function (err, collection) {
-        collection.findOne({
-            _id: new ObjectID(req.params.id)
-        }, function (err, result) {
-            res.send(result);
-        });
-    });
-});
-
-app.post('/api/page', function (req, res) {
-    db.collection('pages').insertOne({
-        index: req.body.index,
-        title: req.body.title,
-        description: req.body.description,
-        ip: req.body.ip,
-        date: Date.now()
-    }, function (err, result) {
-        res.send(result);
-    });
-});
-
-app.put('/api/page/:id', function (req, res) {
-    db.collection('pages').updateOne({
-        _id: new ObjectID(req.params.id)
-    }, {
-        $set: {
-            index: req.body.index,
-            title: req.body.title,
-            description: req.body.description,
-            ip: req.body.ip,
-            date: Date.now()
-        }
-    }, function (err, result) {
-        res.send(result);
-    });
-});
-
-app.delete('/api/page/:id', function (req, res) {
-    db.collection('pages').removeOne({
-        _id: new ObjectID(req.params.id)
-    }, function (err, result) {
-        res.send(result);
     });
 });
 
