@@ -8,6 +8,7 @@ Object.assign = require('object-assign');
 var app = express();
 
 app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/controllers'));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
