@@ -54,6 +54,4 @@ angular.module('todosModule', [])
         $scope.action = 'list';
     };
 
-    $scope.getTodos();
-
 }]);

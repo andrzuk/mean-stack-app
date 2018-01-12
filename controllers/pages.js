@@ -54,6 +54,4 @@ angular.module('pagesModule', [])
         $scope.action = 'plist';
     };
 
-    $scope.getPages();
-
 }]);
