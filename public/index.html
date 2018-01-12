@@ -56,11 +56,15 @@
     </header>
 
     <section id="main-content">
-        <div ng-include="layout.home"></div>
-        <div ng-include="layout.manual"></div>
-        <div ng-include="layout.contact"></div>
-        <div ng-include="layout.pages"></div>
-        <div ng-include="layout.todos"></div>
+        <main class="container">
+            <div ng-view>
+                <div ng-include="layout.home"></div>
+                <div ng-include="layout.manual"></div>
+                <div ng-include="layout.contact"></div>
+                <div ng-include="layout.pages"></div>
+                <div ng-include="layout.todos"></div>
+            </div>
+        </main>
     </section>
 
     <footer class="py-5 bg-dark">
