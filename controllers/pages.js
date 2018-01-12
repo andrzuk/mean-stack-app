@@ -3,14 +3,16 @@ angular.module('pagesModule', [])
 .controller('pagesController', ['$scope', '$http', function ($scope, $http) {
 
     $scope.getPages = function () {
-        $scope.action = 'plist';
+        $scope.action = 'list';
+        console.log('PAGES:', $scope.action);
         $http.get('/pages').then(function (response) {
             $scope.pages = response.data;
+            console.log('PAGES:', response);
         });
     };
 
     $scope.newPage = function () {
-        $scope.action = 'pnew';
+        $scope.action = 'new';
         $scope.formData = {};
         $http.get('http://ipv4.myexternalip.com/json').then(function (response) {
             $scope.formData.ip = response.data.ip;
@@ -18,7 +20,7 @@ angular.module('pagesModule', [])
     };
 
     $scope.createPage = function () {
-        $scope.action = 'plist';
+        $scope.action = 'list';
         $http.post('/pages', $scope.formData).then(function () {
             $scope.formData = {};
             $scope.getPages();
@@ -26,7 +28,7 @@ angular.module('pagesModule', [])
     };
 
     $scope.editPage = function (id) {
-        $scope.action = 'pedit';
+        $scope.action = 'edit';
         $http.get('/pages/' + id).then(function (response) {
             $scope.formData = response.data;
             $http.get('http://ipv4.myexternalip.com/json').then(function (response) {
@@ -36,7 +38,7 @@ angular.module('pagesModule', [])
     };
 
     $scope.updatePage = function (id) {
-        $scope.action = 'plist';
+        $scope.action = 'list';
         $http.put('/pages/' + id, $scope.formData).then(function () {
             $scope.formData = {};
             $scope.getPages();
@@ -44,14 +46,14 @@ angular.module('pagesModule', [])
     };
 
     $scope.deletePage = function (id) {
-        $scope.action = 'plist';
+        $scope.action = 'list';
         $http.delete('/pages/' + id).then(function () {
             $scope.getPages();
         });
     };
 
     $scope.cancelPage = function () {
-        $scope.action = 'plist';
+        $scope.action = 'list';
     };
 
 }]);
