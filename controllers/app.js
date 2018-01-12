@@ -11,8 +11,10 @@ angular.module('mainApp', ['pagesModule', 'todosModule', 'ngSanitize'])
         manual: '../templates/manual',
         contact: '../templates/contact'
     };
+    $scope.formData = {};
+    $scope.pageData = {};
     $scope.action = null;
-    $scope.status = null;
+    $scope.status = null;    
     
     $scope.getHome = function() {
         $scope.action = 'home';

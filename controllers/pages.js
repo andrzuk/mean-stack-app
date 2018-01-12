@@ -2,11 +2,6 @@ angular.module('pagesModule', ['ngSanitize'])
 
 .controller('pagesController', ['$scope', '$http', '$sce', function ($scope, $http, $sce) {
 
-    $scope.formData = {};
-    $scope.pageData = {};
-    $scope.action = null;
-    $scope.status = null;
-    
     $scope.getPage = function(id) {
         $http.get('/pages/' + id).then(function(response) {
             return response.data;

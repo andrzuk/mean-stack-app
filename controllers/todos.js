@@ -2,11 +2,6 @@ angular.module('todosModule', [])
 
 .controller('todosController', ['$scope', '$http', function ($scope, $http) {
 
-    $scope.formData = {};
-    $scope.pageData = {};
-    $scope.action = null;
-    $scope.status = null;
-    
     $scope.getTodos = function () {
         $scope.action = 'list';
         $http.get('/todos').then(function (response) {
