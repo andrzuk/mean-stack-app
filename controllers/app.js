@@ -1,6 +1,6 @@
-angular.module('mainApp', ['pagesModule', 'todosModule'])
+angular.module('mainApp', ['pagesModule', 'todosModule', 'ngSanitize'])
 
-.controller('mainController', ['$scope', '$http', function ($scope, $http) {
+.controller('mainController', ['$scope', '$http', '$sce', function ($scope, $http, $sce) {
 
     $scope.layout = {
         home: '../templates/home',
