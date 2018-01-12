@@ -24,9 +24,9 @@ mongodb.connect(connection.url, function (err, conn) {
     dbDetails.databaseName = db.databaseName;
     dbDetails.url = connection.label;
     dbDetails.type = 'MongoDB';
-    var todos = require('./routes/todos.js')({ database: db });
+    var todos = require('./routes/todos.js')({ database: db, objectId: ObjectID });
     app.use('/todos', todos);
-    var pages = require('./routes/pages.js')({ database: db });
+    var pages = require('./routes/pages.js')({ database: db, objectId: ObjectID });
     app.use('/pages', pages);
     console.log('Connected to MongoDB at: %s', connection.url);
 });
