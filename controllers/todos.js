@@ -4,10 +4,8 @@ angular.module('todosModule', [])
 
     $scope.getTodos = function () {
         $scope.action = 'list';
-        console.log('TODOS:', $scope.action);
         $http.get('/todos').then(function (response) {
             $scope.todos = response.data;
-            console.log('TODOS:', response);
         });
     };
 

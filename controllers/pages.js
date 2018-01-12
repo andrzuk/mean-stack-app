@@ -4,10 +4,8 @@ angular.module('pagesModule', [])
 
     $scope.getPages = function () {
         $scope.action = 'list';
-        console.log('PAGES:', $scope.action);
         $http.get('/pages').then(function (response) {
             $scope.pages = response.data;
-            console.log('PAGES:', response);
         });
     };
 
