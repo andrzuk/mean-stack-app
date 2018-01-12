@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html ng-app="myApp">
+<html ng-app="mainApp">
 
 <head>
     <meta charset="utf-8">
@@ -16,7 +16,9 @@
     <script src="bootstrap.bundle.min.js"></script>
     <script src="angular.min.js"></script>
     <script src="angular-sanitize.js"></script>
-    <script src="app.js"></script>
+    <script src="controllers/app.js"></script>
+    <script src="controllers/pages.js"></script>
+    <script src="controllers/todos.js"></script>
 </head>
 
 <body ng-controller="mainController">
@@ -55,12 +57,16 @@
 
     <section id="main-content">
         <div ng-include="layout.home"></div>
-        <div ng-include="layout.plist"></div>
-        <div ng-include="layout.pform"></div>
-        <div ng-include="layout.list"></div>
-        <div ng-include="layout.form"></div>
         <div ng-include="layout.manual"></div>
         <div ng-include="layout.contact"></div>
+        <div ng-controller="todosController">
+            <div ng-include="layout.list"></div>
+            <div ng-include="layout.form"></div>
+        </div>
+        <div ng-controller="pagesController">
+            <div ng-include="layout.plist"></div>
+            <div ng-include="layout.pform"></div>
+        </div>
     </section>
 
     <footer class="py-5 bg-dark">
