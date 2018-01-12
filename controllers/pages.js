@@ -1,12 +1,6 @@
-angular.module('pagesModule', ['ngSanitize'])
+angular.module('pagesModule', [])
 
-.controller('pagesController', ['$scope', '$http', '$sce', function ($scope, $http, $sce) {
-
-    $scope.getPage = function(id) {
-        $http.get('/pages/' + id).then(function(response) {
-            return response.data;
-        });
-    };
+.controller('pagesController', ['$scope', '$http', function ($scope, $http) {
 
     $scope.getPages = function () {
         $scope.action = 'plist';

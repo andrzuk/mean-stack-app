@@ -56,16 +56,16 @@
     </header>
 
     <section id="main-content">
-        <div ng-include="layout.home"></div>
-        <div ng-include="layout.manual"></div>
-        <div ng-include="layout.contact"></div>
+        <div ng-if="action == 'home'" ng-include="layout.home"></div>
+        <div ng-if="action == 'manual'" ng-include="layout.manual"></div>
+        <div ng-if="action == 'contact'" ng-include="layout.contact"></div>
         <div ng-controller="todosController">
-            <div ng-include="layout.list"></div>
-            <div ng-include="layout.form"></div>
+            <div ng-if="action == 'list'" ng-include="layout.list"></div>
+            <div ng-if="action == 'form'" ng-include="layout.form"></div>
         </div>
         <div ng-controller="pagesController">
-            <div ng-include="layout.plist"></div>
-            <div ng-include="layout.pform"></div>
+            <div ng-if="action == 'plist'" ng-include="layout.plist"></div>
+            <div ng-if="action == 'pform'" ng-include="layout.pform"></div>
         </div>
     </section>
 
