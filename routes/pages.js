@@ -4,7 +4,7 @@ module.exports = function(params) {
     var express = require('express');
     var router = express.Router();
 
-    router.get('/', function (req, res) {
+    router.get('/', function (req, res, next) {
         db.collection('pages', function (err, collection) {
             collection.find().toArray(function (err, result) {
                 res.send(result);
@@ -12,7 +12,7 @@ module.exports = function(params) {
         });
     });
 
-    router.get('/:id', function (req, res) {
+    router.get('/:id', function (req, res, next) {
         db.collection('pages', function (err, collection) {
             collection.findOne({
                 _id: new ObjectID(req.params.id)
@@ -22,7 +22,7 @@ module.exports = function(params) {
         });
     });
 
-    router.post('/', function (req, res) {
+    router.post('/', function (req, res, next) {
         db.collection('pages').insertOne({
             index: req.body.index,
             title: req.body.title,
@@ -34,7 +34,7 @@ module.exports = function(params) {
         });
     });
 
-    router.put('/:id', function (req, res) {
+    router.put('/:id', function (req, res, next) {
         db.collection('pages').updateOne({
             _id: new ObjectID(req.params.id)
         }, {
@@ -50,7 +50,7 @@ module.exports = function(params) {
         });
     });
 
-    router.delete('/:id', function (req, res) {
+    router.delete('/:id', function (req, res, next) {
         db.collection('pages').removeOne({
             _id: new ObjectID(req.params.id)
         }, function (err, result) {

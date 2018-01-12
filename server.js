@@ -24,16 +24,12 @@ mongodb.connect(connection.url, function (err, conn) {
     dbDetails.databaseName = db.databaseName;
     dbDetails.url = connection.label;
     dbDetails.type = 'MongoDB';
+    var todos = require('./routes/todos.js')({ database: db });
+    app.use('/todos', todos);
+    var pages = require('./routes/pages.js')({ database: db });
+    app.use('/pages', pages);
     console.log('Connected to MongoDB at: %s', connection.url);
 });
-
-var todos = require('./routes/todos.js')({ database: db });
-
-app.use('/todos', todos);
-
-var pages = require('./routes/pages.js')({ database: db });
-
-app.use('/pages', pages);
 
 app.get('/', function (req, res) {
     res.sendFile('index.html');
