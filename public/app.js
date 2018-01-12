@@ -95,7 +95,7 @@ var myApp = angular.module('myApp', ['ngSanitize'])
 
     $scope.getTodos = function () {
         $scope.action = 'list';
-        $http.get('/api/todos').then(function (response) {
+        $http.get('/todos').then(function (response) {
             $scope.todos = response.data;
         });
     };
@@ -110,7 +110,7 @@ var myApp = angular.module('myApp', ['ngSanitize'])
 
     $scope.createTodo = function () {
         $scope.action = 'list';
-        $http.post('/api/todo', $scope.formData).then(function () {
+        $http.post('/todos', $scope.formData).then(function () {
             $scope.formData = {};
             $scope.getTodos();
         });
@@ -118,7 +118,7 @@ var myApp = angular.module('myApp', ['ngSanitize'])
 
     $scope.editTodo = function (id) {
         $scope.action = 'edit';
-        $http.get('/api/todo/' + id).then(function (response) {
+        $http.get('/todos/' + id).then(function (response) {
             $scope.formData = response.data;
             $http.get('http://ipv4.myexternalip.com/json').then(function (response) {
                 $scope.formData.ip = response.data.ip;
@@ -128,7 +128,7 @@ var myApp = angular.module('myApp', ['ngSanitize'])
 
     $scope.updateTodo = function (id) {
         $scope.action = 'list';
-        $http.put('/api/todo/' + id, $scope.formData).then(function () {
+        $http.put('/todos/' + id, $scope.formData).then(function () {
             $scope.formData = {};
             $scope.getTodos();
         });
@@ -136,7 +136,7 @@ var myApp = angular.module('myApp', ['ngSanitize'])
 
     $scope.deleteTodo = function (id) {
         $scope.action = 'list';
-        $http.delete('/api/todo/' + id).then(function () {
+        $http.delete('/todos/' + id).then(function () {
             $scope.getTodos();
         });
     };

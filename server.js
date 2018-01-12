@@ -10,9 +10,7 @@ var app = express();
 app.use(express.static(__dirname + '/public'));
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('combined'));
 
 var db = null;
@@ -27,8 +25,11 @@ mongodb.connect(connection.url, function (err, conn) {
     dbDetails.url = connection.label;
     dbDetails.type = 'MongoDB';
     console.log('Connected to MongoDB at: %s', connection.url);
-    console.log('Database: ', db);
 });
+
+var todos = require('./routes/todos.js');
+
+app.use('/todos', todos);
 
 app.get('/', function (req, res) {
     res.sendFile('index.html');
@@ -96,56 +97,6 @@ app.put('/api/page/:id', function (req, res) {
 
 app.delete('/api/page/:id', function (req, res) {
     db.collection('pages').removeOne({
-        _id: new ObjectID(req.params.id)
-    }, function (err, result) {
-        res.send(result);
-    });
-});
-
-app.get('/api/todos', function (req, res) {
-    db.collection('todos', function (err, collection) {
-        collection.find().toArray(function (err, result) {
-            res.send(result);
-        });
-    });
-});
-
-app.get('/api/todo/:id', function (req, res) {
-    db.collection('todos', function (err, collection) {
-        collection.findOne({
-            _id: new ObjectID(req.params.id)
-        }, function (err, result) {
-            res.send(result);
-        });
-    });
-});
-
-app.post('/api/todo', function (req, res) {
-    db.collection('todos').insertOne({
-        text: req.body.text,
-        ip: req.body.ip,
-        date: Date.now()
-    }, function (err, result) {
-        res.send(result);
-    });
-});
-
-app.put('/api/todo/:id', function (req, res) {
-    db.collection('todos').updateOne({
-        _id: new ObjectID(req.params.id)
-    }, {
-        $set: {
-            text: req.body.text,
-            ip: req.body.ip,
-            date: Date.now()
-        }
-    }, function (err, result) {
-        res.send(result);
-    });
-});
-
-app.delete('/api/todo/:id', function (req, res) {
-    db.collection('todos').removeOne({
         _id: new ObjectID(req.params.id)
     }, function (err, result) {
         res.send(result);
