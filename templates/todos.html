@@ -1,0 +1,74 @@
+<div ng-controller="todosController">
+   
+    <div class="container" ng-show="action == 'list'">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="py-3 text-right">
+                    <button class="btn btn-success font-awesome" ng-click="newTodo()"><i class="fa fa-plus" aria-hidden="true"></i> Dodaj nowe zadanie</button>
+                </div>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Id</th>
+                        <th>IP</th>
+                        <th>Opis zadania</th>
+                        <th>Data</th>
+                        <th>Hash</th>
+                        <th colspan="2" class="text-center">Akcje</th>
+                    </tr>
+                    <tr ng-repeat="todo in todos">
+                        <td>{{ todo._id }}</td>
+                        <td>{{ todo.ip }}</td>
+                        <td>{{ todo.text }}</td>
+                        <td>{{ todo.date | date: "dd.MM.yyyy HH:mm:ss" }}</td>
+                        <td>{{ todo.$$hashKey }}</td>
+                        <td class="text-center">
+                            <button class="btn btn-primary action" ng-click="editTodo(todo._id)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                        </td>
+                        <td class="text-center">
+                            <button class="btn btn-danger action" ng-click="deleteTodo(todo._id)"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                        </td>
+                    </tr>
+                    <tr ng-if="todos.length == 0">
+                        <td colspan="7">Brak pozycji.</td>
+                    </tr>
+                </table>
+                <div class="py-3 text-center">
+                    Statystyka: <b>{{ todos.length }}</b> wpisów
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container" ng-show="action == 'new'">
+        <div class="py-4 row">
+            <div class="col-lg-8 offset-lg-2">
+                <form>
+                    <input type="hidden" ng-model="formData.ip">
+                    <div class="form-group text-left">
+                        <label>Nowe zadanie:</label>
+                        <textarea class="form-control" rows="14" ng-model="formData.text" spellcheck="false"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary font-awesome" ng-click="createTodo()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Zapisz</button>
+                    <button type="submit" class="btn btn-warning font-awesome" ng-click="cancelTodo()"><i class="fa fa-ban" aria-hidden="true"></i> Anuluj</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" ng-show="action == 'edit'">
+        <div class="py-4 row">
+            <div class="col-lg-8 offset-lg-2">
+                <form>
+                    <input type="hidden" ng-model="formData.ip">
+                    <div class="form-group text-left">
+                        <label>Edycja zadania:</label>
+                        <textarea class="form-control" rows="14" ng-model="formData.text" spellcheck="false"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary font-awesome" ng-click="updateTodo(formData._id)"><i class="fa fa-floppy-o" aria-hidden="true"></i> Zapisz</button>
+                    <button type="submit" class="btn btn-warning font-awesome" ng-click="cancelTodo()"><i class="fa fa-ban" aria-hidden="true"></i> Anuluj</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+</div>

@@ -4,13 +4,12 @@ angular.module('mainApp', ['pagesModule', 'todosModule', 'ngSanitize'])
 
     $scope.layout = {
         home: '../templates/home',
-        plist: '../templates/plist',
-        pform: '../templates/pform',
-        list: '../templates/list',
-        form: '../templates/form',
         manual: '../templates/manual',
-        contact: '../templates/contact'
+        contact: '../templates/contact',
+        pages: '../templates/pages',
+        todos: '../templates/todos',
     };
+    
     $scope.formData = {};
     $scope.pageData = {};
     $scope.action = null;
