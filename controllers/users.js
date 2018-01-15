@@ -5,6 +5,7 @@ angular.module('usersModule', [])
     $scope.getUsers = function () {
         $scope.action = 'list';
         $http.get('/users').then(function (response) {
+            console.log(response);
             $scope.users = response.data;
         });
     };
