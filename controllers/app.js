@@ -7,7 +7,7 @@ angular.module('mainApp', ['pagesModule', 'usersModule', 'todosModule', 'ngSanit
         manual: '../templates/manual',
         contact: '../templates/contact',
         pages: '../templates/pages',
-        users: '../templates/users'
+        users: '../templates/users',
         todos: '../templates/todos',
     };
     
