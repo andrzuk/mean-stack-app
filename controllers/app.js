@@ -38,14 +38,14 @@ angular.module('mainApp', ['pagesModule', 'todosModule', 'ngSanitize'])
         });
     };
     
-    $scope.getPages = function() {
+    $scope.getAppPages = function() {
         $scope.module = 'pages';
-        $scope.action = 'list';
+        $scope.getPages();
     };
 
-    $scope.getTodos = function() {
+    $scope.getAppTodos = function() {
         $scope.module = 'todos';
-        $scope.action = 'list';
+        $scope.getTodos();
     };
 
     $scope.getHome();
