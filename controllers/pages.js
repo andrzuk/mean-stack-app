@@ -3,16 +3,10 @@ angular.module('pagesModule', [])
 .controller('pagesController', ['$scope', '$http', function ($scope, $http) {
 
     $scope.getPages = function () {
-        if ($scope.currentUser.isLogged) {
-            $scope.action = 'list';
-            $http.get('/pages').then(function (response) {
-                $scope.pages = response.data;
-            });
-        }
-        else {
-            $scope.module = 'users';
-            $scope.action = 'login';
-        }
+        $scope.action = 'list';
+        $http.get('/pages').then(function (response) {
+            $scope.pages = response.data;
+        });
     };
 
     $scope.newPage = function () {

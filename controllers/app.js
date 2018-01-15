@@ -46,8 +46,14 @@ angular.module('mainApp', ['pagesModule', 'usersModule', 'todosModule', 'ngSanit
     };
     
     $scope.getAppPages = function() {
-        $scope.module = 'pages';
-        $scope.action = 'list';
+        if ($scope.currentUser.isLogged) {
+            $scope.module = 'pages';
+            $scope.action = 'list';
+        }
+        else {
+            $scope.module = 'users';
+            $scope.action = 'login';
+        }
     };
 
     $scope.getAppUsers = function() {
