@@ -25,6 +25,10 @@ angular.module('mainApp', ['pagesModule', 'todosModule', 'ngSanitize'])
         $scope.getSubpage('contact');
     };
 
+    $scope.getManual = function () {
+        $scope.action = 'manual';
+    };
+
     $scope.getSubpage = function (index) {
         $scope.status = 'loading';
         $http.get('/api/subpage/' + index).then(function(response) {
@@ -33,9 +37,15 @@ angular.module('mainApp', ['pagesModule', 'todosModule', 'ngSanitize'])
             $scope.status = 'ready';
         });
     };
+    
+    $scope.getPages = function() {
+        $scope.module = 'pages';
+        $scope.action = 'list';
+    };
 
-    $scope.getManual = function () {
-        $scope.action = 'manual';
+    $scope.getTodos = function() {
+        $scope.module = 'todos';
+        $scope.action = 'list';
     };
 
     $scope.getHome();
