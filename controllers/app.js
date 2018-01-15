@@ -12,6 +12,7 @@ angular.module('mainApp', ['pagesModule', 'todosModule', 'ngSanitize'])
     
     $scope.formData = {};
     $scope.pageData = {};
+    $scope.module = null;
     $scope.action = null;
     $scope.status = null;    
     
@@ -40,12 +41,12 @@ angular.module('mainApp', ['pagesModule', 'todosModule', 'ngSanitize'])
     
     $scope.getAppPages = function() {
         $scope.module = 'pages';
-        $scope.getPages();
+        $scope.action = 'list';
     };
 
     $scope.getAppTodos = function() {
         $scope.module = 'todos';
-        $scope.getTodos();
+        $scope.action = 'list';
     };
 
     $scope.getHome();
