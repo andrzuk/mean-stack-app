@@ -50,6 +50,21 @@ angular.module('usersModule', [])
         });
     };
 
+    $scope.loginUser = function () {
+        $scope.action = 'login';
+        $http.post('/users/login', $scope.formData).then(function (response) {
+            console.log(response);
+            if (response.data.isLogged) {
+                $scope.currentUser = response.data;
+                $scope.formData = {};
+                $scope.getUsers();
+            }
+            else {
+                $scope.currentUser.isLogged = false;
+            }
+        });
+    };
+
     $scope.cancelUser = function () {
         $scope.action = 'list';
     };

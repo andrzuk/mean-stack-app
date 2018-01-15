@@ -11,6 +11,8 @@ angular.module('mainApp', ['pagesModule', 'usersModule', 'todosModule', 'ngSanit
         todos: '../templates/todos',
     };
     
+    $scope.currentUser = { isLogged: false };
+    
     $scope.formData = {};
     $scope.pageData = {};
     $scope.module = null;
