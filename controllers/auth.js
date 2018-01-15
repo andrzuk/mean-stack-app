@@ -7,7 +7,7 @@ angular.module('authModule', [])
             console.log(response);
             console.log('Before:', $scope.currentUser);
             if (response.data.isLogged) {
-                $scope.currentUser = response.data;
+                $scope.currentUser = response;
                 $scope.formData = {};
                 $scope.action = 'panel';
                 console.log('After:', $scope.currentUser);
