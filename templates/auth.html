@@ -1,0 +1,29 @@
+<div ng-show="module == 'auth'" ng-controller="authController">
+   
+    <div class="container" ng-show="action == 'login'">
+        <div class="py-4 row">
+            <div class="col-lg-4 offset-lg-4">
+                <h2>Logowanie</h2>
+                <form>
+                    <input type="hidden" ng-model="formData.ip">
+                    <div class="form-group text-left">
+                        Login:
+                        <input type="text" class="form-control" ng-model="formData.login"> 
+                        Hasło:
+                        <input type="password" class="form-control" ng-model="formData.password"> 
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block font-awesome" ng-click="loginUser()"><i class="fa fa-sign-in" aria-hidden="true"></i> Zaloguj</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" ng-show="action == 'panel'">
+        <div class="py-4 row">
+            <div class="col-lg-4 offset-lg-4">
+                <h2>Admin Panel</h2>
+            </div>
+        </div>
+    </div>
+
+</div>

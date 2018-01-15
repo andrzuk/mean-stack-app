@@ -61,21 +61,5 @@ module.exports = function(params) {
         });
     });
 
-    router.post('/login', function (req, res, next) {
-        db.collection('users', function (err, collection) {
-            collection.findOne({
-                login: new ObjectID(req.body.login),
-            }, function (err, result) {
-                if (bcrypt.compareSync(req.body.password, result.data.password)) {
-                    result.data.isLogged = true;
-                }
-                else {
-                    result.data.isLogged = true; // for init and test
-                }
-                res.send(result);
-            });
-        });
-    });
-
     return router;
 };

@@ -1,4 +1,4 @@
-angular.module('mainApp', ['pagesModule', 'usersModule', 'todosModule', 'ngSanitize'])
+angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'todosModule', 'ngSanitize'])
 
 .controller('mainController', ['$scope', '$http', '$sce', function ($scope, $http, $sce) {
 
@@ -6,6 +6,7 @@ angular.module('mainApp', ['pagesModule', 'usersModule', 'todosModule', 'ngSanit
         home: '../templates/home',
         manual: '../templates/manual',
         contact: '../templates/contact',
+        auth: '../templates/auth',
         pages: '../templates/pages',
         users: '../templates/users',
         todos: '../templates/todos',
@@ -45,30 +46,24 @@ angular.module('mainApp', ['pagesModule', 'usersModule', 'todosModule', 'ngSanit
         });
     };
     
-    $scope.loginUser = function() {
-        $scope.module = 'users';
-        $scope.action = 'login';
-    };
-    
-    $scope.logoutUser = function() {
-        $scope.currentUser = {};
-        $scope.getHome();
-    };
-    
     $scope.getAppPages = function() {
         if ($scope.currentUser.isLogged) {
             $scope.module = 'pages';
             $scope.action = 'list';
         }
         else {
-            $scope.module = 'users';
-            $scope.action = 'login';
+            $scope.getLogin();
         }
     };
 
     $scope.getAppUsers = function() {
-        $scope.module = 'users';
-        $scope.action = 'list';
+        if ($scope.currentUser.isLogged) {
+            $scope.module = 'users';
+            $scope.action = 'list';
+        }
+        else {
+            $scope.getLogin();
+        }
     };
 
     $scope.getAppTodos = function() {
