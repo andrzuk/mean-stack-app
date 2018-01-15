@@ -18,6 +18,7 @@
     <script src="angular-sanitize.js"></script>
     <script src="app.js"></script>
     <script src="pages.js"></script>
+    <script src="users.js"></script>
     <script src="todos.js"></script>
 </head>
 
@@ -33,6 +34,9 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="#admin" ng-click="getAppPages()">Administracja</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#users" ng-click="getAppUsers()">Users</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#demo" ng-click="getAppTodos()">Demo</a>
@@ -60,6 +64,7 @@
         <div ng-include="layout.manual"></div>
         <div ng-include="layout.contact"></div>
         <div ng-include="layout.pages"></div>
+        <div ng-include="layout.users"></div>
         <div ng-include="layout.todos"></div>
     </section>
 

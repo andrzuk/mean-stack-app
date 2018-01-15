@@ -7,6 +7,7 @@ angular.module('mainApp', ['pagesModule', 'todosModule', 'ngSanitize'])
         manual: '../templates/manual',
         contact: '../templates/contact',
         pages: '../templates/pages',
+        users: '../templates/users'
         todos: '../templates/todos',
     };
     
@@ -17,16 +18,19 @@ angular.module('mainApp', ['pagesModule', 'todosModule', 'ngSanitize'])
     $scope.status = null;    
     
     $scope.getHome = function() {
+        $scope.module = 'index';
         $scope.action = 'home';
         $scope.getSubpage('index');
     };
     
     $scope.getContact = function () {
+        $scope.module = 'contact';
         $scope.action = 'contact';
         $scope.getSubpage('contact');
     };
 
     $scope.getManual = function () {
+        $scope.module = 'manual';
         $scope.action = 'manual';
     };
 
@@ -41,6 +45,11 @@ angular.module('mainApp', ['pagesModule', 'todosModule', 'ngSanitize'])
     
     $scope.getAppPages = function() {
         $scope.module = 'pages';
+        $scope.action = 'list';
+    };
+
+    $scope.getAppUsers = function() {
+        $scope.module = 'users';
         $scope.action = 'list';
     };
 

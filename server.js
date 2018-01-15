@@ -29,6 +29,8 @@ mongodb.connect(connection.url, function (err, conn) {
     app.use('/todos', todos);
     var pages = require('./routes/pages.js')({ database: db, objectId: ObjectID });
     app.use('/pages', pages);
+    var users = require('./routes/users.js')({ database: db, objectId: ObjectID });
+    app.use('/users', users);
     console.log('Connected to MongoDB at: %s', connection.url);
 });
 
@@ -48,6 +50,10 @@ app.get('/api/subpage/:index', function (req, res) {
             res.send(result);
         });
     });
+});
+
+app.get('/*', function (req, res) {
+    res.sendFile(__dirname + '/templates/not_found.html');
 });
 
 app.listen(connection.port, connection.ip);
