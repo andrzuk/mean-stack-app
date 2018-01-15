@@ -7,14 +7,13 @@ module.exports = function(params) {
     const bcrypt = require('bcrypt');
 
     router.post('/login', function (req, res, next) {
+        var user = {};
         db.collection('users', function (err, collection) {
             collection.findOne({
                 login: req.body.login,
             }, function (err, result) {
-                console.log('RESULT:', result);
-                var user = {};
                 if (result) {
-                    user = result.data;
+                    user = result;
                     if (bcrypt.compareSync(req.body.password, user.password)) {
                         user.isLogged = true;
                     }
