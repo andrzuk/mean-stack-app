@@ -52,10 +52,6 @@ app.get('/api/subpage/:index', function (req, res) {
     });
 });
 
-app.get('/*', function (req, res) {
-    res.sendFile(__dirname + '/templates/not_found.html');
-});
-
 app.listen(connection.port, connection.ip);
 
 console.log('Server running on http://%s:%s', connection.ip, connection.port);
