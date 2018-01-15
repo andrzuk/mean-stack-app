@@ -3,14 +3,18 @@ angular.module('authModule', [])
 .controller('authController', ['$scope', '$http', function ($scope, $http) {
 
     $scope.loginUser = function () {
+        $scope.status = 'wait';
         $http.post('/auth/login', $scope.formData).then(function (response) {
-            console.log(response);
-            console.log('Before:', $scope.currentUser);
             if (response.data.isLogged) {
-                $scope.currentUser = response;
+                $scope.currentUser = response.data;
                 $scope.formData = {};
                 $scope.action = 'panel';
-                console.log('After:', $scope.currentUser);
+                $scope.message = 'Zostałeś pomyślnie zalogowany';
+                $scope.status = 'info';
+            }
+            else {
+                $scope.message = 'Login lub hasło są nieprawidłowe.';
+                $scope.status = 'error';
             }
         });
     };

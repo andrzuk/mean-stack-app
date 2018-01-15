@@ -13,12 +13,9 @@ module.exports = function(params) {
                 login: req.body.login,
             }, function (err, result) {
                 if (result) {
-                    user = result;
-                    if (bcrypt.compareSync(req.body.password, user.password)) {
+                    if (bcrypt.compareSync(req.body.password, result.password)) {
+                        user = result;
                         user.isLogged = true;
-                    }
-                    else {
-                        user.isLogged = false;
                     }
                 }
                 res.send(user);
