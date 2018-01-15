@@ -1,4 +1,4 @@
-angular.module('mainApp', ['pagesModule', 'todosModule', 'ngSanitize'])
+angular.module('mainApp', ['pagesModule', 'usersModule', 'todosModule', 'ngSanitize'])
 
 .controller('mainController', ['$scope', '$http', '$sce', function ($scope, $http, $sce) {
 
