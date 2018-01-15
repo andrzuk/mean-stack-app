@@ -46,6 +46,11 @@ angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'todosMod
         });
     };
     
+    $scope.getLogin = function() {
+        $scope.module = 'auth';
+        $scope.action = 'login';
+    };
+
     $scope.getAppPages = function() {
         if ($scope.currentUser.isLogged) {
             $scope.module = 'pages';

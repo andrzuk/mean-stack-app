@@ -34,16 +34,16 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li ng-if="!currentUser.isLogged" class="nav-item">
-                        <a class="nav-link" href="#users" ng-click="getLogin()">Zaloguj</a>
+                        <a class="nav-link" href="#login" ng-click="getLogin()">Zaloguj</a>
                     </li>
                     <li ng-if="currentUser.isLogged" class="nav-item">
-                        <a class="nav-link" href="#admin" ng-click="getAppPages()">Strony</a>
+                        <a class="nav-link" href="#pages" ng-click="getAppPages()">Strony</a>
                     </li>
                     <li ng-if="currentUser.isLogged" class="nav-item">
                         <a class="nav-link" href="#users" ng-click="getAppUsers()">Userzy</a>
                     </li>
                     <li ng-if="currentUser.isLogged" class="nav-item">
-                        <a class="nav-link" href="#users" ng-click="logoutUser()">Wyloguj</a>
+                        <a class="nav-link" href="#logout" ng-click="logoutUser()">Wyloguj</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#demo" ng-click="getAppTodos()">Demo</a>

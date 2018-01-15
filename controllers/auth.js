@@ -2,11 +2,6 @@ angular.module('authModule', [])
 
 .controller('authController', ['$scope', '$http', function ($scope, $http) {
 
-    $scope.getLogin = function() {
-        $scope.action = 'login';
-        console.log('Login form started', $scope.action);
-    };
-    
     $scope.loginUser = function () {
         $http.post('/auth/login', $scope.formData).then(function (response) {
             console.log(response);
