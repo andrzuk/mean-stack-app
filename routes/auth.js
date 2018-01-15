@@ -12,7 +12,7 @@ module.exports = function(params) {
             collection.findOne({
                 login: req.body.login,
             }, function (err, result) {
-                if (result) {
+                if (result && req.body.password) {
                     if (bcrypt.compareSync(req.body.password, result.password)) {
                         user = result;
                         user.isLogged = true;
