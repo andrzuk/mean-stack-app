@@ -32,11 +32,17 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
+                    <li ng-if="!currentUser.isLogged" class="nav-item">
+                        <a class="nav-link" href="#users" ng-click="loginUser()">Zaloguj</a>
+                    </li>
+                    <li ng-if="currentUser.isLogged" class="nav-item">
                         <a class="nav-link" href="#admin" ng-click="getAppPages()">Administracja</a>
                     </li>
-                    <li class="nav-item">
+                    <li ng-if="currentUser.isLogged" class="nav-item">
                         <a class="nav-link" href="#users" ng-click="getAppUsers()">Users</a>
+                    </li>
+                    <li ng-if="currentUser.isLogged" class="nav-item">
+                        <a class="nav-link" href="#users" ng-click="logoutUser()">Wyloguj</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#demo" ng-click="getAppTodos()">Demo</a>

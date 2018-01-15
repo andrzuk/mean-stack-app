@@ -11,7 +11,7 @@ angular.module('mainApp', ['pagesModule', 'usersModule', 'todosModule', 'ngSanit
         todos: '../templates/todos',
     };
     
-    $scope.currentUser = { isLogged: false };
+    $scope.currentUser = {};
     
     $scope.formData = {};
     $scope.pageData = {};
@@ -43,6 +43,16 @@ angular.module('mainApp', ['pagesModule', 'usersModule', 'todosModule', 'ngSanit
             $scope.pageData.description = $sce.trustAsHtml($scope.pageData.description);
             $scope.status = 'ready';
         });
+    };
+    
+    $scope.loginUser = function() {
+        $scope.module = 'users';
+        $scope.action = 'login';
+    };
+    
+    $scope.logoutUser = function() {
+        $scope.currentUser = {};
+        $scope.getHome();
     };
     
     $scope.getAppPages = function() {
