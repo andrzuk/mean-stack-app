@@ -4,6 +4,7 @@ angular.module('authModule', [])
 
     $scope.getLogin = function() {
         $scope.action = 'login';
+        console.log('Login form started', $scope.action);
     };
     
     $scope.loginUser = function () {
