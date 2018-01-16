@@ -39,10 +39,11 @@ img#page-logo {
     border-color: #ccc;
 }
 form {
-    padding: 2em;
+    padding: 1.35em;
     background-color: #eee;
     border: 1px solid #ccc;
     border-radius: 0.35em;
+    text-align: right;
 }
 form>button {
     width: 150px;

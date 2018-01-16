@@ -20,9 +20,10 @@ angular.module('authModule', [])
     };
 
     $rootScope.logoutUser = function() {
-        console.log('Wylogowanie...');
         $rootScope.currentUser = {};
-        $rootScope.getHome();
+        $scope.action = 'logout';
+        $scope.message = 'Zostałeś pomyślnie wylogowany';
+        $scope.status = 'info';
     };
 
 }]);
