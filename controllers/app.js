@@ -51,6 +51,11 @@ angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'todosMod
         $scope.action = 'login';
     };
 
+    $scope.getPanel = function() {
+        $scope.module = 'auth';
+        $scope.action = 'panel';
+    };
+
     $scope.getAppPages = function() {
         if ($rootScope.currentUser.isLogged) {
             $scope.module = 'pages';

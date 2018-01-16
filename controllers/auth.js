@@ -2,7 +2,7 @@ angular.module('authModule', [])
 
 .controller('authController', ['$rootScope', '$scope', '$http', function ($rootScope, $scope, $http) {
 
-    $scope.loginUser = function () {
+    $rootScope.loginUser = function () {
         $scope.status = 'wait';
         $http.post('/auth/login', $scope.formData).then(function (response) {
             if (response.data.isLogged) {
@@ -19,10 +19,10 @@ angular.module('authModule', [])
         });
     };
 
-    $scope.logoutUser = function() {
+    $rootScope.logoutUser = function() {
         console.log('Wylogowanie...');
         $rootScope.currentUser = {};
-        $scope.getHome();
+        $rootScope.getHome();
     };
 
 }]);

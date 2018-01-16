@@ -23,10 +23,16 @@
             <div class="col-lg-4 offset-lg-4">
                 <h2>Admin Panel</h2>
                 <hr>
-                <button class="btn btn-primary" ng-click="getAppPages()">Strony</button>
-                <button class="btn btn-primary" ng-click="getAppUsers()">Userzy</button>
+                <h3>Login: {{ currentUser.login }}</h3>
+                <h3>E-mail: {{ currentUser.email }}</h3>
+                <h3>Register: {{ currentUser.date }}</h3>
+                <h3>UserId: {{ currentUser._id }}</h3>
+                <h3>Admin: {{ currentUser.isLogged }}</h3>
                 <hr>
-                <button class="btn btn-danger" ng-click="logoutUser()">Wyloguj</button>
+                <button class="btn btn-primary btn-block" ng-click="getAppPages()">Strony</button>
+                <button class="btn btn-primary btn-block" ng-click="getAppUsers()">Userzy</button>
+                <hr>
+                <button class="btn btn-danger btn-block" ng-click="logoutUser()">Wyloguj</button>
             </div>
         </div>
     </div>

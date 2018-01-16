@@ -37,6 +37,9 @@
                         <a class="nav-link" href="#login" ng-click="getLogin()">Zaloguj</a>
                     </li>
                     <li ng-if="currentUser.isLogged" class="nav-item">
+                        <a class="nav-link" href="#panel" ng-click="getPanel()">Wyloguj</a>
+                    </li>
+                    <li ng-if="currentUser.isLogged" class="nav-item">
                         <a class="nav-link" href="#pages" ng-click="getAppPages()">Strony</a>
                     </li>
                     <li ng-if="currentUser.isLogged" class="nav-item">
@@ -63,7 +66,7 @@
         <div class="container text-center">
             <h1>MEAN Stack Application</h1>
             <p class="lead"><b>M</b>ongoDB + <b>E</b>xpress.js + <b>A</b>ngular + <b>N</b>ode.js</p>
-            user: {{ currentUser }}<br>module: {{ module }} action: {{ action }}
+            user: {{ currentUser.login }} logged: {{ currentUser.isLogged }}<br>module: {{ module }} action: {{ action }}
         </div>
     </header>
 
