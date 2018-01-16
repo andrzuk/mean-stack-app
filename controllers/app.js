@@ -6,6 +6,7 @@ angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'todosMod
         home: '../templates/home',
         manual: '../templates/manual',
         contact: '../templates/contact',
+        auth: '../templates/auth',
         pages: '../templates/pages',
         users: '../templates/users',
         todos: '../templates/todos',
