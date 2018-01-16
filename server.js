@@ -9,6 +9,7 @@ var app = express();
 
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/controllers'));
+app.use(express.static(__dirname + '/templates'));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

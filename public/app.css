@@ -38,8 +38,15 @@ img#page-logo {
     vertical-align: middle;
     border-color: #ccc;
 }
+form {
+    padding: 2em;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 0.35em;
+}
 form>button {
     width: 150px;
+    margin-top: 1.95em;
 }
 section#main-content {
     text-align: center;

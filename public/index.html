@@ -63,17 +63,18 @@
         <div class="container text-center">
             <h1>MEAN Stack Application</h1>
             <p class="lead"><b>M</b>ongoDB + <b>E</b>xpress.js + <b>A</b>ngular + <b>N</b>ode.js</p>
+            {{ currentUser }}
         </div>
     </header>
 
     <section id="main-content">
-        <div ng-include="layout.home"></div>
-        <div ng-include="layout.manual"></div>
-        <div ng-include="layout.contact"></div>
-        <div ng-include="layout.auth"></div>
-        <div ng-include="layout.pages"></div>
-        <div ng-include="layout.users"></div>
-        <div ng-include="layout.todos"></div>
+        <div ng-include="home"></div>
+        <div ng-include="manual"></div>
+        <div ng-include="contact"></div>
+        <div ng-include="auth"></div>
+        <div ng-include="pages"></div>
+        <div ng-include="users"></div>
+        <div ng-include="todos"></div>
     </section>
 
     <footer class="py-5 bg-dark">
