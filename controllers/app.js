@@ -1,6 +1,6 @@
 angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'todosModule', 'ngSanitize'])
 
-.controller('mainController', ['$scope', '$http', '$sce', function ($scope, $http, $sce) {
+.controller('mainController', ['$rootScope', '$scope', '$http', '$sce', function ($rootScope, $scope, $http, $sce) {
 
     $scope.layout = {
         home: '../templates/home',
@@ -12,7 +12,7 @@ angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'todosMod
         todos: '../templates/todos',
     };
     
-    $scope.currentUser = { isLogged: true };
+    $rootScope.currentUser = {};
     
     $scope.formData = {};
     $scope.pageData = {};
@@ -52,7 +52,7 @@ angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'todosMod
     };
 
     $scope.getAppPages = function() {
-        if ($scope.currentUser.isLogged) {
+        if ($rootScope.currentUser.isLogged) {
             $scope.module = 'pages';
             $scope.action = 'list';
         }
@@ -62,7 +62,7 @@ angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'todosMod
     };
 
     $scope.getAppUsers = function() {
-        if ($scope.currentUser.isLogged) {
+        if ($rootScope.currentUser.isLogged) {
             $scope.module = 'users';
             $scope.action = 'list';
         }

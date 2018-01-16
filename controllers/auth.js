@@ -1,12 +1,12 @@
 angular.module('authModule', [])
 
-.controller('authController', ['$scope', '$http', function ($scope, $http) {
+.controller('authController', ['$rootScope', '$scope', '$http', function ($rootScope, $scope, $http) {
 
     $scope.loginUser = function () {
         $scope.status = 'wait';
         $http.post('/auth/login', $scope.formData).then(function (response) {
             if (response.data.isLogged) {
-                $scope.currentUser = response.data;
+                $rootScope.currentUser = response.data;
                 $scope.formData = {};
                 $scope.action = 'panel';
                 $scope.message = 'Zostałeś pomyślnie zalogowany';
@@ -20,7 +20,8 @@ angular.module('authModule', [])
     };
 
     $scope.logoutUser = function() {
-        $scope.currentUser = {};
+        console.log('Wylogowanie...');
+        $rootScope.currentUser = {};
         $scope.getHome();
     };
 
