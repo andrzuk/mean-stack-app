@@ -9,7 +9,7 @@ angular.module('authModule', [])
                 $rootScope.currentUser = response.data;
                 $scope.formData = {};
                 $rootScope.action = 'panel';
-                $scope.message = 'Zostałeś pomyślnie zalogowany';
+                $scope.message = 'Zostałeś pomyślnie zalogowany.';
                 $scope.status = 'info';
             }
             else {
@@ -22,7 +22,7 @@ angular.module('authModule', [])
     $rootScope.logoutUser = function() {
         $rootScope.currentUser = {};
         $rootScope.action = 'logout';
-        $scope.message = 'Zostałeś pomyślnie wylogowany';
+        $scope.message = 'Zostałeś pomyślnie wylogowany.';
         $scope.status = 'info';
     };
 
