@@ -12,7 +12,7 @@ angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'todosMod
         todos: '../templates/todos',
     };
     
-    $scope.currentUser = {};
+    $scope.currentUser = { isLogged: true };
     
     $scope.formData = {};
     $scope.pageData = {};
