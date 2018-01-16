@@ -7,9 +7,9 @@
                 <form>
                     <input type="hidden" ng-model="formData.ip">
                     <div class="form-group text-left">
-                        Login:
+                        <h6>Login:</h6>
                         <input type="text" class="form-control" ng-model="formData.login" ng-disabled="status == 'wait'"> 
-                        Hasło:
+                        <h6>Hasło:</h6>
                         <input type="password" class="form-control" ng-model="formData.password" ng-disabled="status == 'wait'"> 
                     </div>
                     <hr>
@@ -24,13 +24,11 @@
             <div class="col-lg-4 offset-lg-4">
                 <h2>Admin Panel</h2>
                 <hr>
-                <h3>Login: {{ currentUser.login }}</h3>
-                <h3>E-mail: {{ currentUser.email }}</h3>
-                <h3>Register: {{ currentUser.date }}</h3>
-                <h3>Admin: {{ currentUser.isLogged }}</h3>
+                <h4>Login: {{ currentUser.login }}</h4>
+                <h4>E-mail: {{ currentUser.email }}</h4>
                 <hr>
-                <button class="btn btn-primary btn-block" ng-click="getAppPages()">Strony</button>
-                <button class="btn btn-primary btn-block" ng-click="getAppUsers()">Userzy</button>
+                <button class="btn btn-primary btn-block" ng-click="getAppPages()">Zarządzanie stronami</button>
+                <button class="btn btn-primary btn-block" ng-click="getAppUsers()">Zarządzanie użytkownikami</button>
                 <hr>
                 <button class="btn btn-danger btn-block" ng-click="logoutUser()">Wyloguj</button>
             </div>

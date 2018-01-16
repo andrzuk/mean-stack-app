@@ -45,6 +45,9 @@ form {
     border-radius: 0.35em;
     text-align: right;
 }
+form h6 {
+    margin: 0.5rem 0 0.2rem 0;
+}
 form>button {
     width: 150px;
     margin-top: 0.5em;

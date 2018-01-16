@@ -7,13 +7,13 @@ angular.module('authModule', [])
         $http.post('/auth/login', $scope.formData).then(function (response) {
             if (response.data.isLogged) {
                 $rootScope.currentUser = response.data;
-                $rootScope.formData = {};
+                $scope.formData = {};
                 $rootScope.action = 'panel';
-                $rootScope.message = 'Zostałeś pomyślnie zalogowany';
+                $scope.message = 'Zostałeś pomyślnie zalogowany';
                 $rootScope.status = 'info';
             }
             else {
-                $rootScope.message = 'Login lub hasło są nieprawidłowe.';
+                $scope.message = 'Login lub hasło są nieprawidłowe.';
                 $rootScope.status = 'error';
             }
         });
@@ -22,7 +22,7 @@ angular.module('authModule', [])
     $rootScope.logoutUser = function() {
         $rootScope.currentUser = {};
         $rootScope.action = 'logout';
-        $rootScope.message = 'Zostałeś pomyślnie wylogowany';
+        $scope.message = 'Zostałeś pomyślnie wylogowany';
         $rootScope.status = 'info';
     };
 

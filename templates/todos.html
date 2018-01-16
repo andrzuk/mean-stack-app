@@ -45,7 +45,7 @@
                 <form>
                     <input type="hidden" ng-model="formData.ip">
                     <div class="form-group text-left">
-                        <label>Nowe zadanie:</label>
+                        <h6>Nowe zadanie:</h6>
                         <textarea class="form-control" rows="14" ng-model="formData.text" spellcheck="false"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary font-awesome" ng-click="createTodo()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Zapisz</button>
@@ -61,7 +61,7 @@
                 <form>
                     <input type="hidden" ng-model="formData.ip">
                     <div class="form-group text-left">
-                        <label>Edycja zadania:</label>
+                        <h6>Edycja zadania:</h6>
                         <textarea class="form-control" rows="14" ng-model="formData.text" spellcheck="false"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary font-awesome" ng-click="updateTodo(formData._id)"><i class="fa fa-floppy-o" aria-hidden="true"></i> Zapisz</button>
