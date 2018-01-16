@@ -11,14 +11,16 @@
                         <th>Indeks</th>
                         <th>Tytuł</th>
                         <th>Treść strony</th>
+                        <th>IP</th>
                         <th>Data</th>
                         <th colspan="2" class="text-center">Akcje</th>
                     </tr>
                     <tr ng-repeat="page in pages">
                         <td>{{ page.index }}</td>
                         <td>{{ page.title }}</td>
-                        <td>{{ page.description | limitTo:256 }}<span ng-if="page.description.length > 256">...</span></td>
-                        <td>{{ page.ip }}<br>{{ page.date | date: "dd.MM.yyyy HH:mm:ss" }}</td>
+                        <td>{{ page.description | limitTo:64 }}<span ng-if="page.description.length > 64">...</span></td>
+                        <td>{{ page.ip }}</td>
+                        <td>{{ page.date | date: "dd.MM.yyyy HH:mm:ss" }}</td>
                         <td class="text-center">
                             <button class="btn btn-primary action" ng-click="editPage(page._id)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
                         </td>
@@ -27,7 +29,7 @@
                         </td>
                     </tr>
                     <tr ng-if="pages.length == 0">
-                        <td colspan="6">Brak pozycji.</td>
+                        <td colspan="7">Brak pozycji.</td>
                     </tr>
                 </table>
                 <div class="py-3 text-center">
