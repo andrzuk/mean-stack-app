@@ -18,26 +18,26 @@ angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'todosMod
     $scope.pageData = {};
     $rootScope.module = null;
     $rootScope.action = null;
-    $rootScope.status = null;
+    $scope.status = null;
     
     $scope.getHome = function() {
         $rootScope.module = 'index';
         $rootScope.action = 'home';
-        $rootScope.status = null;
+        $scope.status = null;
         $scope.getSubpage('index');
     };
     
     $scope.getContact = function () {
         $rootScope.module = 'contact';
         $rootScope.action = 'contact';
-        $rootScope.status = null;
+        $scope.status = null;
         $scope.getSubpage('contact');
     };
 
     $scope.getManual = function () {
         $rootScope.module = 'manual';
         $rootScope.action = 'manual';
-        $rootScope.status = null;
+        $scope.status = null;
     };
 
     $scope.getSubpage = function (index) {
@@ -52,20 +52,20 @@ angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'todosMod
     $scope.getLogin = function() {
         $rootScope.module = 'auth';
         $rootScope.action = 'login';
-        $rootScope.status = null;
+        $scope.status = null;
     };
 
     $scope.getPanel = function() {
         $rootScope.module = 'auth';
         $rootScope.action = 'panel';
-        $rootScope.status = null;
+        $scope.status = null;
     };
 
     $scope.getAppPages = function() {
         if ($rootScope.currentUser.isLogged) {
             $rootScope.module = 'pages';
             $rootScope.action = 'list';
-            $rootScope.status = null;
+            $scope.status = null;
         }
         else {
             $scope.getLogin();
@@ -76,7 +76,7 @@ angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'todosMod
         if ($rootScope.currentUser.isLogged) {
             $rootScope.module = 'users';
             $rootScope.action = 'list';
-            $rootScope.status = null;
+            $scope.status = null;
         }
         else {
             $scope.getLogin();
@@ -86,7 +86,7 @@ angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'todosMod
     $scope.getAppTodos = function() {
         $rootScope.module = 'todos';
         $rootScope.action = 'list';
-        $rootScope.status = null;
+        $scope.status = null;
     };
 
     $scope.getHome();

@@ -11,7 +11,6 @@
                         <th>Id</th>
                         <th>Login</th>
                         <th>E-mail</th>
-                        <th>Hasło</th>
                         <th>Data</th>
                         <th colspan="2" class="text-center">Akcje</th>
                     </tr>
@@ -19,7 +18,6 @@
                         <td>{{ user._id }}</td>
                         <td>{{ user.login }}</td>
                         <td>{{ user.email }}</td>
-                        <td>{{ user.password }}</td>
                         <td>{{ user.ip }}<br>{{ user.date | date: "dd.MM.yyyy HH:mm:ss" }}</td>
                         <td class="text-center">
                             <button class="btn btn-primary action" ng-click="editUser(user._id)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
@@ -29,7 +27,7 @@
                         </td>
                     </tr>
                     <tr ng-if="users.length == 0">
-                        <td colspan="7">Brak pozycji.</td>
+                        <td colspan="6">Brak pozycji.</td>
                     </tr>
                 </table>
                 <div class="py-3 text-center">

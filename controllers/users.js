@@ -29,6 +29,7 @@ angular.module('usersModule', [])
         $scope.action = 'edit';
         $http.get('/users/' + id).then(function (response) {
             $scope.formData = response.data;
+            $scope.formData.password = '';
             $http.get('http://ipv4.myexternalip.com/json').then(function (response) {
                 $scope.formData.ip = response.data.ip;
             });
