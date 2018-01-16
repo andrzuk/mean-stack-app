@@ -9,7 +9,6 @@ var app = express();
 
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/controllers'));
-app.use(express.static(__dirname + '/templates'));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -39,6 +38,10 @@ mongodb.connect(connection.url, function (err, conn) {
 
 app.get('/', function (req, res) {
     res.sendFile('index.html');
+});
+
+app.get('/templates/:name', function (req, res) {
+    res.sendFile(__dirname + '/templates/' + req.params.name + '.html');
 });
 
 app.get('/api/subpage/:index', function (req, res) {
