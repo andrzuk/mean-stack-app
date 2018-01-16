@@ -41,10 +41,6 @@ app.get('/', function (req, res) {
     res.sendFile('index.html');
 });
 
-app.get('/templates/:name', function (req, res) {
-    res.sendFile(__dirname + '/templates/' + req.params.name + '.html');
-});
-
 app.get('/api/subpage/:index', function (req, res) {
     db.collection('pages', function (err, collection) {
         collection.findOne({
