@@ -2,6 +2,15 @@ angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'todosMod
 
 .controller('mainController', ['$scope', '$http', '$sce', function ($scope, $http, $sce) {
 
+    $scope.layout = {
+        home: '../templates/home',
+        manual: '../templates/manual',
+        contact: '../templates/contact',
+        pages: '../templates/pages',
+        users: '../templates/users',
+        todos: '../templates/todos',
+    };
+    
     $scope.currentUser = {};
     
     $scope.formData = {};
