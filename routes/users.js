@@ -8,12 +8,16 @@ module.exports = function(params) {
     const bcrypt = require('bcrypt');
 
     router.get('/', function (req, res, next) {
-        console.log('Headers: ', req.headers);
-        db.collection('users', function (err, collection) {
-            collection.find().toArray(function (err, result) {
-                res.send(result);
+        if (req.headers['x-access-token'].length == 60) {
+            db.collection('users', function (err, collection) {
+                collection.find().toArray(function (err, result) {
+                    res.send(result);
+                });
             });
-        });
+        }
+        else {
+            res.json({ data: {} });
+        }
     });
 
     router.get('/:id', function (req, res, next) {
@@ -27,8 +31,6 @@ module.exports = function(params) {
     });
 
     router.post('/', function (req, res, next) {
-        console.log('Headers: ', req.headers);
-        console.log('Body: ', req.body);
         db.collection('users').insertOne({
             login: req.body.login,
             email: req.body.email,

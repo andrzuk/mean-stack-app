@@ -5,7 +5,6 @@ angular.module('usersModule', [])
     $scope.getUsers = function () {
         $scope.action = 'list';
         $http.get('/users', $rootScope.urlConfig).then(function (response) {
-            console.log(response);
             $scope.users = response.data;
         });
     };
@@ -22,7 +21,6 @@ angular.module('usersModule', [])
     $scope.createUser = function () {
         $scope.action = 'list';
         $http.post('/users', $scope.formData, $rootScope.urlConfig).then(function () {
-            console.log('POST was sent.');
             $scope.formData = {};
             $scope.getUsers();
         });
@@ -30,7 +28,7 @@ angular.module('usersModule', [])
 
     $scope.editUser = function (id) {
         $scope.action = 'edit';
-        $http.get('/users/' + id).then(function (response) {
+        $http.get('/users/' + id, $rootScope.urlConfig).then(function (response) {
             $scope.formData = response.data;
             $scope.formData.password = '';
             $http.get('http://ipv4.myexternalip.com/json').then(function (response) {
@@ -41,7 +39,7 @@ angular.module('usersModule', [])
 
     $scope.updateUser = function (id) {
         $scope.action = 'list';
-        $http.put('/users/' + id, $scope.formData).then(function () {
+        $http.put('/users/' + id, $scope.formData, $rootScope.urlConfig).then(function () {
             $scope.formData = {};
             $scope.getUsers();
         });
@@ -49,7 +47,7 @@ angular.module('usersModule', [])
 
     $scope.deleteUser = function (id) {
         $scope.action = 'list';
-        $http.delete('/users/' + id).then(function () {
+        $http.delete('/users/' + id, $rootScope.urlConfig).then(function () {
             $scope.getUsers();
         });
     };
