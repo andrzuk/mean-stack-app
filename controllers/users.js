@@ -12,9 +12,7 @@ angular.module('usersModule', [])
     $scope.newUser = function () {
         $scope.action = 'new';
         $scope.formData = {};
-        $http.get('http://ipv4.myexternalip.com/json').then(function (response) {
-            $scope.formData.ip = response.data.ip;
-        });
+        $scope.formData.ip = $rootScope.currentIp;
         $scope.formData.token = 'Register';
     };
 
@@ -31,9 +29,7 @@ angular.module('usersModule', [])
         $http.get('/users/' + id, $rootScope.urlConfig).then(function (response) {
             $scope.formData = response.data;
             $scope.formData.password = '';
-            $http.get('http://ipv4.myexternalip.com/json').then(function (response) {
-                $scope.formData.ip = response.data.ip;
-            });
+            $scope.formData.ip = $rootScope.currentIp;
         });
     };
 

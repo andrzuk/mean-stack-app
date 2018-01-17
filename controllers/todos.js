@@ -12,9 +12,7 @@ angular.module('todosModule', [])
     $scope.newTodo = function () {
         $scope.action = 'new';
         $scope.formData = {};
-        $http.get('http://ipv4.myexternalip.com/json').then(function (response) {
-            $scope.formData.ip = response.data.ip;
-        });
+        $scope.formData.ip = $rootScope.currentIp;
     };
 
     $scope.createTodo = function () {
@@ -29,9 +27,7 @@ angular.module('todosModule', [])
         $scope.action = 'edit';
         $http.get('/todos/' + id).then(function (response) {
             $scope.formData = response.data;
-            $http.get('http://ipv4.myexternalip.com/json').then(function (response) {
-                $scope.formData.ip = response.data.ip;
-            });
+            $scope.formData.ip = $rootScope.currentIp;
         });
     };
 

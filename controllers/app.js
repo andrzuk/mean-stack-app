@@ -13,6 +13,7 @@ angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'todosMod
     };
     
     $rootScope.currentUser = {};
+    $rootScope.currentIp = null;
     
     $rootScope.urlConfig = { 
         headers: { 
@@ -20,6 +21,10 @@ angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'todosMod
             'x-access-token': window.localStorage.getItem('authToken') 
         } 
     };
+
+    $http.get('http://ipv4.myexternalip.com/json').then(function (response) {
+        $rootScope.currentIp = response.data.ip;
+    });
     
     $scope.formData = {};
     $scope.pageData = {};

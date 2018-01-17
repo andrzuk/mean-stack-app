@@ -12,9 +12,7 @@ angular.module('pagesModule', [])
     $scope.newPage = function () {
         $scope.action = 'new';
         $scope.formData = {};
-        $http.get('http://ipv4.myexternalip.com/json').then(function (response) {
-            $scope.formData.ip = response.data.ip;
-        });
+        $scope.formData.ip = $rootScope.currentIp;
     };
 
     $scope.createPage = function () {
@@ -29,9 +27,7 @@ angular.module('pagesModule', [])
         $scope.action = 'edit';
         $http.get('/pages/' + id, $rootScope.urlConfig).then(function (response) {
             $scope.formData = response.data;
-            $http.get('http://ipv4.myexternalip.com/json').then(function (response) {
-                $scope.formData.ip = response.data.ip;
-            });
+            $scope.formData.ip = $rootScope.currentIp;
         });
     };
 
