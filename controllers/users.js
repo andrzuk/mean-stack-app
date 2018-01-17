@@ -1,6 +1,6 @@
 angular.module('usersModule', [])
 
-.controller('usersController', ['$scope', '$http', function ($scope, $http) {
+.controller('usersController', ['$rootScope', '$scope', '$http', function ($rootScope, $scope, $http) {
 
     $scope.getUsers = function () {
         $scope.action = 'list';
@@ -22,6 +22,7 @@ angular.module('usersModule', [])
     $scope.createUser = function () {
         $scope.action = 'list';
         $http.post('/users', $rootScope.urlConfig, $scope.formData).then(function () {
+            console.log('POST was sent.');
             $scope.formData = {};
             $scope.getUsers();
         });

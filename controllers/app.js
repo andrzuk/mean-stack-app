@@ -71,8 +71,7 @@ angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'todosMod
     $scope.getAppPages = function() {
         if ($rootScope.currentUser.isLogged) {
             $rootScope.module = 'pages';
-            $rootScope.action = 'list';
-            $scope.status = null;
+            $scope.getPages();
         }
         else {
             $scope.getLogin();
@@ -82,8 +81,7 @@ angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'todosMod
     $scope.getAppUsers = function() {
         if ($rootScope.currentUser.isLogged) {
             $rootScope.module = 'users';
-            $rootScope.action = 'list';
-            $scope.status = null;
+            $scope.getUsers();
         }
         else {
             $scope.getLogin();
@@ -92,8 +90,7 @@ angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'todosMod
 
     $scope.getAppTodos = function() {
         $rootScope.module = 'todos';
-        $rootScope.action = 'list';
-        $scope.status = null;
+        $scope.getTodos();
     };
 
     $scope.getHome();
