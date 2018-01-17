@@ -7,6 +7,8 @@ angular.module('authModule', [])
         $http.post('/auth/login', $scope.formData).then(function (response) {
             if (response.data.isLogged) {
                 $rootScope.currentUser = response.data;
+                window.localStorage.setItem('userId', $rootScope.currentUser._id);
+                $rootScope.urlConfig.headers["user-id"] = window.localStorage.getItem('userId');
                 window.localStorage.setItem('authToken', $rootScope.currentUser.token);
                 $rootScope.urlConfig.headers["x-access-token"] = window.localStorage.getItem('authToken');
                 $scope.formData = {};
@@ -26,6 +28,8 @@ angular.module('authModule', [])
             console.log(response);
             if (response.data.ok) {
                 $rootScope.currentUser = {};
+                window.localStorage.removeItem('userId');
+                $rootScope.urlConfig.headers["user-id"] = window.localStorage.getItem('userId');
                 window.localStorage.removeItem('authToken');
                 $rootScope.urlConfig.headers["x-access-token"] = window.localStorage.getItem('authToken');
                 $rootScope.action = 'logout';

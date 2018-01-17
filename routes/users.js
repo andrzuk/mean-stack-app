@@ -6,17 +6,31 @@ module.exports = function(params) {
     var router = express.Router();
     
     const bcrypt = require('bcrypt');
+    
+    var checkAuth = function(headers, callback) {
+        console.log('Sprawdzamy headers:', headers);
+        db.collection('users', function (err, collection) {
+            collection.findOne({
+                _id: new ObjectID(headers['user-id'])
+            }, function (err, result) {
+                console.log('Sprawdzamy result:', result);
+                callback(result.token == headers['x-access-token']);
+            });
+        });
+    };
 
     router.get('/', function (req, res, next) {
-        if (req.headers['x-access-token'].length == 60) {
-            db.collection('users', function (err, collection) {
-                collection.find().toArray(function (err, result) {
-                    res.send(result);
+        checkAuth(req.headers, function(access)) {
+            if (access) {
+                db.collection('users', function (err, collection) {
+                    collection.find().toArray(function (err, result) {
+                        res.send(result);
+                    });
                 });
-            });
-        }
-        else {
-            res.json({ data: {} });
+            }
+            else {
+                res.json({ data: {} });
+            }
         }
     });
 
