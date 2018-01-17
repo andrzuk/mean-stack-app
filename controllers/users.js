@@ -21,7 +21,7 @@ angular.module('usersModule', [])
 
     $scope.createUser = function () {
         $scope.action = 'list';
-        $http.post('/users', $scope.formData, $rootScope.urlConfig).then(function () {
+        $http.post('/users', { data: $scope.formData, headers: $rootScope.urlConfig }).then(function () {
             console.log('POST was sent.');
             $scope.formData = {};
             $scope.getUsers();
