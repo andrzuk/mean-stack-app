@@ -42,15 +42,15 @@
     <div class="container" ng-show="action == 'new'">
         <div class="py-4 row">
             <div class="col-lg-4 offset-lg-4">
-                <form>
+                <form class="form">
                     <input type="hidden" ng-model="formData.ip">
                     <div class="form-group text-left">
                         <h6>Login:</h6>
-                        <input type="text" class="form-control" ng-model="formData.login" required> 
+                        <input type="text" class="form-control" name="login" ng-model="formData.login" required> 
                         <h6>E-mail:</h6>
-                        <input type="email" class="form-control" ng-model="formData.email" required> 
+                        <input type="email" class="form-control" name="email" ng-model="formData.email" required> 
                         <h6>Hasło:</h6>
-                        <input type="password" class="form-control" ng-model="formData.password" required> 
+                        <input type="password" class="form-control" name="password" ng-model="formData.password" required> 
                     </div>
                     <button type="submit" class="btn btn-primary font-awesome" ng-click="createUser()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Zapisz</button>
                     <button type="submit" class="btn btn-warning font-awesome" ng-click="cancelUser()"><i class="fa fa-ban" aria-hidden="true"></i> Anuluj</button>
@@ -62,15 +62,15 @@
     <div class="container" ng-show="action == 'edit'">
         <div class="py-4 row">
             <div class="col-lg-4 offset-lg-4">
-                <form>
+                <form class="form">
                     <input type="hidden" ng-model="formData.ip">
                     <div class="form-group text-left">
                         <h6>Login:</h6>
-                        <input type="text" class="form-control" ng-model="formData.login" required> 
+                        <input type="text" class="form-control" name="login" ng-model="formData.login" required> 
                         <h6>E-mail:</h6>
-                        <input type="email" class="form-control" ng-model="formData.email" required> 
+                        <input type="email" class="form-control" name="email" ng-model="formData.email" required> 
                         <h6>Hasło:</h6>
-                        <input type="password" class="form-control" ng-model="formData.password" required> 
+                        <input type="password" class="form-control" name="password" ng-model="formData.password" required> 
                     </div>
                     <button type="submit" class="btn btn-primary font-awesome" ng-click="updateUser(formData._id)"><i class="fa fa-floppy-o" aria-hidden="true"></i> Zapisz</button>
                     <button type="submit" class="btn btn-warning font-awesome" ng-click="cancelUser()"><i class="fa fa-ban" aria-hidden="true"></i> Anuluj</button>

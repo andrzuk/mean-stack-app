@@ -42,15 +42,15 @@
     <div class="container" ng-show="action == 'new'">
         <div class="py-4 row">
             <div class="col-lg-10 offset-lg-1">
-                <form>
+                <form class="form">
                     <input type="hidden" ng-model="formData.ip">
                     <div class="form-group text-left">
                         <h6>Indeks:</h6>
-                        <input type="text" class="form-control" ng-model="formData.index" required> 
+                        <input type="text" class="form-control" name="index" ng-model="formData.index" required> 
                         <h6>Tytuł:</h6>
-                        <input type="text" class="form-control" ng-model="formData.title" required> 
+                        <input type="text" class="form-control" name="title" ng-model="formData.title" required> 
                         <h6>Treść strony:</h6>
-                        <textarea class="form-control" rows="14" ng-model="formData.description" spellcheck="false" required></textarea>
+                        <textarea class="form-control" rows="14" name="description" ng-model="formData.description" spellcheck="false" required></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary font-awesome" ng-click="createPage()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Zapisz</button>
                     <button type="submit" class="btn btn-warning font-awesome" ng-click="cancelPage()"><i class="fa fa-ban" aria-hidden="true"></i> Anuluj</button>
@@ -62,15 +62,15 @@
     <div class="container" ng-show="action == 'edit'">
         <div class="py-4 row">
             <div class="col-lg-10 offset-lg-1">
-                <form>
+                <form class="form">
                     <input type="hidden" ng-model="formData.ip">
                     <div class="form-group text-left">
                         <h6>Indeks:</h6>
-                        <input type="text" class="form-control" ng-model="formData.index" required> 
+                        <input type="text" class="form-control" name="index" ng-model="formData.index" required> 
                         <h6>Tytuł:</h6>
-                        <input type="text" class="form-control" ng-model="formData.title" required> 
+                        <input type="text" class="form-control" name="title" ng-model="formData.title" required> 
                         <h6>Treść strony:</h6>
-                        <textarea class="form-control" rows="14" ng-model="formData.description" spellcheck="false" required></textarea>
+                        <textarea class="form-control" rows="14" name="description" ng-model="formData.description" spellcheck="false" required></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary font-awesome" ng-click="updatePage(formData._id)"><i class="fa fa-floppy-o" aria-hidden="true"></i> Zapisz</button>
                     <button type="submit" class="btn btn-warning font-awesome" ng-click="cancelPage()"><i class="fa fa-ban" aria-hidden="true"></i> Anuluj</button>

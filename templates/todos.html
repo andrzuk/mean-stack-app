@@ -42,11 +42,11 @@
     <div class="container" ng-show="action == 'new'">
         <div class="py-4 row">
             <div class="col-lg-8 offset-lg-2">
-                <form>
+                <form class="form">
                     <input type="hidden" ng-model="formData.ip">
                     <div class="form-group text-left">
                         <h6>Nowe zadanie:</h6>
-                        <textarea class="form-control" rows="14" ng-model="formData.text" spellcheck="false" required></textarea>
+                        <textarea class="form-control" rows="14" name="text" ng-model="formData.text" spellcheck="false" required></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary font-awesome" ng-click="createTodo()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Zapisz</button>
                     <button type="submit" class="btn btn-warning font-awesome" ng-click="cancelTodo()"><i class="fa fa-ban" aria-hidden="true"></i> Anuluj</button>
@@ -58,11 +58,11 @@
     <div class="container" ng-show="action == 'edit'">
         <div class="py-4 row">
             <div class="col-lg-8 offset-lg-2">
-                <form>
+                <form class="form">
                     <input type="hidden" ng-model="formData.ip">
                     <div class="form-group text-left">
                         <h6>Edycja zadania:</h6>
-                        <textarea class="form-control" rows="14" ng-model="formData.text" spellcheck="false" required></textarea>
+                        <textarea class="form-control" rows="14" name="text" ng-model="formData.text" spellcheck="false" required></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary font-awesome" ng-click="updateTodo(formData._id)"><i class="fa fa-floppy-o" aria-hidden="true"></i> Zapisz</button>
                     <button type="submit" class="btn btn-warning font-awesome" ng-click="cancelTodo()"><i class="fa fa-ban" aria-hidden="true"></i> Anuluj</button>
