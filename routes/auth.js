@@ -1,6 +1,7 @@
 module.exports = function(params) {
     
     var db = params.database;
+    var ObjectID = params.objectId;
     var express = require('express');
     var router = express.Router();
     
