@@ -8,6 +8,7 @@ module.exports = function(params) {
     const bcrypt = require('bcrypt');
 
     router.get('/', function (req, res, next) {
+        console.log('Headers: ', req.headers);
         db.collection('users', function (err, collection) {
             collection.find().toArray(function (err, result) {
                 res.send(result);
