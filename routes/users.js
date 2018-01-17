@@ -14,7 +14,12 @@ module.exports = function(params) {
                 _id: new ObjectID(headers['user-id'])
             }, function (err, result) {
                 console.log('Sprawdzamy result:', result);
-                callback(result.token == headers['x-access-token']);
+                if (result) {
+                    callback(result.token == headers['x-access-token']);
+                }
+                else {
+                    callback(false);
+                }
             });
         });
     };
