@@ -25,7 +25,6 @@ angular.module('authModule', [])
 
     $rootScope.logoutUser = function() {
         $http.post('/auth/logout', $rootScope.currentUser).then(function (response) {
-            console.log(response);
             if (response.data.ok) {
                 $rootScope.currentUser = {};
                 window.localStorage.removeItem('userId');

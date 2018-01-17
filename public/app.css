@@ -70,7 +70,7 @@ div#load-icon {
     height: 100vh;
 }
 img#page-loader {
-    position: absolute;
+    position: fixed;
     left: calc(50% - 20px);
     top: calc(50% - 20px);
 }        
