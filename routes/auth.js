@@ -16,6 +16,14 @@ module.exports = function(params) {
                     if (bcrypt.compareSync(req.body.password, result.password)) {
                         user = result;
                         user.isLogged = true;
+                        user.token = bcrypt.hashSync(result.password, 10);
+                        db.collection('users').updateOne({
+                            _id: new ObjectID(result._id)
+                        }, {
+                            $set: {
+                                token: user.token
+                            }
+                        }, function (err, result) {});
                     }
                 }
                 res.send(user);
