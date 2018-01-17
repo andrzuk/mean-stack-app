@@ -24,7 +24,7 @@ module.exports = function(params) {
                             $set: {
                                 token: user.token
                             }
-                        }, function (err, result) {});
+                        }, function () {});
                     }
                 }
                 res.send(user);

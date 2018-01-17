@@ -31,7 +31,8 @@ module.exports = function(params) {
             email: req.body.email,
             password: bcrypt.hashSync(req.body.password, 10),
             ip: req.body.ip,
-            date: Date.now()
+            date: Date.now(),
+            token: req.body.token
         }, function (err, result) {
             res.send(result);
         });
@@ -46,7 +47,8 @@ module.exports = function(params) {
                 email: req.body.email,
                 password: bcrypt.hashSync(req.body.password, 10),
                 ip: req.body.ip,
-                date: Date.now()
+                date: Date.now(),
+                token: req.body.token
             }
         }, function (err, result) {
             res.send(result);

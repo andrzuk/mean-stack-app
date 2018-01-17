@@ -15,6 +15,7 @@ angular.module('usersModule', [])
         $http.get('http://ipv4.myexternalip.com/json').then(function (response) {
             $scope.formData.ip = response.data.ip;
         });
+        $scope.formData.token = 'Registered';
     };
 
     $scope.createUser = function () {
