@@ -16,7 +16,7 @@ angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'todosMod
     
     $rootScope.urlConfig = { 
         headers: { 
-            'Content-Type': 'application/json, application/x-www-form-urlencoded',
+            'Content-Type': 'application/x-www-form-urlencoded',
             'x-access-token': window.localStorage.getItem('authToken') 
         } 
     };
