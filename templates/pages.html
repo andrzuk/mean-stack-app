@@ -46,11 +46,11 @@
                     <input type="hidden" ng-model="formData.ip">
                     <div class="form-group text-left">
                         <h6>Indeks:</h6>
-                        <input type="text" class="form-control" ng-model="formData.index"> 
+                        <input type="text" class="form-control" ng-model="formData.index" required> 
                         <h6>Tytuł:</h6>
-                        <input type="text" class="form-control" ng-model="formData.title"> 
+                        <input type="text" class="form-control" ng-model="formData.title" required> 
                         <h6>Treść strony:</h6>
-                        <textarea class="form-control" rows="14" ng-model="formData.description" spellcheck="false"></textarea>
+                        <textarea class="form-control" rows="14" ng-model="formData.description" spellcheck="false" required></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary font-awesome" ng-click="createPage()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Zapisz</button>
                     <button type="submit" class="btn btn-warning font-awesome" ng-click="cancelPage()"><i class="fa fa-ban" aria-hidden="true"></i> Anuluj</button>
@@ -66,11 +66,11 @@
                     <input type="hidden" ng-model="formData.ip">
                     <div class="form-group text-left">
                         <h6>Indeks:</h6>
-                        <input type="text" class="form-control" ng-model="formData.index"> 
+                        <input type="text" class="form-control" ng-model="formData.index" required> 
                         <h6>Tytuł:</h6>
-                        <input type="text" class="form-control" ng-model="formData.title"> 
+                        <input type="text" class="form-control" ng-model="formData.title" required> 
                         <h6>Treść strony:</h6>
-                        <textarea class="form-control" rows="14" ng-model="formData.description" spellcheck="false"></textarea>
+                        <textarea class="form-control" rows="14" ng-model="formData.description" spellcheck="false" required></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary font-awesome" ng-click="updatePage(formData._id)"><i class="fa fa-floppy-o" aria-hidden="true"></i> Zapisz</button>
                     <button type="submit" class="btn btn-warning font-awesome" ng-click="cancelPage()"><i class="fa fa-ban" aria-hidden="true"></i> Anuluj</button>
