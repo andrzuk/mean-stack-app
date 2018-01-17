@@ -20,7 +20,7 @@ module.exports = function(params) {
     };
 
     router.get('/', function (req, res, next) {
-        checkAuth(req.headers, function(access)) {
+        checkAuth(req.headers, function(access) {
             if (access) {
                 db.collection('users', function (err, collection) {
                     collection.find().toArray(function (err, result) {
@@ -31,7 +31,7 @@ module.exports = function(params) {
             else {
                 res.json({ data: {} });
             }
-        }
+        });
     });
 
     router.get('/:id', function (req, res, next) {
