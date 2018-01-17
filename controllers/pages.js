@@ -4,7 +4,7 @@ angular.module('pagesModule', [])
 
     $scope.getPages = function () {
         $scope.action = 'list';
-        $http.get('/pages').then(function (response) {
+        $http.get('/pages', $rootScope.urlConfig).then(function (response) {
             $scope.pages = response.data;
         });
     };
@@ -19,7 +19,7 @@ angular.module('pagesModule', [])
 
     $scope.createPage = function () {
         $scope.action = 'list';
-        $http.post('/pages', $scope.formData).then(function () {
+        $http.post('/pages', $scope.formData, $rootScope.urlConfig).then(function () {
             $scope.formData = {};
             $scope.getPages();
         });
@@ -27,7 +27,7 @@ angular.module('pagesModule', [])
 
     $scope.editPage = function (id) {
         $scope.action = 'edit';
-        $http.get('/pages/' + id).then(function (response) {
+        $http.get('/pages/' + id, $rootScope.urlConfig).then(function (response) {
             $scope.formData = response.data;
             $http.get('http://ipv4.myexternalip.com/json').then(function (response) {
                 $scope.formData.ip = response.data.ip;
@@ -37,7 +37,7 @@ angular.module('pagesModule', [])
 
     $scope.updatePage = function (id) {
         $scope.action = 'list';
-        $http.put('/pages/' + id, $scope.formData).then(function () {
+        $http.put('/pages/' + id, $scope.formData, $rootScope.urlConfig).then(function () {
             $scope.formData = {};
             $scope.getPages();
         });
@@ -45,7 +45,7 @@ angular.module('pagesModule', [])
 
     $scope.deletePage = function (id) {
         $scope.action = 'list';
-        $http.delete('/pages/' + id).then(function () {
+        $http.delete('/pages/' + id, $rootScope.urlConfig).then(function () {
             $scope.getPages();
         });
     };

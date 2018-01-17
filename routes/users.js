@@ -56,7 +56,7 @@ module.exports = function(params) {
 
     router.post('/', function (req, res, next) {
         checkAuth(req.headers, function(access) {
-            if (access) {
+            if (access && req.body.password != undefined) {
                 db.collection('users').insertOne({
                     login: req.body.login,
                     email: req.body.email,
@@ -65,9 +65,6 @@ module.exports = function(params) {
                     date: Date.now(),
                     token: req.body.token
                 }, function (err, result) {
-                    if (err) {
-                        res.sendStatus(400);
-                    }
                     res.send(result);
                 });
             }
@@ -79,7 +76,7 @@ module.exports = function(params) {
 
     router.put('/:id', function (req, res, next) {
         checkAuth(req.headers, function(access) {
-            if (access) {
+            if (access && req.body.password != undefined) {
                 db.collection('users').updateOne({
                     _id: new ObjectID(req.params.id)
                 }, {
@@ -92,9 +89,6 @@ module.exports = function(params) {
                         token: req.body.token
                     }
                 }, function (err, result) {
-                    if (err) {
-                        res.sendStatus(400);
-                    }
                     res.send(result);
                 });
             }
@@ -110,9 +104,6 @@ module.exports = function(params) {
                 db.collection('users').removeOne({
                     _id: new ObjectID(req.params.id)
                 }, function (err, result) {
-                    if (err) {
-                        res.sendStatus(400);
-                    }
                     res.send(result);
                 });
             }
