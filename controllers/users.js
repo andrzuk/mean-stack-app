@@ -4,6 +4,7 @@ angular.module('usersModule', [])
 
     $scope.getUsers = function () {
         $scope.action = 'list';
+        $rootScope.urlConfig.headers["x-access-token"] = window.localStorage.getItem('authToken');
         $http.get('/users', $rootScope.urlConfig).then(function (response) {
             $scope.users = response.data;
         });
@@ -28,6 +29,7 @@ angular.module('usersModule', [])
 
     $scope.editUser = function (id) {
         $scope.action = 'edit';
+        $rootScope.urlConfig.headers["x-access-token"] = window.localStorage.getItem('authToken');
         $http.get('/users/' + id, $rootScope.urlConfig).then(function (response) {
             $scope.formData = response.data;
             $scope.formData.password = '';
@@ -39,6 +41,7 @@ angular.module('usersModule', [])
 
     $scope.updateUser = function (id) {
         $scope.action = 'list';
+        $rootScope.urlConfig.headers["x-access-token"] = window.localStorage.getItem('authToken');
         $http.put('/users/' + id, $scope.formData, $rootScope.urlConfig).then(function () {
             $scope.formData = {};
             $scope.getUsers();
@@ -47,6 +50,7 @@ angular.module('usersModule', [])
 
     $scope.deleteUser = function (id) {
         $scope.action = 'list';
+        $rootScope.urlConfig.headers["x-access-token"] = window.localStorage.getItem('authToken');
         $http.delete('/users/' + id, $rootScope.urlConfig).then(function () {
             $scope.getUsers();
         });
