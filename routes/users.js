@@ -8,12 +8,10 @@ module.exports = function(params) {
     const bcrypt = require('bcrypt');
     
     var checkAuth = function(headers, callback) {
-        console.log('Sprawdzamy headers:', headers);
         db.collection('users', function (err, collection) {
             collection.findOne({
                 _id: new ObjectID(headers['user-id'])
             }, function (err, result) {
-                console.log('Sprawdzamy result:', result);
                 if (result) {
                     callback(result.token == headers['x-access-token']);
                 }
@@ -40,50 +38,87 @@ module.exports = function(params) {
     });
 
     router.get('/:id', function (req, res, next) {
-        db.collection('users', function (err, collection) {
-            collection.findOne({
-                _id: new ObjectID(req.params.id)
-            }, function (err, result) {
-                res.send(result);
-            });
+        checkAuth(req.headers, function(access) {
+            if (access) {
+                db.collection('users', function (err, collection) {
+                    collection.findOne({
+                        _id: new ObjectID(req.params.id)
+                    }, function (err, result) {
+                        res.send(result);
+                    });
+                });
+            }
+            else {
+                res.json({ data: {} });
+            }
         });
     });
 
     router.post('/', function (req, res, next) {
-        db.collection('users').insertOne({
-            login: req.body.login,
-            email: req.body.email,
-            password: bcrypt.hashSync(req.body.password, 10),
-            ip: req.body.ip,
-            date: Date.now(),
-            token: req.body.token
-        }, function (err, result) {
-            res.send(result);
+        checkAuth(req.headers, function(access) {
+            if (access) {
+                db.collection('users').insertOne({
+                    login: req.body.login,
+                    email: req.body.email,
+                    password: bcrypt.hashSync(req.body.password, 10),
+                    ip: req.body.ip,
+                    date: Date.now(),
+                    token: req.body.token
+                }, function (err, result) {
+                    if (err) {
+                        res.sendStatus(400);
+                    }
+                    res.send(result);
+                });
+            }
+            else {
+                res.json({});
+            }
         });
     });
 
     router.put('/:id', function (req, res, next) {
-        db.collection('users').updateOne({
-            _id: new ObjectID(req.params.id)
-        }, {
-            $set: {
-                login: req.body.login,
-                email: req.body.email,
-                password: bcrypt.hashSync(req.body.password, 10),
-                ip: req.body.ip,
-                date: Date.now(),
-                token: req.body.token
+        checkAuth(req.headers, function(access) {
+            if (access) {
+                db.collection('users').updateOne({
+                    _id: new ObjectID(req.params.id)
+                }, {
+                    $set: {
+                        login: req.body.login,
+                        email: req.body.email,
+                        password: bcrypt.hashSync(req.body.password, 10),
+                        ip: req.body.ip,
+                        date: Date.now(),
+                        token: req.body.token
+                    }
+                }, function (err, result) {
+                    if (err) {
+                        res.sendStatus(400);
+                    }
+                    res.send(result);
+                });
             }
-        }, function (err, result) {
-            res.send(result);
+            else {
+                res.json({});
+            }
         });
     });
 
     router.delete('/:id', function (req, res, next) {
-        db.collection('users').removeOne({
-            _id: new ObjectID(req.params.id)
-        }, function (err, result) {
-            res.send(result);
+        checkAuth(req.headers, function(access) {
+            if (access) {
+                db.collection('users').removeOne({
+                    _id: new ObjectID(req.params.id)
+                }, function (err, result) {
+                    if (err) {
+                        res.sendStatus(400);
+                    }
+                    res.send(result);
+                });
+            }
+            else {
+                res.json({});
+            }
         });
     });
 
