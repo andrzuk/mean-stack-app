@@ -16,7 +16,7 @@ angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'todosMod
     
     $rootScope.urlConfig = { 
         headers: { 
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json, application/x-www-form-urlencoded',
             'x-access-token': window.localStorage.getItem('authToken') 
         } 
     };
@@ -71,7 +71,8 @@ angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'todosMod
     $scope.getAppPages = function() {
         if ($rootScope.currentUser.isLogged) {
             $rootScope.module = 'pages';
-            $scope.getPages();
+            $rootScope.action = 'list';
+            $scope.status = null;
         }
         else {
             $scope.getLogin();
@@ -81,7 +82,8 @@ angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'todosMod
     $scope.getAppUsers = function() {
         if ($rootScope.currentUser.isLogged) {
             $rootScope.module = 'users';
-            $scope.getUsers();
+            $rootScope.action = 'list';
+            $scope.status = null;
         }
         else {
             $scope.getLogin();
@@ -90,7 +92,8 @@ angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'todosMod
 
     $scope.getAppTodos = function() {
         $rootScope.module = 'todos';
-        $scope.getTodos();
+        $rootScope.action = 'list';
+        $scope.status = null;
     };
 
     $scope.getHome();
