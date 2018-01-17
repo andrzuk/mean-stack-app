@@ -2,16 +2,9 @@ angular.module('usersModule', [])
 
 .controller('usersController', ['$scope', '$http', function ($scope, $http) {
 
-    $scope.config = { 
-        headers: { 
-            'Content-Type': 'application/json',
-            'x-access-token': window.localStorage.getItem('authToken') 
-        } 
-    };
-    
     $scope.getUsers = function () {
         $scope.action = 'list';
-        $http.get('/users', $scope.config).then(function (response) {
+        $http.get('/users', $rootScope.urlConfig).then(function (response) {
             console.log(response);
             $scope.users = response.data;
         });
@@ -28,7 +21,7 @@ angular.module('usersModule', [])
 
     $scope.createUser = function () {
         $scope.action = 'list';
-        $http.post('/users', $scope.formData).then(function () {
+        $http.post('/users', $rootScope.urlConfig, $scope.formData).then(function () {
             $scope.formData = {};
             $scope.getUsers();
         });

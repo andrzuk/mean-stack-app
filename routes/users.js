@@ -27,6 +27,8 @@ module.exports = function(params) {
     });
 
     router.post('/', function (req, res, next) {
+        console.log('Headers: ', req.headers);
+        console.log('Body: ', req.body);
         db.collection('users').insertOne({
             login: req.body.login,
             email: req.body.email,

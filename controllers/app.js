@@ -14,6 +14,13 @@ angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'todosMod
     
     $rootScope.currentUser = {};
     
+    $rootScope.urlConfig = { 
+        headers: { 
+            'Content-Type': 'application/json',
+            'x-access-token': window.localStorage.getItem('authToken') 
+        } 
+    };
+    
     $scope.formData = {};
     $scope.pageData = {};
     $rootScope.module = null;

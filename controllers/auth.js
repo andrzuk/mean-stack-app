@@ -8,6 +8,7 @@ angular.module('authModule', [])
             if (response.data.isLogged) {
                 $rootScope.currentUser = response.data;
                 window.localStorage.setItem('authToken', $rootScope.currentUser.token);
+                $rootScope.urlConfig.headers["x-access-token"] = window.localStorage.getItem('authToken');
                 $scope.formData = {};
                 $rootScope.action = 'panel';
                 $scope.message = 'Zostałeś pomyślnie zalogowany.';
@@ -26,6 +27,7 @@ angular.module('authModule', [])
             if (response.data.ok) {
                 $rootScope.currentUser = {};
                 window.localStorage.removeItem('authToken');
+                $rootScope.urlConfig.headers["x-access-token"] = window.localStorage.getItem('authToken');
                 $rootScope.action = 'logout';
                 $scope.message = 'Zostałeś pomyślnie wylogowany.';
                 $scope.status = 'info';
