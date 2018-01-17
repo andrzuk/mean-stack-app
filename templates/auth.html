@@ -4,13 +4,13 @@
         <div class="py-4 row">
             <div class="col-lg-4 offset-lg-4">
                 <h2>Logowanie</h2>
-                <form>
+                <form class="form">
                     <input type="hidden" ng-model="formData.ip">
                     <div class="form-group text-left">
                         <h6>Login:</h6>
-                        <input type="text" class="form-control" ng-model="formData.login" ng-disabled="status == 'wait'" required> 
+                        <input type="text" class="form-control" name="login" ng-model="formData.login" ng-disabled="status == 'wait'" required> 
                         <h6>Hasło:</h6>
-                        <input type="password" class="form-control" ng-model="formData.password" ng-disabled="status == 'wait'" required> 
+                        <input type="password" class="form-control" name="password" ng-model="formData.password" ng-disabled="status == 'wait'" required> 
                     </div>
                     <hr>
                     <button type="submit" class="btn btn-primary btn-block font-awesome" ng-click="loginUser()" ng-disabled="status == 'wait'"><i class="fa fa-sign-in" aria-hidden="true"></i> Zaloguj</button>
