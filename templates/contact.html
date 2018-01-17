@@ -40,11 +40,11 @@
                 <form action="/contact" method="post" class="form">
                   <div class="form-group text-left">
                     <h6>Imię:</h6>
-                    <input type="text" class="form-control" name="name" ng-model="formData.name" required> 
+                    <input type="text" class="form-control" ng-model="formData.name"> 
                     <h6>E-mail:</h6>
-                    <input type="email" class="form-control" name="email" ng-model="formData.email" required> 
+                    <input type="email" class="form-control" ng-model="formData.email"> 
                     <h6>Wiadomość:</h6>
-                    <textarea class="form-control" rows="3" name="message" ng-model="formData.message" spellcheck="false" required></textarea>
+                    <textarea class="form-control" rows="3" ng-model="formData.message" spellcheck="false"></textarea>
                   </div>
                   <button type="submit" class="btn btn-primary font-awesome"><i class="fa fa-share" aria-hidden="true"></i> Wyślij</button>
                 </form>
