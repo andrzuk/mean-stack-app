@@ -32,5 +32,17 @@ module.exports = function(params) {
         });
     });
 
+    router.post('/logout', function (req, res, next) {
+        db.collection('users').updateOne({
+            _id: new ObjectID(req.body._id)
+        }, {
+            $set: {
+                token: 'Logout'
+            }
+        }, function (err, result) {
+            res.send(result);
+        });
+    });
+
     return router;
 };

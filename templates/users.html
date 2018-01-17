@@ -11,14 +11,16 @@
                         <th>Id</th>
                         <th>Login</th>
                         <th>E-mail</th>
+                        <th>Token</th>
                         <th>IP</th>
                         <th>Data</th>
                         <th colspan="2" class="text-center">Akcje</th>
                     </tr>
                     <tr ng-repeat="user in users">
                         <td>{{ user._id }}</td>
-                        <td>{{ user.login }}<br>{{ user.password }}<br>{{ user.token }}</td>
+                        <td>{{ user.login }}</td>
                         <td>{{ user.email }}</td>
+                        <td>{{ user.token | limitTo:16 }}<span ng-if="user.token.length > 16">...</span></td>
                         <td>{{ user.ip }}</td>
                         <td>{{ user.date | date: "dd.MM.yyyy HH:mm:ss" }}</td>
                         <td class="text-center">
@@ -29,7 +31,7 @@
                         </td>
                     </tr>
                     <tr ng-if="users.length == 0">
-                        <td colspan="7">Brak pozycji.</td>
+                        <td colspan="8">Brak pozycji.</td>
                     </tr>
                 </table>
                 <div class="py-3 text-center">

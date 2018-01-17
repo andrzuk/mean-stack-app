@@ -7,6 +7,7 @@ angular.module('authModule', [])
         $http.post('/auth/login', $scope.formData).then(function (response) {
             if (response.data.isLogged) {
                 $rootScope.currentUser = response.data;
+                window.localStorage.setItem('authToken', $rootScope.currentUser.token);
                 $scope.formData = {};
                 $rootScope.action = 'panel';
                 $scope.message = 'Zostałeś pomyślnie zalogowany.';
@@ -20,10 +21,20 @@ angular.module('authModule', [])
     };
 
     $rootScope.logoutUser = function() {
-        $rootScope.currentUser = {};
-        $rootScope.action = 'logout';
-        $scope.message = 'Zostałeś pomyślnie wylogowany.';
-        $scope.status = 'info';
+        $http.post('/auth/logout', $rootScope.currentUser).then(function (response) {
+            console.log(response);
+            if (response.data.success) {
+                $rootScope.currentUser = {};
+                window.localStorage.removeItem('authToken');
+                $rootScope.action = 'logout';
+                $scope.message = 'Zostałeś pomyślnie wylogowany.';
+                $scope.status = 'info';
+            }
+            else {
+                $scope.message = 'Wylogowanie nie powiodło się.';
+                $scope.status = 'error';
+            }
+        });
     };
 
 }]);
