@@ -113,6 +113,13 @@ angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'messages
         $scope.status = null;
     };
     
+    $scope.sendMessage = function () {
+        $http.post('/messages', $scope.formData).then(function () {
+            $scope.formData = {};
+            $scope.getContact();
+        });
+    };
+
     $scope.checkUserLogin = function() {
         var userId = window.localStorage.getItem('userId');
         var authToken = window.localStorage.getItem('authToken');

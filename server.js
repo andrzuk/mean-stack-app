@@ -42,19 +42,6 @@ app.get('/', function (req, res) {
     res.sendFile('index.html');
 });
 
-app.post('/', function (req, res) {
-    db.collection('messages').insertOne({
-        name: req.body.name,
-        email: req.body.email,
-        message: req.body.message,
-        ip: req.body.ip,
-        date: Date.now(),
-        accept: false
-    }, function () {
-        res.sendFile('index.html');
-    });
-});
-
 app.get('/templates/:name', function (req, res) {
     res.sendFile(__dirname + '/templates/' + req.params.name + '.html');
 });

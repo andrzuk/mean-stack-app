@@ -79,3 +79,9 @@ span.list-title {
     font-weight: bold;
     float: left;
 }
+tr.requested td {
+	color: #B74934;
+}
+tr.commited td {
+	color: #577492;
+}

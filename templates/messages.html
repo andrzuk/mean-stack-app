@@ -16,7 +16,7 @@
                         <th>Data</th>
                         <th colspan="2" class="text-center">Akcje</th>
                     </tr>
-                    <tr ng-repeat="message in messages">
+                    <tr ng-repeat="message in messages" class="{{ message.accept == 1 ? 'requested' : 'commited' }}">
                         <td>{{ message.name }}</td>
                         <td>{{ message.email }}</td>
                         <td>{{ message.message | limitTo:256 }}<span ng-if="message.message.length > 256">...</span></td>
@@ -48,7 +48,7 @@
                         <h6>Imię:</h6>
                         <input type="text" class="form-control" ng-model="formData.name"> 
                         <h6>E-mail:</h6>
-                        <input type="text" class="form-control" ng-model="formData.email"> 
+                        <input type="email" class="form-control" ng-model="formData.email"> 
                         <h6>Treść wiadomości:</h6>
                         <textarea class="form-control" rows="10" ng-model="formData.message" spellcheck="false"></textarea>
                         <h6>Zatwierdzona:</h6>
