@@ -10,7 +10,7 @@
                 </div>
                 <table class="table table-bordered table-striped">
                     <tr>
-                        <th>Id</th>
+                        <th>Lp.</th>
                         <th>Login</th>
                         <th>E-mail</th>
                         <th>Token</th>
@@ -19,11 +19,11 @@
                         <th colspan="2" class="text-center">Akcje</th>
                     </tr>
                     <tr ng-repeat="user in users">
-                        <td>{{ user._id }}</td>
-                        <td>{{ user.login }}</td>
-                        <td>{{ user.email }}</td>
-                        <td>{{ user.token | limitTo:16 }}<span ng-if="user.token.length > 16">...</span></td>
-                        <td>{{ user.ip }}</td>
+                        <td>{{ $index + 1 }}</td>
+                        <td class="text-left">{{ user.login }}</td>
+                        <td class="text-left">{{ user.email }}</td>
+                        <td class="text-left">{{ user.token | limitTo:16 }}<span ng-if="user.token.length > 16">...</span></td>
+                        <td class="text-left">{{ user.ip }}</td>
                         <td>{{ user.date | date: "dd.MM.yyyy HH:mm:ss" }}</td>
                         <td class="text-center">
                             <button class="btn btn-primary action" ng-click="editUser(user._id)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>

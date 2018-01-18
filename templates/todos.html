@@ -9,7 +9,7 @@
                 </div>
                 <table class="table table-bordered table-striped">
                     <tr>
-                        <th>Id</th>
+                        <th>Lp.</th>
                         <th>Opis zadania</th>
                         <th>IP</th>
                         <th>Data</th>
@@ -17,9 +17,9 @@
                         <th colspan="2" class="text-center">Akcje</th>
                     </tr>
                     <tr ng-repeat="todo in todos">
-                        <td>{{ todo._id }}</td>
-                        <td>{{ todo.text | limitTo:64 }}<span ng-if="todo.text.length > 64">...</span></td>
-                        <td>{{ todo.ip }}</td>
+                        <td>{{ $index + 1 }}</td>
+                        <td class="text-left">{{ todo.text | limitTo:64 }}<span ng-if="todo.text.length > 64">...</span></td>
+                        <td class="text-left">{{ todo.ip }}</td>
                         <td>{{ todo.date | date: "dd.MM.yyyy HH:mm:ss" }}</td>
                         <td>{{ todo.$$hashKey }}</td>
                         <td class="text-center">
