@@ -10,14 +10,14 @@
                 <table class="table table-bordered table-striped">
                     <tr>
                         <th>Lp.</th>
-                        <th>Imię</th>
-                        <th>E-mail</th>
-                        <th>Treść wiadomości</th>
-                        <th>IP</th>
+                        <th class="text-left">Imię</th>
+                        <th class="text-left">E-mail</th>
+                        <th class="text-left">Treść wiadomości</th>
+                        <th class="text-left">IP</th>
                         <th>Data</th>
                         <th colspan="2" class="text-center">Akcje</th>
                     </tr>
-                    <tr ng-repeat="message in messages" class="{{ message.accept == true ? 'commited' : 'requested' }}">
+                    <tr ng-repeat="message in messages" class="{{ message.accept == 'true' ? 'commited' : 'requested' }}">
                         <td>{{ $index + 1 }}</td>
                         <td class="text-left">{{ message.name }}</td>
                         <td class="text-left">{{ message.email }}</td>
