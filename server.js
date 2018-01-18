@@ -31,6 +31,8 @@ mongodb.connect(connection.url, function (err, conn) {
     app.use('/pages', pages);
     var users = require('./routes/users.js')({ database: db, objectId: ObjectID });
     app.use('/users', users);
+    var messages = require('./routes/messages.js')({ database: db, objectId: ObjectID });
+    app.use('/messages', messages);
     var todos = require('./routes/todos.js')({ database: db, objectId: ObjectID });
     app.use('/todos', todos);
     console.log('Connected to MongoDB at: %s', connection.url);
@@ -38,6 +40,19 @@ mongodb.connect(connection.url, function (err, conn) {
 
 app.get('/', function (req, res) {
     res.sendFile('index.html');
+});
+
+app.post('/', function (req, res) {
+    db.collection('contacts').insertOne({
+        name: req.body.name,
+        email: req.body.email,
+        message: req.body.message,
+        ip: req.body.ip,
+        date: Date.now(),
+        accept: false
+    }, function () {
+        res.sendFile('index.html');
+    });
 });
 
 app.get('/templates/:name', function (req, res) {
