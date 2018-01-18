@@ -4,25 +4,10 @@ module.exports = function(params) {
     var ObjectID = params.objectId;
     var express = require('express');
     var router = express.Router();
-    var token = require('./routes/token.js')({ database: db });
+    var token = require('./token.js')({ database: db });
     
     const bcrypt = require('bcrypt');
     
-    var checkAuth = function(headers, callback) {
-        db.collection('users', function (err, collection) {
-            collection.findOne({
-                _id: new ObjectID(headers['user-id'])
-            }, function (err, result) {
-                if (result) {
-                    callback(result.token == headers['x-access-token']);
-                }
-                else {
-                    callback(false);
-                }
-            });
-        });
-    };
-
     router.get('/', function (req, res, next) {
         token.checkAuth(req.headers, function(access) {
             if (access) {
@@ -39,7 +24,7 @@ module.exports = function(params) {
     });
 
     router.get('/:id', function (req, res, next) {
-        checkAuth(req.headers, function(access) {
+        token.checkAuth(req.headers, function(access) {
             if (access) {
                 db.collection('users', function (err, collection) {
                     collection.findOne({
@@ -56,7 +41,7 @@ module.exports = function(params) {
     });
 
     router.post('/', function (req, res, next) {
-        checkAuth(req.headers, function(access) {
+        token.checkAuth(req.headers, function(access) {
             if (access && req.body.password != undefined) {
                 db.collection('users').insertOne({
                     login: req.body.login,
@@ -76,7 +61,7 @@ module.exports = function(params) {
     });
 
     router.put('/:id', function (req, res, next) {
-        checkAuth(req.headers, function(access) {
+        token.checkAuth(req.headers, function(access) {
             if (access && req.body.password != undefined) {
                 db.collection('users').updateOne({
                     _id: new ObjectID(req.params.id)
@@ -100,7 +85,7 @@ module.exports = function(params) {
     });
 
     router.delete('/:id', function (req, res, next) {
-        checkAuth(req.headers, function(access) {
+        token.checkAuth(req.headers, function(access) {
             if (access) {
                 db.collection('users').removeOne({
                     _id: new ObjectID(req.params.id)

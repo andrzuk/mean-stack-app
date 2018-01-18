@@ -4,24 +4,10 @@ module.exports = function(params) {
     var ObjectID = params.objectId;
     var express = require('express');
     var router = express.Router();
-
-    var checkAuth = function(headers, callback) {
-        db.collection('users', function (err, collection) {
-            collection.findOne({
-                _id: new ObjectID(headers['user-id'])
-            }, function (err, result) {
-                if (result) {
-                    callback(result.token == headers['x-access-token']);
-                }
-                else {
-                    callback(false);
-                }
-            });
-        });
-    };
+    var token = require('./token.js')({ database: db });
 
     router.get('/', function (req, res, next) {
-        checkAuth(req.headers, function(access) {
+        token.checkAuth(req.headers, function(access) {
             if (access) {
                 db.collection('pages', function (err, collection) {
                     collection.find().toArray(function (err, result) {
@@ -36,7 +22,7 @@ module.exports = function(params) {
     });
 
     router.get('/:id', function (req, res, next) {
-        checkAuth(req.headers, function(access) {
+        token.checkAuth(req.headers, function(access) {
             if (access) {
                 db.collection('pages', function (err, collection) {
                     collection.findOne({
@@ -53,7 +39,7 @@ module.exports = function(params) {
     });
 
     router.post('/', function (req, res, next) {
-        checkAuth(req.headers, function(access) {
+        token.checkAuth(req.headers, function(access) {
             if (access) {
                 db.collection('pages').insertOne({
                     index: req.body.index,
@@ -72,7 +58,7 @@ module.exports = function(params) {
     });
 
     router.put('/:id', function (req, res, next) {
-        checkAuth(req.headers, function(access) {
+        token.checkAuth(req.headers, function(access) {
             if (access) {
                 db.collection('pages').updateOne({
                     _id: new ObjectID(req.params.id)
@@ -95,7 +81,7 @@ module.exports = function(params) {
     });
 
     router.delete('/:id', function (req, res, next) {
-        checkAuth(req.headers, function(access) {
+        token.checkAuth(req.headers, function(access) {
             if (access) {
                 db.collection('pages').removeOne({
                     _id: new ObjectID(req.params.id)
