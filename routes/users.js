@@ -4,6 +4,7 @@ module.exports = function(params) {
     var ObjectID = params.objectId;
     var express = require('express');
     var router = express.Router();
+    var token = params.token;
     
     const bcrypt = require('bcrypt');
     
@@ -23,7 +24,7 @@ module.exports = function(params) {
     };
 
     router.get('/', function (req, res, next) {
-        checkAuth(req.headers, function(access) {
+        token.checkAuth(req.headers, function(access) {
             if (access) {
                 db.collection('users', function (err, collection) {
                     collection.find().toArray(function (err, result) {
