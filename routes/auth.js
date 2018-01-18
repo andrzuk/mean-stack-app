@@ -13,7 +13,11 @@ module.exports = function(params) {
                 collection.findOne({
                     _id: new ObjectID(req.params.id)
                 }, function (err, result) {
-                    res.send(result);
+                    var user = { 
+                        id: result._id, 
+                        token: result.token
+                    };
+                    res.send(user);
                 });
             }
             else {
@@ -33,6 +37,7 @@ module.exports = function(params) {
                         user = result;
                         user.isLogged = true;
                         user.token = bcrypt.hashSync(result.password, 10);
+                        user.password = null;
                         db.collection('users').updateOne({
                             _id: new ObjectID(result._id)
                         }, {

@@ -109,7 +109,7 @@ angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'todosMod
                 console.log('Local storage:', userId, authToken);
                 console.log('Sprawdzamy zalogowanie:', response);
                 var user = response.data;
-                if (user._id == userId && user.token == authToken) {
+                if (user.id == userId && user.token == authToken) {
                     console.log('Zalogowany.');
                     user.isLogged = true;
                     $rootScope.currentUser = user;
