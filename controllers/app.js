@@ -104,20 +104,26 @@ angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'todosMod
     $scope.checkUserLogin = function() {
         var userId = window.localStorage.getItem('userId');
         var authToken = window.localStorage.getItem('authToken');
-        $http.get('/auth/' + userId).then(function (response) {
-            console.log('Local storage:', userId, authToken);
-            console.log('Sprawdzamy zalogowanie:', response);
-            var user = response.data;
-            if (user._id == userId && user.token == authToken) {
-                console.log('Zalogowany.');
-                user.isLogged = true;
-                $rootScope.currentUser = user;
-            }
-            else {
-                console.log('Wylogowany.');
-                $rootScope.currentUser = {};
-            }
-        });
+        if (userId != undefined && authToken != undefined) {
+            $http.get('/auth/' + userId).then(function (response) {
+                console.log('Local storage:', userId, authToken);
+                console.log('Sprawdzamy zalogowanie:', response);
+                var user = response.data;
+                if (user._id == userId && user.token == authToken) {
+                    console.log('Zalogowany.');
+                    user.isLogged = true;
+                    $rootScope.currentUser = user;
+                }
+                else {
+                    console.log('Wylogowany -1.');
+                    $rootScope.currentUser = {};
+                }
+            });
+        }
+        else {
+            console.log('Wylogowany -2.');
+            $rootScope.currentUser = {};
+        }
     };
 
     $scope.getHome();
