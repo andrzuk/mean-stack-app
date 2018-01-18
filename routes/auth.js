@@ -7,6 +7,16 @@ module.exports = function(params) {
     
     const bcrypt = require('bcrypt');
 
+    router.get('/:id', function (req, res, next) {
+        db.collection('users', function (err, collection) {
+            collection.findOne({
+                _id: new ObjectID(req.params.id)
+            }, function (err, result) {
+                res.send(result);
+            });
+        });
+    });
+
     router.post('/login', function (req, res, next) {
         var user = {};
         db.collection('users', function (err, collection) {

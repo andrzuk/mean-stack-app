@@ -104,7 +104,8 @@ angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'todosMod
     $scope.checkUserLogin = function() {
         var userId = window.localStorage.getItem('userId');
         var authToken = window.localStorage.getItem('authToken');
-        $http.get('/users/' + userId, $rootScope.urlConfig).then(function (response) {
+        $http.get('/auth/' + userId).then(function (response) {
+            console.log('Local storage:', userId, authToken);
             console.log('Sprawdzamy zalogowanie:', response);
             var user = response.data;
             if (user._id == userId && user.token == authToken) {
