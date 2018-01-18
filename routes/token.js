@@ -4,7 +4,7 @@ module.exports = function(params) {
     var express = require('express');
     var router = express.Router();
     
-    var checkAuth = function(headers, callback) {
+    router.checkAuth = function(headers, callback) {
         db.collection('users', function (err, collection) {
             collection.findOne({
                 _id: new ObjectID(headers['user-id'])

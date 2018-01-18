@@ -4,7 +4,7 @@ module.exports = function(params) {
     var ObjectID = params.objectId;
     var express = require('express');
     var router = express.Router();
-    var token = params.token;
+    var token = require('./routes/token.js')({ database: db });
     
     const bcrypt = require('bcrypt');
     
