@@ -4,6 +4,8 @@ module.exports = function(params) {
     var token = {};
     
     token.checkAuth = function(headers, callback) {
+        console.log("Database:",db);
+        console.log("Headers:", headers);
         db.collection('users', function (err, collection) {
             collection.findOne({
                 _id: new ObjectID(headers['user-id'])
