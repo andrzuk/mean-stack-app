@@ -100,7 +100,26 @@ angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'todosMod
         $rootScope.action = 'list';
         $scope.status = null;
     };
+    
+    $scope.checkUserLogin = function() {
+        var userId = window.localStorage.getItem('userId');
+        var authToken = window.localStorage.getItem('authToken');
+        $http.get('/users/' + userId, $rootScope.urlConfig).then(function (response) {
+            console.log('Sprawdzamy zalogowanie:', response);
+            var user = response.data;
+            if (user._id == userId && user.token == authToken) {
+                console.log('Zalogowany.');
+                user.isLogged = true;
+                $rootScope.currentUser = user;
+            }
+            else {
+                console.log('Wylogowany.');
+                $rootScope.currentUser = {};
+            }
+        });
+    };
 
     $scope.getHome();
+    $scope.checkUserLogin();
 
 }]);
