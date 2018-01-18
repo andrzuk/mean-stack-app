@@ -43,7 +43,7 @@ app.get('/', function (req, res) {
 });
 
 app.post('/', function (req, res) {
-    db.collection('contacts').insertOne({
+    db.collection('messages').insertOne({
         name: req.body.name,
         email: req.body.email,
         message: req.body.message,
