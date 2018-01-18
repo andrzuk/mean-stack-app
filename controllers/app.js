@@ -17,7 +17,7 @@ angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'todosMod
     
     $rootScope.urlConfig = { 
         headers: { 
-            'user-id': $rootScope.currentUser._id,
+            'user-id': window.localStorage.getItem('userId'),
             'x-access-token': window.localStorage.getItem('authToken') 
         } 
     };

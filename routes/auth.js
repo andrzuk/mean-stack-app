@@ -9,11 +9,16 @@ module.exports = function(params) {
 
     router.get('/:id', function (req, res, next) {
         db.collection('users', function (err, collection) {
-            collection.findOne({
-                _id: new ObjectID(req.params.id)
-            }, function (err, result) {
-                res.send(result);
-            });
+            if (collection != undefined) {
+                collection.findOne({
+                    _id: new ObjectID(req.params.id)
+                }, function (err, result) {
+                    res.send(result);
+                });
+            }
+            else {
+                res.json({});
+            }
         });
     });
 
