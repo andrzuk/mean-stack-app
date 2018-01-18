@@ -48,7 +48,7 @@ module.exports = function(params) {
                     message: req.body.message,
                     ip: req.body.ip,
                     date: Date.now(),
-                    accept: false
+                    accept: 0
                 }, function (err, result) {
                     res.send(result);
                 });

@@ -16,7 +16,7 @@
                         <th>Data</th>
                         <th colspan="2" class="text-center">Akcje</th>
                     </tr>
-                    <tr ng-repeat="message in messages" class="{{ message.accept == 1 ? 'requested' : 'commited' }}">
+                    <tr ng-repeat="message in messages" class="{{ message.accept == 1 ? 'commited' : 'requested' }}">
                         <td>{{ message.name }}</td>
                         <td>{{ message.email }}</td>
                         <td>{{ message.message | limitTo:256 }}<span ng-if="message.message.length > 256">...</span></td>

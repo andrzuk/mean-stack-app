@@ -114,6 +114,7 @@ angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'messages
     };
     
     $scope.sendMessage = function () {
+        $scope.formData.ip = $rootScope.currentIp;
         $http.post('/messages', $scope.formData).then(function () {
             $scope.formData = {};
             $scope.getContact();
