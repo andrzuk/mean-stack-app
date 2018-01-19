@@ -34,7 +34,7 @@ angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'messages
     $scope.status = null;
     
     $scope.getHome = function() {
-        $rootScope.module = 'index';
+        $rootScope.module = 'home';
         $rootScope.action = 'home';
         $scope.status = null;
         $scope.getSubpage('index');
