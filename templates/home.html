@@ -1,15 +1,22 @@
 <div ng-show="action == 'home'">
 
+    <style>
+        section#main-content {
+            text-align: center;
+            min-height: calc(100vh - 346px);
+        }
+    </style>
+
     <div ng-show="status == 'ready'">
         <div class="container">
             <div id="start-content" ng-bind-html="pageData.description"></div>
         </div>
     </div>
-    
+
     <div ng-show="status == 'loading'">
         <div id="load-icon">
             <img src="loader.gif" id="page-loader" alt="MEAN Stack Loader">
         </div>
     </div>
-    
+
 </div>

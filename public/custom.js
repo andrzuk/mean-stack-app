@@ -2,9 +2,9 @@ const notFound = `
 
     <div class="py-4 text-center">
         <div class="py-4">
-            <h1>Strona nie znaleziona.</h1>
+            <h1 style="color: #c00;">Strona nie znaleziona.</h1>
             <br>
-            <h4>Sprawdź, czy indeks strony jest poprawny.</h4>
+            <h5 style="color: #090;">Sprawdź, czy indeks strony jest poprawny.</h5>
         </div>
         <div class="py-4">
             <button class="btn btn-danger font-awesome" onclick="getPage('index')"><i class="fa fa-times-circle" aria-hidden="true"></i> Zamknij</button>
@@ -13,43 +13,30 @@ const notFound = `
 
 `;
 
-function getSubPage(index) {
-    
-    var $page = $('div#start-content');
-    
-    $page.fadeOut(function () {
-        $.getJSON('/page/' + index, function (response, msg) {
-            if (response.msg == 'success') {
-                $page.html(response.description);
-            }
-            else {
-                $page.html(notFound);
-            }
-            $page.fadeIn();
-        });
-    });
-    
-    setTimeout(function() {
-        if (!$page.is(':visible')) {
-            $page.html(notFound).fadeIn();
-        }
-    }, 2000);
-}
+const loadIcon = `
+
+    <div id="load-icon">
+        <img src="loader.gif" id="page-loader" alt="MEAN Stack Loader">
+    </div>
+
+`;
 
 function getPage(index) {
     
+    var loadResult = false;
     var $page = $('div#start-content');
     
     $page.fadeOut(function () {
+        $page.html(loadIcon).show();
         $.getJSON('/page/' + index).then(function(response) {
-            console.log(response);
             $page.html(response.description).fadeIn();
+            loadResult = true;
         });
     });
     
     setTimeout(function() {
-        if (!$page.is(':visible')) {
-            $page.html(notFound).fadeIn();
+        if (!loadResult) {
+            $page.hide().html(notFound).fadeIn();
         }
-    }, 2000);
+    }, 1000);
 }
