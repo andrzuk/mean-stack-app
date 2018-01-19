@@ -51,9 +51,6 @@ app.get('/page/:index', function (req, res) {
         collection.findOne({
             index: req.params.index
         }, function (err, result) {
-            if (err) {
-                res.send(err);
-            }
             res.send(result);
         });
     });

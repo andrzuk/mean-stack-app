@@ -13,11 +13,12 @@ const notFound = `
 `;
 
 function getPage(index) {
+    
     var $page = $('div#start-content');
+    
     $page.fadeOut(function () {
-        $.getJSON('/page/' + index, function (response, error) {
-            console.log('Err, Response:', error, response);
-            if (response.description.length) {
+        $.getJSON('/page/' + index, function (response, msg) {
+            if (response.msg == 'success') {
                 $page.html(response.description);
             }
             else {
@@ -26,4 +27,10 @@ function getPage(index) {
             $page.fadeIn();
         });
     });
+    
+    setTimeout(function() {
+        if (!$page.is(':visible')) {
+            $page.html(notFound).fadeIn();
+        }
+    }, 1000);
 }

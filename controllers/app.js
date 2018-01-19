@@ -54,13 +54,11 @@ angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'messages
     };
 
     $scope.getSubpage = function (index) {
-        console.log('getSubPage started...');
         $scope.status = 'loading';
         $http.get('/page/' + index).then(function(response) {
             $scope.pageData = response.data;
             $scope.pageData.description = $sce.trustAsHtml($scope.pageData.description);
             $scope.status = 'ready';
-            console.log($scope.pageData.description);
         });
     };
     
