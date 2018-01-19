@@ -33,8 +33,27 @@ angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'messages
     $rootScope.action = null;
     $scope.status = null;
     
+    $scope.initApp = function() {
+        $http.get('/auth/init').then(function(response) {
+            console.log('Jest kolekcja?', response);
+            if (response.data.status) {
+                console.log('Rejestrujemy admina...');
+                $scope.formData = {};
+                $scope.formData.ip = $rootScope.currentIp;
+                $rootScope.module = 'auth';
+                $rootScope.action = 'register';
+                $scope.status = null;
+            }
+            else {
+                console.log("Start Home Page...");
+                $scope.getHome();
+                $scope.checkUserLogin();
+            }
+        });
+    };
+
     $scope.getHome = function() {
-        $rootScope.module = 'home';
+        $rootScope.module = 'index';
         $rootScope.action = 'home';
         $scope.status = null;
         $scope.getSubpage('index');
@@ -142,19 +161,6 @@ angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'messages
         }
     };
     
-    $scope.initApp = function() {
-        $http.get('/auth/init').then(function(response) {
-            console.log('Jest kolekcja?', response);
-            if (response.data.status) {
-                $rootScope.module = 'users';
-                $rootScope.action = 'new';
-                $scope.status = null;
-            }
-        });
-    };
-
     $scope.initApp();
-    $scope.getHome();
-    $scope.checkUserLogin();
 
 }]);
