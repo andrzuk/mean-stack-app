@@ -56,6 +56,16 @@ app.get('/api/subpage/:index', function (req, res) {
     });
 });
 
+app.get('/page/:index', function (req, res) {
+    db.collection('pages', function (err, collection) {
+        collection.findOne({
+            index: req.params.index
+        }, function (err, result) {
+            res.send(result);
+        });
+    });
+});
+
 app.listen(connection.port, connection.ip);
 
 console.log('Server running on http://%s:%s', connection.ip, connection.port);
