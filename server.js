@@ -39,7 +39,7 @@ mongodb.connect(connection.url, function (err, conn) {
 });
 
 app.get('/', function (req, res) {
-    res.send('index.html');
+    res.sendFile('index.html');
 });
 
 app.get('/templates/:name', function (req, res) {
