@@ -58,7 +58,7 @@ form>button {
 }
 section#main-content {
     text-align: center;
-    min-height: calc(100vh - 362px);
+    min-height: calc(100vh - 330px);
 }
 p.lead>b {
     font-weight: 500;
@@ -71,7 +71,7 @@ button.font-awesome>i.fa {
     margin: 0 0.4em 0 0;
 }
 div#load-icon {
-    height: 100vh;
+    height: 0;
 }
 img#page-loader {
     position: fixed;

@@ -16,6 +16,7 @@ function getPage(index) {
     var $page = $('div#start-content');
     $page.fadeOut(function () {
         $.getJSON('/page/' + index, function (response) {
+            console.log('Response:', response);
             if (response.description.length) {
                 $page.html(response.description);
             }
