@@ -1,34 +1,6 @@
 <div ng-show="action == 'home'">
 
-    <style>
-        div#start-image {
-            margin: 0 0 1.0em 0;
-            width: 100%;
-        }        
-        div#start-image img {
-            width: 100%;
-            max-height: 400px;
-        }
-        div#start-content {
-            margin: 1.0em 0;
-            text-align: justify;
-        }
-        div#start-button button {
-            width: 100px;
-            position: absolute;
-            top: 400px;
-            left: calc(50% - 50px);
-        }
-    </style>
-    
     <div ng-show="status == 'ready'">
-        <div id="start-image">
-            <img src="img/start.png" alt="MEAN Stack Application">
-        </div>
-        <div id="start-button">
-            <button class="btn btn-success" ng-click="getAppTodos()">Start</button>
-        </div>
-
         <div class="container">
             <div id="start-content" ng-bind-html="pageData.description"></div>
         </div>

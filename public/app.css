@@ -22,6 +22,10 @@ img#page-logo {
     height: 50px;
     margin: 2px;
 }
+div#start-content {
+    margin: 1.0em 0;
+    text-align: justify;
+}
 .table-bordered>thead>tr>th,
 .table-bordered>tbody>tr>th,
 .table-bordered>tfoot>tr>th {
