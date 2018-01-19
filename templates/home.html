@@ -1,8 +1,48 @@
 <div ng-show="action == 'home'">
 
+    <style>
+        div#start-content {
+            margin: 1.0em 0;
+            text-align: left;
+        }
+    </style>
+
     <div ng-show="status == 'ready'">
         <div class="container">
             <div id="start-content" ng-bind-html="pageData.description"></div>
+            <div ng-if="!pageData.description">
+                <h2 class="text-center">Witaj!</h2>
+                <div class="row py-3">
+                    <div class="col-lg-8 offset-lg-2">
+                        <p style="text-align: justify;">
+                            Oddaję Ci do rąk serwis, w którym możesz tworzyć posty. Posty będą prezentowane jako niezależne podstrony. Posty mogą być tworzone po zalogowaniu na zarejestrowane konto administratora. A więc w pierwszej kolejności należy zarejestrować swoje konto. Dalsze kroki opisane są w postaci krótkiej instrukcji wprowadzającej podanej niżej.
+                        </p>
+                    </div>
+                </div>
+                <div class="row py-3">
+                    <div class="col-lg-8 offset-lg-2">
+                        <ol>
+                            <li>Odśwież stronę (<b>F5</b>).</li>
+                            <li>Zarejestruj konto administratora.</li>
+                            <li>W panelu administratora uruchom moduł <b>Strony</b>.</li>
+                            <li>Dodaj nową stronę o indeksie <b>index</b>. Będzie to Twoja własna strona główna.</li>
+                            <li>Dodaj nową stronę o indeksie: <b>contact</b>. Będzie to Twoja własna strona kontaktowa.</li>
+                            <li>Dodaj nową stronę o indeksie: <b>1</b>. Będzie to strona Twojego posta o numerze <b>1</b>. Numer może być dowolny. Linki do postów muszą mieć postać:
+                                <p style="color: #369; padding-left: 2em;">
+                                    &lt;a href="#" onclick="getPage(1)"&gt;dowolny_tytuł_linku&lt;/a&gt; <br> &lt;a href="#" onclick="getPage('index')"&gt;dowolny_tytuł_linku&lt;/a&gt; <br> &lt;a href="#" onclick="getPage('contact')"&gt;dowolny_tytuł_linku&lt;/a&gt;
+                                </p>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="row py-3">
+                    <div class="col-lg-8 offset-lg-2">
+                        <p style="text-align: justify;">
+                            Mam nadzieję, że serwis Ci się spodoba. Życzę przyjemności podczas pracy z serwisem i sukcesów przy tworzeniu wspaniałych i ciekawych postów!
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

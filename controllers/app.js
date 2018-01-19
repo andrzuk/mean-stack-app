@@ -35,9 +35,7 @@ angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'messages
     
     $scope.initApp = function() {
         $http.get('/auth/init').then(function(response) {
-            console.log('Jest kolekcja?', response);
             if (response.data.status) {
-                console.log('Rejestrujemy admina...');
                 $scope.formData = {};
                 $scope.formData.ip = $rootScope.currentIp;
                 $rootScope.module = 'auth';
@@ -45,7 +43,6 @@ angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'messages
                 $scope.status = null;
             }
             else {
-                console.log("Start Home Page...");
                 $scope.getHome();
                 $scope.checkUserLogin();
             }
