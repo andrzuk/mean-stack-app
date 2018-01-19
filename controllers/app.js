@@ -51,6 +51,7 @@ angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'messages
         $rootScope.module = 'manual';
         $rootScope.action = 'manual';
         $scope.status = null;
+        $scope.getSubpage('manual');
     };
 
     $scope.getSubpage = function (index) {

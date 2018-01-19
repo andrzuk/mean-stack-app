@@ -3,6 +3,7 @@ const notFound = `
     <div class="py-4 text-center">
         <div class="py-4">
             <h1>Strona nie znaleziona.</h1>
+            <br>
             <h4>Sprawdź, czy indeks strony jest poprawny.</h4>
         </div>
         <div class="py-4">
@@ -12,7 +13,7 @@ const notFound = `
 
 `;
 
-function getPage(index) {
+function getSubPage(index) {
     
     var $page = $('div#start-content');
     
@@ -32,5 +33,23 @@ function getPage(index) {
         if (!$page.is(':visible')) {
             $page.html(notFound).fadeIn();
         }
-    }, 1000);
+    }, 2000);
+}
+
+function getPage(index) {
+    
+    var $page = $('div#start-content');
+    
+    $page.fadeOut(function () {
+        $.getJSON('/page/' + index).then(function(response) {
+            console.log(response);
+            $page.html(response.description).fadeIn();
+        });
+    });
+    
+    setTimeout(function() {
+        if (!$page.is(':visible')) {
+            $page.html(notFound).fadeIn();
+        }
+    }, 2000);
 }
