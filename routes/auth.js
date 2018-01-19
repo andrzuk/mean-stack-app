@@ -9,12 +9,7 @@ module.exports = function(params) {
 
     router.get('/init', function (req, res, next) {
         db.listCollections({ name: 'users' }).next(function(err, result) {
-            if (result) {
-                res.json({ status: 'exists' });
-            }
-            else {
-                res.json({ status: 'empty' });
-            }
+            res.json({ status: result == undefined });
         });
     });
 
@@ -36,6 +31,23 @@ module.exports = function(params) {
             else {
                 res.json({});
             }
+        });
+    });
+
+    router.post('/register', function (req, res, next) {
+        var hashPassword = bcrypt.hashSync(req.body.password, 10);
+        var user = {
+            login: req.body.login,
+            email: req.body.email,
+            password: hashPassword,
+            ip: req.body.ip,
+            date: Date.now(),
+            token: bcrypt.hashSync(hashPassword, 10)
+        };
+        db.collection('users').insertOne(user, function (err, result) {
+            user.isLogged = true;
+            user.password = null;
+            res.send(user);
         });
     });
 

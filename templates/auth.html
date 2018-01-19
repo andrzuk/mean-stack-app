@@ -3,7 +3,28 @@
     <div class="container" ng-show="action == 'login'">
         <div class="py-4 row">
             <div class="col-lg-4 offset-lg-4">
-                <h2 class="py-2">Logowanie</h2>
+                <h2 class="py-3">Rejestracja</h2>
+                <form class="form">
+                    <input type="hidden" ng-model="formData.ip">
+                    <div class="form-group text-left">
+                        <h6>Login:</h6>
+                        <input type="text" class="form-control" ng-model="formData.login" ng-disabled="status == 'wait'"> 
+                        <h6>E-mail:</h6>
+                        <input type="email" class="form-control" ng-model="formData.email" ng-disabled="status == 'wait'"> 
+                        <h6>Hasło:</h6>
+                        <input type="password" class="form-control" ng-model="formData.password" ng-disabled="status == 'wait'"> 
+                    </div>
+                    <hr>
+                    <button type="submit" class="btn btn-primary btn-block font-awesome" ng-click="registerUser()" ng-disabled="status == 'wait'"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Zarejestruj</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" ng-show="action == 'login'">
+        <div class="py-4 row">
+            <div class="col-lg-4 offset-lg-4">
+                <h2 class="py-3">Logowanie</h2>
                 <form class="form">
                     <input type="hidden" ng-model="formData.ip">
                     <div class="form-group text-left">

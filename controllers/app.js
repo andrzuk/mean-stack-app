@@ -142,9 +142,10 @@ angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'messages
         }
     };
     
-    $scope.checkDatabase = function() {
+    $scope.initApp = function() {
         $http.get('/auth/init').then(function(response) {
-            if (response.data.status == 'empty') {
+            console.log('Jest kolekcja?', response);
+            if (response.data.status) {
                 $rootScope.module = 'users';
                 $rootScope.action = 'new';
                 $scope.status = null;
@@ -152,8 +153,8 @@ angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'messages
         });
     };
 
+    $scope.initApp();
     $scope.getHome();
     $scope.checkUserLogin();
-    $scope.checkDatabase();
 
 }]);
