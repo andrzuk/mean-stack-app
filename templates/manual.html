@@ -84,7 +84,7 @@
                             $('span#manual-page').text(id + ' z ' + pagesCount);
                         });
                     });
-                    $.getJSON('/api/subpage/manual-' + id, function(response) {
+                    $.getJSON('/page/manual-' + id, function(response) {
                         $('div#manual-title').html(response.title);
                         $('div#manual-description').html(response.description);
                     });
