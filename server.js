@@ -39,7 +39,11 @@ mongodb.connect(connection.url, function (err, conn) {
 });
 
 app.get('/', function (req, res) {
-    res.sendFile('index.html');
+    res.send('index.html');
+});
+
+app.get('*', function (req, res) {
+    res.sendFile(__dirname + '/public/index.html');
 });
 
 app.get('/templates/:name', function (req, res) {
