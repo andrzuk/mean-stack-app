@@ -15,8 +15,8 @@ const notFound = `
 function getPage(index) {
     var $page = $('div#start-content');
     $page.fadeOut(function () {
-        $.getJSON('/page/' + index, function (response) {
-            console.log('Response:', response);
+        $.getJSON('/page/' + index, function (response, error) {
+            console.log('Err, Response:', error, response);
             if (response.description.length) {
                 $page.html(response.description);
             }
