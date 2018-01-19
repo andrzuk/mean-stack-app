@@ -58,7 +58,7 @@ form>button {
 }
 section#main-content {
     text-align: center;
-    min-height: calc(100vh - 330px);
+    min-height: calc(100vh - 362px);
 }
 p.lead>b {
     font-weight: 500;

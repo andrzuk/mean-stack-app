@@ -45,6 +45,7 @@ Project directory structure:
 	│   ├── angular-sanitize.js
 	│   ├── bootstrap.bundle.min.js
 	│   ├── jquery.min.js
+	│   ├── custom.js
 	│   ├── app.css
 	│   ├── bootstrap.min.css
 	│   ├── font-awesome.min.css
