@@ -7,6 +7,17 @@ module.exports = function(params) {
     
     const bcrypt = require('bcrypt');
 
+    router.get('/init', function (req, res, next) {
+        db.listCollections({ name: 'users' }).next(function(err, result) {
+            if (result) {
+                res.json({ status: 'exists' });
+            }
+            else {
+                res.json({ status: 'empty' });
+            }
+        });
+    });
+
     router.get('/:id', function (req, res, next) {
         db.collection('users', function (err, collection) {
             if (collection != undefined) {

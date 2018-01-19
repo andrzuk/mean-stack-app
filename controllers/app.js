@@ -141,8 +141,19 @@ angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'messages
             $rootScope.currentUser = {};
         }
     };
+    
+    $scope.checkDatabase = function() {
+        $http.get('/auth/init').then(function(response) {
+            if (response.data.status == 'empty') {
+                $rootScope.module = 'users';
+                $rootScope.action = 'new';
+                $scope.status = null;
+            }
+        });
+    };
 
     $scope.getHome();
     $scope.checkUserLogin();
+    $scope.checkDatabase();
 
 }]);
