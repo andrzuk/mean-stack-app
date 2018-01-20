@@ -56,4 +56,4 @@ Project directory structure:
 	├── server.js
 	└── README.md
 
-Demo: http://todos-my-mean-stack.193b.starter-ca-central-1.openshiftapps.com
+Demo: http://todos-mean-stack-auth-app.193b.starter-ca-central-1.openshiftapps.com
