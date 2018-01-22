@@ -71,6 +71,9 @@ module.exports = function(params) {
             }
         });
         */
+             console.log('REQ:',req);
+                console.log('FILES:',req.files);
+           
         fs.readFile(req.files.upload.path, function(err, data) {
 
             var newPath = __dirname + '/../public/gallery/' + req.files.upload.name;

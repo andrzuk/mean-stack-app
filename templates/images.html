@@ -49,13 +49,11 @@
     <div class="container" ng-show="action == 'new'">
         <div class="py-4 row">
             <div class="col-lg-10 offset-lg-1">
-                <form class="form" enctype="multipart/form-data">
+                <form class="form" action="/images" method="post" enctype="multipart/form-data">
                     <input type="hidden" ng-model="formData.ip">
                     <div class="form-group text-left">
-                        <h6>Indeks:</h6>
-                        <input type="text" class="form-control" ng-model="formData.index"> 
                         <h6>Obrazek:</h6>
-                        <input type="file" class="form-control" ng-model="formData.upload"> 
+                        <input type="file" class="form-control" name="upload"> 
                     </div>
                     <button type="submit" class="btn btn-primary font-awesome" ng-click="createImage()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Zapisz</button>
                     <button type="submit" class="btn btn-warning font-awesome" ng-click="cancelImage()"><i class="fa fa-ban" aria-hidden="true"></i> Anuluj</button>
