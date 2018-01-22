@@ -16,13 +16,11 @@ angular.module('imagesModule', [])
 
     $scope.createImage = function () {
         $scope.action = 'list';
-        return false;
-        /*
-        $http.post('/images', $scope.formData, $rootScope.urlConfig).then(function () {
+        console.log('Before send:', $scope.upload);
+        $http.post('/images', { upload: $scope.upload }, $rootScope.urlConfig).then(function () {
             $scope.formData = {};
             $scope.getImages();
         });
-        */
     };
 
     $scope.editImage = function (id) {
