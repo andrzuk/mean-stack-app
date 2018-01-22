@@ -44,6 +44,7 @@ module.exports = function(params) {
     router.post('/', function (req, res, next) {
         token.checkAuth(req.headers, function(access) {
             if (access) {
+                console.log('REQ:',req);
                 console.log('FILES:',req.files);
                 var tempPath = req.files.file.path;
                 var targetPath = path.resolve('../upload/' + req.files.file.name);
