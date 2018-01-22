@@ -4,7 +4,7 @@ module.exports = function(params) {
     var ObjectID = params.objectId;
     var express = require('express');
     var router = express.Router();
-    var formidable = require('formidable');
+    var path = require('path');
     var fs = require('fs');
     
     var token = require('./token.js')({ database: db, objectId: ObjectID });
@@ -44,16 +44,23 @@ module.exports = function(params) {
     router.post('/', function (req, res, next) {
         token.checkAuth(req.headers, function(access) {
             if (access) {
-                console.log('form body:',req.body);
-                db.collection('images').insertOne({
-                    index: req.body.index,
-                    filename: req.body.file_data.path,
-                    filesize: req.body.file_data.name,
-                    resolution: req.body.file_data.size,
-                    date: Date.now()
-                }, function (err, result) {
-                    res.send(result);
-                });                
+                var tempPath = req.files.file.path;
+                var targetPath = path.resolve('../upload/' + req.files.file.name);
+                console.log('temp path:',tempPath);
+                console.log('target path:',targetPath);
+                fs.rename(tempPath, targetPath, function(err) {
+                    if (err) throw err;
+                    console.log("Upload completed!");
+                    db.collection('images').insertOne({
+                        index: req.body.index,
+                        filename: req.files.file.name,
+                        filesize: req.files.file.path,
+                        resolution: req.files.file.size,
+                        date: Date.now()
+                    }, function (err, result) {
+                        res.send(result);
+                    });                
+                });
             }
             else {
                 res.json({});

@@ -12,6 +12,7 @@ app.use(express.static(__dirname + '/controllers'));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser({ uploadDir: '/upload' }));
 app.use(morgan('combined'));
 
 var db = null;

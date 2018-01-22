@@ -23,7 +23,7 @@
                     <tr ng-repeat="image in images">
                         <td>{{ $index + 1 }}</td>
                         <td>{{ image.index }}</td>
-                        <td><img src="/upload/{{ image.index }}.png" class="preview"></td>
+                        <td><img src="{{ image.filename }}" class="preview"></td>
                         <td class="text-left">{{ image.filename }}</td>
                         <td>{{ image.filesize }}</td>
                         <td>{{ image.resolution }}</td>
@@ -49,13 +49,13 @@
     <div class="container" ng-show="action == 'new'">
         <div class="py-4 row">
             <div class="col-lg-10 offset-lg-1">
-                <form class="form">
+                <form method="post" class="form" enctype="multipart/form-data">
                     <input type="hidden" ng-model="formData.ip">
                     <div class="form-group text-left">
                         <h6>Indeks:</h6>
                         <input type="text" class="form-control" ng-model="formData.index"> 
                         <h6>Obrazek:</h6>
-                        <input type="file" class="form-control" file-model="formData.file_data"> 
+                        <input type="file" class="form-control" name="file" file-model="formData.file"> 
                     </div>
                     <button type="submit" class="btn btn-primary font-awesome" ng-click="createImage()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Zapisz</button>
                     <button type="submit" class="btn btn-warning font-awesome" ng-click="cancelImage()"><i class="fa fa-ban" aria-hidden="true"></i> Anuluj</button>
