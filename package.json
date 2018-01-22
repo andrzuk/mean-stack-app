@@ -7,6 +7,7 @@
     "express": "^4.13.4",
     "mongodb": "^2.1.16",
     "body-parser": "^1.18.2",
+    "connect-multiparty": "^2.1.0",
     "morgan": "^1.7.0",
     "object-assign":"4.1.0",
     "bcrypt": "1.0.3",
@@ -24,10 +25,10 @@
     "type": "git",
     "url": "https://github.com/andrzuk/mean-stack.git"
   },
-  "author": "Steve Speicher <sspeiche@gmail.com>",
+  "author": "Andrzej Zukowski <andrzuk@gmail.com>",
   "license": "CC-BY-1.0",
   "bugs": {
-    "url": "https://github.com/andrzuk/mean-stack/issues"
+    "url": "https://github.com/andrzuk/mean-stack-app/issues"
   },
-  "homepage": "https://github.com/andrzuk/mean-stack"
+  "homepage": "https://github.com/andrzuk/mean-stack-app"
 }
