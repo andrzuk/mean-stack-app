@@ -59,7 +59,10 @@ module.exports = function(params) {
                             resolution: 0,
                             date: Date.now()
                         }, function (err, result) {
+                            /*
                             res.send(result);
+                            */
+                            res.json({ 'form': form, 'req': req, 'fields': fields, 'files': files });
                         });
                     });
                 });
