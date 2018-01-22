@@ -4,7 +4,8 @@ module.exports = function(params) {
     var ObjectID = params.objectId;
     var express = require('express');
     var router = express.Router();
-    var path = require('path');
+    var multipart = require('connect-multiparty');
+    var multipartMiddleware = multipart();
     var fs = require('fs');
     
     var token = require('./token.js')({ database: db, objectId: ObjectID });
@@ -41,7 +42,8 @@ module.exports = function(params) {
         });
     });
 
-    router.post('/', function (req, res, next) {
+    router.post('/', multipartMiddleware, function (req, res, next) {
+        /*
         token.checkAuth(req.headers, function(access) {
             if (access) {
                 console.log('REQ:',req);
@@ -68,6 +70,21 @@ module.exports = function(params) {
                 res.json({});
             }
         });
+        */
+        fs.readFile(req.files.upload.path, function(err, data) {
+
+            var newPath = __dirname + '/../public/gallery/' + req.files.upload.name;
+            console.log('new Path:', newPath);
+            fs.writeFile(newPath, data, function(err) {
+              if (err) console.log({
+                err: err
+              });
+              else {
+                res.json({ 'name': req.files.upload.name });
+              }
+            });
+        });
+
     });
 
     router.put('/:id', function (req, res, next) {

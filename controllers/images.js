@@ -16,11 +16,7 @@ angular.module('imagesModule', [])
 
     $scope.createImage = function () {
         $scope.action = 'list';
-		var fd = new FormData();
-        console.log('step-0', fd);
-		fd.append('file', $scope.file);
-        console.log('step-2', fd);
-        $http.post('/images', fd, $rootScope.urlConfig).then(function () {
+        $http.post('/images', $scope.formData, $rootScope.urlConfig).then(function () {
             $scope.formData = {};
             $scope.getImages();
         });
