@@ -18,8 +18,6 @@ angular.module('imagesModule', [])
         $scope.action = 'list';
 		var fd = new FormData();
         console.log('step-0', fd);
-        fd.append($scope.formData);
-        console.log('step-1', fd);
 		fd.append('file', $scope.file);
         console.log('step-2', fd);
         $http.post('/images', fd, $rootScope.urlConfig).then(function () {
