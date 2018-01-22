@@ -4,6 +4,8 @@ module.exports = function(params) {
     var ObjectID = params.objectId;
     var express = require('express');
     var router = express.Router();
+    var formidable = require('formidable');
+    var fs = require('fs');
     
     var token = require('./token.js')({ database: db, objectId: ObjectID });
 
@@ -47,7 +49,7 @@ module.exports = function(params) {
                     console.log('fields:', fields);
                     console.log('files:', files);
                     var oldpath = files.filetoupload.path;
-                    var newpath = '/upload/' + files.filetoupload.name;
+                    var newpath = '../upload/' + files.filetoupload.name;
                     fs.rename(oldpath, newpath, function (err) {
                         if (err) throw err;
                         db.collection('images').insertOne({
