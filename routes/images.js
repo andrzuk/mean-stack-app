@@ -43,68 +43,53 @@ module.exports = function(params) {
     });
 
     router.post('/', multipartMiddleware, function (req, res, next) {
-        /*
         token.checkAuth(req.headers, function(access) {
             if (access) {
-                console.log('REQ:',req);
-                console.log('FILES:',req.files);
-                var tempPath = req.files.file.path;
-                var targetPath = path.resolve('../upload/' + req.files.file.name);
-                console.log('temp path:',tempPath);
-                console.log('target path:',targetPath);
-                fs.rename(tempPath, targetPath, function(err) {
-                    if (err) throw err;
-                    console.log("Upload completed!");
-                    db.collection('images').insertOne({
-                        index: req.body.index,
-                        filename: req.files.file.name,
-                        filesize: req.files.file.path,
-                        resolution: req.files.file.size,
-                        date: Date.now()
-                    }, function (err, result) {
-                        res.send(result);
-                    });                
+                console.log('ACCESS OK');
+                fs.readFile(req.files.upload.path, function(err, data) {
+                    var newPath = __dirname + '/../public/gallery/' + req.files.upload.name;
+                    fs.writeFile(newPath, data, function(err) {
+                        if (err) throw err;
+                        console.log("Upload completed!");
+                        db.collection('images').insertOne({
+                            index: req.body.index,
+                            filename: req.files.upload.name,
+                            filesize: req.files.upload.size,
+                            date: Date.now()
+                        }, function (err, result) {
+                            res.send(result);
+                        });                
+                    });
                 });
             }
             else {
+                console.log('ACCESS Fail');
                 res.json({});
             }
         });
-        */
-             console.log('REQ:',req);
-                console.log('FILES:',req.files);
-           
-        fs.readFile(req.files.upload.path, function(err, data) {
-
-            var newPath = __dirname + '/../public/gallery/' + req.files.upload.name;
-            console.log('new Path:', newPath);
-            fs.writeFile(newPath, data, function(err) {
-              if (err) console.log({
-                err: err
-              });
-              else {
-                res.json({ 'name': req.files.upload.name });
-              }
-            });
-        });
-
     });
 
     router.put('/:id', function (req, res, next) {
         token.checkAuth(req.headers, function(access) {
             if (access) {
-                db.collection('images').updateOne({
-                    _id: new ObjectID(req.params.id)
-                }, {
-                    $set: {
-                        index: req.body.index,
-                        title: req.body.title,
-                        description: req.body.description,
-                        ip: req.body.ip,
-                        date: Date.now()
-                    }
-                }, function (err, result) {
-                    res.send(result);
+                fs.readFile(req.files.upload.path, function(err, data) {
+                    var newPath = __dirname + '/../public/gallery/' + req.files.upload.name;
+                    fs.writeFile(newPath, data, function(err) {
+                        if (err) throw err;
+                        console.log("Update completed!");
+                        db.collection('images').updateOne({
+                            _id: new ObjectID(req.params.id)
+                        }, {
+                            $set: {
+                                index: req.body.index,
+                                filename: req.files.upload.name,
+                                filesize: req.files.upload.size,
+                                date: Date.now()
+                            }
+                        }, function (err, result) {
+                            res.send(result);
+                        });
+                    });
                 });
             }
             else {

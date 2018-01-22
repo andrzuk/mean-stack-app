@@ -58,6 +58,10 @@ app.get('/page/:index', function (req, res) {
     });
 });
 
+app.get('/public/gallery/:name', function (req, res) {
+    res.sendFile(__dirname + '/public/gallery/' + req.params.name);
+});
+
 app.listen(connection.port, connection.ip);
 
 console.log('Server running on http://%s:%s', connection.ip, connection.port);

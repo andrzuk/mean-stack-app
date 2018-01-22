@@ -15,11 +15,9 @@ angular.module('imagesModule', [])
     };
 
     $scope.createImage = function () {
-        $scope.action = 'list';
-        console.log('Before send:', $scope.upload);
         $http.post('/images', { upload: $scope.upload }, $rootScope.urlConfig).then(function () {
             $scope.formData = {};
-            $scope.getImages();
+            $scope.getAppImages();
         });
     };
 
@@ -31,12 +29,9 @@ angular.module('imagesModule', [])
     };
 
     $scope.updateImage = function (id) {
-        $scope.action = 'list';
-		var fd = new FormData();
-		fd.append('file', $scope.formData.file_data);
-        $http.put('/images/' + id, fd, $rootScope.urlConfig).then(function () {
+        $http.put('/images/' + id, { id: id, upload: $scope.upload }, $rootScope.urlConfig).then(function () {
             $scope.formData = {};
-            $scope.getImages();
+            $scope.getAppImages();
         });
     };
 
