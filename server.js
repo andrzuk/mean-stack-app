@@ -8,6 +8,7 @@ Object.assign = require('object-assign');
 var app = express();
 
 app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/upload'));
 app.use(express.static(__dirname + '/controllers'));
 
 app.use(bodyParser.json());
@@ -31,6 +32,8 @@ mongodb.connect(connection.url, function (err, conn) {
     app.use('/pages', pages);
     var users = require('./routes/users.js')({ database: db, objectId: ObjectID });
     app.use('/users', users);
+    var images = require('./routes/images.js')({ database: db, objectId: ObjectID });
+    app.use('/images', images);
     var messages = require('./routes/messages.js')({ database: db, objectId: ObjectID });
     app.use('/messages', messages);
     var todos = require('./routes/todos.js')({ database: db, objectId: ObjectID });
