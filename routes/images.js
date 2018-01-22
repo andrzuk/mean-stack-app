@@ -44,29 +44,16 @@ module.exports = function(params) {
     router.post('/', function (req, res, next) {
         token.checkAuth(req.headers, function(access) {
             if (access) {
-                var form = new formidable.IncomingForm();
-                form.parse(req, function (err, fields, files) {
-                    console.log('fields:', fields);
-                    console.log('files:', files);
-                    var oldpath = files.filetoupload.path;
-                    var newpath = '../upload/' + files.filetoupload.name;
-                    fs.rename(oldpath, newpath, function (err) {
-                        if (err) throw err;
-                        db.collection('images').insertOne({
-                            index: req.body.index,
-                            filename: files.filetoupload.name,
-                            filesize: files.filetoupload.size,
-                            resolution: 0,
-                            date: Date.now()
-                        }, function (err, result) {
-                            /*
-                            res.send(result);
-                            */
-                            res.json({ 'form': form, 'req': req, 'fields': fields, 'files': files });
-                        });
-                    });
-                });
-                
+                console.log('form body:',req.body);
+                db.collection('images').insertOne({
+                    index: req.body.index,
+                    filename: req.body.file_data.path,
+                    filesize: req.body.file_data.name,
+                    resolution: req.body.file_data.size,
+                    date: Date.now()
+                }, function (err, result) {
+                    res.send(result);
+                });                
             }
             else {
                 res.json({});
