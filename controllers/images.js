@@ -11,44 +11,10 @@ angular.module('imagesModule', [])
 
     $scope.newImage = function () {
         $scope.action = 'new';
-        $scope.formData = {};
     };
 
     $scope.createImage = function () {
-        /*
-        $.post('/images', $('form#upload-form').serialize(), $rootScope.urlConfig, function(result) {
-            console.log(result);
-            $scope.getAppImages();
-        });
-        
-        $http.post('/images', $scope.formData, $rootScope.urlConfig).then(function (response) {
-            console.log(response);
-            $scope.getImages();
-        });
-        $http({
-            method: 'POST',
-            url: '/images',
-            type: 'post',
-            headers: {
-                'user-id': window.localStorage.getItem('userId'),
-                'x-access-token': window.localStorage.getItem('authToken') 
-            },
-            contentType: false,
-            processData: false,
-            data: new FormData($('form#upload-form'))
-        })
-        .then(function (data) {
-            console.log(data);
-        });
-        */
-        
-        var fd = new FormData();
-        fd.append('data', $('#file-1'));
-        $http.post('/images', fd, $rootScope.urlConfig).then(function (response) {
-            console.log(response);
-            $scope.getImages();
-        });
-        
+        $scope.getImages();
     };
 
     $scope.deleteImage = function (id) {

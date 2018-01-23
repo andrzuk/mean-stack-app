@@ -45,20 +45,28 @@
     <div class="container" ng-show="action == 'new'">
         <div class="py-4 row">
             <div class="col-lg-10 offset-lg-1">
-                <form class="form" id="upload-form" method="post" enctype="multipart/form-data" role="form">
+                <form class="form" id="upload-form" role="form">
                     <div class="form-group text-left">
                         <h6>Obrazek:</h6>
-                        <input type="file" name="file-1" id="file-1" class="form-control"> 
-                        <h6>Obrazek:</h6>
-                        <input type="file" name="file-2" id="file-2" class="form-control"> 
-                        <h6>Obrazek:</h6>
-                        <input type="file" name="file-3" id="file-3" class="form-control"> 
+                        <input type="file" name="file-uploaded" class="form-control"> 
                     </div>
                     <button type="submit" class="btn btn-primary font-awesome" ng-click="createImage()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Zapisz</button>
-                    <button type="submit" class="btn btn-warning font-awesome" ng-click="cancelImage()"><i class="fa fa-ban" aria-hidden="true"></i> Anuluj</button>
+                    <button type="button" class="btn btn-warning font-awesome" ng-click="cancelImage()"><i class="fa fa-ban" aria-hidden="true"></i> Anuluj</button>
                 </form>
             </div>
         </div>
+        <script>
+            $('form#upload-form').submit(function(e) {
+                $.ajax({
+                    url: '/images',
+                    type: 'post',
+                    data: new FormData(this),
+                    processData: false,
+                    contentType: false
+                });
+                e.preventDefault();
+            });            
+        </script>
     </div>
 
 </div>
