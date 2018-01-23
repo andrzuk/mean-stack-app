@@ -11,6 +11,7 @@ angular.module('imagesModule', [])
 
     $scope.newImage = function () {
         $scope.action = 'new';
+        $scope.formData = {};
     };
 
     $scope.createImage = function () {
@@ -20,7 +21,7 @@ angular.module('imagesModule', [])
             $scope.getAppImages();
         });
         */
-        $http.post('/images', { uploaded: $scope.uploaded }, $rootScope.urlConfig).then(function (response) {
+        $http.post('/images', $scope.formData, $rootScope.urlConfig).then(function (response) {
             console.log(response);
             $scope.getImages();
         });
