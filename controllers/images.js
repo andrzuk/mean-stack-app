@@ -14,16 +14,16 @@ angular.module('imagesModule', [])
     };
 
     $scope.createImage = function () {
+        /*
         $.post('/images', $('form#upload-form').serialize(), $rootScope.urlConfig, function(result) {
             console.log(result);
             $scope.getAppImages();
         });
-        /*
-        $http.post('/images', { upload: $scope.upload }, $rootScope.urlConfig).then(function () {
-            console.log(result);
+        */
+        $http.post('/images', $('form#upload-form').serialize(), $rootScope.urlConfig).then(function (response) {
+            console.log(response);
             $scope.getAppImages();
         });
-        */
     };
 
     $scope.deleteImage = function (id) {
