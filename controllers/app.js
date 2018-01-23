@@ -1,4 +1,38 @@
-angular.module('mainApp', ['appRoutes', 'authModule', 'pagesModule', 'usersModule', 'imagesModule', 'messagesModule', 'todosModule', 'ngSanitize'])
+angular.module('mainApp', ['ngRoute', 'authModule', 'pagesModule', 'usersModule', 'imagesModule', 'messagesModule', 'todosModule', 'ngSanitize'])
+
+.config(['$routeProvider', function($routeProvider) {
+
+    $routeProvider
+
+    .when('/', {
+        templateUrl: '/templates/home.html',
+        controller: 'mainController',
+    })
+    .when('/contact', {
+        templateUrl: '/templates/contact.html',
+        controller: 'contactController',
+    })
+    .when('/login', {
+        templateUrl: '/templates/auth.html',
+        controller: 'authController',
+    })
+    .when('/users', {
+        templateUrl: '/templates/users.html',
+        controller: 'usersController',
+    })
+    .when('/pages', {
+        templateUrl: '/templates/pages.html',
+        controller: 'pagesController',
+    })
+    .when('/images', {
+        templateUrl: '/templates/images.html',
+        controller: 'imagesController',
+    })
+    .otherwise({
+        redirectTo: '/'
+    });
+
+}])
 
 .controller('mainController', ['$rootScope', '$scope', '$http', '$sce', function ($rootScope, $scope, $http, $sce) {
 
