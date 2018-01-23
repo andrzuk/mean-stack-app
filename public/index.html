@@ -67,15 +67,7 @@
     </header>
 
     <section id="main-content">
-        <div ng-include="layout.home"></div>
-        <div ng-include="layout.manual"></div>
-        <div ng-include="layout.contact"></div>
-        <div ng-include="layout.auth"></div>
-        <div ng-include="layout.pages"></div>
-        <div ng-include="layout.users"></div>
-        <div ng-include="layout.images"></div>
-        <div ng-include="layout.messages"></div>
-        <div ng-include="layout.todos"></div>
+        <div ng-view></div>
     </section>
 
     <footer class="bg-dark">
