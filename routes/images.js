@@ -44,7 +44,8 @@ module.exports = function(params) {
             if (access) {
                 console.log('ACCESS OK');
                 console.log('FILES..............:',req.files);
-                res.json({ 'files': req.files });
+                console.log('HEADERS............:',req.headers);
+                res.json({ 'headers': req.headers,'files': req.files });
                 /*
                 fs.readFile(req.files.upload.path, function(err, data) {
                     var newPath = __dirname + '/../public/gallery/' + req.files.upload.name;
