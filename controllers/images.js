@@ -34,8 +34,8 @@ angular.module('imagesModule', [])
                 'user-id': window.localStorage.getItem('userId'),
                 'x-access-token': window.localStorage.getItem('authToken') 
             },
-            files: {
-                upload: $scope.formData
+            data: {
+                files: $scope.formData
             },
             transformRequest: function (data, headersGetter) {
                 var formData = new FormData();
@@ -51,7 +51,7 @@ angular.module('imagesModule', [])
             console.log(data);
         });
         
-        $http.post('/images', { files: $scope.formData }, $rootScope.urlConfig).then(function (response) {
+        $http.post('/images', { data: $scope.formData }, $rootScope.urlConfig).then(function (response) {
             console.log(response);
             $scope.getImages();
         });
