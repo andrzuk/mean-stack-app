@@ -20,11 +20,39 @@ angular.module('imagesModule', [])
             console.log(result);
             $scope.getAppImages();
         });
-        */
+        
         $http.post('/images', $scope.formData, $rootScope.urlConfig).then(function (response) {
             console.log(response);
             $scope.getImages();
         });
+        */
+        $http({
+            method: 'POST',
+            url: '/images',
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                'user-id': window.localStorage.getItem('userId'),
+                'x-access-token': window.localStorage.getItem('authToken') 
+            },
+            data: {
+                upload: $scope.file
+            },
+            transformRequest: function (data, headersGetter) {
+                var formData = new FormData();
+                angular.forEach(data, function (value, key) {
+                    formData.append(key, value);
+                });
+                var headers = headersGetter();
+                delete headers['Content-Type'];
+                return formData;
+            }
+        })
+        .success(function (data) {
+            console.log(data);
+        })
+        .error(function (data, status) {
+            console.log(data, status);
+        });        
     };
 
     $scope.deleteImage = function (id) {
