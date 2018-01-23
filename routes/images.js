@@ -39,6 +39,37 @@ module.exports = function(params) {
         });
     });
 
+    router.post('/', function (req, res, next) {
+        token.checkAuth(req.headers, function(access) {
+            if (access) {
+                console.log('ACCESS OK');
+                console.log('FILES..............:',req.files);
+                res.json({ 'files': req.files });
+                /*
+                fs.readFile(req.files.upload.path, function(err, data) {
+                    var newPath = __dirname + '/../public/gallery/' + req.files.upload.name;
+                    fs.writeFile(newPath, data, function(err) {
+                        if (err) throw err;
+                        console.log("Upload completed!");
+                        db.collection('images').insertOne({
+                            index: req.body.index,
+                            filename: req.files.upload.name,
+                            filesize: req.files.upload.size,
+                            date: Date.now()
+                        }, function (err, result) {
+                            res.send(result);
+                        });                
+                    });
+                });
+                */
+            }
+            else {
+                console.log('ACCESS Fail');
+                res.json({});
+            }
+        });
+    });
+
     router.delete('/:id', function (req, res, next) {
         token.checkAuth(req.headers, function(access) {
             if (access) {
