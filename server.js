@@ -45,7 +45,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/templates/:name', function (req, res) {
-    res.sendFile(__dirname + '/templates/' + req.params.name + '.html');
+    res.sendFile(__dirname + '/templates/' + req.params.name);
 });
 
 app.get('/page/:index', function (req, res) {
@@ -56,10 +56,6 @@ app.get('/page/:index', function (req, res) {
             res.send(result);
         });
     });
-});
-
-app.get('/public/gallery/:name', function (req, res) {
-    res.sendFile(__dirname + '/public/gallery/' + req.params.name);
 });
 
 app.listen(connection.port, connection.ip);

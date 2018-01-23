@@ -5,27 +5,27 @@ angular.module('appRoutes', ['ngRoute'])
     $routeProvider
 
     .when('/', {
-        templateUrl: 'home.html',
+        templateUrl: '/templates/home.html',
         controller: 'mainController',
     })
     .when('/contact', {
-        templateUrl: 'contact.html',
+        templateUrl: '/templates/contact.html',
         controller: 'contactController',
     })
     .when('/login', {
-        templateUrl: 'auth.html',
+        templateUrl: '/templates/auth.html',
         controller: 'authController',
     })
     .when('/users', {
-        templateUrl: 'users.html',
+        templateUrl: '/templates/users.html',
         controller: 'usersController',
     })
     .when('/pages', {
-        templateUrl: 'pages.html',
+        templateUrl: '/templates/pages.html',
         controller: 'pagesController',
     })
     .when('/images', {
-        templateUrl: 'images.html',
+        templateUrl: '/templates/images.html',
         controller: 'imagesController',
     })
     .otherwise({
