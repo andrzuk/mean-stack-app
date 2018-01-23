@@ -55,16 +55,10 @@
                 </form>
             </div>
         </div>
+        <script src="jquery.form.js"></script>
         <script>
-            $('form#upload-form').submit(function(e) {
-                $.ajax({
-                    url: '/images',
-                    type: 'post',
-                    data: new FormData(this),
-                    processData: false,
-                    contentType: false
-                });
-                e.preventDefault();
+            $('form#upload-form').ajaxForm(function(result) {
+                console.log('Result:',result);
             });            
         </script>
     </div>
