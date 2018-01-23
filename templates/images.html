@@ -50,19 +50,11 @@
                         <h6>Obrazek:</h6>
                         <input type="file" name="file-uploaded" class="form-control"> 
                     </div>
-                    <button type="submit" class="btn btn-primary font-awesome" onclick="return false"><i class="fa fa-floppy-o" aria-hidden="true"></i> Zapisz</button>
+                    <button type="submit" class="btn btn-primary font-awesome" onclick="createImage()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Zapisz</button>
                     <button type="button" class="btn btn-warning font-awesome" ng-click="cancelImage()"><i class="fa fa-ban" aria-hidden="true"></i> Anuluj</button>
                 </form>
             </div>
         </div>
-        <script>
-            $('form').on('submit', function(e) {
-                console.log('SUBMIT:',e);
-                /*
-                e.preventDefault();
-                */
-            });
-        </script>
     </div>
 
 </div>

@@ -1,6 +1,6 @@
 angular.module('imagesModule', [])
 
-.controller('imagesController', ['$rootScope', '$scope', '$http', function ($rootScope, $scope, $http) {
+.controller('imagesController', ['$rootScope', '$scope', '$http', '$location', function ($rootScope, $scope, $http, $location) {
 
     $scope.getImages = function () {
         $scope.action = 'list';
@@ -14,7 +14,9 @@ angular.module('imagesModule', [])
     };
 
     $scope.createImage = function () {
-        $scope.action = 'list';
+        $location.url('/');
+        $rootScope.module = 'images';
+        $rootScope.action = 'list';
     };
 
     $scope.deleteImage = function (id) {
