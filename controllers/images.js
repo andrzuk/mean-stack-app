@@ -25,7 +25,6 @@ angular.module('imagesModule', [])
             console.log(response);
             $scope.getImages();
         });
-        */
         $http({
             method: 'POST',
             url: '/images',
@@ -41,8 +40,11 @@ angular.module('imagesModule', [])
         .then(function (data) {
             console.log(data);
         });
+        */
         
-        $http.post('/images', new FormData($('form#upload-form')), $rootScope.urlConfig).then(function (response) {
+        var fd = new FormData();
+        fd.append('data', $('#file-1'));
+        $http.post('/images', fd, $rootScope.urlConfig).then(function (response) {
             console.log(response);
             $scope.getImages();
         });
