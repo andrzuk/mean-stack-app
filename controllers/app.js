@@ -1,4 +1,4 @@
-angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'messagesModule', 'todosModule', 'ngSanitize'])
+angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'messagesModule', 'imagesModule', 'todosModule', 'ngSanitize'])
 
 .controller('mainController', ['$rootScope', '$scope', '$http', '$sce', function ($rootScope, $scope, $http, $sce) {
 
@@ -10,6 +10,7 @@ angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'messages
         pages: '../templates/pages',
         users: '../templates/users',
         messages: '../templates/messages',
+        images: '../templates/images',
         todos: '../templates/todos',
     };
     
@@ -116,6 +117,17 @@ angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'messages
     $scope.getAppMessages = function() {
         if ($rootScope.currentUser.isLogged) {
             $rootScope.module = 'messages';
+            $rootScope.action = 'list';
+            $scope.status = null;
+        }
+        else {
+            $scope.getLogin();
+        }
+    };
+
+    $scope.getAppImages = function() {
+        if ($rootScope.currentUser.isLogged) {
+            $rootScope.module = 'images';
             $rootScope.action = 'list';
             $scope.status = null;
         }

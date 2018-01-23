@@ -33,6 +33,8 @@ mongodb.connect(connection.url, function (err, conn) {
     app.use('/users', users);
     var messages = require('./routes/messages.js')({ database: db, objectId: ObjectID });
     app.use('/messages', messages);
+    var images = require('./routes/images.js')({ database: db, objectId: ObjectID });
+    app.use('/images', images);
     var todos = require('./routes/todos.js')({ database: db, objectId: ObjectID });
     app.use('/todos', todos);
     console.log('Connected to MongoDB at: %s', connection.url);
