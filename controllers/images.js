@@ -20,9 +20,9 @@ angular.module('imagesModule', [])
             $scope.getAppImages();
         });
         */
-        $http.post('/images', $('form#upload-form').serialize(), $rootScope.urlConfig).then(function (response) {
+        $http.post('/images', { uploaded: $scope.uploaded }, $rootScope.urlConfig).then(function (response) {
             console.log(response);
-            $scope.getAppImages();
+            $scope.getImages();
         });
     };
 
