@@ -1,38 +1,4 @@
-angular.module('mainApp', ['ngRoute', 'authModule', 'pagesModule', 'usersModule', 'imagesModule', 'messagesModule', 'todosModule', 'ngSanitize'])
-
-.config(['$routeProvider', function($routeProvider) {
-
-    $routeProvider
-
-    .when('/', {
-        templateUrl: '/templates/home.html',
-        controller: 'mainController',
-    })
-    .when('/contact', {
-        templateUrl: '/templates/contact.html',
-        controller: 'contactController',
-    })
-    .when('/login', {
-        templateUrl: '/templates/auth.html',
-        controller: 'authController',
-    })
-    .when('/users', {
-        templateUrl: '/templates/users.html',
-        controller: 'usersController',
-    })
-    .when('/pages', {
-        templateUrl: '/templates/pages.html',
-        controller: 'pagesController',
-    })
-    .when('/images', {
-        templateUrl: '/templates/images.html',
-        controller: 'imagesController',
-    })
-    .otherwise({
-        redirectTo: '/'
-    });
-
-}])
+angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'messagesModule', 'todosModule', 'ngSanitize'])
 
 .controller('mainController', ['$rootScope', '$scope', '$http', '$sce', function ($rootScope, $scope, $http, $sce) {
 
@@ -43,7 +9,6 @@ angular.module('mainApp', ['ngRoute', 'authModule', 'pagesModule', 'usersModule'
         auth: '../templates/auth',
         pages: '../templates/pages',
         users: '../templates/users',
-        images: '../templates/images',
         messages: '../templates/messages',
         todos: '../templates/todos',
     };
@@ -140,17 +105,6 @@ angular.module('mainApp', ['ngRoute', 'authModule', 'pagesModule', 'usersModule'
     $scope.getAppUsers = function() {
         if ($rootScope.currentUser.isLogged) {
             $rootScope.module = 'users';
-            $rootScope.action = 'list';
-            $scope.status = null;
-        }
-        else {
-            $scope.getLogin();
-        }
-    };
-
-    $scope.getAppImages = function() {
-        if ($rootScope.currentUser.isLogged) {
-            $rootScope.module = 'images';
             $rootScope.action = 'list';
             $scope.status = null;
         }

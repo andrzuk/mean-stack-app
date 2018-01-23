@@ -12,17 +12,14 @@
     <link href="font-awesome.min.css" rel="stylesheet">
     <link href="app.css" rel="stylesheet">
     <link href="favicon.png" rel="shortcut icon" type="image/png">
-    <base href="/">
     <script src="jquery.min.js"></script>
     <script src="bootstrap.bundle.min.js"></script>
     <script src="angular.min.js"></script>
-    <script src="angular-route.js"></script>
     <script src="angular-sanitize.js"></script>
     <script src="app.js"></script>
     <script src="auth.js"></script>
     <script src="pages.js"></script>
     <script src="users.js"></script>
-    <script src="images.js"></script>
     <script src="messages.js"></script>
     <script src="todos.js"></script>
     <script src="custom.js"></script>
@@ -66,12 +63,19 @@
     </header>
 
     <section id="main-content">
-        <div ng-view></div>
+        <div ng-include="layout.home"></div>
+        <div ng-include="layout.manual"></div>
+        <div ng-include="layout.contact"></div>
+        <div ng-include="layout.auth"></div>
+        <div ng-include="layout.pages"></div>
+        <div ng-include="layout.users"></div>
+        <div ng-include="layout.messages"></div>
+        <div ng-include="layout.todos"></div>
     </section>
 
     <footer class="bg-dark">
         <div class="container">
-            <p class="text-center">Copyright &copy; 2018 <a href="http://andrzej-zukowski.com.pl" target="_blank">Andrzej Żukowski</a></p>
+            <p class="m-0 text-center text-white">Copyright &copy; 2018 <a href="http://andrzej-zukowski.com.pl" target="_blank">Andrzej Żukowski</a></p>
         </div>
     </footer>
 

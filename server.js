@@ -31,8 +31,6 @@ mongodb.connect(connection.url, function (err, conn) {
     app.use('/pages', pages);
     var users = require('./routes/users.js')({ database: db, objectId: ObjectID });
     app.use('/users', users);
-    var images = require('./routes/images.js')({ database: db, objectId: ObjectID });
-    app.use('/images', images);
     var messages = require('./routes/messages.js')({ database: db, objectId: ObjectID });
     app.use('/messages', messages);
     var todos = require('./routes/todos.js')({ database: db, objectId: ObjectID });
@@ -45,7 +43,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/templates/:name', function (req, res) {
-    res.sendFile(__dirname + '/templates/' + req.params.name);
+    res.sendFile(__dirname + '/templates/' + req.params.name + '.html');
 });
 
 app.get('/page/:index', function (req, res) {

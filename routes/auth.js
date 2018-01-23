@@ -53,7 +53,7 @@ module.exports = function(params) {
                 });
             }
             else {
-                res.json({});
+                res.send({ message: 'Rejestracja zablokowana.' });
             }
         });
     });
