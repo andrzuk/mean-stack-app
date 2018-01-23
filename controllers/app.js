@@ -173,18 +173,3 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
     $scope.initApp();
 
 }]);
-
-app.directive('file', function () {
-    return {
-        scope: {
-            file: '='
-        },
-        link: function (scope, element, attrs) {
-            element.bind('change', function (event) {
-                var file = event.target.files[0];
-                scope.file = file ? file : undefined;
-                scope.$apply();
-            });
-        }
-    };
-});
