@@ -14,7 +14,7 @@ angular.module('imagesModule', [])
     };
 
     $scope.createImage = function () {
-        $scope.getImages();
+        $rootScope.getAppImages();
     };
 
     $scope.deleteImage = function (id) {

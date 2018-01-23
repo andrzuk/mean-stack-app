@@ -45,7 +45,7 @@
     <div class="container" ng-show="action == 'new'">
         <div class="py-4 row">
             <div class="col-lg-10 offset-lg-1">
-                <form class="form" id="upload-form" role="form">
+                <form action="/images" method="post" class="form" role="form">
                     <div class="form-group text-left">
                         <h6>Obrazek:</h6>
                         <input type="file" name="file-uploaded" class="form-control"> 
@@ -55,12 +55,6 @@
                 </form>
             </div>
         </div>
-        <script src="jquery.form.js"></script>
-        <script>
-            $('form#upload-form').ajaxForm(function(result) {
-                console.log('Result:',result);
-            });            
-        </script>
     </div>
 
 </div>
