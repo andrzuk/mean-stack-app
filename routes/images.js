@@ -47,8 +47,9 @@ module.exports = function(params) {
     router.post('/', upload.single('file'), function (req, res, next) {
         token.checkAuth(req.headers, function(access) {
             if (access) {
-                console.log('SAVING..............:',uploadFolder + req.file.originalname);
+                console.log('FILE.........................:',req.file);
                 fs.writeFile(uploadFolder + req.file.originalname, req.file, function(err) {
+                    console.log('ERROR..............................',err);
                     db.collection('images').insertOne({
                         index: req.body.index,
                         filename: req.file.originalname,
