@@ -104,12 +104,12 @@ module.exports = function(params) {
                     collection.findOne({
                         _id: new ObjectID(req.params.id)
                     }, function (err, result) {
-                        fs.unlinkSync(uploadFolder + result.filename);
                         db.collection('images').removeOne({
                             _id: new ObjectID(req.params.id)
                         }, function (err, result) {
                             res.send(result);
                         });
+                        fs.unlinkSync(uploadFolder + result.filename);
                     });
                 });
             }
