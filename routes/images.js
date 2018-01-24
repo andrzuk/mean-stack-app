@@ -5,13 +5,11 @@ module.exports = function(params) {
     var express = require('express');
     var router = express.Router();
     var fs = require('fs');
-    var multer = require('multer');
     var busboy = require('connect-busboy');
     
     var token = require('./token.js')({ database: db, objectId: ObjectID });
     
     var uploadFolder = __dirname + '/../public/img/';
-    var upload = multer({ dest: uploadFolder });
     
     router.use(busboy());
     
@@ -71,16 +69,19 @@ module.exports = function(params) {
     router.post('/', function (req, res, next) {
         token.checkAuth(req.headers, function(access) {
             if (access) {
+                console.log('BODY.....................',req.body);                
                 req.pipe(req.busboy);
                 req.busboy.on('file', function (fieldname, file, filename) {
                     var fstream = fs.createWriteStream(uploadFolder + filename);
+                    console.log('FSTREAM...................',fstream);
+                    console.log('BUSBOY...................',req.busboy);
                     file.pipe(fstream);
                     fstream.on('close', function () {
                         db.collection('images').insertOne({
                             index: req.body.index,
                             filename: filename,
                             filesize: fstream.bytesWritten,
-                            filetype: fstream.mimetype,
+                            filetype: fstream.mime,
                             date: Date.now()
                         }, function (err, result) {
                             res.send(result);
@@ -94,7 +95,7 @@ module.exports = function(params) {
         });
     });
 
-    router.put('/:id', upload.single('file'), function (req, res, next) {
+    router.put('/:id', function (req, res, next) {
         token.checkAuth(req.headers, function(access) {
             if (access) {
                 db.collection('images', function (err, collection) {
@@ -105,6 +106,7 @@ module.exports = function(params) {
                         db.collection('images').removeOne({
                             _id: new ObjectID(req.params.id)
                         }, function (err, result) {
+                            /*
                             fs.writeFile(uploadFolder + req.file.originalname, req.file, function(err) {
                                 db.collection('images').updateOne({
                                     _id: new ObjectID(req.params.id)
@@ -119,7 +121,8 @@ module.exports = function(params) {
                                 }, function (err, result) {
                                     res.send(result);
                                 });
-                            }); 
+                            });
+                            */
                         });
                     });
                 });
