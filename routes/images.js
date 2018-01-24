@@ -136,14 +136,11 @@ module.exports = function(params) {
                         res.sendFile(file);
                     }
                     else {
-                        console.log('TEST..............', __dirname + '/../public/file_not_found.png');
-                        res.sendStatus(200);
-                    //    res.sendFile(__dirname + '/../public/file_not_found.png')
+                        res.sendFile(__dirname + '/../public/file_not_found.png');
                     }
                 }
                 else {
-                    res.sendStatus(200);
-                //    res.sendFile(__dirname + '/../public/file_not_found.png')
+                    res.sendFile(__dirname + '/../public/file_not_found.png');
                 }
             });
         });
