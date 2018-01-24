@@ -24,7 +24,8 @@ angular.module('imagesModule', [])
                 'user-id': $rootScope.urlConfig.headers['user-id'],
                 'x-access-token': $rootScope.urlConfig.headers['x-access-token']
             }
-		}).then(function () {
+		}).then(function (response) {
+            console.log('Odp.serwera:',response);
             $scope.formData = {};
             $scope.getImages();
         });

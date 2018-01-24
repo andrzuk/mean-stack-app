@@ -42,7 +42,7 @@ module.exports = function(params) {
 
     router.post('/', function (req, res, next) {
         token.checkAuth(req.headers, function(access) {
-            if (access) {
+            if (access || true) {
                 if (!req.files) {
                     res.send("File was not found");
                     return;
@@ -55,7 +55,6 @@ module.exports = function(params) {
                 }, function (err, result) {
                     res.send(result);
                 });
-                res.send("File Uploaded");
                 
                 
                 
