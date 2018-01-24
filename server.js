@@ -59,7 +59,7 @@ app.get('/page/:index', function (req, res) {
 });
 
 app.get('/img/:name', function (req, res) {
-    res.sendFile(__dirname + '/public/img/' + req.params.name);
+    res.sendFile(OPENSHIFT_DATA_DIR + '/img/' + req.params.name);
 });
 
 app.listen(connection.port, connection.ip);

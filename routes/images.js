@@ -9,7 +9,7 @@ module.exports = function(params) {
     
     var token = require('./token.js')({ database: db, objectId: ObjectID });
     
-    var uploadFolder = __dirname + '/../public/img/';
+    var uploadFolder = process.env.OPENSHIFT_DATA_DIR + '/img/';
     var upload = multer({ dest: uploadFolder });
     
     router.get('/', function (req, res, next) {
@@ -73,23 +73,19 @@ module.exports = function(params) {
                         _id: new ObjectID(req.params.id)
                     }, function (err, result) {
                         fs.unlinkSync(uploadFolder + result.filename);
-                        db.collection('images').removeOne({
-                            _id: new ObjectID(req.params.id)
-                        }, function (err, result) {
-                            fs.rename(req.file.path, req.file.destination + req.file.originalname, function(err) {
-                                db.collection('images').updateOne({
-                                    _id: new ObjectID(req.params.id)
-                                }, {
-                                    $set: {
-                                        index: req.body.index,
-                                        filename: req.file.originalname,
-                                        filesize: req.file.size,
-                                        filetype: req.file.mimetype,
-                                        date: Date.now()
-                                    }
-                                }, function (err, result) {
-                                    res.send(result);
-                                });
+                        fs.rename(req.file.path, req.file.destination + req.file.originalname, function(err) {
+                            db.collection('images').updateOne({
+                                _id: new ObjectID(req.params.id)
+                            }, {
+                                $set: {
+                                    index: req.body.index,
+                                    filename: req.file.originalname,
+                                    filesize: req.file.size,
+                                    filetype: req.file.mimetype,
+                                    date: Date.now()
+                                }
+                            }, function (err, result) {
+                                res.send(result);
                             });
                         });
                     });
