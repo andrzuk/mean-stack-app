@@ -6,7 +6,6 @@ module.exports = function(params) {
     var router = express.Router();
     var fs = require('fs');
     var multer = require('multer');
-    var busboy = require('connect-busboy');
     
     var token = require('./token.js')({ database: db, objectId: ObjectID });
     
@@ -50,49 +49,17 @@ module.exports = function(params) {
     router.post('/', upload.single('file'), function (req, res, next) {
         token.checkAuth(req.headers, function(access) {
             if (access) {
-                console.log('FILE......................:', req.file);
-                console.log('BODY......................: ',req.body);
-                
-                fs.writeFile(uploadFolder + req.file.filename, req.file, function(err) {
-                    if(err) {
-                        return console.log(err);
-                    }
-
+                fs.writeFile(uploadFolder + req.file.originalname, req.file, function(err) {
                     db.collection('images').insertOne({
                         index: req.body.index,
-                        filename: req.file.filename,
+                        filename: req.file.originalname,
                         filesize: req.file.size,
+                        filetype: req.file.mimetype,
                         date: Date.now()
                     }, function (err, result) {
                         res.send(result);
                     });
-                    
-                    console.log("The file was saved!");
-                    res.send('OK');
-                    return;
                 }); 
-                
-                
-                req.pipe(req.busboy);
-                req.busboy.on('index', function (fieldname, file, filename) {
-                    console.log('fieldname:',fieldname);
-                    console.log('file:',file);
-                    console.log('filename:',filename);
-                });
-                req.busboy.on('file', function (fieldname, file, filename) {
-                    var fstream = fs.createWriteStream(uploadFolder + filename);
-                    file.pipe(fstream);
-                    fstream.on('close', function () {
-                        db.collection('images').insertOne({
-                            index: req.body.index,
-                            filename: filename,
-                            filesize: fstream.bytesWritten,
-                            date: Date.now()
-                        }, function (err, result) {
-                            res.send(result);
-                        });
-                    });
-                });
             }
             else {
                 res.json({});
@@ -100,7 +67,7 @@ module.exports = function(params) {
         });
     });
 
-    router.put('/:id', function (req, res, next) {
+    router.put('/:id', upload.single('file'), function (req, res, next) {
         token.checkAuth(req.headers, function(access) {
             if (access) {
                 db.collection('images', function (err, collection) {
@@ -111,25 +78,21 @@ module.exports = function(params) {
                         db.collection('images').removeOne({
                             _id: new ObjectID(req.params.id)
                         }, function (err, result) {
-                            req.pipe(req.busboy);
-                            req.busboy.on('file', function (fieldname, file, filename) {
-                                var fstream = fs.createWriteStream(uploadFolder + filename);
-                                file.pipe(fstream);
-                                fstream.on('close', function () {
-                                    db.collection('images').updateOne({
-                                        _id: new ObjectID(req.params.id)
-                                    }, {
-                                        $set: {
-                                            index: req.body.index,
-                                            filename: filename,
-                                            filesize: fstream.bytesWritten,
-                                            date: Date.now()
-                                        }
-                                    }, function (err, result) {
-                                        res.send(result);
-                                    });
+                            fs.writeFile(uploadFolder + req.file.originalname, req.file, function(err) {
+                                db.collection('images').updateOne({
+                                    _id: new ObjectID(req.params.id)
+                                }, {
+                                    $set: {
+                                        index: req.body.index,
+                                        filename: req.file.originalname,
+                                        filesize: req.file.size,
+                                        filetype: req.file.mimetype,
+                                        date: Date.now()
+                                    }
+                                }, function (err, result) {
+                                    res.send(result);
                                 });
-                            });
+                            }); 
                         });
                     });
                 });
