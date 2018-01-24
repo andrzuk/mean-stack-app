@@ -130,10 +130,8 @@ module.exports = function(params) {
             collection.findOne({
                 index: req.params.id
             }, function (err, result) {
-                res.sendStatus(200);
-                /*
                 if (result != null) {
-                    var file = process.env.OPENSHIFT_DATA_DIR + result.filename;
+                    var file = uploadFolder + result.filename;
                     if (fs.existsSync(file)) {
                         res.sendFile(file);
                     }
@@ -144,7 +142,6 @@ module.exports = function(params) {
                 else {
                     res.sendFile(__dirname + '/../public/file_not_found.png')
                 }
-                */
             });
         });
     });
