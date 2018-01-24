@@ -99,3 +99,9 @@ img.preview {
     padding: 1px;
     border: 1px solid #ccc;
 }
+img.full-preview {
+    max-width: 100%;
+    height: auto;
+    padding: 1px;
+    border: 1px solid #ccc;
+}
