@@ -45,33 +45,24 @@ module.exports = function(params) {
 
     router.post('/', function (req, res, next) {
         token.checkAuth(req.headers, function(access) {
-            if (access || true) {
-                console.log('ACCESS = ',access);
+            if (access) {
                 var fstream;
                 req.pipe(req.busboy);
                 req.busboy.on('file', function (fieldname, file, filename) {
-                    console.log("Uploading........................: " + filename); 
                     fstream = fs.createWriteStream(__dirname + '/../public/img/' + filename);
                     file.pipe(fstream);
                     fstream.on('close', function () {
-                        console.log("FINISHED.");
+                        console.log('file:',file);
                         db.collection('images').insertOne({
                             index: req.body.index,
-                            filename: req.files.uploaded.name,
-                            filesize: req.files.uploaded.size,
+                            filename: filename,
+                            filesize: file.size,
                             date: Date.now()
                         }, function (err, result) {
                             res.send(result);
                         });
                     });
                 });
-                
-                
-                
-                console.log('ACCESS OK');
-                console.log('FILE...............:',req.file);
-                console.log('FILES..............:',req.files);
-                console.log('HEADERS............:',req.headers);
                 /*
                 fs.readFile(req.files.uploaded.path, function(err, data) {
                     var newPath = __dirname + '/../public/gallery/' + req.files.uploaded.name;
