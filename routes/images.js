@@ -4,9 +4,12 @@ module.exports = function(params) {
     var ObjectID = params.objectId;
     var express = require('express');
     var router = express.Router();
-    var fileupload = require('express-fileupload');
+    var fs = require('fs');
+    var busboy = require('connect-busboy');
     
     var token = require('./token.js')({ database: db, objectId: ObjectID });
+    
+    router.use(busboy());
 
     router.get('/', function (req, res, next) {
         token.checkAuth(req.headers, function(access) {
@@ -43,17 +46,24 @@ module.exports = function(params) {
     router.post('/', function (req, res, next) {
         token.checkAuth(req.headers, function(access) {
             if (access || true) {
-                if (!req.files) {
-                    res.send("File was not found");
-                    return;
-                }
-                db.collection('images').insertOne({
-                    index: req.body.index,
-                    filename: req.files.uploaded.name,
-                    filesize: req.files.uploaded.size,
-                    date: Date.now()
-                }, function (err, result) {
-                    res.send(result);
+                console.log('ACCESS = ',access);
+                var fstream;
+                req.pipe(req.busboy);
+                req.busboy.on('file', function (fieldname, file, filename) {
+                    console.log("Uploading........................: " + filename); 
+                    fstream = fs.createWriteStream(__dirname + '/../public/img/' + filename);
+                    file.pipe(fstream);
+                    fstream.on('close', function () {
+                        console.log("FINISHED.");
+                        db.collection('images').insertOne({
+                            index: req.body.index,
+                            filename: req.files.uploaded.name,
+                            filesize: req.files.uploaded.size,
+                            date: Date.now()
+                        }, function (err, result) {
+                            res.send(result);
+                        });
+                    });
                 });
                 
                 
