@@ -93,3 +93,9 @@ tr.requested td {
 tr.commited td {
 	color: #577492;
 }
+img.preview {
+    width: 140px;
+    height: 70px;
+    padding: 1px;
+    border: 1px solid #ccc;
+}
