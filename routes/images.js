@@ -4,6 +4,7 @@ module.exports = function(params) {
     var ObjectID = params.objectId;
     var express = require('express');
     var router = express.Router();
+    var fileupload = require('express-fileupload');
     
     var token = require('./token.js')({ database: db, objectId: ObjectID });
 
@@ -41,22 +42,37 @@ module.exports = function(params) {
 
     router.post('/', function (req, res, next) {
         token.checkAuth(req.headers, function(access) {
-            if (access || true) {
+            if (access) {
+                if (!req.files) {
+                    res.send("File was not found");
+                    return;
+                }
+                db.collection('images').insertOne({
+                    index: req.body.index,
+                    filename: req.files.uploaded.name,
+                    filesize: req.files.uploaded.size,
+                    date: Date.now()
+                }, function (err, result) {
+                    res.send(result);
+                });
+                res.send("File Uploaded");
+                
+                
+                
                 console.log('ACCESS OK');
                 console.log('FILE...............:',req.file);
                 console.log('FILES..............:',req.files);
                 console.log('HEADERS............:',req.headers);
-                res.json({ 'headers': req.headers,'files': req.files, 'file': req.file });
                 /*
-                fs.readFile(req.files.upload.path, function(err, data) {
-                    var newPath = __dirname + '/../public/gallery/' + req.files.upload.name;
+                fs.readFile(req.files.uploaded.path, function(err, data) {
+                    var newPath = __dirname + '/../public/gallery/' + req.files.uploaded.name;
                     fs.writeFile(newPath, data, function(err) {
                         if (err) throw err;
                         console.log("Upload completed!");
                         db.collection('images').insertOne({
                             index: req.body.index,
-                            filename: req.files.upload.name,
-                            filesize: req.files.upload.size,
+                            filename: req.files.uploaded.name,
+                            filesize: req.files.uploaded.size,
                             date: Date.now()
                         }, function (err, result) {
                             res.send(result);
