@@ -130,17 +130,12 @@ module.exports = function(params) {
             collection.findOne({
                 index: req.params.id
             }, function (err, result) {
-                if (result) {
-                    var file = uploadFolder + result.filename;
-                    if (fs.existsSync(file)) {
-                        res.sendFile(file);
-                    }
-                    else {
-                        res.sendFile('/public/file_not_found.png');
-                    }
+                var file = uploadFolder + result.filename;
+                if (fs.existsSync(file)) {
+                    res.sendFile(file);
                 }
                 else {
-                    res.sendFile('/public/file_not_found.png');
+                    res.sendFile(process.env.HOME + '/public/file_not_found.png');
                 }
             });
         });
