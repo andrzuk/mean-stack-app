@@ -130,9 +130,14 @@ module.exports = function(params) {
             collection.findOne({
                 index: req.params.id
             }, function (err, result) {
-                var file = uploadFolder + result.filename;
-                if (fs.existsSync(file)) {
-                    res.sendFile(file);
+                if (result) {
+                    var file = uploadFolder + result.filename;
+                    if (fs.existsSync(file)) {
+                        res.sendFile(file);
+                    }
+                    else {
+                        res.sendFile(process.env.HOME + '/public/file_not_found.png');
+                    }
                 }
                 else {
                     res.sendFile(process.env.HOME + '/public/file_not_found.png');
