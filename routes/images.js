@@ -9,7 +9,7 @@ module.exports = function(params) {
     
     var token = require('./token.js')({ database: db, objectId: ObjectID });
     
-    var uploadFolder = process.env.OPENSHIFT_DATA_DIR + '/img/';
+    var uploadFolder = process.env.OPENSHIFT_DATA_DIR + '/';
     var upload = multer({ dest: uploadFolder });
     
     router.get('/', function (req, res, next) {
