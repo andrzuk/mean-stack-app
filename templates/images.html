@@ -22,7 +22,7 @@
                     </tr>
                     <tr ng-repeat="image in images">
                         <td>{{ $index + 1 }}</td>
-                        <td><img src="/img/{{ image.filename }}" class="preview"></td>
+                        <td><a href="#preview" ng-click="previewImage(image._id)"><img src="/img/{{ image.filename }}" class="preview"></a></td>
                         <td>{{ image.index }}</td>
                         <td class="text-left">{{ image.filename }}</td>
                         <td>{{ image.filesize | bytes }}</td>
@@ -76,6 +76,20 @@
                     <button type="submit" class="btn btn-primary font-awesome" ng-click="updateImage(formData._id)"><i class="fa fa-floppy-o" aria-hidden="true"></i> Zapisz</button>
                     <button type="button" class="btn btn-warning font-awesome" ng-click="cancelImage()"><i class="fa fa-ban" aria-hidden="true"></i> Anuluj</button>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" ng-show="action == 'preview'">
+        <div class="py-4 row">
+            <div class="col-lg-10 offset-lg-1">
+                <div class="py-3 text-right">
+                    <span class="list-title">Podgląd</span>
+                    <button class="btn btn-danger" ng-click="cancelImage()"><i class="fa fa-times" aria-hidden="true"></i></button>
+                </div>
+                <div class="text-center">
+                    <img src="/img/{{ image.filename }}" style="max-width: 100%;">
+                </div>
             </div>
         </div>
     </div>

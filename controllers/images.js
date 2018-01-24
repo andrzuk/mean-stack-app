@@ -57,6 +57,13 @@ angular.module('imagesModule', [])
         });
     };
 
+    $scope.previewImage = function (id) {
+        $scope.action = 'preview';
+        $http.get('/images/' + id, $rootScope.urlConfig).then(function (response) {
+            $scope.image = response.data;
+        });
+    };
+
     $scope.deleteImage = function (id) {
         $scope.action = 'list';
         $http.delete('/images/' + id, $rootScope.urlConfig).then(function () {
