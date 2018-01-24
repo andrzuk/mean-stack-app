@@ -15,6 +15,7 @@ angular.module('imagesModule', [])
     };
 
     $scope.createImage = function () {
+        $scope.action = 'list';
 		var fd = new FormData();
 		fd.append('index', $scope.formData.index);
 		fd.append('file', $scope.formData.file);
@@ -39,6 +40,7 @@ angular.module('imagesModule', [])
     };
 
     $scope.updateImage = function (id) {
+        $scope.action = 'list';
 		var fd = new FormData();
 		fd.append('index', $scope.formData.index);
 		fd.append('file', $scope.formData.file);

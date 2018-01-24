@@ -47,6 +47,7 @@ module.exports = function(params) {
     router.post('/', upload.single('file'), function (req, res, next) {
         token.checkAuth(req.headers, function(access) {
             if (access) {
+                console.log('SAVING..............:',uploadFolder + req.file.originalname);
                 fs.writeFile(uploadFolder + req.file.originalname, req.file, function(err) {
                     db.collection('images').insertOne({
                         index: req.body.index,
@@ -108,7 +109,9 @@ module.exports = function(params) {
                     collection.findOne({
                         _id: new ObjectID(req.params.id)
                     }, function (err, result) {
+                        /*
                         fs.unlinkSync(uploadFolder + result.filename);
+                        */
                         db.collection('images').removeOne({
                             _id: new ObjectID(req.params.id)
                         }, function (err, result) {
