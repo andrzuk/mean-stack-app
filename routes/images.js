@@ -5,11 +5,13 @@ module.exports = function(params) {
     var express = require('express');
     var router = express.Router();
     var fs = require('fs');
+    var multer = require('multer');
     var busboy = require('connect-busboy');
     
     var token = require('./token.js')({ database: db, objectId: ObjectID });
     
     var uploadFolder = __dirname + '/../public/img/';
+    var upload = multer({ dest: uploadFolder });
     
     router.use(busboy());
     
@@ -66,28 +68,41 @@ module.exports = function(params) {
         });
     });
 */
-    router.post('/', function (req, res, next) {
+    router.post('/', upload.single('file'), function (req, res, next) {
         token.checkAuth(req.headers, function(access) {
             if (access) {
+                fs.rename(req.file.path, req.file.destination + req.file.originalname, function(err) {
+                    db.collection('images').insertOne({
+                        index: req.body.index,
+                        filename: req.file.originalname,
+                        filesize: req.file.size,
+                        filetype: req.file.mimetype,
+                        date: Date.now()
+                    }, function (err, result) {
+                        res.send(result);
+                    });
+                });
+                
+/*                
                 console.log('BODY.....................',req.body);                
+                console.log('FILE.....................',req.file);          
                 req.pipe(req.busboy);
                 req.busboy.on('file', function (fieldname, file, filename) {
                     var fstream = fs.createWriteStream(uploadFolder + filename);
-                    console.log('FSTREAM...................',fstream);
-                    console.log('BUSBOY...................',req.busboy);
                     file.pipe(fstream);
                     fstream.on('close', function () {
                         db.collection('images').insertOne({
                             index: req.body.index,
-                            filename: filename,
-                            filesize: fstream.bytesWritten,
-                            filetype: fstream.mime,
+                            filename: req.file.originalname,
+                            filesize: req.file.size,
+                            filetype: req.file.mimetype,
                             date: Date.now()
                         }, function (err, result) {
                             res.send(result);
                         });
                     });
                 });
+                */
             }
             else {
                 res.json({});
