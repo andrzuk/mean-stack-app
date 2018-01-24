@@ -9,7 +9,7 @@ module.exports = function(params) {
     
     var token = require('./token.js')({ database: db, objectId: ObjectID });
     
-    var uploadFolder = process.env.OPENSHIFT_DATA_DIR + '/';
+    var uploadFolder = process.env.OPENSHIFT_DATA_DIR;
     var upload = multer({ dest: uploadFolder });
     
     router.get('/', function (req, res, next) {
@@ -72,7 +72,10 @@ module.exports = function(params) {
                     collection.findOne({
                         _id: new ObjectID(req.params.id)
                     }, function (err, result) {
-                        fs.unlinkSync(uploadFolder + result.filename);
+                        var name = uploadFolder + result.filename;
+                        if (fs.existsSync(name)) {
+                            fs.unlinkSync(name);
+                        }
                         fs.rename(req.file.path, req.file.destination + req.file.originalname, function(err) {
                             db.collection('images').updateOne({
                                 _id: new ObjectID(req.params.id)
@@ -104,12 +107,15 @@ module.exports = function(params) {
                     collection.findOne({
                         _id: new ObjectID(req.params.id)
                     }, function (err, result) {
+                        var name = uploadFolder + result.filename;
+                        if (fs.existsSync(name)) {
+                            fs.unlinkSync(name);
+                        }
                         db.collection('images').removeOne({
                             _id: new ObjectID(req.params.id)
                         }, function (err, result) {
                             res.send(result);
                         });
-                        fs.unlinkSync(uploadFolder + result.filename);
                     });
                 });
             }

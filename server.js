@@ -2,6 +2,7 @@ var express = require('express');
 var mongodb = require('mongodb');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
+var fs = require('fs');
 
 Object.assign = require('object-assign');
 
@@ -59,7 +60,14 @@ app.get('/page/:index', function (req, res) {
 });
 
 app.get('/img/:name', function (req, res) {
-    res.sendFile(__dirname + '/' + process.env.OPENSHIFT_DATA_DIR + '/' + req.params.name);
+    var file = process.env.OPENSHIFT_DATA_DIR + req.params.name;
+    if (fs.existsSync(file)) {
+        res.sendFile(file);
+    }
+    else {
+        console.log('FILE NOT FOUND: ', file);
+        res.sendFile(__dirname + '/public/file_not_found.png')
+    }
 });
 
 app.listen(connection.port, connection.ip);
