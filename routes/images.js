@@ -130,8 +130,7 @@ module.exports = function(params) {
             collection.findOne({
                 index: req.params.id
             }, function (err, result) {
-                console.log(err, result);
-                if (result != undefined) {
+                if (result != null) {
                     var file = process.env.OPENSHIFT_DATA_DIR + result.filename;
                     if (fs.existsSync(file)) {
                         res.sendFile(file);
