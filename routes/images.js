@@ -12,8 +12,6 @@ module.exports = function(params) {
     var uploadFolder = __dirname + '/../public/img/';
     var upload = multer({ dest: uploadFolder });
     
-    router.use(busboy());
-
     router.get('/', function (req, res, next) {
         token.checkAuth(req.headers, function(access) {
             if (access) {
