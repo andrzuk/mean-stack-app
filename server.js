@@ -59,7 +59,8 @@ app.get('/page/:index', function (req, res) {
 });
 
 app.get('/img/:name', function (req, res) {
-    res.sendFile(process.env.OPENSHIFT_DATA_DIR + '/' + req.params.name);
+    console.log('DATA DIR............................:',process.env.OPENSHIFT_DATA_DIR);
+    res.sendFile(__dirname + '/' + process.env.OPENSHIFT_DATA_DIR + '/' + req.params.name);
 });
 
 app.listen(connection.port, connection.ip);
