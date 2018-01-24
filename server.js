@@ -65,7 +65,6 @@ app.get('/img/:name', function (req, res) {
         res.sendFile(file);
     }
     else {
-        console.log('FILE NOT FOUND: ', file);
         res.sendFile(__dirname + '/public/file_not_found.png')
     }
 });

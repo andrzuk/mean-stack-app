@@ -130,12 +130,16 @@ module.exports = function(params) {
             collection.findOne({
                 index: req.params.id
             }, function (err, result) {
-                var file = process.env.OPENSHIFT_DATA_DIR + result.filename;
-                if (fs.existsSync(file)) {
-                    res.sendFile(file);
+                if (result) {
+                    var file = process.env.OPENSHIFT_DATA_DIR + result.filename;
+                    if (fs.existsSync(file)) {
+                        res.sendFile(file);
+                    }
+                    else {
+                        res.sendFile(__dirname + '/../public/file_not_found.png')
+                    }
                 }
                 else {
-                    console.log('FILE NOT FOUND: ', file);
                     res.sendFile(__dirname + '/../public/file_not_found.png')
                 }
             });
