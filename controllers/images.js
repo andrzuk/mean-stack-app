@@ -11,12 +11,23 @@ angular.module('imagesModule', [])
 
     $scope.newImage = function () {
         $scope.action = 'new';
+        $scope.formData = {};
     };
 
     $scope.createImage = function () {
-        $location.url('/');
-        $rootScope.module = 'images';
-        $rootScope.action = 'list';
+		var fd = new FormData();
+		fd.append('file', $scope.formData.file_data);
+        $http.post('/images', fd, {
+			transformRequest: angular.identity,
+			headers: {
+                'Content-Type': undefined,
+                'user-id': $rootScope.urlConfig.headers['user-id'],
+                'x-access-token': $rootScope.urlConfig.headers['x-access-token']
+            }
+		}).then(function () {
+            $scope.formData = {};
+            $scope.getImages();
+        });
     };
 
     $scope.deleteImage = function (id) {

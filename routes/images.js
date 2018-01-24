@@ -43,9 +43,10 @@ module.exports = function(params) {
         token.checkAuth(req.headers, function(access) {
             if (access || true) {
                 console.log('ACCESS OK');
+                console.log('FILE...............:',req.file);
                 console.log('FILES..............:',req.files);
                 console.log('HEADERS............:',req.headers);
-                res.json({ 'headers': req.headers,'files': req.files });
+                res.json({ 'headers': req.headers,'files': req.files, 'file': req.file });
                 /*
                 fs.readFile(req.files.upload.path, function(err, data) {
                     var newPath = __dirname + '/../public/gallery/' + req.files.upload.name;

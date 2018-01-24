@@ -45,10 +45,10 @@
     <div class="container" ng-show="action == 'new'">
         <div class="py-4 row">
             <div class="col-lg-10 offset-lg-1">
-                <form action="/images" method="post" class="form" role="form" enctype="multipart/form-data">
+                <form method="post" class="form" role="form">
                     <div class="form-group text-left">
                         <h6>Obrazek:</h6>
-                        <input type="file" name="file-uploaded" class="form-control"> 
+                        <input type="file" class="form-control" id="image" file-model="formData.file_data"> 
                     </div>
                     <button type="submit" class="btn btn-primary font-awesome" onclick="createImage()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Zapisz</button>
                     <button type="button" class="btn btn-warning font-awesome" ng-click="cancelImage()"><i class="fa fa-ban" aria-hidden="true"></i> Anuluj</button>
