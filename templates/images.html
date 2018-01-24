@@ -47,11 +47,29 @@
             <div class="col-lg-10 offset-lg-1">
                 <form method="post" class="form" role="form">
                     <div class="form-group text-left">
-                        <input type="hidden" ng-model="formData.index" value="1">
+                        <h6>Indeks:</h6>
+                        <input type="text" class="form-control" ng-model="formData.index"> 
                         <h6>Obrazek:</h6>
-                        <input type="file" class="form-control" file-model="formData.file_data"> 
+                        <input type="file" class="form-control" file-model="formData.file"> 
                     </div>
                     <button type="submit" class="btn btn-primary font-awesome" ng-click="createImage()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Zapisz</button>
+                    <button type="button" class="btn btn-warning font-awesome" ng-click="cancelImage()"><i class="fa fa-ban" aria-hidden="true"></i> Anuluj</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" ng-show="action == 'edit'">
+        <div class="py-4 row">
+            <div class="col-lg-10 offset-lg-1">
+                <form method="post" class="form" role="form">
+                    <div class="form-group text-left">
+                        <h6>Indeks:</h6>
+                        <input type="text" class="form-control" ng-model="formData.index"> 
+                        <h6>Obrazek:</h6>
+                        <input type="file" class="form-control" file-model="formData.file"> 
+                    </div>
+                    <button type="submit" class="btn btn-primary font-awesome" ng-click="updateImage(formData._id)"><i class="fa fa-floppy-o" aria-hidden="true"></i> Zapisz</button>
                     <button type="button" class="btn btn-warning font-awesome" ng-click="cancelImage()"><i class="fa fa-ban" aria-hidden="true"></i> Anuluj</button>
                 </form>
             </div>

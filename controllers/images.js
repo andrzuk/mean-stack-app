@@ -16,7 +16,8 @@ angular.module('imagesModule', [])
 
     $scope.createImage = function () {
 		var fd = new FormData();
-		fd.append('file', $scope.formData.file_data);
+		fd.append('index', $scope.formData.index);
+		fd.append('file', $scope.formData.file);
         $http.post('/images', fd, {
 			transformRequest: angular.identity,
 			headers: {
@@ -25,7 +26,30 @@ angular.module('imagesModule', [])
                 'x-access-token': $rootScope.urlConfig.headers['x-access-token']
             }
 		}).then(function (response) {
-            console.log('Odp.serwera:',response);
+            $scope.formData = {};
+            $scope.getImages();
+        });
+    };
+
+    $scope.editImage = function (id) {
+        $scope.action = 'edit';
+        $http.get('/images/' + id, $rootScope.urlConfig).then(function (response) {
+            $scope.formData = response.data;
+        });
+    };
+
+    $scope.updateImage = function (id) {
+		var fd = new FormData();
+		fd.append('index', $scope.formData.index);
+		fd.append('file', $scope.formData.file);
+        $http.put('/images/' + id, fd, {
+			transformRequest: angular.identity,
+			headers: {
+                'Content-Type': undefined,
+                'user-id': $rootScope.urlConfig.headers['user-id'],
+                'x-access-token': $rootScope.urlConfig.headers['x-access-token']
+            }
+		}).then(function (response) {
             $scope.formData = {};
             $scope.getImages();
         });
