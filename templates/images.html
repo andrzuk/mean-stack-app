@@ -12,6 +12,7 @@
                 <table class="table table-bordered table-striped">
                     <tr>
                         <th>Lp.</th>
+                        <th>Podgląd</th>
                         <th>Indeks</th>
                         <th class="text-left">Nazwa pliku</th>
                         <th>Wielkość</th>
@@ -20,6 +21,7 @@
                     </tr>
                     <tr ng-repeat="image in images">
                         <td>{{ $index + 1 }}</td>
+                        <td><img src="/img/{{ image.filename }}" class="preview"></td>
                         <td>{{ image.index }}</td>
                         <td class="text-left">{{ image.filename }}</td>
                         <td>{{ image.filesize }}</td>
@@ -32,7 +34,7 @@
                         </td>
                     </tr>
                     <tr ng-if="images.length == 0">
-                        <td colspan="7">Brak pozycji.</td>
+                        <td colspan="8">Brak pozycji.</td>
                     </tr>
                 </table>
                 <div class="py-3 text-center">
