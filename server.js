@@ -60,12 +60,12 @@ app.get('/page/:index', function (req, res) {
 });
 
 app.get('/img/:name', function (req, res) {
-    var file = process.env.OPENSHIFT_DATA_DIR + req.params.name;
+    var file = process.env.HOME + '/upload/' + req.params.name;
     if (fs.existsSync(file)) {
         res.sendFile(file);
     }
     else {
-        res.sendFile(__dirname + '/public/file_not_found.png')
+        res.sendFile(process.env.HOME + '/public/file_not_found.png')
     }
 });
 
