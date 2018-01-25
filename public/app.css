@@ -74,6 +74,10 @@ textarea.form-control {
 button.font-awesome>i.fa {
     margin: 0 0.4em 0 0;
 }
+button.left-align {
+    padding: 0.5em 8.0em;
+    text-align: left;
+}
 div#load-icon {
     height: 0;
 }
