@@ -19,13 +19,18 @@ module.exports = function(params) {
                 collection.findOne({
                     _id: new ObjectID(req.params.id)
                 }, function (err, result) {
-                    var user = { 
-                        id: result._id, 
-                        login: result.login,
-                        email: result.email,
-                        token: result.token
-                    };
-                    res.send(user);
+                    if (result) {
+                        var user = { 
+                            id: result._id, 
+                            login: result.login,
+                            email: result.email,
+                            token: result.token
+                        };
+                        res.send(user);
+                    }
+                    else {
+                        res.json({});
+                    }
                 });
             }
             else {
