@@ -56,6 +56,6 @@ Project directory structure:
 	├── server.js
 	└── README.md
 
-Demo: 
-    Mirror 1: http://todos-mean-stack-auth-app.193b.starter-ca-central-1.openshiftapps.com
-    Mirror 2: http://mean-stack-todo-auth-app.7e14.starter-us-west-2.openshiftapps.com
+### Demo: 
+####    Mirror 1: http://todos-mean-stack-auth-app.193b.starter-ca-central-1.openshiftapps.com
+####    Mirror 2: http://mean-stack-todo-auth-app.7e14.starter-us-west-2.openshiftapps.com

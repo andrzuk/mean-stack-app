@@ -193,6 +193,15 @@ app.directive('fileModel', ['$parse', function ($parse) {
 	};
 }]);
 
+app.directive('autoFocus', function() {
+	return {
+		restrict: 'A',
+		link: function(scope, element, attributes) {
+			$(element).focus();
+		}
+	};
+});
+
 app.filter('bytes', function() {
 	return function(bytes, precision) {
 		if (isNaN(parseFloat(bytes)) || !isFinite(bytes)) return '-';
