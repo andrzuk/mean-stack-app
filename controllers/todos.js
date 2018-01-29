@@ -46,6 +46,13 @@ angular.module('todosModule', [])
         });
     };
 
+    $scope.setTodo = function (id, value) {
+        $scope.action = 'list';
+        $http.put('/todos/' + id + '/' + value).then(function () {
+            $scope.getTodos();
+        });
+    };
+
     $scope.cancelTodo = function () {
         $scope.action = 'list';
     };

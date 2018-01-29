@@ -26,6 +26,7 @@ module.exports = function(params) {
     router.post('/', function (req, res, next) {
         db.collection('todos').insertOne({
             text: req.body.text,
+            accept: req.body.accept,
             ip: req.body.ip,
             date: Date.now()
         }, function (err, result) {
@@ -39,7 +40,21 @@ module.exports = function(params) {
         }, {
             $set: {
                 text: req.body.text,
+                accept: req.body.accept,
                 ip: req.body.ip,
+                date: Date.now()
+            }
+        }, function (err, result) {
+            res.send(result);
+        });
+    });
+
+    router.put('/:id/:accept', function (req, res, next) {
+        db.collection('todos').updateOne({
+            _id: new ObjectID(req.params.id)
+        }, {
+            $set: {
+                accept: req.params.accept,
                 date: Date.now()
             }
         }, function (err, result) {

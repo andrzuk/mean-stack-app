@@ -10,13 +10,20 @@
                 <table class="table table-bordered table-striped">
                     <tr>
                         <th>Lp.</th>
+                        <th>Stan</th>
                         <th class="text-left">Opis zadania</th>
                         <th class="text-left">IP</th>
                         <th>Data</th>
                         <th colspan="2" class="text-center">Akcje</th>
                     </tr>
-                    <tr ng-repeat="todo in todos">
+                    <tr ng-repeat="todo in todos" class="{{ todo.accept == 'true' ? 'commited' : 'requested' }}">
                         <td>{{ $index + 1 }}</td>
+                        <td ng-if="todo.accept == 'true'">
+                            <button class="btn btn-sm btn-success" ng-click="setTodo(todo._id, false)"><i class="fa fa-check-square-o" aria-hidden="true"></i></button>
+                        </td>
+                        <td ng-if="todo.accept != 'true'">
+                            <button class="btn btn-sm btn-danger" ng-click="setTodo(todo._id, true)"><i class="fa fa-square-o" aria-hidden="true"></i></button>
+                        </td>
                         <td class="text-left">{{ todo.text | limitTo:256 }}<span ng-if="todo.text.length > 256">...</span></td>
                         <td class="text-left">{{ todo.ip }}</td>
                         <td>{{ todo.date | date: "dd.MM.yyyy HH:mm:ss" }}</td>
@@ -28,7 +35,7 @@
                         </td>
                     </tr>
                     <tr ng-if="todos.length == 0">
-                        <td colspan="6">Brak pozycji.</td>
+                        <td colspan="7">Brak pozycji.</td>
                     </tr>
                 </table>
                 <div class="py-3 text-center">
@@ -46,6 +53,11 @@
                     <div class="form-group text-left">
                         <h6>Nowe zadanie:</h6>
                         <textarea class="form-control" rows="14" ng-model="formData.text" spellcheck="false"></textarea>
+                        <h6>Zatwierdzone:</h6>
+                        <select class="form-control" ng-model="formData.accept">
+                            <option value="false">Nie</option>
+                            <option value="true">Tak</option>
+                        </select>
                     </div>
                     <button type="submit" class="btn btn-primary font-awesome" ng-click="createTodo()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Zapisz</button>
                     <button type="submit" class="btn btn-warning font-awesome" ng-click="cancelTodo()"><i class="fa fa-ban" aria-hidden="true"></i> Anuluj</button>
@@ -62,6 +74,11 @@
                     <div class="form-group text-left">
                         <h6>Edycja zadania:</h6>
                         <textarea class="form-control" rows="14" ng-model="formData.text" spellcheck="false"></textarea>
+                        <h6>Zatwierdzone:</h6>
+                        <select class="form-control" ng-model="formData.accept">
+                            <option value="false">Nie</option>
+                            <option value="true">Tak</option>
+                        </select>
                     </div>
                     <button type="submit" class="btn btn-primary font-awesome" ng-click="updateTodo(formData._id)"><i class="fa fa-floppy-o" aria-hidden="true"></i> Zapisz</button>
                     <button type="submit" class="btn btn-warning font-awesome" ng-click="cancelTodo()"><i class="fa fa-ban" aria-hidden="true"></i> Anuluj</button>
