@@ -2,6 +2,8 @@ angular.module('usersModule', [])
 
 .controller('usersController', ['$rootScope', '$scope', '$http', function ($rootScope, $scope, $http) {
 
+    $scope.users = [];
+    
     $scope.getUsers = function () {
         $scope.action = 'list';
         $http.get('/users', $rootScope.urlConfig).then(function (response) {

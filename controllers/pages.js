@@ -2,6 +2,8 @@ angular.module('pagesModule', [])
 
 .controller('pagesController', ['$rootScope', '$scope', '$http', function ($rootScope, $scope, $http) {
 
+    $scope.pages = [];
+    
     $scope.getPages = function () {
         $scope.action = 'list';
         $http.get('/pages', $rootScope.urlConfig).then(function (response) {

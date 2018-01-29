@@ -197,9 +197,7 @@ app.directive('autoFocus', function() {
 	return {
 		restrict: 'A',
 		link: function(scope, element, attributes) {
-            setTimeout(function() {
-                $(element).focus();
-            }, 500);
+			$(element).focus();
 		}
 	};
 });

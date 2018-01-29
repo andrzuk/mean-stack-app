@@ -2,6 +2,8 @@ angular.module('messagesModule', [])
 
 .controller('messagesController', ['$rootScope', '$scope', '$http', function ($rootScope, $scope, $http) {
 
+    $scope.messages = [];
+    
     $scope.getMessages = function () {
         $scope.action = 'list';
         $http.get('/messages', $rootScope.urlConfig).then(function (response) {

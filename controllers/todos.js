@@ -2,6 +2,8 @@ angular.module('todosModule', [])
 
 .controller('todosController', ['$rootScope', '$scope', '$http', function ($rootScope, $scope, $http) {
 
+    $scope.todos = [];
+    
     $scope.getTodos = function () {
         $scope.action = 'list';
         $http.get('/todos').then(function (response) {

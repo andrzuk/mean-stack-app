@@ -2,6 +2,8 @@ angular.module('imagesModule', [])
 
 .controller('imagesController', ['$rootScope', '$scope', '$http', '$location', function ($rootScope, $scope, $http, $location) {
 
+    $scope.images = [];
+    
     $scope.getImages = function () {
         $scope.action = 'list';
         $http.get('/images', $rootScope.urlConfig).then(function (response) {
