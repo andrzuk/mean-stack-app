@@ -1,5 +1,5 @@
 <div ng-show="module == 'images'" ng-controller="imagesController" ng-init="getImages()">
-
+   
     <div class="container" ng-show="action == 'list'">
         <div class="row">
             <div class="col-lg-12">
@@ -22,9 +22,7 @@
                     </tr>
                     <tr ng-repeat="image in images">
                         <td>{{ $index + 1 }}</td>
-                        <td>
-                            <a href="#preview" ng-click="previewImage(image._id)"><img src="/img/{{ image.filename }}" class="preview"></a>
-                        </td>
+                        <td><a href="#preview" ng-click="previewImage(image._id)"><img src="/img/{{ image.filename }}" class="preview"></a></td>
                         <td>{{ image.index }}</td>
                         <td class="text-left">{{ image.filename }}</td>
                         <td>{{ image.filesize | bytes }}</td>
@@ -47,24 +45,16 @@
             </div>
         </div>
     </div>
-
+    
     <div class="container" ng-show="action == 'new'">
         <div class="py-4 row">
             <div class="col-lg-10 offset-lg-1">
                 <form method="post" class="form" role="form">
                     <div class="form-group text-left">
                         <h6>Indeks:</h6>
-                        <input type="text" name="index" class="form-control" ng-model="formData.index" auto-focus>
+                        <input type="text" name="index" class="form-control" ng-model="formData.index" auto-focus> 
                         <h6>Obrazek:</h6>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Wysyłanie</span>
-                            </div>
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="inputFile" name="file" file-model="formData.file">
-                                <label class="custom-file-label" for="inputFile">Wybierz obrazek</label>
-                            </div>
-                        </div>
+                        <input type="file" name="file" class="form-control" file-model="formData.file"> 
                     </div>
                     <button type="submit" class="btn btn-primary font-awesome" ng-click="createImage()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Zapisz</button>
                     <button type="button" class="btn btn-warning font-awesome" ng-click="cancelImage()"><i class="fa fa-ban" aria-hidden="true"></i> Anuluj</button>
@@ -79,17 +69,9 @@
                 <form method="post" class="form" role="form">
                     <div class="form-group text-left">
                         <h6>Indeks:</h6>
-                        <input type="text" name="index" class="form-control" ng-model="formData.index" auto-focus>
+                        <input type="text" name="index" class="form-control" ng-model="formData.index" auto-focus> 
                         <h6>Obrazek:</h6>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Wysyłanie</span>
-                            </div>
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="inputFile" name="file" file-model="formData.file">
-                                <label class="custom-file-label" for="inputFile">Wybierz obrazek</label>
-                            </div>
-                        </div>
+                        <input type="file" name="file" class="form-control" file-model="formData.file"> 
                     </div>
                     <button type="submit" class="btn btn-primary font-awesome" ng-click="updateImage(formData._id)"><i class="fa fa-floppy-o" aria-hidden="true"></i> Zapisz</button>
                     <button type="button" class="btn btn-warning font-awesome" ng-click="cancelImage()"><i class="fa fa-ban" aria-hidden="true"></i> Anuluj</button>
