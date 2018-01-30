@@ -95,7 +95,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
     $scope.getAppPages = function() {
         $scope.checkUserLogin();
         if ($rootScope.currentUser.isLogged) {
-            $scope.getPages();
+            $rootScope.getPages();
             $rootScope.module = 'pages';
             $rootScope.action = 'list';
             $scope.status = null;
@@ -108,7 +108,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
     $scope.getAppUsers = function() {
         $scope.checkUserLogin();
         if ($rootScope.currentUser.isLogged) {
-            $scope.getUsers();
+            $rootScope.getUsers();
             $rootScope.module = 'users';
             $rootScope.action = 'list';
             $scope.status = null;
@@ -121,7 +121,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
     $scope.getAppMessages = function() {
         $scope.checkUserLogin();
         if ($rootScope.currentUser.isLogged) {
-            $scope.getMessages();
+            $rootScope.getMessages();
             $rootScope.module = 'messages';
             $rootScope.action = 'list';
             $scope.status = null;
@@ -134,7 +134,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
     $scope.getAppImages = function() {
         $scope.checkUserLogin();
         if ($rootScope.currentUser.isLogged) {
-            $scope.getImages();
+            $rootScope.getImages();
             $rootScope.module = 'images';
             $rootScope.action = 'list';
             $scope.status = null;
