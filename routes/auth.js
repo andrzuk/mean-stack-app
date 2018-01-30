@@ -10,11 +10,10 @@ module.exports = function(params) {
     router.get('/init', function (req, res, next) {
         db.listCollections({ name: 'users' }).next(function(err, result) {
             if (result != undefined) {
-                console.log('1:',db.collection('users').find());
-                console.log('2:',db.collection('users').find().count());
-                console.log('3:',db.collection('users').find().count().length);
-                console.log('4:',!db.collection('users').find().count().length);
-                res.json({ status: !db.collection('users').find().count().length });
+                db.collection('users').find().count(function(err, result) {
+                    console.log('Users count: ', err, result);
+                    res.json({ status: result == 0 });
+                });
             }
             else {
                 res.json({ status: true });
