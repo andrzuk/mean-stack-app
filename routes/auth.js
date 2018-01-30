@@ -9,7 +9,12 @@ module.exports = function(params) {
 
     router.get('/init', function (req, res, next) {
         db.listCollections({ name: 'users' }).next(function(err, result) {
-            res.json({ status: result == undefined });
+            if (result != undefined) {
+                res.json({ status: db.collection('users').find().count() == 0 });
+            }
+            else {
+                res.json({ status: true });
+            }
         });
     });
 

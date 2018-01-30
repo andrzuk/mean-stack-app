@@ -87,7 +87,7 @@ module.exports = function(params) {
 
     router.delete('/:id', function (req, res, next) {
         token.checkAuth(req.headers, function(access) {
-            if (access) {
+            if (access && req.params.id != req.headers['user-id']) {
                 db.collection('users').removeOne({
                     _id: new ObjectID(req.params.id)
                 }, function (err, result) {
