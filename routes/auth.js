@@ -10,7 +10,11 @@ module.exports = function(params) {
     router.get('/init', function (req, res, next) {
         db.listCollections({ name: 'users' }).next(function(err, result) {
             if (result != undefined) {
-                res.json({ status: db.collection('users').find().count().length == 0, len: db.collection('users').find().count().length });
+                console.log('1:',db.collection('users').find();
+                console.log('2:',db.collection('users').find().count());
+                console.log('3:',db.collection('users').find().count().length);
+                console.log('4:',!db.collection('users').find().count().length);
+                res.json({ status: !db.collection('users').find().count().length });
             }
             else {
                 res.json({ status: true });
