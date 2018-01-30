@@ -19,7 +19,7 @@ module.exports = function(params) {
                 });
             }
             else {
-                res.json({ data: {} });
+                res.json({ data: [] });
             }
         });
     });
@@ -36,7 +36,7 @@ module.exports = function(params) {
                 });
             }
             else {
-                res.json({ data: {} });
+                res.json({ data: [] });
             }
         });
     });
