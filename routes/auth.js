@@ -6,18 +6,23 @@ module.exports = function(params) {
     var router = express.Router();
     
     const bcrypt = require('bcrypt');
-
-    router.get('/init', function (req, res, next) {
+    
+    var isCollectionEmpty = function(callback) {
         db.listCollections({ name: 'users' }).next(function(err, result) {
             if (result != undefined) {
                 db.collection('users').find().count(function(err, result) {
-                    console.log('Users count: ', err, result);
-                    res.json({ status: result == 0 });
+                    return callback(result == 0);
                 });
             }
             else {
-                res.json({ status: true });
+                return callback(true);
             }
+        });
+    };
+
+    router.get('/init', function (req, res, next) {
+        isCollectionEmpty(function(result) {
+            res.json({ status: result });
         });
     });
 
@@ -48,8 +53,8 @@ module.exports = function(params) {
     });
 
     router.post('/register', function (req, res, next) {
-        db.listCollections({ name: 'users' }).next(function(err, result) {
-            if (result == undefined) {
+        isCollectionEmpty(function(result) {
+            if (result) {
                 var hashPassword = bcrypt.hashSync(req.body.password, 10);
                 var user = {
                     login: req.body.login,
