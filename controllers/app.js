@@ -42,6 +42,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
                 $rootScope.module = 'auth';
                 $rootScope.action = 'register';
                 $scope.status = null;
+                $('input#register-name').focus();
             }
             else {
                 $scope.getHome();
@@ -83,6 +84,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
         $rootScope.module = 'auth';
         $rootScope.action = 'login';
         $scope.status = null;
+        $('input#login-name').focus();
     };
 
     $scope.getPanel = function() {
@@ -92,47 +94,55 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
     };
 
     $scope.getAppPages = function() {
-        if ($scope.isUserLoggedIn()) {
-            $rootScope.module = 'pages';
-            $rootScope.action = 'list';
-            $scope.status = null;
-        }
-        else {
-            $scope.getLogin();
-        }
+        $scope.isUserLoggedIn(function(result) {
+            if (result) {
+                $rootScope.module = 'pages';
+                $rootScope.action = 'list';
+                $scope.status = null;
+            }
+            else {
+                $scope.getLogin();
+            }
+        });
     };
 
     $scope.getAppUsers = function() {
-        if ($scope.isUserLoggedIn()) {
-            $rootScope.module = 'users';
-            $rootScope.action = 'list';
-            $scope.status = null;
-        }
-        else {
-            $scope.getLogin();
-        }
+        $scope.isUserLoggedIn(function(result) {
+            if (result) {
+                $rootScope.module = 'users';
+                $rootScope.action = 'list';
+                $scope.status = null;
+            }
+            else {
+                $scope.getLogin();
+            }
+        });
     };
 
     $scope.getAppMessages = function() {
-        if ($scope.isUserLoggedIn()) {
-            $rootScope.module = 'messages';
-            $rootScope.action = 'list';
-            $scope.status = null;
-        }
-        else {
-            $scope.getLogin();
-        }
+        $scope.isUserLoggedIn(function(result) {
+            if (result) {
+                $rootScope.module = 'messages';
+                $rootScope.action = 'list';
+                $scope.status = null;
+            }
+            else {
+                $scope.getLogin();
+            }
+        });
     };
 
     $scope.getAppImages = function() {
-        if ($scope.isUserLoggedIn()) {
-            $rootScope.module = 'images';
-            $rootScope.action = 'list';
-            $scope.status = null;
-        }
-        else {
-            $scope.getLogin();
-        }
+        $scope.isUserLoggedIn(function(result) {
+            if (result) {
+                $rootScope.module = 'images';
+                $rootScope.action = 'list';
+                $scope.status = null;
+            }
+            else {
+                $scope.getLogin();
+            }
+        });
     };
 
     $scope.getAppTodos = function() {
@@ -149,22 +159,22 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
         });
     };
 
-    $scope.isUserLoggedIn = function() {
+    $scope.isUserLoggedIn = function(callback) {
         var userId = window.localStorage.getItem('userId');
         var authToken = window.localStorage.getItem('authToken');
         if (userId != undefined && authToken != undefined) {
             $http.get('/auth/' + userId).then(function (response) {
                 var user = response.data;
                 if (user.id == userId && user.token == authToken) {
-                    return true;
+                    return callback(true);
                 }
                 else {
-                    return false;
+                    return callback(false);
                 }
             });
         }
         else {
-            return false;
+            return callback(false);
         }
     };
     
@@ -186,18 +196,6 @@ app.directive('fileModel', ['$parse', function ($parse) {
 		}
 	};
 }]);
-
-app.directive('autoFocus', function() {
-	return {
-		restrict: 'A',
-		link: function(scope, element, attributes) {
-            setTimeout(function() {
-                console.log('Set focus on:', element, $(element));
-                element.focus();
-            }, 500);
-		}
-	};
-});
 
 app.filter('bytes', function() {
 	return function(bytes, precision) {
