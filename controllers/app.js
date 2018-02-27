@@ -42,10 +42,15 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
                 $rootScope.module = 'auth';
                 $rootScope.action = 'register';
                 $scope.status = null;
-                $('input#register-name').focus();
+                setTimeout(function() {
+                    $('input#register-name').focus();
+                }, 1000);
             }
             else {
                 $scope.getHome();
+                $scope.getUserData(function(user) {
+                    $rootScope.currentUser = user;
+                });
             }
         });
     };
@@ -84,7 +89,9 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
         $rootScope.module = 'auth';
         $rootScope.action = 'login';
         $scope.status = null;
-        $('input#login-name').focus();
+        setTimeout(function() {
+            $('input#login-name').focus();
+        }, 1000);
     };
 
     $scope.getPanel = function() {
@@ -175,6 +182,25 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
         }
         else {
             return callback(false);
+        }
+    };
+    
+    $scope.getUserData = function(callback) {
+        var userId = window.localStorage.getItem('userId');
+        var authToken = window.localStorage.getItem('authToken');
+        if (userId != undefined && authToken != undefined) {
+            $http.get('/auth/' + userId).then(function (response) {
+                var user = response.data;
+                if (user.id == userId && user.token == authToken) {
+                    return callback(user);
+                }
+                else {
+                    return callback({});
+                }
+            });
+        }
+        else {
+            return callback({});
         }
     };
     
