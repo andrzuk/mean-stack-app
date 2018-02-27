@@ -92,7 +92,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
     };
 
     $scope.getAppPages = function() {
-        if ($scope.checkUserLogin().isLogged) {
+        if ($scope.isUserLoggedIn()) {
             $rootScope.module = 'pages';
             $rootScope.action = 'list';
             $scope.status = null;
@@ -103,7 +103,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
     };
 
     $scope.getAppUsers = function() {
-        if ($scope.checkUserLogin().isLogged) {
+        if ($scope.isUserLoggedIn()) {
             $rootScope.module = 'users';
             $rootScope.action = 'list';
             $scope.status = null;
@@ -114,7 +114,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
     };
 
     $scope.getAppMessages = function() {
-        if ($scope.checkUserLogin().isLogged) {
+        if ($scope.isUserLoggedIn()) {
             $rootScope.module = 'messages';
             $rootScope.action = 'list';
             $scope.status = null;
@@ -125,7 +125,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
     };
 
     $scope.getAppImages = function() {
-        if ($scope.checkUserLogin().isLogged) {
+        if ($scope.isUserLoggedIn()) {
             $rootScope.module = 'images';
             $rootScope.action = 'list';
             $scope.status = null;
@@ -149,25 +149,22 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
         });
     };
 
-    $scope.checkUserLogin = function() {
+    $scope.isUserLoggedIn = function() {
         var userId = window.localStorage.getItem('userId');
         var authToken = window.localStorage.getItem('authToken');
         if (userId != undefined && authToken != undefined) {
             $http.get('/auth/' + userId).then(function (response) {
                 var user = response.data;
                 if (user.id == userId && user.token == authToken) {
-                    user.isLogged = true;
-                    $rootScope.currentUser = user;
+                    return true;
                 }
                 else {
-                    $rootScope.currentUser = {};
+                    return false;
                 }
-                return $rootScope.currentUser;
             });
         }
         else {
-            $rootScope.currentUser = {};
-            return $rootScope.currentUser;
+            return false;
         }
     };
     
@@ -195,7 +192,8 @@ app.directive('autoFocus', function() {
 		restrict: 'A',
 		link: function(scope, element, attributes) {
             setTimeout(function() {
-                $(element).focus();
+                console.log('Set focus on:', element, $(element));
+                element.focus();
             }, 500);
 		}
 	};
