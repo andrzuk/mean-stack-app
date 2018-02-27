@@ -192,6 +192,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
             $http.get('/auth/' + userId).then(function (response) {
                 var user = response.data;
                 if (user.id == userId && user.token == authToken) {
+                    user.isLogged = true;
                     return callback(user);
                 }
                 else {
