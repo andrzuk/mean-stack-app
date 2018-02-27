@@ -18,6 +18,7 @@ app.use(morgan('combined'));
 var db = null;
 var dbDetails = new Object();
 var ObjectID = mongodb.ObjectID;
+var dbParams = null;
 
 var connection = require('./config/db.js');
 
@@ -26,17 +27,21 @@ mongodb.connect(connection.url, function (err, conn) {
     dbDetails.databaseName = db.databaseName;
     dbDetails.url = connection.label;
     dbDetails.type = 'MongoDB';
-    var auth = require('./routes/auth.js')({ database: db, objectId: ObjectID });
+    dbParams = { 
+        database: db, 
+        objectId: ObjectID, 
+    };
+    var auth = require('./routes/auth.js')(dbParams);
     app.use('/auth', auth);
-    var pages = require('./routes/pages.js')({ database: db, objectId: ObjectID });
+    var pages = require('./routes/pages.js')(dbParams);
     app.use('/pages', pages);
-    var users = require('./routes/users.js')({ database: db, objectId: ObjectID });
+    var users = require('./routes/users.js')(dbParams);
     app.use('/users', users);
-    var messages = require('./routes/messages.js')({ database: db, objectId: ObjectID });
+    var messages = require('./routes/messages.js')(dbParams);
     app.use('/messages', messages);
-    var images = require('./routes/images.js')({ database: db, objectId: ObjectID });
+    var images = require('./routes/images.js')(dbParams);
     app.use('/images', images);
-    var todos = require('./routes/todos.js')({ database: db, objectId: ObjectID });
+    var todos = require('./routes/todos.js')(dbParams);
     app.use('/todos', todos);
     console.log('Connected to MongoDB at: %s', connection.url);
 });

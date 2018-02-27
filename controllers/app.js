@@ -45,7 +45,6 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
             }
             else {
                 $scope.getHome();
-                $scope.checkUserLogin();
             }
         });
     };
@@ -93,8 +92,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
     };
 
     $scope.getAppPages = function() {
-        $scope.checkUserLogin();
-        if ($rootScope.currentUser.isLogged) {
+        if ($scope.checkUserLogin().isLogged) {
             $rootScope.module = 'pages';
             $rootScope.action = 'list';
             $scope.status = null;
@@ -105,8 +103,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
     };
 
     $scope.getAppUsers = function() {
-        $scope.checkUserLogin();
-        if ($rootScope.currentUser.isLogged) {
+        if ($scope.checkUserLogin().isLogged) {
             $rootScope.module = 'users';
             $rootScope.action = 'list';
             $scope.status = null;
@@ -117,8 +114,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
     };
 
     $scope.getAppMessages = function() {
-        $scope.checkUserLogin();
-        if ($rootScope.currentUser.isLogged) {
+        if ($scope.checkUserLogin().isLogged) {
             $rootScope.module = 'messages';
             $rootScope.action = 'list';
             $scope.status = null;
@@ -129,8 +125,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
     };
 
     $scope.getAppImages = function() {
-        $scope.checkUserLogin();
-        if ($rootScope.currentUser.isLogged) {
+        if ($scope.checkUserLogin().isLogged) {
             $rootScope.module = 'images';
             $rootScope.action = 'list';
             $scope.status = null;
@@ -167,10 +162,12 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
                 else {
                     $rootScope.currentUser = {};
                 }
+                return $rootScope.currentUser;
             });
         }
         else {
             $rootScope.currentUser = {};
+            return $rootScope.currentUser;
         }
     };
     
@@ -197,7 +194,9 @@ app.directive('autoFocus', function() {
 	return {
 		restrict: 'A',
 		link: function(scope, element, attributes) {
-			$(element).focus();
+            setTimeout(function() {
+                $(element).focus();
+            }, 500);
 		}
 	};
 });
