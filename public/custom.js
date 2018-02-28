@@ -40,7 +40,8 @@ function getPage(index) {
     setTimeout(function() {
         if (!loadResult) {
             $page.hide().html(notFound).fadeIn(function() {
-                $pageId.text(index);
+                $pageId.html(index);
+                console.log('Index:', index);
             });
         }
     }, 1000);
