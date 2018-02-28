@@ -27,7 +27,7 @@ function getPage(index) {
     
     var loadResult = false;
     var $page = $('div#start-content');
-    var pageId = $('span#page-index');
+    var $pageId = $('span#page-index');
     
     $page.fadeOut(function () {
         $page.html(loadIcon).show();
