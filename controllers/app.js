@@ -78,9 +78,9 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
 
     $scope.getSubpage = function (index) {
         $scope.status = 'loading';
+        $scope.pageData.description = null;
         $http.get('/page/' + index).then(function(response) {
             $scope.pageData = response.data;
-            console.log($scope.pageData);
             $scope.pageData.description = $sce.trustAsHtml($scope.pageData.description);
             $scope.status = 'ready';
         });
@@ -108,7 +108,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
                 $rootScope.action = 'list';
                 $scope.status = null;
                 setTimeout(function() {
-                    $scope.getPages();
+                    $('button#get-pages').click();
                 }, 500);
             }
             else {
@@ -124,7 +124,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
                 $rootScope.action = 'list';
                 $scope.status = null;
                 setTimeout(function() {
-                    $scope.getUsers();
+                    $('button#get-users').click();
                 }, 500);
             }
             else {
@@ -140,7 +140,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
                 $rootScope.action = 'list';
                 $scope.status = null;
                 setTimeout(function() {
-                    $scope.getMessages();
+                    $('button#get-messages').click();
                 }, 500);
             }
             else {
@@ -156,7 +156,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
                 $rootScope.action = 'list';
                 $scope.status = null;
                 setTimeout(function() {
-                    $scope.getImages();
+                    $('button#get-images').click();
                 }, 500);
             }
             else {
