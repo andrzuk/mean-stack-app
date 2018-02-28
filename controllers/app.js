@@ -44,7 +44,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
                 $scope.status = null;
                 setTimeout(function() {
                     $('input#register-name').focus();
-                }, 1000);
+                }, 500);
             }
             else {
                 $scope.getHome();
@@ -80,6 +80,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
         $scope.status = 'loading';
         $http.get('/page/' + index).then(function(response) {
             $scope.pageData = response.data;
+            console.log($scope.pageData);
             $scope.pageData.description = $sce.trustAsHtml($scope.pageData.description);
             $scope.status = 'ready';
         });
@@ -91,7 +92,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
         $scope.status = null;
         setTimeout(function() {
             $('input#login-name').focus();
-        }, 1000);
+        }, 500);
     };
 
     $scope.getPanel = function() {
@@ -106,6 +107,9 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
                 $rootScope.module = 'pages';
                 $rootScope.action = 'list';
                 $scope.status = null;
+                setTimeout(function() {
+                    $scope.getPages();
+                }, 500);
             }
             else {
                 $scope.getLogin();
@@ -119,6 +123,9 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
                 $rootScope.module = 'users';
                 $rootScope.action = 'list';
                 $scope.status = null;
+                setTimeout(function() {
+                    $scope.getUsers();
+                }, 500);
             }
             else {
                 $scope.getLogin();
@@ -132,6 +139,9 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
                 $rootScope.module = 'messages';
                 $rootScope.action = 'list';
                 $scope.status = null;
+                setTimeout(function() {
+                    $scope.getMessages();
+                }, 500);
             }
             else {
                 $scope.getLogin();
@@ -145,6 +155,9 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
                 $rootScope.module = 'images';
                 $rootScope.action = 'list';
                 $scope.status = null;
+                setTimeout(function() {
+                    $scope.getImages();
+                }, 500);
             }
             else {
                 $scope.getLogin();
