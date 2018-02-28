@@ -6,7 +6,7 @@ const notFound = `
             <br>
             <h5 style="color: #090;">Sprawdź, czy indeks strony jest poprawny.</h5>
             <br>
-            <h6 style="color: #369;">Index żądania: <span id="page-index" style="color: #900;"></span>.</h6>
+            <h6 style="color: #369;">Request index: <span id="request-index" style="color: #900;"></span>.</h6>
         </div>
         <div class="py-4">
             <button class="btn btn-danger font-awesome" onclick="getPage('index')"><i class="fa fa-times-circle" aria-hidden="true"></i> Zamknij</button>
@@ -27,7 +27,6 @@ function getPage(index) {
     
     var loadResult = false;
     var $page = $('div#start-content');
-    var $pageId = $('span#page-index');
     
     $page.fadeOut(function () {
         $page.html(loadIcon).show();
@@ -40,8 +39,7 @@ function getPage(index) {
     setTimeout(function() {
         if (!loadResult) {
             $page.hide().html(notFound).fadeIn(function() {
-                $pageId.html(index);
-                console.log('Index:', index);
+                $('span#request-index').text(index);
             });
         }
     }, 1000);
