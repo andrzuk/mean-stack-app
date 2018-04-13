@@ -59,11 +59,11 @@
 
     <header class="bg-primary text-white">
         <div class="container text-center">
-            <div ng-if="!settings['header_enabled'].value">
+            <div ng-if="settings['header_enabled'].value != 'true'">
                 <h1>MEAN Stack Application</h1>
                 <p class="lead"><b>M</b>ongoDB + <b>E</b>xpress.js + <b>A</b>ngular + <b>N</b>ode.js</p>
             </div>
-            <div ng-if="settings['header_enabled'].value">
+            <div ng-if="settings['header_enabled'].value == 'true'">
                 <div ng-bind-html="settings['header_content'].value"></div>
             </div>
         </div>
@@ -82,14 +82,12 @@
         <div ng-include="layout.todos"></div>
     </section>
     
-    <p>settings:<br><br> {{ settings }} </p>
-
     <footer class="bg-dark">
         <div class="container">
-            <div ng-if="!settings['footer_enabled'].value">
+            <div ng-if="settings['footer_enabled'].value != 'true'">
                 <p class="text-center">Copyright &copy; 2018 <a href="http://angular-cms.pl/category/11" target="_blank">Andrzej Żukowski</a></p>
             </div>
-            <div ng-if="settings['footer_enabled'].value">
+            <div ng-if="settings['footer_enabled'].value == 'true'">
                 <div ng-bind-html="settings['footer_content'].value"></div>
             </div>
         </div>
