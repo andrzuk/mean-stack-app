@@ -23,6 +23,7 @@ var dbParams = null;
 var connection = require('./config/db.js');
 
 mongodb.connect(connection.url, function (err, conn) {
+    db = conn;
     dbDetails.databaseName = conn.databaseName;
     dbDetails.url = connection.label;
     dbDetails.type = 'MongoDB';
