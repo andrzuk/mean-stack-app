@@ -23,12 +23,11 @@ var dbParams = null;
 var connection = require('./config/db.js');
 
 mongodb.connect(connection.url, function (err, conn) {
-    db = conn;
-    dbDetails.databaseName = db.databaseName;
+    dbDetails.databaseName = conn.databaseName;
     dbDetails.url = connection.label;
     dbDetails.type = 'MongoDB';
     dbParams = { 
-        database: db, 
+        database: conn, 
         objectId: ObjectID, 
     };
     var auth = require('./routes/auth.js')(dbParams);
@@ -41,6 +40,8 @@ mongodb.connect(connection.url, function (err, conn) {
     app.use('/messages', messages);
     var images = require('./routes/images.js')(dbParams);
     app.use('/images', images);
+    var settings = require('./routes/settings.js')(dbParams);
+    app.use('/settings', settings);
     var todos = require('./routes/todos.js')(dbParams);
     app.use('/todos', todos);
     console.log('Connected to MongoDB at: %s', connection.url);
@@ -72,6 +73,16 @@ app.get('/img/:name', function (req, res) {
     else {
         res.sendFile(process.env.HOME + '/public/file_not_found.png')
     }
+});
+
+app.get('/setting/:name', function (req, res) {
+    db.collection('settings', function (err, collection) {
+        collection.findOne({
+            name: req.params.name
+        }, function (err, result) {
+            res.send(result);
+        });
+    });
 });
 
 app.listen(connection.port, connection.ip);

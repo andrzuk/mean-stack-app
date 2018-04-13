@@ -1,4 +1,4 @@
-var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'messagesModule', 'imagesModule', 'todosModule', 'ngSanitize'])
+var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'messagesModule', 'imagesModule', 'settingsModule', 'todosModule', 'ngSanitize'])
 
 .controller('mainController', ['$rootScope', '$scope', '$http', '$sce', function ($rootScope, $scope, $http, $sce) {
 
@@ -11,6 +11,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
         users: '../templates/users',
         messages: '../templates/messages',
         images: '../templates/images',
+        settings: '../templates/settings',
         todos: '../templates/todos',
     };
     
@@ -33,6 +34,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
     $rootScope.module = null;
     $rootScope.action = null;
     $scope.status = null;
+    $scope.settings = {};
     
     $scope.initApp = function() {
         $http.get('/auth/init').then(function(response) {
@@ -53,6 +55,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
                 });
             }
         });
+        $scope.getSettings();
     };
 
     $scope.getHome = function() {
@@ -83,6 +86,12 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
             $scope.pageData = response.data;
             $scope.pageData.description = $sce.trustAsHtml($scope.pageData.description);
             $scope.status = 'ready';
+        });
+    };
+    
+    $scope.getSettings = function () {
+        $http.get('/settings/').then(function(response) {
+            $scope.settings = response.data;
         });
     };
     
@@ -157,6 +166,22 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
                 $scope.status = null;
                 setTimeout(function() {
                     $('button#get-images').click();
+                }, 500);
+            }
+            else {
+                $scope.getLogin();
+            }
+        });
+    };
+
+    $scope.getAppSettings = function() {
+        $scope.isUserLoggedIn(function(result) {
+            if (result) {
+                $rootScope.module = 'settings';
+                $rootScope.action = 'list';
+                $scope.status = null;
+                setTimeout(function() {
+                    $('button#get-settings').click();
                 }, 500);
             }
             else {
