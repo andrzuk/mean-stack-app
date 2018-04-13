@@ -90,8 +90,20 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
     };
     
     $scope.getSettings = function () {
-        $http.get('/settings/').then(function(response) {
-            $rootScope.settings = response.data;
+        $http.get('/setting/header_enabled').then(function(response) {
+            $rootScope.settings['header_enabled'] = response.data;
+            console.log('odebrano:', $rootScope.settings);
+        });
+        $http.get('/setting/header_content').then(function(response) {
+            $rootScope.settings['header_content'] = response.data;
+            console.log('odebrano:', $rootScope.settings);
+        });
+        $http.get('/setting/footer_enabled').then(function(response) {
+            $rootScope.settings['footer_enabled'] = response.data;
+            console.log('odebrano:', $rootScope.settings);
+        });
+        $http.get('/setting/footer_content').then(function(response) {
+            $rootScope.settings['footer_content'] = response.data;
             console.log('odebrano:', $rootScope.settings);
         });
     };
