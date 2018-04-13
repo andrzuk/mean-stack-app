@@ -17,6 +17,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
     
     $rootScope.currentUser = {};
     $rootScope.currentIp = null;
+    $rootScope.settings = {};
     
     $rootScope.urlConfig = { 
         headers: { 
@@ -34,7 +35,6 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
     $rootScope.module = null;
     $rootScope.action = null;
     $scope.status = null;
-    $scope.settings = {};
     
     $scope.initApp = function() {
         $http.get('/auth/init').then(function(response) {
@@ -91,7 +91,8 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
     
     $scope.getSettings = function () {
         $http.get('/settings/').then(function(response) {
-            $scope.settings = response.data;
+            $rootScope.settings = response.data;
+            console.log('odebrano:', $rootScope.settings);
         });
     };
     
