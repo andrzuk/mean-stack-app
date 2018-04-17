@@ -90,17 +90,13 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
     };
     
     $scope.getSettings = function () {
-        $http.get('/setting/header_enabled').then(function(response) {
-            $rootScope.settings['header_enabled'] = response.data;
-        });
-        $http.get('/setting/header_content').then(function(response) {
-            $rootScope.settings['header_content'] = response.data;
-        });
-        $http.get('/setting/footer_enabled').then(function(response) {
-            $rootScope.settings['footer_enabled'] = response.data;
-        });
-        $http.get('/setting/footer_content').then(function(response) {
-            $rootScope.settings['footer_content'] = response.data;
+        const settingKeys = [
+            'header_enabled', 'header_content', 'footer_enabled', 'footer_content', 'general_styles', 'general_scripts'
+        ];
+        $.each(settingKeys, function(index, settingKey) {
+            $http.get('/setting/' + settingKey).then(function(response) {
+                $rootScope.settings[settingKey] = response.data;
+            });
         });
     };
     
