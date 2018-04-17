@@ -4,7 +4,8 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="py-3 text-right">
-                    <span class="list-title">Galeria</span>
+                    <span class="list-title"><i class="fa fa-picture-o" aria-hidden="true"></i> Galeria</span>
+                    <span class="list-search"><input type="search" class="form-control" ng-model="searchValue" placeholder="Szukaj"></span>
                     <button class="btn btn-success font-awesome" ng-click="newImage()"><i class="fa fa-plus" aria-hidden="true"></i> Dodaj nowy obrazek</button>
                     <button class="btn btn-primary font-awesome" ng-click="getImages()" id="get-images"><i class="fa fa-refresh" aria-hidden="true"></i> Odśwież listę</button>
                     <button class="btn btn-danger" ng-click="getPanel()"><i class="fa fa-times" aria-hidden="true"></i></button>
@@ -20,7 +21,7 @@
                         <th>Data</th>
                         <th colspan="2" class="text-center">Akcje</th>
                     </tr>
-                    <tr ng-repeat="image in images">
+                    <tr ng-repeat="image in images | filter:searchValue">
                         <td>{{ $index + 1 }}</td>
                         <td><a href="#preview" ng-click="previewImage(image._id)"><img src="/img/{{ image.filename }}" class="preview"></a></td>
                         <td>{{ image.index }}</td>

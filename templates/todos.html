@@ -4,7 +4,8 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="py-3 text-right">
-                    <span class="list-title">Lista zadań</span>
+                    <span class="list-title"><i class="fa fa-list-alt" aria-hidden="true"></i> Lista zadań</span>
+                    <span class="list-search"><input type="search" class="form-control" ng-model="searchValue" placeholder="Szukaj"></span>
                     <button class="btn btn-success font-awesome" ng-click="newTodo()"><i class="fa fa-plus" aria-hidden="true"></i> Dodaj nowe zadanie</button>
                 </div>
                 <table class="table table-bordered table-striped">
@@ -16,7 +17,7 @@
                         <th>Data</th>
                         <th colspan="2" class="text-center">Akcje</th>
                     </tr>
-                    <tr ng-repeat="todo in todos" class="{{ todo.accept == 'true' ? 'commited' : 'requested' }}">
+                    <tr ng-repeat="todo in todos | filter:searchValue" class="{{ todo.accept == 'true' ? 'commited' : 'requested' }}">
                         <td>{{ $index + 1 }}</td>
                         <td ng-if="todo.accept == 'true'">
                             <button class="btn btn-sm btn-success" ng-click="setTodo(todo._id, false)"><i class="fa fa-check-square-o" aria-hidden="true"></i></button>

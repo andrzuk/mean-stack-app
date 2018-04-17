@@ -4,7 +4,8 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="py-3 text-right">
-                    <span class="list-title">Ustawienia</span>
+                    <span class="list-title"><i class="fa fa-cog" aria-hidden="true"></i> Ustawienia</span>
+                    <span class="list-search"><input type="search" class="form-control" ng-model="searchValue" placeholder="Szukaj"></span>
                     <button class="btn btn-success font-awesome" ng-click="newSetting()"><i class="fa fa-plus" aria-hidden="true"></i> Dodaj nowe ustawienie</button>
                     <button class="btn btn-primary font-awesome" ng-click="getSettings()" id="get-settings"><i class="fa fa-refresh" aria-hidden="true"></i> Odśwież listę</button>
                     <button class="btn btn-danger" ng-click="getPanel()"><i class="fa fa-times" aria-hidden="true"></i></button>
@@ -18,7 +19,7 @@
                         <th>Data</th>
                         <th colspan="2" class="text-center">Akcje</th>
                     </tr>
-                    <tr ng-repeat="setting in settings">
+                    <tr ng-repeat="setting in settings | filter:searchValue">
                         <td>{{ $index + 1 }}</td>
                         <td>{{ setting.name }}</td>
                         <td class="text-left">{{ setting.value }}</td>
