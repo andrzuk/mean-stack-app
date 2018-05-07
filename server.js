@@ -93,7 +93,9 @@ app.post('/visitor', function (req, res) {
         referer: req.body.referer,
         url: req.body.url,
         date: Date.now()
-    }, null);
+    }, function (err, result) {
+        res.json({});
+    });
 });
 
 app.listen(connection.port, connection.ip);

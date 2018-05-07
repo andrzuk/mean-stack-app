@@ -253,14 +253,14 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
     $scope.registerVisitor = function() {
         var details = {
             ip: $rootScope.currentIp,
-            referer: $document.referrer,
+            referer: $document.getReferer(),
             url: $location.url(),
         };
         console.log('client aIP:',$rootScope.currentIp);
-        console.log('client Ref:',$document.referrer);
+        console.log('client Ref:',$document.getReferer());
         console.log('client Url:',$location.url());
 
-        $http.post('/visitor', details, null);
+        $http.post('/visitor', details, null).then(function() {});
     };
     
     $scope.initApp();
@@ -290,4 +290,13 @@ app.filter('bytes', function() {
 		number = Math.floor(Math.log(bytes) / Math.log(1024));
 		return (bytes / Math.pow(1024, Math.floor(number))).toFixed(precision) + ' ' + units[number];
 	}
+});
+
+app.config(function($provide) {
+    $provide.decorator('$document', ['$delegate', function ($delegate) {
+        $delegate.getReferer = function() { 
+            return document.referrer; 
+        };
+        return $delegate; 
+    }]);
 });
