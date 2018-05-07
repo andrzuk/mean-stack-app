@@ -86,6 +86,18 @@ app.get('/setting/:name', function (req, res) {
     });
 });
 
+app.get('*', function(req, res) {
+    console.log('client IP:',req.connection.remoteAddress);
+    console.log('client Rf:',req.headers.referer);
+    console.log('client Ur:',req.url);
+    db.collection('visitors').insertOne({
+        ip: req.connection.remoteAddress,
+        referer: req.headers.referer,
+        url: req.url,
+        date: Date.now()
+    }, function () {});
+});
+
 app.listen(connection.port, connection.ip);
 
 console.log('Server running on http://%s:%s', connection.ip, connection.port);
