@@ -1,6 +1,6 @@
 var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'messagesModule', 'imagesModule', 'settingsModule', 'todosModule', 'ngSanitize'])
 
-.controller('mainController', ['$rootScope', '$scope', '$http', '$location', '$sce', function ($rootScope, $scope, $http, $location, $sce) {
+.controller('mainController', ['$rootScope', '$scope', '$http', '$location', '$document', '$sce', function ($rootScope, $scope, $http, $location, $document, $sce) {
 
     $scope.layout = {
         home: '../templates/home',
@@ -253,14 +253,14 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
     $scope.registerVisitor = function() {
         var details = {
             ip: $rootScope.currentIp,
-            referer: document.referrer,
+            referer: $document.referrer,
             url: $location.url(),
         };
         console.log('client aIP:',$rootScope.currentIp);
-        console.log('client Ref:',document.referrer);
+        console.log('client Ref:',$document.referrer);
         console.log('client Url:',$location.url());
 
-        $http.post('/visitor', details).then(function () {});
+        $http.post('/visitor', details, null);
     };
     
     $scope.initApp();
