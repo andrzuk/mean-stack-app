@@ -61,15 +61,6 @@ app.get('/page/:index', function (req, res) {
         collection.findOne({
             index: req.params.index
         }, function (err, result) {
-            console.log('client aIP:',$rootScope.currentIp);
-            console.log('client Ref:',req.headers.referer);
-            console.log('client Url:',req.url);
-            db.collection('visitors').insertOne({
-                ip: $rootScope.currentIp,
-                referer: req.headers.referer,
-                url: req.url,
-                date: Date.now()
-            }, null);
             res.send(result);
         });
     });
@@ -93,6 +84,16 @@ app.get('/setting/:name', function (req, res) {
             res.send(result);
         });
     });
+});
+
+app.post('/visitor', function (req, res) {
+    console.log('Received:', req.body);
+    db.collection('visitors').insertOne({
+        ip: req.body.ip,
+        referer: req.body.referer,
+        url: req.body.url,
+        date: Date.now()
+    }, null);
 });
 
 app.listen(connection.port, connection.ip);

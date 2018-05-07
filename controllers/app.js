@@ -1,6 +1,6 @@
 var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'messagesModule', 'imagesModule', 'settingsModule', 'todosModule', 'ngSanitize'])
 
-.controller('mainController', ['$rootScope', '$scope', '$http', '$sce', function ($rootScope, $scope, $http, $sce) {
+.controller('mainController', ['$rootScope', '$scope', '$http', '$location', '$sce', function ($rootScope, $scope, $http, $location, $sce) {
 
     $scope.layout = {
         home: '../templates/home',
@@ -87,6 +87,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
             $scope.pageData.description = $sce.trustAsHtml($scope.pageData.description);
             $scope.status = 'ready';
         });
+        $scope.registerVisitor();
     };
     
     $scope.getSettings = function () {
@@ -247,6 +248,19 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
         else {
             return callback({});
         }
+    };
+    
+    $scope.registerVisitor = function() {
+        var details = {
+            ip: $rootScope.currentIp,
+            referer: document.referrer,
+            url: $location.url(),
+        };
+        console.log('client aIP:',$rootScope.currentIp);
+        console.log('client Ref:',document.referrer);
+        console.log('client Url:',$location.url());
+
+        $http.post('/visitor', details).then(function () {});
     };
     
     $scope.initApp();
