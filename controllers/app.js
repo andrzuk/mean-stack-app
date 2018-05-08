@@ -56,7 +56,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
             }
         });
         $scope.getSettings();
-        $scope.registerVisitor();
+        $scope.registerVisitor('init');
     };
 
     $scope.getHome = function() {
@@ -88,7 +88,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
             $scope.pageData.description = $sce.trustAsHtml($scope.pageData.description);
             $scope.status = 'ready';
         });
-        $scope.registerVisitor();
+        $scope.registerVisitor('page/' + index);
     };
     
     $scope.getSettings = function () {
@@ -116,7 +116,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
         $rootScope.module = 'auth';
         $rootScope.action = 'panel';
         $scope.status = null;
-        $scope.registerVisitor();
+        $scope.registerVisitor('admin-panel');
     };
 
     $scope.getAppPages = function() {
@@ -133,7 +133,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
                 $scope.getLogin();
             }
         });
-        $scope.registerVisitor();
+        $scope.registerVisitor('pages');
     };
 
     $scope.getAppUsers = function() {
@@ -150,7 +150,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
                 $scope.getLogin();
             }
         });
-        $scope.registerVisitor();
+        $scope.registerVisitor('users');
     };
 
     $scope.getAppMessages = function() {
@@ -167,7 +167,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
                 $scope.getLogin();
             }
         });
-        $scope.registerVisitor();
+        $scope.registerVisitor('messages');
     };
 
     $scope.getAppImages = function() {
@@ -184,7 +184,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
                 $scope.getLogin();
             }
         });
-        $scope.registerVisitor();
+        $scope.registerVisitor('images');
     };
 
     $scope.getAppSettings = function() {
@@ -201,14 +201,14 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
                 $scope.getLogin();
             }
         });
-        $scope.registerVisitor();
+        $scope.registerVisitor('settings');
     };
 
     $scope.getAppTodos = function() {
         $rootScope.module = 'todos';
         $rootScope.action = 'list';
         $scope.status = null;
-        $scope.registerVisitor();
+        $scope.registerVisitor('todos');
     };
     
     $scope.sendMessage = function () {
@@ -217,7 +217,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
             $scope.formData = {};
             $scope.getContact();
         });
-        $scope.registerVisitor();
+        $scope.registerVisitor('send-message');
     };
 
     $scope.isUserLoggedIn = function(callback) {
@@ -259,7 +259,8 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
         }
     };
     
-    $scope.registerVisitor = function() {
+    $scope.registerVisitor = function(hash) {
+        document.location.hash = '#!#' + hash;
         var details = {
             ip: $rootScope.currentIp,
             referer: $document.getReferer(),
