@@ -46,7 +46,7 @@ function getPage(index) {
     
     $.getJSON('http://ipv4.myexternalip.com/json').then(function (response) {
         var details = {
-            ip: response.data.ip,
+            ip: response.ip,
             referer: document.referrer,
             url: document.location.href.replace(document.location.origin, '').replace('#!#', ''),
         };
