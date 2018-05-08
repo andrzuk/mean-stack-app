@@ -1,6 +1,6 @@
 var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'messagesModule', 'imagesModule', 'settingsModule', 'todosModule', 'ngSanitize'])
 
-.controller('mainController', ['$rootScope', '$scope', '$http', '$location', '$document', '$sce', function ($rootScope, $scope, $http, $location, $document, $sce) {
+.controller('mainController', ['$rootScope', '$scope', '$http', '$document', '$sce', function ($rootScope, $scope, $http, $document, $sce) {
 
     $scope.layout = {
         home: '../templates/home',
@@ -56,6 +56,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
             }
         });
         $scope.getSettings();
+        $scope.registerVisitor();
     };
 
     $scope.getHome = function() {
@@ -115,6 +116,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
         $rootScope.module = 'auth';
         $rootScope.action = 'panel';
         $scope.status = null;
+        $scope.registerVisitor();
     };
 
     $scope.getAppPages = function() {
@@ -131,6 +133,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
                 $scope.getLogin();
             }
         });
+        $scope.registerVisitor();
     };
 
     $scope.getAppUsers = function() {
@@ -147,6 +150,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
                 $scope.getLogin();
             }
         });
+        $scope.registerVisitor();
     };
 
     $scope.getAppMessages = function() {
@@ -163,6 +167,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
                 $scope.getLogin();
             }
         });
+        $scope.registerVisitor();
     };
 
     $scope.getAppImages = function() {
@@ -179,6 +184,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
                 $scope.getLogin();
             }
         });
+        $scope.registerVisitor();
     };
 
     $scope.getAppSettings = function() {
@@ -195,12 +201,14 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
                 $scope.getLogin();
             }
         });
+        $scope.registerVisitor();
     };
 
     $scope.getAppTodos = function() {
         $rootScope.module = 'todos';
         $rootScope.action = 'list';
         $scope.status = null;
+        $scope.registerVisitor();
     };
     
     $scope.sendMessage = function () {
@@ -209,6 +217,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
             $scope.formData = {};
             $scope.getContact();
         });
+        $scope.registerVisitor();
     };
 
     $scope.isUserLoggedIn = function(callback) {
@@ -254,12 +263,8 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
         var details = {
             ip: $rootScope.currentIp,
             referer: $document.getReferer(),
-            url: $location.url(),
+            url: document.location.href.replace(document.location.origin, '').replace('#!#', ''),
         };
-        console.log('client aIP:',$rootScope.currentIp);
-        console.log('client Ref:',$document.getReferer());
-        console.log('client Url:',$location.url());
-
         $http.post('/visitor', details, null).then(function() {});
     };
     
