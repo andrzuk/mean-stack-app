@@ -25,7 +25,7 @@
                         <td class="text-left">{{ visitor.url | limitTo:64 }}<span ng-if="visitor.url.length > 64">...</span></td>
                         <td>{{ visitor.date | date: "dd.MM.yyyy HH:mm:ss" }}</td>
                         <td class="text-center">
-                            <button class="btn btn-primary action" ng-click="viewVisitor(visitor._id)"><i class="fa fa-info-square" aria-hidden="true"></i></button>
+                            <button class="btn btn-primary action" ng-click="viewVisitor(visitor._id)"><i class="fa fa-file-text-o" aria-hidden="true"></i></button>
                         </td>
                     </tr>
                     <tr ng-if="visitors.length == 0">
@@ -49,9 +49,9 @@
                         <h6>Referer:</h6>
                         <textarea class="form-control" rows="2" ng-model="visitor.referer" disabled></textarea>
                         <h6>Request:</h6>
-                        <input type="text" class="form-control" ng-model="visitor.url" disabled> 
+                        <textarea class="form-control" rows="2" ng-model="visitor.url" disabled></textarea>
                         <h6>Data:</h6>
-                        <input type="text" class="form-control" ng-model="visitor.date" disabled> 
+                        <input type="text" class="form-control" ng-model="visitor.date | date: 'dd.MM.yyyy HH:mm:ss'" disabled> 
                     </div>
                     <button type="submit" class="btn btn-warning font-awesome" ng-click="cancelVisitor()"><i class="fa fa-ban" aria-hidden="true"></i> Anuluj</button>
                 </form>
