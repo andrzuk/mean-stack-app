@@ -11,7 +11,7 @@ module.exports = function(params) {
         token.checkAuth(req.headers, function(access) {
             if (access) {
                 db.collection('visitors', function (err, collection) {
-                    collection.find().sort({ date: -1 }, function (err, result) {
+                    collection.find().toArray(function (err, result) {
                         res.send(result);
                     });
                 });
