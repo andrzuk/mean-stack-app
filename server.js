@@ -50,6 +50,8 @@ mongodb.connect(connection.url, function (err, conn) {
     console.log('Connected to MongoDB at: %s', connection.url);
 });
 
+var dns = require('dns');
+
 app.get('/', function (req, res) {
     res.sendFile('index.html');
 });
@@ -90,12 +92,15 @@ app.get('/setting/:name', function (req, res) {
 
 app.post('/visitor', function (req, res) {
     if (req.body.ip !== null && req.body.url.length) {
-        db.collection('visitors').insertOne({
-            ip: req.body.ip,
-            referer: req.body.referer,
-            url: req.body.url,
-            date: Date.now()
-        }, function (err, result) {});
+        dns.lookupService(req.body.ip, 22, function(err, hostname, service) {
+            db.collection('visitors').insertOne({
+                ip: req.body.ip,
+                host: hostname,
+                referer: req.body.referer,
+                url: req.body.url,
+                date: Date.now()
+            }, function (err, result) {});
+        });
     }
     res.json({});
 });

@@ -13,23 +13,28 @@
                     <tr>
                         <th>Lp.</th>
                         <th class="text-left">IP</th>
+                        <th class="text-left">Host</th>
                         <th class="text-left">Referer</th>
                         <th class="text-left">Request</th>
                         <th>Data</th>
-                        <th class="text-center">Akcje</th>
+                        <th colspan="2" class="text-center">Akcje</th>
                     </tr>
                     <tr ng-repeat="visitor in visitors | filter:searchValue">
                         <td>{{ $index + 1 }}</td>
-                        <td>{{ visitor.ip }}</td>
+                        <td class="text-left">{{ visitor.ip }}</td>
+                        <td class="text-left">{{ visitor.host }}</td>
                         <td class="text-left">{{ visitor.referer | limitTo:128 }}<span ng-if="visitor.referer.length > 128">...</span></td>
                         <td class="text-left">{{ visitor.url | limitTo:64 }}<span ng-if="visitor.url.length > 64">...</span></td>
                         <td>{{ visitor.date | date: "dd.MM.yyyy HH:mm:ss" }}</td>
                         <td class="text-center">
                             <button class="btn btn-primary action" ng-click="viewVisitor(visitor._id)"><i class="fa fa-file-text-o" aria-hidden="true"></i></button>
                         </td>
+                        <td class="text-center">
+                            <button class="btn btn-danger action" ng-click="deleteVisitor(visitor._id)"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                        </td>
                     </tr>
                     <tr ng-if="visitors.length == 0">
-                        <td colspan="6">Brak pozycji.</td>
+                        <td colspan="8">Brak pozycji.</td>
                     </tr>
                 </table>
                 <div class="py-3 text-center">
@@ -46,6 +51,8 @@
                     <div class="form-group text-left">
                         <h6>IP:</h6>
                         <input type="text" class="form-control" ng-model="visitor.ip" disabled> 
+                        <h6>Host:</h6>
+                        <input type="text" class="form-control" ng-model="visitor.host" disabled> 
                         <h6>Referer:</h6>
                         <textarea class="form-control" rows="2" ng-model="visitor.referer" disabled></textarea>
                         <h6>Request:</h6>

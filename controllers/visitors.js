@@ -18,6 +18,13 @@ angular.module('visitorsModule', [])
         });
     };
 
+    $scope.deleteVisitor = function (id) {
+        $scope.action = 'list';
+        $http.delete('/visitors/' + id, $rootScope.urlConfig).then(function () {
+            $scope.getVisitors();
+        });
+    };
+
     $scope.cancelVisitor = function () {
         $scope.action = 'list';
     };

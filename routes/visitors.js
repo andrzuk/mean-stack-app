@@ -39,5 +39,20 @@ module.exports = function(params) {
         });
     });
 
+    router.delete('/:id', function (req, res, next) {
+        token.checkAuth(req.headers, function(access) {
+            if (access) {
+                db.collection('visitors').removeOne({
+                    _id: new ObjectID(req.params.id)
+                }, function (err, result) {
+                    res.send(result);
+                });
+            }
+            else {
+                res.json({});
+            }
+        });
+    });
+
     return router;
 };
