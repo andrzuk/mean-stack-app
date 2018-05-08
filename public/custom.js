@@ -45,11 +45,11 @@ function getPage(index) {
     }, 1000);
     
     $.getJSON('http://ipv4.myexternalip.com/json').then(function (response) {
-        document.location.hash = '#!#page/' + index;
+        document.location.hash = '#!#page:' + index;
         var details = {
             ip: response.ip,
             referer: document.referrer,
-            url: document.location.href.replace(document.location.origin, '').replace('#!#', ''),
+            url: '/page/' + index,
         };
         $.post('/visitor', details, function() {});
     });

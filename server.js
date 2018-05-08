@@ -87,17 +87,15 @@ app.get('/setting/:name', function (req, res) {
 });
 
 app.post('/visitor', function (req, res) {
-    console.log('Received:', req.body);
     if (req.body.ip !== null && req.body.url.length) {
         db.collection('visitors').insertOne({
             ip: req.body.ip,
             referer: req.body.referer,
             url: req.body.url,
             date: Date.now()
-        }, function (err, result) {
-            res.json({});
-        });
+        }, function (err, result) {});
     }
+    res.json({});
 });
 
 app.listen(connection.port, connection.ip);
