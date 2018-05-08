@@ -22,7 +22,7 @@
                     <tr ng-repeat="setting in settings | filter:searchValue">
                         <td>{{ $index + 1 }}</td>
                         <td>{{ setting.name }}</td>
-                        <td class="text-left">{{ setting.value }}</td>
+                        <td class="text-left">{{ setting.value | limitTo:128 }}<span ng-if="setting.value.length > 128">...</span></td>
                         <td class="text-left">{{ setting.description | limitTo:64 }}<span ng-if="setting.description.length > 64">...</span></td>
                         <td>{{ setting.date | date: "dd.MM.yyyy HH:mm:ss" }}</td>
                         <td class="text-center">

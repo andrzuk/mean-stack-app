@@ -1,0 +1,62 @@
+<div ng-show="module == 'visitors'" ng-controller="visitorsController">
+   
+    <div class="container" ng-show="action == 'list'">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="py-3 text-right">
+                    <span class="list-title"><i class="fa fa-cog" aria-hidden="true"></i> Odwiedziny</span>
+                    <span class="list-search"><input type="search" class="form-control" ng-model="searchValue" placeholder="Szukaj"></span>
+                    <button class="btn btn-primary font-awesome" ng-click="getVisitors()" id="get-visitors"><i class="fa fa-refresh" aria-hidden="true"></i> Odśwież listę</button>
+                    <button class="btn btn-danger" ng-click="getPanel()"><i class="fa fa-times" aria-hidden="true"></i></button>
+                </div>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Lp.</th>
+                        <th class="text-left">IP</th>
+                        <th class="text-left">Referer</th>
+                        <th class="text-left">Request</th>
+                        <th>Data</th>
+                        <th class="text-center">Akcje</th>
+                    </tr>
+                    <tr ng-repeat="visitor in visitors | filter:searchValue">
+                        <td>{{ $index + 1 }}</td>
+                        <td>{{ visitor.ip }}</td>
+                        <td class="text-left">{{ visitor.referer | limitTo:128 }}<span ng-if="visitor.referer.length > 128">...</span></td>
+                        <td class="text-left">{{ visitor.url | limitTo:64 }}<span ng-if="visitor.url.length > 64">...</span></td>
+                        <td>{{ visitor.date | date: "dd.MM.yyyy HH:mm:ss" }}</td>
+                        <td class="text-center">
+                            <button class="btn btn-primary action" ng-click="viewVisitor(visitor._id)"><i class="fa fa-info-square" aria-hidden="true"></i></button>
+                        </td>
+                    </tr>
+                    <tr ng-if="visitors.length == 0">
+                        <td colspan="6">Brak pozycji.</td>
+                    </tr>
+                </table>
+                <div class="py-3 text-center">
+                    Statystyka: <b>{{ visitors.length }}</b> odwiedzin
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container" ng-show="action == 'view'">
+        <div class="py-4 row">
+            <div class="col-lg-10 offset-lg-1">
+                <form class="form">
+                    <div class="form-group text-left">
+                        <h6>IP:</h6>
+                        <input type="text" class="form-control" ng-model="visitor.ip" disabled> 
+                        <h6>Referer:</h6>
+                        <textarea class="form-control" rows="2" ng-model="visitor.referer" disabled></textarea>
+                        <h6>Request:</h6>
+                        <input type="text" class="form-control" ng-model="visitor.url" disabled> 
+                        <h6>Data:</h6>
+                        <input type="text" class="form-control" ng-model="visitor.date" disabled> 
+                    </div>
+                    <button type="submit" class="btn btn-warning font-awesome" ng-click="cancelVisitor()"><i class="fa fa-ban" aria-hidden="true"></i> Anuluj</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+</div>

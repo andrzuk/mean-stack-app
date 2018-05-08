@@ -1,4 +1,4 @@
-var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'messagesModule', 'imagesModule', 'settingsModule', 'todosModule', 'ngSanitize'])
+var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'messagesModule', 'imagesModule', 'settingsModule', 'visitorsModule', 'todosModule', 'ngSanitize'])
 
 .controller('mainController', ['$rootScope', '$scope', '$http', '$document', '$sce', function ($rootScope, $scope, $http, $document, $sce) {
 
@@ -12,6 +12,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
         messages: '../templates/messages',
         images: '../templates/images',
         settings: '../templates/settings',
+        visitors: '../templates/visitors',
         todos: '../templates/todos',
     };
     
@@ -204,6 +205,23 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
         $scope.registerVisitor('settings');
     };
 
+    $scope.getAppVisitors = function() {
+        $scope.isUserLoggedIn(function(result) {
+            if (result) {
+                $rootScope.module = 'visitors';
+                $rootScope.action = 'list';
+                $scope.status = null;
+                setTimeout(function() {
+                    $('button#get-visitors').click();
+                }, 500);
+            }
+            else {
+                $scope.getLogin();
+            }
+        });
+        $scope.registerVisitor('visitors');
+    };
+
     $scope.getAppTodos = function() {
         $rootScope.module = 'todos';
         $rootScope.action = 'list';
@@ -264,7 +282,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
         var details = {
             ip: $rootScope.currentIp,
             referer: $document.getReferer(),
-            url: document.location.href.replace(document.location.origin, '').replace('#!#', ''),
+            url: '/' + hash,
         };
         $http.post('/visitor', details, null).then(function() {});
     };
