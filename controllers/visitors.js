@@ -6,8 +6,14 @@ angular.module('visitorsModule', [])
     
     $scope.getVisitors = function () {
         $scope.action = 'list';
-        $http.get('/visitors/' + $rootScope.settings['visitors_excluded'].value + '/' + $rootScope.settings['visitors_limit'].value, $rootScope.urlConfig).then(function (response) {
-            $scope.visitors = response.data;
+        $http.get('/setting/visitors_excluded').then(function (response) {
+            $scope.excludes = response.data;
+            $http.get('/setting/visitors_limit').then(function (response) {
+                $scope.limit = response.data;
+                $http.get('/visitors/' + $scope.excludes.value + '/' + $scope.limit.value, $rootScope.urlConfig).then(function (response) {
+                    $scope.visitors = response.data;
+                });
+            });
         });
     };
 

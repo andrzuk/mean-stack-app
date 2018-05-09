@@ -94,13 +94,12 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
     
     $scope.getSettings = function () {
         const settingKeys = [
-            'header_enabled', 'header_content', 'footer_enabled', 'footer_content', 'general_styles', 'general_scripts', 'visitors_excluded', 'visitors_limit'
+            'header_enabled', 'header_content', 'footer_enabled', 'footer_content', 'general_styles', 'general_scripts'
         ];
         $.each(settingKeys, function(index, settingKey) {
             $http.get('/setting/' + settingKey).then(function(response) {
                 $rootScope.settings[settingKey] = response.data;
                 $scope.pageData[settingKey] = $sce.trustAsHtml($rootScope.settings[settingKey].value);
-        console.log('Settings:', $rootScope.settings[settingKey].value);
             });
         });
     };
