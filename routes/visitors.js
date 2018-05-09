@@ -26,7 +26,6 @@ module.exports = function(params) {
     });
 
     router.get('/:id', function (req, res, next) {
-        console.log('Received request:', req.params.id);
         token.checkAuth(req.headers, function(access) {
             if (access) {
                 db.collection('visitors', function (err, collection) {

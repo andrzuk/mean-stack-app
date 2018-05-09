@@ -21,6 +21,12 @@ angular.module('visitorsModule', [])
         $scope.action = 'view';
         $http.get('/visitors/' + id, $rootScope.urlConfig).then(function (response) {
             $scope.visitor = response.data;
+            $http.get('/setting/space_characters').then(function (response) {
+                $scope.separators = response.data;
+                for (i = 0; i < $scope.separators.value.length; i++) {
+                    $scope.visitor.referer = $scope.visitor.referer.replace($scope.separators.value[i], ' ' + $scope.separators.value[i] + ' ');
+                }
+            });
         });
     };
 
