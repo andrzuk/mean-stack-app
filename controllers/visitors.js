@@ -24,7 +24,8 @@ angular.module('visitorsModule', [])
             $http.get('/setting/space_characters').then(function (response) {
                 $scope.separators = response.data;
                 for (i = 0; i < $scope.separators.value.length; i++) {
-                    $scope.visitor.referer = $scope.visitor.referer.replace($scope.separators.value[i], ' ' + $scope.separators.value[i] + ' ');
+                    $scope.visitor.referer = $scope.visitor.referer.split($scope.separators.value[i]).join(' ' + $scope.separators.value[i] + ' ');
+                    $scope.visitor.url = $scope.visitor.url.split($scope.separators.value[i]).join(' ' + $scope.separators.value[i] + ' ');
                 }
             });
         });
