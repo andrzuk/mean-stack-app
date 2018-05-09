@@ -8,12 +8,12 @@ module.exports = function(params) {
     var token = require('./token.js')({ database: db, objectId: ObjectID });
 
     router.get('/:excluded/:limit', function (req, res, next) {
-        console.log('Received request [1]:', req.params.excluded);
+        console.log('Received request [1]:', req.params.excluded.split(','));
         console.log('Received request [2]:', req.params.limit);
         token.checkAuth(req.headers, function(access) {
             if (access) {
                 db.collection('visitors', function (err, collection) {
-                    collection.find({ ip: { $nin: req.params.excluded } }).sort({ date: -1 }).toArray(function (err, result) {
+                    collection.find({ ip: { $nin: req.params.excluded.split(',') } }).sort({ date: -1 }).toArray(function (err, result) {
                         res.send(result);
                     });
                 });
