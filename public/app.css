@@ -99,8 +99,7 @@ span.list-search {
 span.form-title {
     font-size: 1.6em;
     font-weight: bold;
-    float: left;
-    padding: 20px 0;
+    padding: 10px;
 }
 tr.requested td {
 	color: #B74934;
