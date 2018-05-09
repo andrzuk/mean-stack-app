@@ -99,13 +99,15 @@ span.list-search {
 span.form-title {
     font-size: 1.6em;
     font-weight: bold;
-    padding: 10px;
+    padding: 0 0 15px 0;
+    float: left;
+    text-align: left;
 }
 tr.requested td {
-	color: #B74934;
+    color: #B74934;
 }
 tr.commited td {
-	color: #577492;
+    color: #577492;
 }
 img.preview {
     width: 140px;
