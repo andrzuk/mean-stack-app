@@ -100,7 +100,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
             $http.get('/setting/' + settingKey).then(function(response) {
                 $rootScope.settings[settingKey] = response.data;
                 $scope.pageData[settingKey] = $sce.trustAsHtml($rootScope.settings[settingKey].value);
-        console.log('Settings:', $rootScope.settings[settingKey]);
+        console.log('Settings:', $rootScope.settings[settingKey].value);
             });
         });
     };
