@@ -48,8 +48,8 @@
     <div class="container" ng-show="action == 'new'">
         <div class="py-4 row">
             <div class="col-lg-10 offset-lg-1">
-                <span class="form-title container"><i class="fa fa-file-text-o" aria-hidden="true"></i> Strona</span>
                 <form class="form">
+                    <span class="form-title container"><i class="fa fa-file-text-o" aria-hidden="true"></i> Strona</span>
                     <input type="hidden" ng-model="formData.ip">
                     <div class="form-group text-left">
                         <h6>Indeks:</h6>
@@ -57,7 +57,7 @@
                         <h6>Tytuł:</h6>
                         <input type="text" class="form-control" ng-model="formData.title"> 
                         <h6>Treść strony:</h6>
-                        <textarea class="form-control" rows="14" ng-model="formData.description" spellcheck="false"></textarea>
+                        <textarea class="form-control" rows="12" ng-model="formData.description" spellcheck="false"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary font-awesome" ng-click="createPage()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Zapisz</button>
                     <button type="submit" class="btn btn-warning font-awesome" ng-click="cancelPage()"><i class="fa fa-ban" aria-hidden="true"></i> Anuluj</button>
@@ -69,8 +69,8 @@
     <div class="container" ng-show="action == 'edit'">
         <div class="py-4 row">
             <div class="col-lg-10 offset-lg-1">
-                <span class="form-title container"><i class="fa fa-file-text-o" aria-hidden="true"></i> Strona</span>
                 <form class="form">
+                    <span class="form-title container"><i class="fa fa-file-text-o" aria-hidden="true"></i> Strona</span>
                     <input type="hidden" ng-model="formData.ip">
                     <div class="form-group text-left">
                         <h6>Indeks:</h6>
@@ -78,7 +78,7 @@
                         <h6>Tytuł:</h6>
                         <input type="text" class="form-control" ng-model="formData.title"> 
                         <h6>Treść strony:</h6>
-                        <textarea class="form-control" rows="14" ng-model="formData.description" spellcheck="false"></textarea>
+                        <textarea class="form-control" rows="12" ng-model="formData.description" spellcheck="false"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary font-awesome" ng-click="updatePage(formData._id)"><i class="fa fa-floppy-o" aria-hidden="true"></i> Zapisz</button>
                     <button type="submit" class="btn btn-warning font-awesome" ng-click="cancelPage()"><i class="fa fa-ban" aria-hidden="true"></i> Anuluj</button>
