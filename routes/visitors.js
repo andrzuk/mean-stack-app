@@ -7,11 +7,13 @@ module.exports = function(params) {
     
     var token = require('./token.js')({ database: db, objectId: ObjectID });
 
-    router.get('/', function (req, res, next) {
+    router.get('/:excluded/:limit', function (req, res, next) {
+        console.log('Received request [1]:', req.params.excluded);
+        console.log('Received request [2]:', req.params.limit);
         token.checkAuth(req.headers, function(access) {
             if (access) {
                 db.collection('visitors', function (err, collection) {
-                    collection.find().sort({ date: -1 }).toArray(function (err, result) {
+                    collection.find({ ip: { $nin: req.params.excluded } }).sort({ date: -1 }).toArray(function (err, result) {
                         res.send(result);
                     });
                 });
@@ -23,6 +25,7 @@ module.exports = function(params) {
     });
 
     router.get('/:id', function (req, res, next) {
+        console.log('Received request:', req.params.id);
         token.checkAuth(req.headers, function(access) {
             if (access) {
                 db.collection('visitors', function (err, collection) {

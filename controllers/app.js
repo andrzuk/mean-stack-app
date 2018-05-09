@@ -94,7 +94,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
     
     $scope.getSettings = function () {
         const settingKeys = [
-            'header_enabled', 'header_content', 'footer_enabled', 'footer_content', 'general_styles', 'general_scripts'
+            'header_enabled', 'header_content', 'footer_enabled', 'footer_content', 'general_styles', 'general_scripts', 'visitors_excluded', 'visitors_limit'
         ];
         $.each(settingKeys, function(index, settingKey) {
             $http.get('/setting/' + settingKey).then(function(response) {

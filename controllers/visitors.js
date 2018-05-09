@@ -6,7 +6,7 @@ angular.module('visitorsModule', [])
     
     $scope.getVisitors = function () {
         $scope.action = 'list';
-        $http.get('/visitors', $rootScope.urlConfig).then(function (response) {
+        $http.get('/visitors/' + $rootScope.settings['visitors_excluded'] + '/' + $rootScope.settings['visitors_limit'], $rootScope.urlConfig).then(function (response) {
             $scope.visitors = response.data;
         });
     };
