@@ -47,19 +47,26 @@ module.exports = function(params) {
     router.post('/', upload.single('file'), function (req, res, next) {
         token.checkAuth(req.headers, function(access) {
             if (access && req.file) {
-                console.log('Received data.....................:', req.file.data);
-                fs.rename(req.file.path, req.file.destination + req.file.originalname, function(err) {
-                    db.collection('images').insertOne({
-                        index: req.body.index,
-                        filename: req.file.originalname,
-                        filesize: req.file.size,
-                        filetype: req.file.mimetype,
-                        filedata: req.file.data,
-                        date: Date.now()
-                    }, function (err, result) {
-                        res.send(result);
+                var data = new Buffer('');
+                req.on('data', function(chunk) {
+                    data = Buffer.concat([data, chunk]);
+                });
+                req.on('end', function() {
+                    console.log('Received data.....................:', data);
+                    fs.rename(req.file.path, req.file.destination + req.file.originalname, function(err) {
+                        db.collection('images').insertOne({
+                            index: req.body.index,
+                            filename: req.file.originalname,
+                            filesize: req.file.size,
+                            filetype: req.file.mimetype,
+                            filedata: data,
+                            date: Date.now()
+                        }, function (err, result) {
+                            res.send(result);
+                        });
                     });
                 });
+                
             }
             else {
                 res.json({});
