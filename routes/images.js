@@ -136,7 +136,7 @@ module.exports = function(params) {
             }, function (err, result) {
                 if (result) {
                     res.writeHead(200, {
-                        'Content-Type': 'image/png',
+                        'Content-Type': result.filetype,
                         'Content-Length': result.filedata.position
                     });
                     res.end(result.filedata.buffer);
