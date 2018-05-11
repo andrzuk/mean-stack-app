@@ -70,7 +70,8 @@ app.get('/page/:index', function (req, res) {
     });
 });
 
-app.get('/img/:name', function (req, res) {
+app.get('/img/:index', function (req, res) {
+    /*
     var file = process.env.HOME + '/upload/' + req.params.name;
     if (fs.existsSync(file)) {
         res.sendFile(file);
@@ -78,6 +79,14 @@ app.get('/img/:name', function (req, res) {
     else {
         res.sendFile(process.env.HOME + '/public/file_not_found.png')
     }
+    */
+    db.collection('images', function (err, collection) {
+        collection.findOne({
+            index: req.params.index
+        }, function (err, result) {
+            res.send(result.data);
+        });
+    });
 });
 
 app.get('/setting/:name', function (req, res) {
