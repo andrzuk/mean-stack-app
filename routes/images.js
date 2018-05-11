@@ -57,6 +57,7 @@ module.exports = function(params) {
                         filedata: fileData,
                         date: Date.now()
                     }, function (err, result) {
+                        console.log('IMG length..........:', fileData.length);
                         res.send(result);
                     });
                 });
@@ -144,7 +145,9 @@ module.exports = function(params) {
                         res.sendFile(process.env.HOME + '/public/file_not_found.png');
                     }
                     */
-                    var img = new Buffer(result.filedata, 'base64');
+                    console.log('FileData............:', result.filedata);
+                    var img = new Buffer(result.filedata);
+                    console.log('IMG length..........:', img.length);
                     res.writeHead(200, {
                         'Content-Type': 'image/png',
                         'Content-Length': img.length
