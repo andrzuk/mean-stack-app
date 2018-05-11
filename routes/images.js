@@ -129,12 +129,13 @@ module.exports = function(params) {
         });
     });
 
-    router.get('/index/:id', function (req, res, next) {
+    router.get('/index/:index', function (req, res, next) {
         db.collection('images', function (err, collection) {
             collection.findOne({
-                index: req.params.id
+                index: req.params.index
             }, function (err, result) {
                 if (result) {
+                    /*
                     var file = uploadFolder + result.filename;
                     if (fs.existsSync(file)) {
                         res.sendFile(file);
@@ -142,6 +143,13 @@ module.exports = function(params) {
                     else {
                         res.sendFile(process.env.HOME + '/public/file_not_found.png');
                     }
+                    */
+                    var img = new Buffer(result.filedata, 'base64');
+                    res.writeHead(200, {
+                        'Content-Type': 'image/png',
+                        'Content-Length': img.length
+                    });
+                    res.end(img);
                 }
                 else {
                     res.sendFile(process.env.HOME + '/public/file_not_found.png');
