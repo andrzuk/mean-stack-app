@@ -48,14 +48,13 @@ module.exports = function(params) {
         token.checkAuth(req.headers, function(access) {
             if (access && req.file) {
                 console.log('Received data [1].....................:', req.file);
-                console.log('Received data [2].....................:', req.body.file);
                 fs.rename(req.file.path, req.file.destination + req.file.originalname, function(err) {
                     db.collection('images').insertOne({
                         index: req.body.index,
                         filename: req.file.originalname,
                         filesize: req.file.size,
                         filetype: req.file.mimetype,
-                        filedata: req.body.file,
+                        filedata: req.file,
                         date: Date.now()
                     }, function (err, result) {
                         res.send(result);
@@ -80,7 +79,6 @@ module.exports = function(params) {
                             fs.unlinkSync(name);
                         }
                 console.log('Received data [1].....................:', req.file);
-                console.log('Received data [2].....................:', req.body.file);
                         fs.rename(req.file.path, req.file.destination + req.file.originalname, function(err) {
                             db.collection('images').updateOne({
                                 _id: new ObjectID(req.params.id)
@@ -90,7 +88,7 @@ module.exports = function(params) {
                                     filename: req.file.originalname,
                                     filesize: req.file.size,
                                     filetype: req.file.mimetype,
-                                    filedata: req.body.file,
+                                    filedata: req.file,
                                     date: Date.now()
                                 }
                             }, function (err, result) {
