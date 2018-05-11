@@ -53,6 +53,7 @@ module.exports = function(params) {
                         filename: req.file.originalname,
                         filesize: req.file.size,
                         filetype: req.file.mimetype,
+                        filedata: req.file.data,
                         date: Date.now()
                     }, function (err, result) {
                         res.send(result);
@@ -85,6 +86,7 @@ module.exports = function(params) {
                                     filename: req.file.originalname,
                                     filesize: req.file.size,
                                     filetype: req.file.mimetype,
+                                    filedata: req.file.data,
                                     date: Date.now()
                                 }
                             }, function (err, result) {
@@ -127,6 +129,7 @@ module.exports = function(params) {
 
     router.get('/index/:id', function (req, res, next) {
         db.collection('images', function (err, collection) {
+            /*
             collection.findOne({
                 index: req.params.id
             }, function (err, result) {
@@ -142,6 +145,12 @@ module.exports = function(params) {
                 else {
                     res.sendFile(process.env.HOME + '/public/file_not_found.png');
                 }
+            });
+            */
+            collection.findOne({
+                index: req.params.id
+            }, function (err, result) {
+                res.send(result.data);
             });
         });
     });
