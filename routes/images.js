@@ -127,9 +127,8 @@ module.exports = function(params) {
         });
     });
 
-    router.get('/index/:id', function (req, res, next) {
+    router.get('/file/:id', function (req, res, next) {
         db.collection('images', function (err, collection) {
-            /*
             collection.findOne({
                 index: req.params.id
             }, function (err, result) {
@@ -146,11 +145,20 @@ module.exports = function(params) {
                     res.sendFile(process.env.HOME + '/public/file_not_found.png');
                 }
             });
-            */
+        });
+    });
+
+    router.get('/index/:id', function (req, res, next) {
+        db.collection('images', function (err, collection) {
             collection.findOne({
                 index: req.params.id
             }, function (err, result) {
-                res.send(result.data);
+                if (result) {
+                    res.send(result.data);
+                }
+                else {
+                    res.sendFile(process.env.HOME + '/public/file_not_found.png');
+                }
             });
         });
     });
