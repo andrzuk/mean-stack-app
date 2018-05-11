@@ -57,7 +57,6 @@ module.exports = function(params) {
                         filedata: fileData,
                         date: Date.now()
                     }, function (err, result) {
-                        console.log('IMG length..........:', fileData.length);
                         res.send(result);
                     });
                 });
@@ -136,18 +135,6 @@ module.exports = function(params) {
                 index: req.params.index
             }, function (err, result) {
                 if (result) {
-                    /*
-                    var file = uploadFolder + result.filename;
-                    if (fs.existsSync(file)) {
-                        res.sendFile(file);
-                    }
-                    else {
-                        res.sendFile(process.env.HOME + '/public/file_not_found.png');
-                    }
-                    */
-                    console.log('FileData............:', result.filedata);
-                    console.log('Length..............:', result.filedata.position);
-                    console.log('Buffer..............:', result.filedata.buffer);
                     res.writeHead(200, {
                         'Content-Type': 'image/png',
                         'Content-Length': result.filedata.position
