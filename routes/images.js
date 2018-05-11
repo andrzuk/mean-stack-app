@@ -47,26 +47,20 @@ module.exports = function(params) {
     router.post('/', upload.single('file'), function (req, res, next) {
         token.checkAuth(req.headers, function(access) {
             if (access && req.file) {
-                var data = new Buffer('');
-                req.on('data', function(chunk) {
-                    data = Buffer.concat([data, chunk]);
-                });
-                req.on('end', function() {
-                    console.log('Received data.....................:', data);
-                    fs.rename(req.file.path, req.file.destination + req.file.originalname, function(err) {
-                        db.collection('images').insertOne({
-                            index: req.body.index,
-                            filename: req.file.originalname,
-                            filesize: req.file.size,
-                            filetype: req.file.mimetype,
-                            filedata: data,
-                            date: Date.now()
-                        }, function (err, result) {
-                            res.send(result);
-                        });
+                console.log('Received data [1].....................:', req.file);
+                console.log('Received data [2].....................:', req.body.file);
+                fs.rename(req.file.path, req.file.destination + req.file.originalname, function(err) {
+                    db.collection('images').insertOne({
+                        index: req.body.index,
+                        filename: req.file.originalname,
+                        filesize: req.file.size,
+                        filetype: req.file.mimetype,
+                        filedata: req.body.file,
+                        date: Date.now()
+                    }, function (err, result) {
+                        res.send(result);
                     });
                 });
-                
             }
             else {
                 res.json({});
@@ -85,7 +79,8 @@ module.exports = function(params) {
                         if (fs.existsSync(name)) {
                             fs.unlinkSync(name);
                         }
-                        console.log('Received data.....................:', req.file.data);
+                console.log('Received data [1].....................:', req.file);
+                console.log('Received data [2].....................:', req.body.file);
                         fs.rename(req.file.path, req.file.destination + req.file.originalname, function(err) {
                             db.collection('images').updateOne({
                                 _id: new ObjectID(req.params.id)
@@ -95,7 +90,7 @@ module.exports = function(params) {
                                     filename: req.file.originalname,
                                     filesize: req.file.size,
                                     filetype: req.file.mimetype,
-                                    filedata: req.file.data,
+                                    filedata: req.body.file,
                                     date: Date.now()
                                 }
                             }, function (err, result) {
