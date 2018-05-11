@@ -47,14 +47,14 @@ module.exports = function(params) {
     router.post('/', upload.single('file'), function (req, res, next) {
         token.checkAuth(req.headers, function(access) {
             if (access && req.file) {
-                console.log('Received data [1].....................:', req.file);
+                var fileData = fs.readFileSync(req.file.path);
                 fs.rename(req.file.path, req.file.destination + req.file.originalname, function(err) {
                     db.collection('images').insertOne({
                         index: req.body.index,
                         filename: req.file.originalname,
                         filesize: req.file.size,
                         filetype: req.file.mimetype,
-                        filedata: req.file,
+                        filedata: fileData,
                         date: Date.now()
                     }, function (err, result) {
                         res.send(result);
@@ -78,7 +78,7 @@ module.exports = function(params) {
                         if (fs.existsSync(name)) {
                             fs.unlinkSync(name);
                         }
-                console.log('Received data [1].....................:', req.file);
+                        var fileData = fs.readFileSync(req.file.path);
                         fs.rename(req.file.path, req.file.destination + req.file.originalname, function(err) {
                             db.collection('images').updateOne({
                                 _id: new ObjectID(req.params.id)
@@ -88,7 +88,7 @@ module.exports = function(params) {
                                     filename: req.file.originalname,
                                     filesize: req.file.size,
                                     filetype: req.file.mimetype,
-                                    filedata: req.file,
+                                    filedata: fileData,
                                     date: Date.now()
                                 }
                             }, function (err, result) {
@@ -129,10 +129,10 @@ module.exports = function(params) {
         });
     });
 
-    router.get('/file/:name', function (req, res, next) {
+    router.get('/index/:id', function (req, res, next) {
         db.collection('images', function (err, collection) {
             collection.findOne({
-                index: req.params.name
+                index: req.params.id
             }, function (err, result) {
                 if (result) {
                     var file = uploadFolder + result.filename;
@@ -142,27 +142,6 @@ module.exports = function(params) {
                     else {
                         res.sendFile(process.env.HOME + '/public/file_not_found.png');
                     }
-                }
-                else {
-                    res.sendFile(process.env.HOME + '/public/file_not_found.png');
-                }
-            });
-        });
-    });
-
-    router.get('/index/:index', function (req, res, next) {
-        db.collection('images', function (err, collection) {
-            collection.findOne({
-                index: req.params.index
-            }, function (err, result) {
-                if (result) {
-                    console.log('Send data.....................:', result.filedata);
-                    var img = new Buffer(result.filedata, 'base64');
-                    res.writeHead(200, {
-                        'Content-Type': 'image/png',
-                        'Content-Length': img.length
-                    });
-                    res.end(img);
                 }
                 else {
                     res.sendFile(process.env.HOME + '/public/file_not_found.png');
