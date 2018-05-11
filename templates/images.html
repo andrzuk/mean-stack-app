@@ -23,7 +23,7 @@
                     </tr>
                     <tr ng-repeat="image in images | filter:searchValue">
                         <td>{{ $index + 1 }}</td>
-                        <td><a href="#preview" ng-click="previewImage(image._id)"><img src="/img/{{ image.filename }}" class="preview"></a></td>
+                        <td><a href="#preview" ng-click="previewImage(image._id)"><img src="/images/index/{{ image.index }}" class="preview"></a></td>
                         <td>{{ image.index }}</td>
                         <td class="text-left">{{ image.filename }}</td>
                         <td>{{ image.filesize | bytes }}</td>
@@ -91,7 +91,7 @@
                     <button class="btn btn-danger" ng-click="cancelImage()"><i class="fa fa-times" aria-hidden="true"></i></button>
                 </div>
                 <div class="text-center">
-                    <img src="/img/{{ image.filename }}" class="full-preview">
+                    <img src="/images/index/{{ image.index }}" class="full-preview">
                     <div class="py-2">Fot. {{ image.index }}. <b>"{{ image.filename }}"</b></div>
                 </div>
             </div>
