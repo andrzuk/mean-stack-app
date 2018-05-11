@@ -146,13 +146,13 @@ module.exports = function(params) {
                     }
                     */
                     console.log('FileData............:', result.filedata);
-                    var img = new Buffer(result.filedata);
-                    console.log('IMG length..........:', img.length);
+                    console.log('Length..............:', result.filedata.position);
+                    console.log('Buffer..............:', result.filedata.buffer);
                     res.writeHead(200, {
                         'Content-Type': 'image/png',
-                        'Content-Length': img.length
+                        'Content-Length': result.filedata.position
                     });
-                    res.end(img);
+                    res.end(result.filedata.buffer);
                 }
                 else {
                     res.sendFile(process.env.HOME + '/public/file_not_found.png');
