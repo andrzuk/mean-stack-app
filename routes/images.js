@@ -154,7 +154,7 @@ module.exports = function(params) {
                 index: req.params.id
             }, function (err, result) {
                 if (result) {
-                    res.send(result.data);
+                    res.end(result.data, 'binary');
                 }
                 else {
                     res.sendFile(process.env.HOME + '/public/file_not_found.png');
