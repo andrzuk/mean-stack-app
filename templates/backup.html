@@ -10,20 +10,26 @@
                 </div>
                 <table class="table table-bordered table-striped">
                     <tr>
+                        <th class="text-left">Tabela</th>
                         <th class="text-left">Rekordy</th>
+                        <th class="text-center">Count</th>
                     </tr>
                     <tr>
+                        <td class="text-left">Pages</td>
                         <td class="text-left">{{ backup.pages }}</td>
+                        <td class="text-center">{{ backup.pages.length }}</td>
                     </tr>
                     <tr>
+                        <td class="text-left">Settings</td>
                         <td class="text-left">{{ backup.settings }}</td>
+                        <td class="text-center">{{ backup.settings.length }}</td>
                     </tr>
                     <tr ng-if="backup.length == 0">
-                        <td><span class="empty-list"><i class="fa fa-times-circle" aria-hidden="true"></i></span><br>Brak pozycji.</td>
+                        <td colspan="3"><span class="empty-list"><i class="fa fa-times-circle" aria-hidden="true"></i></span><br>Brak pozycji.</td>
                     </tr>
                 </table>
                 <div class="py-3 text-center">
-                    Statystyka: <b>{{ backup.length }}</b> rekordów
+                    Statystyka: <b>{{ backup.pages.length + backup.settings.length }}</b> rekordów
                 </div>
             </div>
         </div>
