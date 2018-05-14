@@ -1,0 +1,29 @@
+<div ng-show="module == 'backup'" ng-controller="backupController">
+   
+    <div class="container" ng-show="action == 'view'">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="py-3 text-right">
+                    <span class="list-title"><i class="fa fa-database" aria-hidden="true"></i> Backup</span>
+                    <button class="btn btn-primary font-awesome" ng-click="getBackup()" id="get-backup"><i class="fa fa-refresh" aria-hidden="true"></i> Odśwież listę</button>
+                    <button class="btn btn-danger" ng-click="getPanel()"><i class="fa fa-times" aria-hidden="true"></i></button>
+                </div>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th class="text-left">Rekordy</th>
+                    </tr>
+                    <tr>
+                        <td>{{ backup }}</td>
+                    </tr>
+                    <tr ng-if="backup.length == 0">
+                        <td><span class="empty-list"><i class="fa fa-times-circle" aria-hidden="true"></i></span><br>Brak pozycji.</td>
+                    </tr>
+                </table>
+                <div class="py-3 text-center">
+                    Statystyka: <b>{{ backup.length }}</b> rekordów
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>

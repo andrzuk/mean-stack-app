@@ -45,6 +45,8 @@ mongodb.connect(connection.url, function (err, conn) {
     app.use('/settings', settings);
     var visitors = require('./routes/visitors.js')(dbParams);
     app.use('/visitors', visitors);
+    var backup = require('./routes/backup.js')(dbParams);
+    app.use('/backup', backup);
     var todos = require('./routes/todos.js')(dbParams);
     app.use('/todos', todos);
     console.log('Connected to MongoDB at: %s', connection.url);

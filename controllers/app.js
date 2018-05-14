@@ -1,4 +1,4 @@
-var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'messagesModule', 'imagesModule', 'settingsModule', 'visitorsModule', 'todosModule', 'ngSanitize'])
+var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule', 'messagesModule', 'imagesModule', 'settingsModule', 'visitorsModule', 'backupModule', 'todosModule', 'ngSanitize'])
 
 .controller('mainController', ['$rootScope', '$scope', '$http', '$document', '$sce', function ($rootScope, $scope, $http, $document, $sce) {
 
@@ -13,6 +13,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
         images: '../templates/images',
         settings: '../templates/settings',
         visitors: '../templates/visitors',
+        backup: '../templates/backup',
         todos: '../templates/todos',
     };
     
@@ -220,6 +221,23 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
             }
         });
         $scope.registerVisitor('visitors');
+    };
+
+    $scope.getAppBackup = function() {
+        $scope.isUserLoggedIn(function(result) {
+            if (result) {
+                $rootScope.module = 'backup';
+                $rootScope.action = 'view';
+                $scope.status = null;
+                setTimeout(function() {
+                    $('button#get-backup').click();
+                }, 500);
+            }
+            else {
+                $scope.getLogin();
+            }
+        });
+        $scope.registerVisitor('backup');
     };
 
     $scope.getAppTodos = function() {
