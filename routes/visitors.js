@@ -42,6 +42,7 @@ module.exports = function(params) {
         });
     });
 
+    /*
     router.put('/exclude/:ip', function (req, res, next) {
         token.checkAuth(req.headers, function(access) {
             console.log('Settings id......................:', req.body.id);
@@ -64,6 +65,7 @@ module.exports = function(params) {
             }
         });
     });
+    */
 
     router.delete('/:id', function (req, res, next) {
         token.checkAuth(req.headers, function(access) {
