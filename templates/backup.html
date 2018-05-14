@@ -13,7 +13,10 @@
                         <th class="text-left">Rekordy</th>
                     </tr>
                     <tr>
-                        <td>{{ backup }}</td>
+                        <td class="text-left">{{ backup.pages }}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left">{{ backup.settings }}</td>
                     </tr>
                     <tr ng-if="backup.length == 0">
                         <td><span class="empty-list"><i class="fa fa-times-circle" aria-hidden="true"></i></span><br>Brak pozycji.</td>
