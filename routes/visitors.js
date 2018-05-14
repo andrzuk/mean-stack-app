@@ -11,7 +11,7 @@ module.exports = function(params) {
         token.checkAuth(req.headers, function(access) {
             if (access) {
                 db.collection('visitors', function (err, collection) {
-                    collection.find({ ip: { $nin: req.params.excluded.split(', ') } })
+                    collection.find({ ip: { $nin: req.params.excluded.split(',') } })
                               .sort({ date: -1 })
                               .limit(parseInt(req.params.limit))
                               .toArray(function (err, result) {
@@ -41,31 +41,6 @@ module.exports = function(params) {
             }
         });
     });
-
-    /*
-    router.put('/exclude/:ip', function (req, res, next) {
-        token.checkAuth(req.headers, function(access) {
-            console.log('Settings id......................:', req.body.id);
-            console.log('Settings value...................:', req.body.value);
-            console.log('Params ip........................:', req.params.ip);
-            if (access) {
-                db.collection('settings').updateOne({
-                    _id: new ObjectID(req.body.id)
-                }, {
-                    $set: {
-                        value: req.body.value + ', ' + req.params.ip,
-                        date: Date.now()
-                    }
-                }, function (err, result) {
-                    res.send(result);
-                });
-            }
-            else {
-                res.json({});
-            }
-        });
-    });
-    */
 
     router.delete('/:id', function (req, res, next) {
         token.checkAuth(req.headers, function(access) {
