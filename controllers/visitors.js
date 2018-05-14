@@ -38,6 +38,19 @@ angular.module('visitorsModule', [])
         });
     };
 
+    $scope.excludeVisitor = function (ip) {
+        $scope.action = 'list';
+        $http.get('/setting/visitors_excluded').then(function (response) {
+            $scope.excludes = response.data;
+            var details = { id: $scope.excludes._id, value: $scope.excludes.value };
+            console.log('Selected ip:', ip);
+            console.log('Get excludes:', details);
+            $http.put('/visitors/exclude/' + ip, details, $rootScope.urlConfig).then(function () {
+                $scope.getVisitors();
+            });
+        });
+    };
+
     $scope.cancelVisitor = function () {
         $scope.action = 'list';
     };
