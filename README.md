@@ -15,26 +15,35 @@ Project directory structure:
 	├── controllers
 	│   ├── app.js
 	│   ├── auth.js
+	│   ├── images.js
 	│   ├── messages.js
 	│   ├── pages.js
+	│   ├── settings.js
 	│   ├── todos.js
-	│   └── users.js
+	│   ├── users.js
+	│   └── visitors.js
 	├── routes
 	│   ├── token.js
 	│   ├── auth.js
+	│   ├── images.js
 	│   ├── messages.js
 	│   ├── pages.js
+	│   ├── settings.js
 	│   ├── todos.js
-	│   └── users.js
+	│   ├── users.js
+	│   └── visitors.js
 	├── templates
 	│   ├── auth.html
 	│   ├── home.html
 	│   ├── contact.html
+	│   ├── images.html
 	│   ├── manual.html
 	│   ├── messages.html
 	│   ├── pages.html
+	│   ├── settings.html
 	│   ├── todos.html
-	│   └── users.html
+	│   ├── users.html
+	│   └── visitors.html
 	├── public
 	│   ├── fonts
 	│   │   └── (...)
