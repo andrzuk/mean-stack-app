@@ -10,5 +10,18 @@ angular.module('backupModule', [])
             $scope.backup = response.data;
         });
     };
+    
+    $scope.openBackup = function () {
+        $scope.action = 'restore';
+        $scope.formData = {};
+    };
+
+    $scope.restoreBackup = function () {
+        $scope.action = 'view';
+    };
+
+    $scope.cancelBackup = function () {
+        $scope.action = 'view';
+    };
 
 }]);
