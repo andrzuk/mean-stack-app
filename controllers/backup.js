@@ -18,15 +18,16 @@ angular.module('backupModule', [])
 
     $scope.restoreBackup = function () {
         $scope.action = 'view';
-        $scope.records = $.parseJSON($scope.formData.script);
-        $.each($scope.records, function(index, record) {
-            delete record._id;
-            console.log('Record.........................:', record);
-        });
-        $scope.formData.script = JSON.stringify($scope.records);
-        $http.post('/backup', $scope.formData, $rootScope.urlConfig).then(function () {
-            $scope.formData = {};
-        });
+        if ($scope.formData.table && $scope.formData.script) {
+            $scope.records = $.parseJSON($scope.formData.script);
+            $.each($scope.records, function(index, record) {
+                delete record._id;
+            });
+            $scope.formData.script = JSON.stringify($scope.records);
+            $http.post('/backup', $scope.formData, $rootScope.urlConfig).then(function () {
+                $scope.formData = {};
+            });
+        }
     };
 
     $scope.cancelBackup = function () {

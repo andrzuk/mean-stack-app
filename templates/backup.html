@@ -44,7 +44,10 @@
                     <span class="form-title container"><i class="fa fa-database" aria-hidden="true"></i> Backup</span>
                     <div class="form-group text-left">
                         <h6>Tabela:</h6>
-                        <input type="text" class="form-control" ng-model="formData.table"> 
+                        <select class="form-control" ng-model="formData.table">
+                            <option value="pages">Pages</option>
+                            <option value="settings">Settings</option>
+                        </select>
                         <h6>Skrypt:</h6>
                         <textarea class="form-control" rows="14" ng-model="formData.script" spellcheck="false"></textarea>
                     </div>

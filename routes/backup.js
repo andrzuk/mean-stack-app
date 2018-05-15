@@ -35,11 +35,10 @@ module.exports = function(params) {
             if (access) {
                 console.log('Table..........................:', req.body.table);
                 console.log('Script.........................:', req.body.script);
-                /*
                 db.collection(req.body.table).insert(req.body.script, function (err, result) {
+                    if (err) console.log('Error..................:', err);
                     res.send(result);
                 });
-                */
             }
             else {
                 res.json({});
