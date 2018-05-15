@@ -16,14 +16,14 @@
                         <th class="text-left">Rekordy</th>
                         <th class="text-center">Count</th>
                     </tr>
-                    <tr ng-if="backup.pages | filter:searchValue">
+                    <tr ng-if="backup.pages">
                         <td class="text-left">Pages</td>
-                        <td class="text-left">{{ backup.pages }}</td>
+                        <td class="text-left">{{ backup.pages | filter:searchValue }}</td>
                         <td class="text-center">{{ backup.pages.length }}</td>
                     </tr>
-                    <tr ng-if="backup.settings | filter:searchValue">
+                    <tr ng-if="backup.settings">
                         <td class="text-left">Settings</td>
-                        <td class="text-left">{{ backup.settings }}</td>
+                        <td class="text-left">{{ backup.settings | filter:searchValue }}</td>
                         <td class="text-center">{{ backup.settings.length }}</td>
                     </tr>
                     <tr ng-if="backup.length == 0">
