@@ -30,5 +30,27 @@ module.exports = function(params) {
         });
     });
 
+    router.post('/', function (req, res, next) {
+        token.checkAuth(req.headers, function(access) {
+            if (access) {
+                console.log('Table..........................:', req.body.table);
+                console.log('Script.........................:', req.body.script);
+                /*
+                db.collection(req.body.table).insert(req.body.script, function (err, result) {
+                    res.send(result);
+                });
+                */
+                $.each(req.body.script, function(index, record) {
+                    delete record._id;
+                    console.log('Record.........................:', record);
+                });
+                console.log('Stripped.......................:', req.body.script);
+            }
+            else {
+                res.json({});
+            }
+        });
+    });
+
     return router;
 };

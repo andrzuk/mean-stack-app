@@ -43,8 +43,10 @@
                 <form class="form">
                     <span class="form-title container"><i class="fa fa-database" aria-hidden="true"></i> Backup</span>
                     <div class="form-group text-left">
+                        <h6>Tabela:</h6>
+                        <input type="text" class="form-control" ng-model="formData.table"> 
                         <h6>Skrypt:</h6>
-                        <textarea class="form-control" rows="20" ng-model="formData.script" spellcheck="false"></textarea>
+                        <textarea class="form-control" rows="14" ng-model="formData.script" spellcheck="false"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary font-awesome" ng-click="restoreBackup()"><i class="fa fa-copy" aria-hidden="true"></i> Uruchom</button>
                     <button type="submit" class="btn btn-warning font-awesome" ng-click="cancelBackup()"><i class="fa fa-ban" aria-hidden="true"></i> Anuluj</button>

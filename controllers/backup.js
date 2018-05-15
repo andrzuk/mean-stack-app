@@ -18,6 +18,9 @@ angular.module('backupModule', [])
 
     $scope.restoreBackup = function () {
         $scope.action = 'view';
+        $http.post('/backup', $scope.formData, $rootScope.urlConfig).then(function () {
+            $scope.formData = {};
+        });
     };
 
     $scope.cancelBackup = function () {
