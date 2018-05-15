@@ -40,7 +40,7 @@ module.exports = function(params) {
                     res.send(result);
                 });
                 */
-                $.each(req.body.script, function(index, record) {
+                $.each($.parseJSON(req.body.script), function(index, record) {
                     delete record._id;
                     console.log('Record.........................:', record);
                 });
