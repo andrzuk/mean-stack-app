@@ -40,11 +40,6 @@ module.exports = function(params) {
                     res.send(result);
                 });
                 */
-                $.each($.parseJSON(req.body.script), function(index, record) {
-                    delete record._id;
-                    console.log('Record.........................:', record);
-                });
-                console.log('Stripped.......................:', req.body.script);
             }
             else {
                 res.json({});
