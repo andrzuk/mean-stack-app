@@ -33,10 +33,7 @@ module.exports = function(params) {
     router.post('/', function (req, res, next) {
         token.checkAuth(req.headers, function(access) {
             if (access) {
-                console.log('Table..........................:', req.body.table);
-                console.log('Script.........................:', req.body.script);
-                db.collection(req.body.table).insert(req.body.script, function (err, result) {
-                    if (err) console.log('Error..................:', err);
+                db.collection(req.body.table).insertMany(req.body.script, function (err, result) {
                     res.send(result);
                 });
             }

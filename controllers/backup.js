@@ -23,7 +23,7 @@ angular.module('backupModule', [])
             $.each($scope.records, function(index, record) {
                 delete record._id;
             });
-            $scope.formData.script = JSON.stringify($scope.records);
+            $scope.formData.script = $scope.records;
             $http.post('/backup', $scope.formData, $rootScope.urlConfig).then(function () {
                 $scope.formData = {};
             });
