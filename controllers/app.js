@@ -95,12 +95,15 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
     
     $scope.getSettings = function () {
         const settingKeys = [
-            'header_enabled', 'header_content', 'footer_enabled', 'footer_content', 'general_styles', 'general_scripts'
+            'header_enabled', 'header_content', 'footer_enabled', 'footer_content', 'general_styles', 'general_scripts', 'messages_timeout'
         ];
         $.each(settingKeys, function(index, settingKey) {
             $http.get('/setting/' + settingKey).then(function(response) {
                 $rootScope.settings[settingKey] = response.data;
                 $scope.pageData[settingKey] = $sce.trustAsHtml($rootScope.settings[settingKey].value);
+                if (settingKey == 'messages_timeout') {
+                    $rootScope.settings[settingKey] = $rootScope.settings[settingKey] ? parseInt($rootScope.settings[settingKey]) : 3000;
+                }
             });
         });
     };

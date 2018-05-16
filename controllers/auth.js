@@ -41,6 +41,10 @@ angular.module('authModule', [])
                 $scope.message = 'Login lub hasło są nieprawidłowe.';
                 $scope.status = 'error';
             }
+            setTimeout(function() {
+                $scope.message = null;
+                $scope.status = null;
+            }, $rootScope.settings['messages_timeout']);
         });
     };
 
@@ -60,6 +64,10 @@ angular.module('authModule', [])
                 $scope.message = 'Wylogowanie nie powiodło się.';
                 $scope.status = 'error';
             }
+            setTimeout(function() {
+                $scope.message = null;
+                $scope.status = null;
+            }, $rootScope.settings['messages_timeout']);
         });
     };
 

@@ -25,7 +25,14 @@ angular.module('backupModule', [])
             });
             $scope.formData.script = $scope.records;
             $http.post('/backup', $scope.formData, $rootScope.urlConfig).then(function () {
+                $scope.getBackup();
                 $scope.formData = {};
+                $scope.message = 'Backup został zakończony pomyślnie.';
+                $scope.status = 'info';
+                setTimeout(function() {
+                    $scope.message = null;
+                    $scope.status = null;
+                }, $rootScope.settings['messages_timeout']);
             });
         }
     };
