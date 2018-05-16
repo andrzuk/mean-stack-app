@@ -102,8 +102,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
                 $rootScope.settings[settingKey] = response.data;
                 $scope.pageData[settingKey] = $sce.trustAsHtml($rootScope.settings[settingKey].value);
                 if (settingKey == 'messages_timeout') {
-                    console.log('z bazy:', response.data);
-                    $rootScope.settings[settingKey] = $rootScope.settings[settingKey] ? parseInt($rootScope.settings[settingKey]) : 3000;
+                    $rootScope.settings[settingKey] = $rootScope.settings[settingKey] ? parseInt($rootScope.settings[settingKey].value) : 3000;
                 }
             });
         });
