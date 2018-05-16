@@ -41,6 +41,8 @@ angular.module('authModule', [])
                 $scope.message = 'Login lub hasło są nieprawidłowe.';
                 $scope.status = 'error';
             }
+            console.log('settings:',$rootScope.settings);
+            console.log('timeout:',$rootScope.settings['messages_timeout']);
             setTimeout(function() {
                 $scope.message = null;
                 $scope.status = null;
@@ -64,6 +66,8 @@ angular.module('authModule', [])
                 $scope.message = 'Wylogowanie nie powiodło się.';
                 $scope.status = 'error';
             }
+            console.log('settings:',$rootScope.settings);
+            console.log('timeout:',$rootScope.settings['messages_timeout']);
             setTimeout(function() {
                 $scope.message = null;
                 $scope.status = null;
