@@ -20,6 +20,11 @@ angular.module('authModule', [])
                 $scope.message = 'Rejestracja nie powiodła się.';
                 $scope.status = 'error';
             }
+            setTimeout(function() {
+                console.log('Register Timeout!');
+                $scope.message = null;
+                $scope.status = null;
+            }, $rootScope.settings['messages_timeout']);
         });
     };
 
@@ -44,6 +49,7 @@ angular.module('authModule', [])
             console.log('settings:',$rootScope.settings);
             console.log('timeout:',$rootScope.settings['messages_timeout']);
             setTimeout(function() {
+                console.log('Login Timeout!');
                 $scope.message = null;
                 $scope.status = null;
             }, $rootScope.settings['messages_timeout']);
@@ -69,6 +75,7 @@ angular.module('authModule', [])
             console.log('settings:',$rootScope.settings);
             console.log('timeout:',$rootScope.settings['messages_timeout']);
             setTimeout(function() {
+                console.log('Logout Timeout!');
                 $scope.message = null;
                 $scope.status = null;
             }, $rootScope.settings['messages_timeout']);
