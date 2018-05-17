@@ -35,6 +35,14 @@ angular.module('visitorsModule', [])
         $scope.action = 'list';
         $http.delete('/visitors/' + id, $rootScope.urlConfig).then(function () {
             $scope.getVisitors();
+            $scope.message = 'Odwiedziny zostały usunięte pomyślnie.';
+            $scope.status = 'info';
+            $('div.alert').fadeIn();
+            setTimeout(function() {
+                $scope.message = null;
+                $scope.status = null;
+                $('div.alert').fadeOut();
+            }, $rootScope.settings['messages_timeout']);
         });
     };
 
@@ -45,6 +53,14 @@ angular.module('visitorsModule', [])
             var details = { id: $scope.excludes._id, value: $scope.excludes.value };
             $http.put('/visitors/exclude/' + ip, details, $rootScope.urlConfig).then(function () {
                 $scope.getVisitors();
+                $scope.message = 'Adres został wykluczony pomyślnie.';
+                $scope.status = 'info';
+                $('div.alert').fadeIn();
+                setTimeout(function() {
+                    $scope.message = null;
+                    $scope.status = null;
+                    $('div.alert').fadeOut();
+                }, $rootScope.settings['messages_timeout']);
             });
         });
     };

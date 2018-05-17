@@ -23,6 +23,14 @@ angular.module('usersModule', [])
         $http.post('/users', $scope.formData, $rootScope.urlConfig).then(function () {
             $scope.formData = {};
             $scope.getUsers();
+            $scope.message = 'Użytkownik został dodany pomyślnie.';
+            $scope.status = 'info';
+            $('div.alert').fadeIn();
+            setTimeout(function() {
+                $scope.message = null;
+                $scope.status = null;
+                $('div.alert').fadeOut();
+            }, $rootScope.settings['messages_timeout']);
         });
     };
 
@@ -40,6 +48,14 @@ angular.module('usersModule', [])
         $http.put('/users/' + id, $scope.formData, $rootScope.urlConfig).then(function () {
             $scope.formData = {};
             $scope.getUsers();
+            $scope.message = 'Użytkownik został zmieniony pomyślnie.';
+            $scope.status = 'info';
+            $('div.alert').fadeIn();
+            setTimeout(function() {
+                $scope.message = null;
+                $scope.status = null;
+                $('div.alert').fadeOut();
+            }, $rootScope.settings['messages_timeout']);
         });
     };
 
@@ -47,6 +63,14 @@ angular.module('usersModule', [])
         $scope.action = 'list';
         $http.delete('/users/' + id, $rootScope.urlConfig).then(function () {
             $scope.getUsers();
+            $scope.message = 'Użytkownik został usunięty pomyślnie.';
+            $scope.status = 'info';
+            $('div.alert').fadeIn();
+            setTimeout(function() {
+                $scope.message = null;
+                $scope.status = null;
+                $('div.alert').fadeOut();
+            }, $rootScope.settings['messages_timeout']);
         });
     };
 

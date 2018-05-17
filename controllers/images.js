@@ -31,6 +31,14 @@ angular.module('imagesModule', [])
 		}).then(function (response) {
             $scope.formData = {};
             $scope.getImages();
+            $scope.message = 'Obrazek został dodany pomyślnie.';
+            $scope.status = 'info';
+            $('div.alert').fadeIn();
+            setTimeout(function() {
+                $scope.message = null;
+                $scope.status = null;
+                $('div.alert').fadeOut();
+            }, $rootScope.settings['messages_timeout']);
         });
     };
 
@@ -56,6 +64,14 @@ angular.module('imagesModule', [])
 		}).then(function (response) {
             $scope.formData = {};
             $scope.getImages();
+            $scope.message = 'Obrazek został zmieniony pomyślnie.';
+            $scope.status = 'info';
+            $('div.alert').fadeIn();
+            setTimeout(function() {
+                $scope.message = null;
+                $scope.status = null;
+                $('div.alert').fadeOut();
+            }, $rootScope.settings['messages_timeout']);
         });
     };
 
@@ -70,6 +86,14 @@ angular.module('imagesModule', [])
         $scope.action = 'list';
         $http.delete('/images/' + id, $rootScope.urlConfig).then(function () {
             $scope.getImages();
+            $scope.message = 'Obrazek został usunięty pomyślnie.';
+            $scope.status = 'info';
+            $('div.alert').fadeIn();
+            setTimeout(function() {
+                $scope.message = null;
+                $scope.status = null;
+                $('div.alert').fadeOut();
+            }, $rootScope.settings['messages_timeout']);
         });
     };
 

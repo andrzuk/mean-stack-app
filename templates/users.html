@@ -89,4 +89,13 @@
         </div>
     </div>
     
+    <div class="container">
+        <div class="py-4 row">
+            <div class="col-lg-6 offset-lg-3">
+                <div ng-if="status == 'info'" class="alert alert-success" role="alert">{{ message }}</div>
+                <div ng-if="status == 'error'" class="alert alert-danger" role="alert">{{ message }}</div>
+            </div>
+        </div>
+    </div>
+
 </div>

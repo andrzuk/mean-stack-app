@@ -23,6 +23,14 @@ angular.module('messagesModule', [])
         $http.put('/messages/' + id, $scope.formData, $rootScope.urlConfig).then(function () {
             $scope.formData = {};
             $scope.getMessages();
+            $scope.message = 'Wiadomość została zmieniona pomyślnie.';
+            $scope.status = 'info';
+            $('div.alert').fadeIn();
+            setTimeout(function() {
+                $scope.message = null;
+                $scope.status = null;
+                $('div.alert').fadeOut();
+            }, $rootScope.settings['messages_timeout']);
         });
     };
 
@@ -30,6 +38,14 @@ angular.module('messagesModule', [])
         $scope.action = 'list';
         $http.delete('/messages/' + id, $rootScope.urlConfig).then(function () {
             $scope.getMessages();
+            $scope.message = 'Wiadomość została usunięta pomyślnie.';
+            $scope.status = 'info';
+            $('div.alert').fadeIn();
+            setTimeout(function() {
+                $scope.message = null;
+                $scope.status = null;
+                $('div.alert').fadeOut();
+            }, $rootScope.settings['messages_timeout']);
         });
     };
 

@@ -29,9 +29,11 @@ angular.module('backupModule', [])
                 $scope.formData = {};
                 $scope.message = 'Backup został zakończony pomyślnie.';
                 $scope.status = 'info';
+                $('div.alert').fadeIn();
                 setTimeout(function() {
                     $scope.message = null;
                     $scope.status = null;
+                    $('div.alert').fadeOut();
                 }, $rootScope.settings['messages_timeout']);
             });
         }

@@ -22,6 +22,14 @@ angular.module('pagesModule', [])
         $http.post('/pages', $scope.formData, $rootScope.urlConfig).then(function () {
             $scope.formData = {};
             $scope.getPages();
+            $scope.message = 'Strona została dodana pomyślnie.';
+            $scope.status = 'info';
+            $('div.alert').fadeIn();
+            setTimeout(function() {
+                $scope.message = null;
+                $scope.status = null;
+                $('div.alert').fadeOut();
+            }, $rootScope.settings['messages_timeout']);
         });
     };
 
@@ -38,6 +46,14 @@ angular.module('pagesModule', [])
         $http.put('/pages/' + id, $scope.formData, $rootScope.urlConfig).then(function () {
             $scope.formData = {};
             $scope.getPages();
+            $scope.message = 'Strona została zmieniona pomyślnie.';
+            $scope.status = 'info';
+            $('div.alert').fadeIn();
+            setTimeout(function() {
+                $scope.message = null;
+                $scope.status = null;
+                $('div.alert').fadeOut();
+            }, $rootScope.settings['messages_timeout']);
         });
     };
 
@@ -45,6 +61,14 @@ angular.module('pagesModule', [])
         $scope.action = 'list';
         $http.delete('/pages/' + id, $rootScope.urlConfig).then(function () {
             $scope.getPages();
+            $scope.message = 'Strona została usunięta pomyślnie.';
+            $scope.status = 'info';
+            $('div.alert').fadeIn();
+            setTimeout(function() {
+                $scope.message = null;
+                $scope.status = null;
+                $('div.alert').fadeOut();
+            }, $rootScope.settings['messages_timeout']);
         });
     };
 

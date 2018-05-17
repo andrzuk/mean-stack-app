@@ -21,6 +21,14 @@ angular.module('settingsModule', [])
         $http.post('/settings', $scope.formData, $rootScope.urlConfig).then(function () {
             $scope.formData = {};
             $scope.getSettings();
+            $scope.message = 'Ustawienie zostało dodane pomyślnie.';
+            $scope.status = 'info';
+            $('div.alert').fadeIn();
+            setTimeout(function() {
+                $scope.message = null;
+                $scope.status = null;
+                $('div.alert').fadeOut();
+            }, $rootScope.settings['messages_timeout']);
         });
     };
 
@@ -36,6 +44,14 @@ angular.module('settingsModule', [])
         $http.put('/settings/' + id, $scope.formData, $rootScope.urlConfig).then(function () {
             $scope.formData = {};
             $scope.getSettings();
+            $scope.message = 'Ustawienie zostało zmienione pomyślnie.';
+            $scope.status = 'info';
+            $('div.alert').fadeIn();
+            setTimeout(function() {
+                $scope.message = null;
+                $scope.status = null;
+                $('div.alert').fadeOut();
+            }, $rootScope.settings['messages_timeout']);
         });
     };
 
@@ -43,6 +59,14 @@ angular.module('settingsModule', [])
         $scope.action = 'list';
         $http.delete('/settings/' + id, $rootScope.urlConfig).then(function () {
             $scope.getSettings();
+            $scope.message = 'Ustawienie zostało usunięte pomyślnie.';
+            $scope.status = 'info';
+            $('div.alert').fadeIn();
+            setTimeout(function() {
+                $scope.message = null;
+                $scope.status = null;
+                $('div.alert').fadeOut();
+            }, $rootScope.settings['messages_timeout']);
         });
     };
 

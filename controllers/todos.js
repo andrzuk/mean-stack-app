@@ -22,6 +22,14 @@ angular.module('todosModule', [])
         $http.post('/todos', $scope.formData).then(function () {
             $scope.formData = {};
             $scope.getTodos();
+            $scope.message = 'Zadanie zostało dodane pomyślnie.';
+            $scope.status = 'info';
+            $('div.alert').fadeIn();
+            setTimeout(function() {
+                $scope.message = null;
+                $scope.status = null;
+                $('div.alert').fadeOut();
+            }, $rootScope.settings['messages_timeout']);
         });
     };
 
@@ -38,6 +46,14 @@ angular.module('todosModule', [])
         $http.put('/todos/' + id, $scope.formData).then(function () {
             $scope.formData = {};
             $scope.getTodos();
+            $scope.message = 'Zadanie zostało zmienione pomyślnie.';
+            $scope.status = 'info';
+            $('div.alert').fadeIn();
+            setTimeout(function() {
+                $scope.message = null;
+                $scope.status = null;
+                $('div.alert').fadeOut();
+            }, $rootScope.settings['messages_timeout']);
         });
     };
 
@@ -45,6 +61,14 @@ angular.module('todosModule', [])
         $scope.action = 'list';
         $http.delete('/todos/' + id).then(function () {
             $scope.getTodos();
+            $scope.message = 'Zadanie zostało usunięte pomyślnie.';
+            $scope.status = 'info';
+            $('div.alert').fadeIn();
+            setTimeout(function() {
+                $scope.message = null;
+                $scope.status = null;
+                $('div.alert').fadeOut();
+            }, $rootScope.settings['messages_timeout']);
         });
     };
 
@@ -52,6 +76,14 @@ angular.module('todosModule', [])
         $scope.action = 'list';
         $http.put('/todos/' + id + '/' + value).then(function () {
             $scope.getTodos();
+            $scope.message = 'Status został zmieniony pomyślnie.';
+            $scope.status = 'info';
+            $('div.alert').fadeIn();
+            setTimeout(function() {
+                $scope.message = null;
+                $scope.status = null;
+                $('div.alert').fadeOut();
+            }, $rootScope.settings['messages_timeout']);
         });
     };
 

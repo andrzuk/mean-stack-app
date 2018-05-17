@@ -49,6 +49,12 @@
                         </div>
                         <button type="submit" class="btn btn-primary font-awesome" ng-click="sendMessage()"><i class="fa fa-share" aria-hidden="true"></i> Wyślij</button>
                     </form>
+                    <div class="container">
+                        <div class="row">
+                            <div ng-if="status == 'info'" class="alert alert-success" role="alert">{{ message }}</div>
+                            <div ng-if="status == 'error'" class="alert alert-danger" role="alert">{{ message }}</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

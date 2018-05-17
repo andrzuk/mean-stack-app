@@ -255,6 +255,14 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
         $http.post('/messages', $scope.formData).then(function () {
             $scope.formData = {};
             $scope.getContact();
+            $scope.message = 'Wiadomość została wysłana pomyślnie.';
+            $scope.status = 'info';
+            $('div.alert').fadeIn();
+            setTimeout(function() {
+                $scope.message = null;
+                $scope.status = null;
+                $('div.alert').fadeOut();
+            }, $rootScope.settings['messages_timeout']);
         });
         $scope.registerVisitor('send-message');
     };
