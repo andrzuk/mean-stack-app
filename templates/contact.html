@@ -50,7 +50,7 @@
                         <button type="submit" class="btn btn-primary font-awesome" ng-click="sendMessage()"><i class="fa fa-share" aria-hidden="true"></i> Wyślij</button>
                     </form>
                     <div class="container">
-                        <div class="row">
+                        <div class="row py-3">
                             <div ng-if="state == 'info'" class="alert alert-success" role="alert">{{ message }}</div>
                             <div ng-if="state == 'error'" class="alert alert-danger" role="alert">{{ message }}</div>
                         </div>

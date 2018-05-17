@@ -125,3 +125,6 @@ img.full-preview {
     padding: 1px;
     border: 1px solid #ccc;
 }
+div.alert {
+    width: 100%;
+}
