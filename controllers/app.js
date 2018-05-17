@@ -251,33 +251,19 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
     };
     
     $scope.sendMessage = function () {
-        /*
         $scope.formData.ip = $rootScope.currentIp;
         $http.post('/messages', $scope.formData).then(function () {
             $scope.formData = {};
-            $scope.getContact();
             $scope.message = 'Wiadomość została wysłana pomyślnie.';
-            $scope.status = 'info';
+            $scope.state = 'info';
             $('div.alert').fadeIn();
             setTimeout(function() {
                 $scope.message = null;
-                $scope.status = null;
+                $scope.state = null;
                 $('div.alert').fadeOut();
             }, $rootScope.settings['messages_timeout']);
         });
         $scope.registerVisitor('send-message');
-        */
-        $scope.formData.ip = $rootScope.currentIp;
-        $http.post('/messages', $scope.formData).then(function () {
-            $scope.message = 'Wiadomość została wysłana pomyślnie.';
-            $scope.status = 'info';
-            $('div.alert').fadeIn();
-            setTimeout(function() {
-                $scope.message = null;
-                $scope.status = null;
-                $('div.alert').fadeOut();
-            }, $rootScope.settings['messages_timeout']);
-        });
     };
 
     $scope.isUserLoggedIn = function(callback) {
