@@ -42,21 +42,27 @@
 
     <div class="container" ng-show="action == 'panel'">
         <div class="py-4 row">
-            <div class="col-lg-4 offset-lg-4">
+            <div class="col-lg-8 offset-lg-2">
                 <h3>Admin Panel</h3>
                 <hr>
-                <h6>Login: {{ currentUser.login }}</h6>
-                <h6>E-mail: {{ currentUser.email }}</h6>
+                <h6>Login: <b>{{ currentUser.login }}</b></h6>
+                <h6>E-mail: <b>{{ currentUser.email }}</b></h6>
                 <hr>
-                <button class="btn btn-primary btn-block font-awesome left-align" ng-click="getAppPages()"><i class="fa fa-file-text-o" aria-hidden="true"></i> Strony</button>
-                <button class="btn btn-primary btn-block font-awesome left-align" ng-click="getAppUsers()"><i class="fa fa-user" aria-hidden="true"></i> Użytkownicy</button>
-                <button class="btn btn-primary btn-block font-awesome left-align" ng-click="getAppImages()"><i class="fa fa-picture-o" aria-hidden="true"></i> Galeria</button>
-                <button class="btn btn-primary btn-block font-awesome left-align" ng-click="getAppMessages()"><i class="fa fa-envelope-o" aria-hidden="true"></i> Wiadomości</button>
-                <button class="btn btn-primary btn-block font-awesome left-align" ng-click="getAppSettings()"><i class="fa fa-cog" aria-hidden="true"></i> Ustawienia</button>
-                <button class="btn btn-primary btn-block font-awesome left-align" ng-click="getAppVisitors()"><i class="fa fa-globe" aria-hidden="true"></i> Odwiedziny</button>
-                <button class="btn btn-primary btn-block font-awesome left-align" ng-click="getAppBackup()"><i class="fa fa-database" aria-hidden="true"></i> Backup</button>
-                <hr>
-                <button class="btn btn-danger btn-block font-awesome left-align" ng-click="logoutUser()"><i class="fa fa-sign-out" aria-hidden="true"></i> Wyloguj</button>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <button class="btn btn-primary btn-block font-awesome left-align" ng-click="getAppPages()"><i class="fa fa-file-text-o" aria-hidden="true"></i> Strony</button>
+                        <button class="btn btn-primary btn-block font-awesome left-align" ng-click="getAppUsers()"><i class="fa fa-user" aria-hidden="true"></i> Użytkownicy</button>
+                        <button class="btn btn-primary btn-block font-awesome left-align" ng-click="getAppImages()"><i class="fa fa-picture-o" aria-hidden="true"></i> Galeria</button>
+                        <button class="btn btn-primary btn-block font-awesome left-align" ng-click="getAppMessages()"><i class="fa fa-envelope-o" aria-hidden="true"></i> Wiadomości</button>
+                    </div>
+                    <div class="col-lg-6">
+                        <button class="btn btn-primary btn-block font-awesome left-align" ng-click="getAppSettings()"><i class="fa fa-cog" aria-hidden="true"></i> Ustawienia</button>
+                        <button class="btn btn-primary btn-block font-awesome left-align" ng-click="getAppVisitors()"><i class="fa fa-globe" aria-hidden="true"></i> Odwiedziny</button>
+                        <button class="btn btn-primary btn-block font-awesome left-align" ng-click="getAppBackup()"><i class="fa fa-database" aria-hidden="true"></i> Backup</button>
+                        <hr>
+                        <button class="btn btn-danger btn-block font-awesome left-align" ng-click="logoutUser()"><i class="fa fa-sign-out" aria-hidden="true"></i> Wyloguj</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
