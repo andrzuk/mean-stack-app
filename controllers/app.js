@@ -254,7 +254,6 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
         $scope.formData.ip = $rootScope.currentIp;
         $http.post('/messages', $scope.formData).then(function () {
             $scope.formData = {};
-            $scope.getContact();
             $scope.message = 'Wiadomość została wysłana pomyślnie.';
             $scope.status = 'info';
             $('div.alert').fadeIn();
