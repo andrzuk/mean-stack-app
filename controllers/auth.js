@@ -20,10 +20,11 @@ angular.module('authModule', [])
                 $scope.message = 'Rejestracja nie powiodła się.';
                 $scope.status = 'error';
             }
+            $('div.alert').fadeIn();
             setTimeout(function() {
-                console.log('Register Timeout!');
                 $scope.message = null;
                 $scope.status = null;
+                $('div.alert').fadeOut();
             }, $rootScope.settings['messages_timeout']);
         });
     };
@@ -46,12 +47,11 @@ angular.module('authModule', [])
                 $scope.message = 'Login lub hasło są nieprawidłowe.';
                 $scope.status = 'error';
             }
-            console.log('settings:',$rootScope.settings);
-            console.log('timeout:',$rootScope.settings['messages_timeout']);
+            $('div.alert').fadeIn();
             setTimeout(function() {
-                console.log('Login Timeout!');
-                $scope.message = 'Test';
-                $scope.status = 'hide';
+                $scope.message = null;
+                $scope.status = null;
+                $('div.alert').fadeOut();
             }, $rootScope.settings['messages_timeout']);
         });
     };
@@ -72,12 +72,11 @@ angular.module('authModule', [])
                 $scope.message = 'Wylogowanie nie powiodło się.';
                 $scope.status = 'error';
             }
-            console.log('settings:',$rootScope.settings);
-            console.log('timeout:',$rootScope.settings['messages_timeout']);
+            $('div.alert').fadeIn();
             setTimeout(function() {
-                console.log('Logout Timeout!');
-                $scope.message = 'Test';
-                $scope.status = 'hide';
+                $scope.message = null;
+                $scope.status = null;
+                $('div.alert').fadeOut();
             }, $rootScope.settings['messages_timeout']);
         });
     };
