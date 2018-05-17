@@ -263,7 +263,6 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
                 $('div.alert').fadeOut();
             }, $rootScope.settings['messages_timeout']);
         });
-        $scope.registerVisitor('send-message');
     };
 
     $scope.isUserLoggedIn = function(callback) {
