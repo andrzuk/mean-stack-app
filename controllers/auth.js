@@ -50,8 +50,8 @@ angular.module('authModule', [])
             console.log('timeout:',$rootScope.settings['messages_timeout']);
             setTimeout(function() {
                 console.log('Login Timeout!');
-                $scope.message = null;
-                $scope.status = null;
+                $scope.message = 'Test';
+                $scope.status = 'hide';
             }, $rootScope.settings['messages_timeout']);
         });
     };
@@ -76,8 +76,8 @@ angular.module('authModule', [])
             console.log('timeout:',$rootScope.settings['messages_timeout']);
             setTimeout(function() {
                 console.log('Logout Timeout!');
-                $scope.message = null;
-                $scope.status = null;
+                $scope.message = 'Test';
+                $scope.status = 'hide';
             }, $rootScope.settings['messages_timeout']);
         });
     };
