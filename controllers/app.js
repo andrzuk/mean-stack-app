@@ -251,6 +251,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
     };
     
     $scope.sendMessage = function () {
+        /*
         $scope.formData.ip = $rootScope.currentIp;
         $http.post('/messages', $scope.formData).then(function () {
             $scope.formData = {};
@@ -263,6 +264,8 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
                 $('div.alert').fadeOut();
             }, $rootScope.settings['messages_timeout']);
         });
+        */
+        console.log('Send message');
     };
 
     $scope.isUserLoggedIn = function(callback) {
