@@ -57,8 +57,8 @@
                         <input type="text" class="form-control" value="{{ visitor.ip }}" disabled> 
                         <h6>Host:</h6>
                         <input type="text" class="form-control" value="{{ visitor.host }}" disabled> 
-                        <h6>Referer:</h6>
-                        <a href="{{ visitor.link }}" target="_blank"><textarea class="form-control" rows="2" disabled>{{ visitor.referer }}</textarea></a>
+                        <h6>Referer (<a href="{{ visitor.link }}" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a>):</h6>
+                        <textarea class="form-control" rows="2" disabled>{{ visitor.referer }}</textarea>
                         <h6>Request:</h6>
                         <textarea class="form-control" rows="2" disabled>{{ visitor.url }}</textarea>
                         <h6>Data:</h6>
