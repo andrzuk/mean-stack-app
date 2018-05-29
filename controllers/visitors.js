@@ -21,6 +21,7 @@ angular.module('visitorsModule', [])
         $scope.action = 'view';
         $http.get('/visitors/' + id, $rootScope.urlConfig).then(function (response) {
             $scope.visitor = response.data;
+            $scope.visitor.link = $scope.visitor.referer;
             $http.get('/setting/space_characters').then(function (response) {
                 $scope.separators = response.data;
                 for (i = 0; i < $scope.separators.value.length; i++) {
