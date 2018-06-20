@@ -14,7 +14,7 @@ angular.module('usersModule', [])
     $scope.newUser = function () {
         $scope.action = 'new';
         $scope.formData = {};
-        $scope.formData.ip = $rootScope.currentIp;
+        $scope.formData.ip = $rootScope.currentIp.ip;
         $scope.formData.token = 'Register';
     };
 
@@ -39,7 +39,7 @@ angular.module('usersModule', [])
         $http.get('/users/' + id, $rootScope.urlConfig).then(function (response) {
             $scope.formData = response.data;
             $scope.formData.password = '';
-            $scope.formData.ip = $rootScope.currentIp;
+            $scope.formData.ip = $rootScope.currentIp.ip;
         });
     };
 

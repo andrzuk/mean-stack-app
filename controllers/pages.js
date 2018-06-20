@@ -14,7 +14,7 @@ angular.module('pagesModule', [])
     $scope.newPage = function () {
         $scope.action = 'new';
         $scope.formData = {};
-        $scope.formData.ip = $rootScope.currentIp;
+        $scope.formData.ip = $rootScope.currentIp.ip;
     };
 
     $scope.createPage = function () {
@@ -37,7 +37,7 @@ angular.module('pagesModule', [])
         $scope.action = 'edit';
         $http.get('/pages/' + id, $rootScope.urlConfig).then(function (response) {
             $scope.formData = response.data;
-            $scope.formData.ip = $rootScope.currentIp;
+            $scope.formData.ip = $rootScope.currentIp.ip;
         });
     };
 
