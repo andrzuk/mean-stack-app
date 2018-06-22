@@ -18,19 +18,21 @@ angular.module('pagesModule', [])
     };
 
     $scope.createPage = function () {
-        $scope.action = 'list';
-        $http.post('/pages', $scope.formData, $rootScope.urlConfig).then(function () {
-            $scope.formData = {};
-            $scope.getPages();
-            $scope.message = 'Strona została dodana pomyślnie.';
-            $scope.status = 'info';
-            $('div.alert').fadeIn();
-            setTimeout(function() {
-                $scope.message = null;
-                $scope.status = null;
-                $('div.alert').fadeOut();
-            }, $rootScope.settings['messages_timeout']);
-        });
+		if ($scope.formData.index && $scope.formData.title && $scope.formData.description) {
+			$scope.action = 'list';
+			$http.post('/pages', $scope.formData, $rootScope.urlConfig).then(function () {
+				$scope.formData = {};
+				$scope.getPages();
+				$scope.message = 'Strona została dodana pomyślnie.';
+				$scope.status = 'info';
+				$('div.alert').fadeIn();
+				setTimeout(function() {
+					$scope.message = null;
+					$scope.status = null;
+					$('div.alert').fadeOut();
+				}, $rootScope.settings['messages_timeout']);
+			});
+		}
     };
 
     $scope.editPage = function (id) {
@@ -42,34 +44,43 @@ angular.module('pagesModule', [])
     };
 
     $scope.updatePage = function (id) {
-        $scope.action = 'list';
-        $http.put('/pages/' + id, $scope.formData, $rootScope.urlConfig).then(function () {
-            $scope.formData = {};
-            $scope.getPages();
-            $scope.message = 'Strona została zmieniona pomyślnie.';
-            $scope.status = 'info';
-            $('div.alert').fadeIn();
-            setTimeout(function() {
-                $scope.message = null;
-                $scope.status = null;
-                $('div.alert').fadeOut();
-            }, $rootScope.settings['messages_timeout']);
-        });
+		if ($scope.formData.index && $scope.formData.title && $scope.formData.description) {
+			$scope.action = 'list';
+			$http.put('/pages/' + id, $scope.formData, $rootScope.urlConfig).then(function () {
+				$scope.formData = {};
+				$scope.getPages();
+				$scope.message = 'Strona została zmieniona pomyślnie.';
+				$scope.status = 'info';
+				$('div.alert').fadeIn();
+				setTimeout(function() {
+					$scope.message = null;
+					$scope.status = null;
+					$('div.alert').fadeOut();
+				}, $rootScope.settings['messages_timeout']);
+			});
+		}
     };
 
-    $scope.deletePage = function (id) {
-        $scope.action = 'list';
-        $http.delete('/pages/' + id, $rootScope.urlConfig).then(function () {
-            $scope.getPages();
-            $scope.message = 'Strona została usunięta pomyślnie.';
-            $scope.status = 'info';
-            $('div.alert').fadeIn();
-            setTimeout(function() {
-                $scope.message = null;
-                $scope.status = null;
-                $('div.alert').fadeOut();
-            }, $rootScope.settings['messages_timeout']);
-        });
+    $scope.deletePage = function (id, confirmed) {
+		if (!confirmed) {
+			$scope.id = id;
+			$scope.action = 'dialog';
+			$scope.status = null;
+		}
+		else {
+			$scope.action = 'list';
+			$http.delete('/pages/' + id, $rootScope.urlConfig).then(function () {
+				$scope.getPages();
+				$scope.message = 'Strona została usunięta pomyślnie.';
+				$scope.status = 'info';
+				$('div.alert').fadeIn();
+				setTimeout(function() {
+					$scope.message = null;
+					$scope.status = null;
+					$('div.alert').fadeOut();
+				}, $rootScope.settings['messages_timeout']);
+			});
+		}
     };
 
     $scope.cancelPage = function () {

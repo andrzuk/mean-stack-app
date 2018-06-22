@@ -19,19 +19,21 @@ angular.module('usersModule', [])
     };
 
     $scope.createUser = function () {
-        $scope.action = 'list';
-        $http.post('/users', $scope.formData, $rootScope.urlConfig).then(function () {
-            $scope.formData = {};
-            $scope.getUsers();
-            $scope.message = 'Użytkownik został dodany pomyślnie.';
-            $scope.status = 'info';
-            $('div.alert').fadeIn();
-            setTimeout(function() {
-                $scope.message = null;
-                $scope.status = null;
-                $('div.alert').fadeOut();
-            }, $rootScope.settings['messages_timeout']);
-        });
+		if ($scope.formData.login && $scope.formData.email && $scope.formData.password) {
+			$scope.action = 'list';
+			$http.post('/users', $scope.formData, $rootScope.urlConfig).then(function () {
+				$scope.formData = {};
+				$scope.getUsers();
+				$scope.message = 'Użytkownik został dodany pomyślnie.';
+				$scope.status = 'info';
+				$('div.alert').fadeIn();
+				setTimeout(function() {
+					$scope.message = null;
+					$scope.status = null;
+					$('div.alert').fadeOut();
+				}, $rootScope.settings['messages_timeout']);
+			});
+		}
     };
 
     $scope.editUser = function (id) {
@@ -44,34 +46,43 @@ angular.module('usersModule', [])
     };
 
     $scope.updateUser = function (id) {
-        $scope.action = 'list';
-        $http.put('/users/' + id, $scope.formData, $rootScope.urlConfig).then(function () {
-            $scope.formData = {};
-            $scope.getUsers();
-            $scope.message = 'Użytkownik został zmieniony pomyślnie.';
-            $scope.status = 'info';
-            $('div.alert').fadeIn();
-            setTimeout(function() {
-                $scope.message = null;
-                $scope.status = null;
-                $('div.alert').fadeOut();
-            }, $rootScope.settings['messages_timeout']);
-        });
+		if ($scope.formData.login && $scope.formData.email && $scope.formData.password) {
+			$scope.action = 'list';
+			$http.put('/users/' + id, $scope.formData, $rootScope.urlConfig).then(function () {
+				$scope.formData = {};
+				$scope.getUsers();
+				$scope.message = 'Użytkownik został zmieniony pomyślnie.';
+				$scope.status = 'info';
+				$('div.alert').fadeIn();
+				setTimeout(function() {
+					$scope.message = null;
+					$scope.status = null;
+					$('div.alert').fadeOut();
+				}, $rootScope.settings['messages_timeout']);
+			});
+		}
     };
 
-    $scope.deleteUser = function (id) {
-        $scope.action = 'list';
-        $http.delete('/users/' + id, $rootScope.urlConfig).then(function () {
-            $scope.getUsers();
-            $scope.message = 'Użytkownik został usunięty pomyślnie.';
-            $scope.status = 'info';
-            $('div.alert').fadeIn();
-            setTimeout(function() {
-                $scope.message = null;
-                $scope.status = null;
-                $('div.alert').fadeOut();
-            }, $rootScope.settings['messages_timeout']);
-        });
+    $scope.deleteUser = function (id, confirmed) {
+		if (!confirmed) {
+			$scope.id = id;
+			$scope.action = 'dialog';
+			$scope.status = null;
+		}
+		else {
+			$scope.action = 'list';
+			$http.delete('/users/' + id, $rootScope.urlConfig).then(function () {
+				$scope.getUsers();
+				$scope.message = 'Użytkownik został usunięty pomyślnie.';
+				$scope.status = 'info';
+				$('div.alert').fadeIn();
+				setTimeout(function() {
+					$scope.message = null;
+					$scope.status = null;
+					$('div.alert').fadeOut();
+				}, $rootScope.settings['messages_timeout']);
+			});
+		}
     };
 
     $scope.cancelUser = function () {

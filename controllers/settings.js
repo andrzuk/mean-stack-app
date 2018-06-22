@@ -17,19 +17,21 @@ angular.module('settingsModule', [])
     };
 
     $scope.createSetting = function () {
-        $scope.action = 'list';
-        $http.post('/settings', $scope.formData, $rootScope.urlConfig).then(function () {
-            $scope.formData = {};
-            $scope.getSettings();
-            $scope.message = 'Ustawienie zostało dodane pomyślnie.';
-            $scope.status = 'info';
-            $('div.alert').fadeIn();
-            setTimeout(function() {
-                $scope.message = null;
-                $scope.status = null;
-                $('div.alert').fadeOut();
-            }, $rootScope.settings['messages_timeout']);
-        });
+		if ($scope.formData.name && $scope.formData.value && $scope.formData.description) {
+			$scope.action = 'list';
+			$http.post('/settings', $scope.formData, $rootScope.urlConfig).then(function () {
+				$scope.formData = {};
+				$scope.getSettings();
+				$scope.message = 'Ustawienie zostało dodane pomyślnie.';
+				$scope.status = 'info';
+				$('div.alert').fadeIn();
+				setTimeout(function() {
+					$scope.message = null;
+					$scope.status = null;
+					$('div.alert').fadeOut();
+				}, $rootScope.settings['messages_timeout']);
+			});
+		}
     };
 
     $scope.editSetting = function (id) {
@@ -40,34 +42,43 @@ angular.module('settingsModule', [])
     };
 
     $scope.updateSetting = function (id) {
-        $scope.action = 'list';
-        $http.put('/settings/' + id, $scope.formData, $rootScope.urlConfig).then(function () {
-            $scope.formData = {};
-            $scope.getSettings();
-            $scope.message = 'Ustawienie zostało zmienione pomyślnie.';
-            $scope.status = 'info';
-            $('div.alert').fadeIn();
-            setTimeout(function() {
-                $scope.message = null;
-                $scope.status = null;
-                $('div.alert').fadeOut();
-            }, $rootScope.settings['messages_timeout']);
-        });
+		if ($scope.formData.name && $scope.formData.value && $scope.formData.description) {
+			$scope.action = 'list';
+			$http.put('/settings/' + id, $scope.formData, $rootScope.urlConfig).then(function () {
+				$scope.formData = {};
+				$scope.getSettings();
+				$scope.message = 'Ustawienie zostało zmienione pomyślnie.';
+				$scope.status = 'info';
+				$('div.alert').fadeIn();
+				setTimeout(function() {
+					$scope.message = null;
+					$scope.status = null;
+					$('div.alert').fadeOut();
+				}, $rootScope.settings['messages_timeout']);
+			});
+		}
     };
 
-    $scope.deleteSetting = function (id) {
-        $scope.action = 'list';
-        $http.delete('/settings/' + id, $rootScope.urlConfig).then(function () {
-            $scope.getSettings();
-            $scope.message = 'Ustawienie zostało usunięte pomyślnie.';
-            $scope.status = 'info';
-            $('div.alert').fadeIn();
-            setTimeout(function() {
-                $scope.message = null;
-                $scope.status = null;
-                $('div.alert').fadeOut();
-            }, $rootScope.settings['messages_timeout']);
-        });
+    $scope.deleteSetting = function (id, confirmed) {
+		if (!confirmed) {
+			$scope.id = id;
+			$scope.action = 'dialog';
+			$scope.status = null;
+		}
+		else {
+			$scope.action = 'list';
+			$http.delete('/settings/' + id, $rootScope.urlConfig).then(function () {
+				$scope.getSettings();
+				$scope.message = 'Ustawienie zostało usunięte pomyślnie.';
+				$scope.status = 'info';
+				$('div.alert').fadeIn();
+				setTimeout(function() {
+					$scope.message = null;
+					$scope.status = null;
+					$('div.alert').fadeOut();
+				}, $rootScope.settings['messages_timeout']);
+			});
+		}
     };
 
     $scope.cancelSetting = function () {

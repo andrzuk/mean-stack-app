@@ -32,19 +32,26 @@ angular.module('visitorsModule', [])
         });
     };
 
-    $scope.deleteVisitor = function (id) {
-        $scope.action = 'list';
-        $http.delete('/visitors/' + id, $rootScope.urlConfig).then(function () {
-            $scope.getVisitors();
-            $scope.message = 'Odwiedziny zostały usunięte pomyślnie.';
-            $scope.status = 'info';
-            $('div.alert').fadeIn();
-            setTimeout(function() {
-                $scope.message = null;
-                $scope.status = null;
-                $('div.alert').fadeOut();
-            }, $rootScope.settings['messages_timeout']);
-        });
+    $scope.deleteVisitor = function (id, confirmed) {
+		if (!confirmed) {
+			$scope.id = id;
+			$scope.action = 'dialog';
+			$scope.status = null;
+		}
+		else {
+			$scope.action = 'list';
+			$http.delete('/visitors/' + id, $rootScope.urlConfig).then(function () {
+				$scope.getVisitors();
+				$scope.message = 'Odwiedziny zostały usunięte pomyślnie.';
+				$scope.status = 'info';
+				$('div.alert').fadeIn();
+				setTimeout(function() {
+					$scope.message = null;
+					$scope.status = null;
+					$('div.alert').fadeOut();
+				}, $rootScope.settings['messages_timeout']);
+			});
+		}
     };
 
     $scope.excludeVisitor = function (ip) {

@@ -1,102 +1,120 @@
 <div ng-show="module == 'todos'" ng-controller="todosController" ng-init="getTodos()">
    
-    <div class="container" ng-show="action == 'list'">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="py-3 text-right">
-                    <span class="list-title"><i class="fa fa-list-alt" aria-hidden="true"></i> Lista zadań</span>
-                    <span class="list-search"><input type="search" class="form-control" ng-model="searchValue" placeholder="Szukaj"></span>
-                    <button class="btn btn-success font-awesome" ng-click="newTodo()"><i class="fa fa-plus" aria-hidden="true"></i> Dodaj nowe zadanie</button>
-                </div>
-                <table class="table table-bordered table-striped">
-                    <tr>
-                        <th>Lp.</th>
-                        <th>Stan</th>
-                        <th class="text-left">Opis zadania</th>
-                        <th class="text-left">IP</th>
-                        <th>Data</th>
-                        <th colspan="2" class="text-center">Akcje</th>
-                    </tr>
-                    <tr ng-repeat="todo in todos | filter:searchValue" class="{{ todo.accept == 'true' ? 'commited' : 'requested' }}">
-                        <td>{{ $index + 1 }}</td>
-                        <td ng-if="todo.accept == 'true'">
-                            <button class="btn btn-sm btn-success" ng-click="setTodo(todo._id, false)"><i class="fa fa-check-square-o" aria-hidden="true"></i></button>
-                        </td>
-                        <td ng-if="todo.accept != 'true'">
-                            <button class="btn btn-sm btn-danger" ng-click="setTodo(todo._id, true)"><i class="fa fa-square-o" aria-hidden="true"></i></button>
-                        </td>
-                        <td class="text-left">{{ todo.text | limitTo:256 }}<span ng-if="todo.text.length > 256">...</span></td>
-                        <td class="text-left">{{ todo.ip }}</td>
-                        <td>{{ todo.date | date: "dd.MM.yyyy HH:mm:ss" }}</td>
-                        <td class="text-center">
-                            <button class="btn btn-primary action" ng-click="editTodo(todo._id)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                        </td>
-                        <td class="text-center">
-                            <button class="btn btn-danger action" ng-click="deleteTodo(todo._id)"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                        </td>
-                    </tr>
-                    <tr ng-if="todos.length == 0">
-                        <td colspan="7"><span class="empty-list"><i class="fa fa-times-circle" aria-hidden="true"></i></span><br>Brak pozycji.</td>
-                    </tr>
-                </table>
-                <div class="py-3 text-center">
-                    Statystyka: <b>{{ todos.length }}</b> zadań
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="container" ng-show="action == 'new'">
-        <div class="py-4 row">
-            <div class="col-lg-8 offset-lg-2">
-                <form class="form">
-                    <span class="form-title container"><i class="fa fa-list-alt" aria-hidden="true"></i> Zadanie</span>
-                    <input type="hidden" ng-model="formData.ip">
-                    <div class="form-group text-left">
-                        <h6>Opis zadania:</h6>
-                        <textarea class="form-control" rows="12" ng-model="formData.text" spellcheck="false"></textarea>
-                        <h6>Zatwierdzone:</h6>
-                        <select class="form-control" ng-model="formData.accept">
-                            <option value="false">Nie</option>
-                            <option value="true">Tak</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary font-awesome" ng-click="createTodo()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Zapisz</button>
-                    <button type="submit" class="btn btn-warning font-awesome" ng-click="cancelTodo()"><i class="fa fa-ban" aria-hidden="true"></i> Anuluj</button>
-                </form>
-            </div>
-        </div>
-    </div>
+	<div class="container" ng-show="action == 'list'">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="py-3 text-right">
+					<span class="list-title"><i class="fa fa-list-alt" aria-hidden="true"></i> Lista zadań</span>
+					<span class="list-search"><input type="search" class="form-control" ng-model="searchValue" placeholder="Szukaj"></span>
+					<button class="btn btn-success font-awesome" ng-click="newTodo()"><i class="fa fa-plus" aria-hidden="true"></i> Dodaj nowe zadanie</button>
+				</div>
+				<table class="table table-bordered table-striped">
+					<tr>
+						<th>Lp.</th>
+						<th>Stan</th>
+						<th class="text-left">Opis zadania</th>
+						<th class="text-left">IP</th>
+						<th>Data</th>
+						<th colspan="2" class="text-center">Akcje</th>
+					</tr>
+					<tr ng-repeat="todo in todos | filter:searchValue" class="{{ todo.accept == 'true' ? 'commited' : 'requested' }}">
+						<td>{{ $index + 1 }}</td>
+						<td ng-if="todo.accept == 'true'">
+							<button class="btn btn-sm btn-success" ng-click="setTodo(todo._id, false)"><i class="fa fa-check-square-o" aria-hidden="true"></i></button>
+						</td>
+						<td ng-if="todo.accept != 'true'">
+							<button class="btn btn-sm btn-danger" ng-click="setTodo(todo._id, true)"><i class="fa fa-square-o" aria-hidden="true"></i></button>
+						</td>
+						<td class="text-left">{{ todo.text | limitTo:256 }}<span ng-if="todo.text.length > 256">...</span></td>
+						<td class="text-left">{{ todo.ip }}</td>
+						<td>{{ todo.date | date: "dd.MM.yyyy HH:mm:ss" }}</td>
+						<td class="text-center">
+							<button class="btn btn-primary action" ng-click="editTodo(todo._id)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+						</td>
+						<td class="text-center">
+							<button class="btn btn-danger action" ng-click="deleteTodo(todo._id, false)"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+						</td>
+					</tr>
+					<tr ng-if="todos.length == 0">
+						<td colspan="7"><span class="empty-list"><i class="fa fa-times-circle" aria-hidden="true"></i></span><br>Brak pozycji.</td>
+					</tr>
+				</table>
+				<div class="py-3 text-center">
+					Statystyka: <b>{{ todos.length }}</b> zadań
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container" ng-show="action == 'new'">
+		<div class="py-4 row">
+			<div class="col-lg-8 offset-lg-2">
+				<form class="form">
+					<span class="form-title container"><i class="fa fa-list-alt" aria-hidden="true"></i> Zadanie</span>
+					<input type="hidden" ng-model="formData.ip">
+					<div class="form-group text-left">
+						<h6>Opis zadania:</h6>
+						<textarea class="form-control" rows="12" ng-model="formData.text" spellcheck="false" required></textarea>
+						<h6>Zatwierdzone:</h6>
+						<select class="form-control" ng-model="formData.accept">
+							<option value="false">Nie</option>
+							<option value="true">Tak</option>
+						</select>
+					</div>
+					<button type="submit" class="btn btn-primary font-awesome" ng-click="createTodo()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Zapisz</button>
+					<button type="submit" class="btn btn-warning font-awesome" ng-click="cancelTodo()"><i class="fa fa-ban" aria-hidden="true"></i> Anuluj</button>
+				</form>
+			</div>
+		</div>
+	</div>
 
-    <div class="container" ng-show="action == 'edit'">
-        <div class="py-4 row">
-            <div class="col-lg-8 offset-lg-2">
-                <form class="form">
-                    <span class="form-title container"><i class="fa fa-list-alt" aria-hidden="true"></i> Zadanie</span>
-                    <input type="hidden" ng-model="formData.ip">
-                    <div class="form-group text-left">
-                        <h6>Opis zadania:</h6>
-                        <textarea class="form-control" rows="12" ng-model="formData.text" spellcheck="false"></textarea>
-                        <h6>Zatwierdzone:</h6>
-                        <select class="form-control" ng-model="formData.accept">
-                            <option value="false">Nie</option>
-                            <option value="true">Tak</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary font-awesome" ng-click="updateTodo(formData._id)"><i class="fa fa-floppy-o" aria-hidden="true"></i> Zapisz</button>
-                    <button type="submit" class="btn btn-warning font-awesome" ng-click="cancelTodo()"><i class="fa fa-ban" aria-hidden="true"></i> Anuluj</button>
-                </form>
-            </div>
-        </div>
-    </div>
-    
-    <div class="container">
-        <div class="py-4 row">
-            <div class="col-lg-6 offset-lg-3">
-                <div ng-if="status == 'info'" class="alert alert-success" role="alert">{{ message }}</div>
-                <div ng-if="status == 'error'" class="alert alert-danger" role="alert">{{ message }}</div>
-            </div>
-        </div>
-    </div>
+	<div class="container" ng-show="action == 'edit'">
+		<div class="py-4 row">
+			<div class="col-lg-8 offset-lg-2">
+				<form class="form">
+					<span class="form-title container"><i class="fa fa-list-alt" aria-hidden="true"></i> Zadanie</span>
+					<input type="hidden" ng-model="formData.ip">
+					<div class="form-group text-left">
+						<h6>Opis zadania:</h6>
+						<textarea class="form-control" rows="12" ng-model="formData.text" spellcheck="false" required></textarea>
+						<h6>Zatwierdzone:</h6>
+						<select class="form-control" ng-model="formData.accept">
+							<option value="false">Nie</option>
+							<option value="true">Tak</option>
+						</select>
+					</div>
+					<button type="submit" class="btn btn-primary font-awesome" ng-click="updateTodo(formData._id)"><i class="fa fa-floppy-o" aria-hidden="true"></i> Zapisz</button>
+					<button type="submit" class="btn btn-warning font-awesome" ng-click="cancelTodo()"><i class="fa fa-ban" aria-hidden="true"></i> Anuluj</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container">
+		<div class="py-4 row">
+			<div class="col-lg-6 offset-lg-3">
+				<div ng-if="status == 'info'" class="alert alert-success" role="alert">{{ message }}</div>
+				<div ng-if="status == 'error'" class="alert alert-danger" role="alert">{{ message }}</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container" ng-show="action == 'dialog'">
+		<div class="py-4 row">
+			<div class="col-lg-6 offset-lg-3">
+				<div class="panel panel-dialog">
+					<div class="panel-heading">Usuwanie rekordu</div>
+					<div class="panel-body">
+						<p><div class="icon"><i class="fa fa-3x fa-trash-o" aria-hidden="true"></i></div></p>
+						<p>Uwaga! Czy na pewno chcesz usunąć wskazaną pozycję?</p>
+					</div>
+					<div class="panel-footer">
+						<a href="#" class="btn btn-danger" ng-click="deleteTodo(id, true)">Skasuj</a>
+						<a href="#" class="btn btn-warning" ng-click="cancelTodo()">Anuluj</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 </div>

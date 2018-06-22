@@ -18,19 +18,21 @@ angular.module('todosModule', [])
     };
 
     $scope.createTodo = function () {
-        $scope.action = 'list';
-        $http.post('/todos', $scope.formData).then(function () {
-            $scope.formData = {};
-            $scope.getTodos();
-            $scope.message = 'Zadanie zostało dodane pomyślnie.';
-            $scope.status = 'info';
-            $('div.alert').fadeIn();
-            setTimeout(function() {
-                $scope.message = null;
-                $scope.status = null;
-                $('div.alert').fadeOut();
-            }, $rootScope.settings['messages_timeout']);
-        });
+		if ($scope.formData.text) {
+			$scope.action = 'list';
+			$http.post('/todos', $scope.formData).then(function () {
+				$scope.formData = {};
+				$scope.getTodos();
+				$scope.message = 'Zadanie zostało dodane pomyślnie.';
+				$scope.status = 'info';
+				$('div.alert').fadeIn();
+				setTimeout(function() {
+					$scope.message = null;
+					$scope.status = null;
+					$('div.alert').fadeOut();
+				}, $rootScope.settings['messages_timeout']);
+			});
+		}
     };
 
     $scope.editTodo = function (id) {
@@ -42,34 +44,43 @@ angular.module('todosModule', [])
     };
 
     $scope.updateTodo = function (id) {
-        $scope.action = 'list';
-        $http.put('/todos/' + id, $scope.formData).then(function () {
-            $scope.formData = {};
-            $scope.getTodos();
-            $scope.message = 'Zadanie zostało zmienione pomyślnie.';
-            $scope.status = 'info';
-            $('div.alert').fadeIn();
-            setTimeout(function() {
-                $scope.message = null;
-                $scope.status = null;
-                $('div.alert').fadeOut();
-            }, $rootScope.settings['messages_timeout']);
-        });
+		if ($scope.formData.text) {
+			$scope.action = 'list';
+			$http.put('/todos/' + id, $scope.formData).then(function () {
+				$scope.formData = {};
+				$scope.getTodos();
+				$scope.message = 'Zadanie zostało zmienione pomyślnie.';
+				$scope.status = 'info';
+				$('div.alert').fadeIn();
+				setTimeout(function() {
+					$scope.message = null;
+					$scope.status = null;
+					$('div.alert').fadeOut();
+				}, $rootScope.settings['messages_timeout']);
+			});
+		}
     };
 
-    $scope.deleteTodo = function (id) {
-        $scope.action = 'list';
-        $http.delete('/todos/' + id).then(function () {
-            $scope.getTodos();
-            $scope.message = 'Zadanie zostało usunięte pomyślnie.';
-            $scope.status = 'info';
-            $('div.alert').fadeIn();
-            setTimeout(function() {
-                $scope.message = null;
-                $scope.status = null;
-                $('div.alert').fadeOut();
-            }, $rootScope.settings['messages_timeout']);
-        });
+    $scope.deleteTodo = function (id, confirmed) {
+		if (!confirmed) {
+			$scope.id = id;
+			$scope.action = 'dialog';
+			$scope.status = null;
+		}
+		else {
+			$scope.action = 'list';
+			$http.delete('/todos/' + id).then(function () {
+				$scope.getTodos();
+				$scope.message = 'Zadanie zostało usunięte pomyślnie.';
+				$scope.status = 'info';
+				$('div.alert').fadeIn();
+				setTimeout(function() {
+					$scope.message = null;
+					$scope.status = null;
+					$('div.alert').fadeOut();
+				}, $rootScope.settings['messages_timeout']);
+			});
+		}
     };
 
     $scope.setTodo = function (id, value) {

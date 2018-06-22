@@ -19,34 +19,43 @@ angular.module('messagesModule', [])
     };
 
     $scope.updateMessage = function (id) {
-        $scope.action = 'list';
-        $http.put('/messages/' + id, $scope.formData, $rootScope.urlConfig).then(function () {
-            $scope.formData = {};
-            $scope.getMessages();
-            $scope.message = 'Wiadomość została zmieniona pomyślnie.';
-            $scope.status = 'info';
-            $('div.alert').fadeIn();
-            setTimeout(function() {
-                $scope.message = null;
-                $scope.status = null;
-                $('div.alert').fadeOut();
-            }, $rootScope.settings['messages_timeout']);
-        });
+		if ($scope.formData.name && $scope.formData.email && $scope.formData.message) {
+			$scope.action = 'list';
+			$http.put('/messages/' + id, $scope.formData, $rootScope.urlConfig).then(function () {
+				$scope.formData = {};
+				$scope.getMessages();
+				$scope.message = 'Wiadomość została zmieniona pomyślnie.';
+				$scope.status = 'info';
+				$('div.alert').fadeIn();
+				setTimeout(function() {
+					$scope.message = null;
+					$scope.status = null;
+					$('div.alert').fadeOut();
+				}, $rootScope.settings['messages_timeout']);
+			});
+		}
     };
 
-    $scope.deleteMessage = function (id) {
-        $scope.action = 'list';
-        $http.delete('/messages/' + id, $rootScope.urlConfig).then(function () {
-            $scope.getMessages();
-            $scope.message = 'Wiadomość została usunięta pomyślnie.';
-            $scope.status = 'info';
-            $('div.alert').fadeIn();
-            setTimeout(function() {
-                $scope.message = null;
-                $scope.status = null;
-                $('div.alert').fadeOut();
-            }, $rootScope.settings['messages_timeout']);
-        });
+    $scope.deleteMessage = function (id, confirmed) {
+		if (!confirmed) {
+			$scope.id = id;
+			$scope.action = 'dialog';
+			$scope.status = null;
+		}
+		else {
+			$scope.action = 'list';
+			$http.delete('/messages/' + id, $rootScope.urlConfig).then(function () {
+				$scope.getMessages();
+				$scope.message = 'Wiadomość została usunięta pomyślnie.';
+				$scope.status = 'info';
+				$('div.alert').fadeIn();
+				setTimeout(function() {
+					$scope.message = null;
+					$scope.status = null;
+					$('div.alert').fadeOut();
+				}, $rootScope.settings['messages_timeout']);
+			});
+		}
     };
 
     $scope.cancelMessage = function () {

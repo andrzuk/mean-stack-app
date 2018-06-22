@@ -17,29 +17,31 @@ angular.module('imagesModule', [])
     };
 
     $scope.createImage = function () {
-        $scope.action = 'list';
-		var fd = new FormData();
-		fd.append('index', $scope.formData.index);
-		fd.append('file', $scope.formData.file);
-        $http.post('/images', fd, {
-			transformRequest: angular.identity,
-			headers: {
-                'Content-Type': undefined,
-                'user-id': $rootScope.urlConfig.headers['user-id'],
-                'x-access-token': $rootScope.urlConfig.headers['x-access-token']
-            }
-		}).then(function (response) {
-            $scope.formData = {};
-            $scope.getImages();
-            $scope.message = 'Obrazek został dodany pomyślnie.';
-            $scope.status = 'info';
-            $('div.alert').fadeIn();
-            setTimeout(function() {
-                $scope.message = null;
-                $scope.status = null;
-                $('div.alert').fadeOut();
-            }, $rootScope.settings['messages_timeout']);
-        });
+		if ($scope.formData.index && $scope.formData.file) {
+			$scope.action = 'list';
+			var fd = new FormData();
+			fd.append('index', $scope.formData.index);
+			fd.append('file', $scope.formData.file);
+			$http.post('/images', fd, {
+				transformRequest: angular.identity,
+				headers: {
+					'Content-Type': undefined,
+					'user-id': $rootScope.urlConfig.headers['user-id'],
+					'x-access-token': $rootScope.urlConfig.headers['x-access-token']
+				}
+			}).then(function (response) {
+				$scope.formData = {};
+				$scope.getImages();
+				$scope.message = 'Obrazek został dodany pomyślnie.';
+				$scope.status = 'info';
+				$('div.alert').fadeIn();
+				setTimeout(function() {
+					$scope.message = null;
+					$scope.status = null;
+					$('div.alert').fadeOut();
+				}, $rootScope.settings['messages_timeout']);
+			});
+		}
     };
 
     $scope.editImage = function (id) {
@@ -50,29 +52,31 @@ angular.module('imagesModule', [])
     };
 
     $scope.updateImage = function (id) {
-        $scope.action = 'list';
-		var fd = new FormData();
-		fd.append('index', $scope.formData.index);
-		fd.append('file', $scope.formData.file);
-        $http.put('/images/' + id, fd, {
-			transformRequest: angular.identity,
-			headers: {
-                'Content-Type': undefined,
-                'user-id': $rootScope.urlConfig.headers['user-id'],
-                'x-access-token': $rootScope.urlConfig.headers['x-access-token']
-            }
-		}).then(function (response) {
-            $scope.formData = {};
-            $scope.getImages();
-            $scope.message = 'Obrazek został zmieniony pomyślnie.';
-            $scope.status = 'info';
-            $('div.alert').fadeIn();
-            setTimeout(function() {
-                $scope.message = null;
-                $scope.status = null;
-                $('div.alert').fadeOut();
-            }, $rootScope.settings['messages_timeout']);
-        });
+		if ($scope.formData.index && $scope.formData.file) {
+			$scope.action = 'list';
+			var fd = new FormData();
+			fd.append('index', $scope.formData.index);
+			fd.append('file', $scope.formData.file);
+			$http.put('/images/' + id, fd, {
+				transformRequest: angular.identity,
+				headers: {
+					'Content-Type': undefined,
+					'user-id': $rootScope.urlConfig.headers['user-id'],
+					'x-access-token': $rootScope.urlConfig.headers['x-access-token']
+				}
+			}).then(function (response) {
+				$scope.formData = {};
+				$scope.getImages();
+				$scope.message = 'Obrazek został zmieniony pomyślnie.';
+				$scope.status = 'info';
+				$('div.alert').fadeIn();
+				setTimeout(function() {
+					$scope.message = null;
+					$scope.status = null;
+					$('div.alert').fadeOut();
+				}, $rootScope.settings['messages_timeout']);
+			});
+		}
     };
 
     $scope.previewImage = function (id) {
@@ -82,19 +86,26 @@ angular.module('imagesModule', [])
         });
     };
 
-    $scope.deleteImage = function (id) {
-        $scope.action = 'list';
-        $http.delete('/images/' + id, $rootScope.urlConfig).then(function () {
-            $scope.getImages();
-            $scope.message = 'Obrazek został usunięty pomyślnie.';
-            $scope.status = 'info';
-            $('div.alert').fadeIn();
-            setTimeout(function() {
-                $scope.message = null;
-                $scope.status = null;
-                $('div.alert').fadeOut();
-            }, $rootScope.settings['messages_timeout']);
-        });
+    $scope.deleteImage = function (id, confirmed) {
+		if (!confirmed) {
+			$scope.id = id;
+			$scope.action = 'dialog';
+			$scope.status = null;
+		}
+		else {
+			$scope.action = 'list';
+			$http.delete('/images/' + id, $rootScope.urlConfig).then(function () {
+				$scope.getImages();
+				$scope.message = 'Obrazek został usunięty pomyślnie.';
+				$scope.status = 'info';
+				$('div.alert').fadeIn();
+				setTimeout(function() {
+					$scope.message = null;
+					$scope.status = null;
+					$('div.alert').fadeOut();
+				}, $rootScope.settings['messages_timeout']);
+			});
+		}
     };
 
     $scope.cancelImage = function () {

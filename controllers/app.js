@@ -256,18 +256,20 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
 	
 	$scope.sendMessage = function () {
 		$scope.formData.ip = $rootScope.currentIp.ip;
-		$http.post('/messages', $scope.formData).then(function () {
-			$scope.formData = {};
-			$scope.message = 'Wiadomość została wysłana pomyślnie.';
-			$scope.state = 'info';
-			$('div.alert').fadeIn();
-			setTimeout(function() {
-				$scope.message = null;
-				$scope.state = null;
-				$('div.alert').fadeOut();
-			}, $rootScope.settings['messages_timeout']);
-		});
-		$scope.registerVisitor('send-message');
+		if ($scope.formData.name && $scope.formData.email && $scope.formData.message) {
+			$http.post('/messages', $scope.formData).then(function () {
+				$scope.formData = {};
+				$scope.message = 'Wiadomość została wysłana pomyślnie.';
+				$scope.state = 'info';
+				$('div.alert').fadeIn();
+				setTimeout(function() {
+					$scope.message = null;
+					$scope.state = null;
+					$('div.alert').fadeOut();
+				}, $rootScope.settings['messages_timeout']);
+			});
+			$scope.registerVisitor('send-message');
+		}
 	};
 
 	$scope.isUserLoggedIn = function(callback) {

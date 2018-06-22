@@ -128,3 +128,18 @@ img.full-preview {
 div.alert {
     width: 100%;
 }
+div.panel-dialog {
+	border: 1px solid #c00;
+	border-radius: 0.4em;
+	padding: 1em;
+	background-color: #fdb;
+	color: #c00;
+}
+div.panel-dialog div.panel-heading {
+	font-size: 1.25em;
+	font-weight: bold;
+	background-color: #ffa;
+}
+div.panel-dialog div.panel-footer {
+	margin: 2em 0 0 0;
+}

@@ -1,101 +1,119 @@
 <div ng-show="module == 'users'" ng-controller="usersController">
    
-    <div class="container" ng-show="action == 'list'">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="py-3 text-right">
-                    <span class="list-title"><i class="fa fa-user" aria-hidden="true"></i> Użytkownicy</span>
-                    <span class="list-search"><input type="search" class="form-control" ng-model="searchValue" placeholder="Szukaj"></span>
-                    <button class="btn btn-success font-awesome" ng-click="newUser()"><i class="fa fa-plus" aria-hidden="true"></i> Dodaj nowego użytkownika</button>
-                    <button class="btn btn-primary font-awesome" ng-click="getUsers()" id="get-users"><i class="fa fa-refresh" aria-hidden="true"></i> Odśwież listę</button>
-                    <button class="btn btn-danger" ng-click="getPanel()"><i class="fa fa-times" aria-hidden="true"></i></button>
-                </div>
-                <table class="table table-bordered table-striped">
-                    <tr>
-                        <th>Lp.</th>
-                        <th class="text-left">Login</th>
-                        <th class="text-left">E-mail</th>
-                        <th class="text-left">Token</th>
-                        <th class="text-left">IP</th>
-                        <th>Data</th>
-                        <th colspan="2" class="text-center">Akcje</th>
-                    </tr>
-                    <tr ng-repeat="user in users | filter:searchValue">
-                        <td>{{ $index + 1 }}</td>
-                        <td class="text-left">{{ user.login }}</td>
-                        <td class="text-left">{{ user.email }}</td>
-                        <td class="text-left">{{ user.token | limitTo:16 }}<span ng-if="user.token.length > 16">...</span></td>
-                        <td class="text-left">{{ user.ip }}</td>
-                        <td>{{ user.date | date: "dd.MM.yyyy HH:mm:ss" }}</td>
-                        <td class="text-center">
-                            <button class="btn btn-primary action" ng-click="editUser(user._id)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                        </td>
-                        <td class="text-center">
-                            <button class="btn btn-danger action" ng-click="deleteUser(user._id)" ng-disabled="user._id == currentUser._id"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                        </td>
-                    </tr>
-                    <tr ng-if="users.length == 0">
-                        <td colspan="8"><span class="empty-list"><i class="fa fa-times-circle" aria-hidden="true"></i></span><br>Brak pozycji.</td>
-                    </tr>
-                </table>
-                <div class="py-3 text-center">
-                    Statystyka: <b>{{ users.length }}</b> użytkowników
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="container" ng-show="action == 'new'">
-        <div class="py-4 row">
-            <div class="col-lg-4 offset-lg-4">
-                <form class="form">
-                    <span class="form-title container"><i class="fa fa-user" aria-hidden="true"></i> Użytkownik</span>
-                    <input type="hidden" ng-model="formData.ip">
-                    <input type="hidden" ng-model="formData.token">
-                    <div class="form-group text-left">
-                        <h6>Login:</h6>
-                        <input type="text" class="form-control" ng-model="formData.login"> 
-                        <h6>E-mail:</h6>
-                        <input type="email" class="form-control" ng-model="formData.email"> 
-                        <h6>Hasło:</h6>
-                        <input type="password" class="form-control" ng-model="formData.password"> 
-                    </div>
-                    <button type="submit" class="btn btn-primary font-awesome" ng-click="createUser()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Zapisz</button>
-                    <button type="submit" class="btn btn-warning font-awesome" ng-click="cancelUser()"><i class="fa fa-ban" aria-hidden="true"></i> Anuluj</button>
-                </form>
-            </div>
-        </div>
-    </div>
+	<div class="container" ng-show="action == 'list'">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="py-3 text-right">
+					<span class="list-title"><i class="fa fa-user" aria-hidden="true"></i> Użytkownicy</span>
+					<span class="list-search"><input type="search" class="form-control" ng-model="searchValue" placeholder="Szukaj"></span>
+					<button class="btn btn-success font-awesome" ng-click="newUser()"><i class="fa fa-plus" aria-hidden="true"></i> Dodaj nowego użytkownika</button>
+					<button class="btn btn-primary font-awesome" ng-click="getUsers()" id="get-users"><i class="fa fa-refresh" aria-hidden="true"></i> Odśwież listę</button>
+					<button class="btn btn-danger" ng-click="getPanel()"><i class="fa fa-times" aria-hidden="true"></i></button>
+				</div>
+				<table class="table table-bordered table-striped">
+					<tr>
+						<th>Lp.</th>
+						<th class="text-left">Login</th>
+						<th class="text-left">E-mail</th>
+						<th class="text-left">Token</th>
+						<th class="text-left">IP</th>
+						<th>Data</th>
+						<th colspan="2" class="text-center">Akcje</th>
+					</tr>
+					<tr ng-repeat="user in users | filter:searchValue">
+						<td>{{ $index + 1 }}</td>
+						<td class="text-left">{{ user.login }}</td>
+						<td class="text-left">{{ user.email }}</td>
+						<td class="text-left">{{ user.token | limitTo:16 }}<span ng-if="user.token.length > 16">...</span></td>
+						<td class="text-left">{{ user.ip }}</td>
+						<td>{{ user.date | date: "dd.MM.yyyy HH:mm:ss" }}</td>
+						<td class="text-center">
+							<button class="btn btn-primary action" ng-click="editUser(user._id)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+						</td>
+						<td class="text-center">
+							<button class="btn btn-danger action" ng-click="deleteUser(user._id, false)" ng-disabled="user._id == currentUser._id"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+						</td>
+					</tr>
+					<tr ng-if="users.length == 0">
+						<td colspan="8"><span class="empty-list"><i class="fa fa-times-circle" aria-hidden="true"></i></span><br>Brak pozycji.</td>
+					</tr>
+				</table>
+				<div class="py-3 text-center">
+					Statystyka: <b>{{ users.length }}</b> użytkowników
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container" ng-show="action == 'new'">
+		<div class="py-4 row">
+			<div class="col-lg-4 offset-lg-4">
+				<form class="form">
+					<span class="form-title container"><i class="fa fa-user" aria-hidden="true"></i> Użytkownik</span>
+					<input type="hidden" ng-model="formData.ip">
+					<input type="hidden" ng-model="formData.token">
+					<div class="form-group text-left">
+						<h6>Login:</h6>
+						<input type="text" class="form-control" ng-model="formData.login" required> 
+						<h6>E-mail:</h6>
+						<input type="email" class="form-control" ng-model="formData.email" required> 
+						<h6>Hasło:</h6>
+						<input type="password" class="form-control" ng-model="formData.password" required> 
+					</div>
+					<button type="submit" class="btn btn-primary font-awesome" ng-click="createUser()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Zapisz</button>
+					<button type="submit" class="btn btn-warning font-awesome" ng-click="cancelUser()"><i class="fa fa-ban" aria-hidden="true"></i> Anuluj</button>
+				</form>
+			</div>
+		</div>
+	</div>
 
-    <div class="container" ng-show="action == 'edit'">
-        <div class="py-4 row">
-            <div class="col-lg-4 offset-lg-4">
-                <form class="form">
-                    <span class="form-title container"><i class="fa fa-user" aria-hidden="true"></i> Użytkownik</span>
-                    <input type="hidden" ng-model="formData.ip">
-                    <input type="hidden" ng-model="formData.token">
-                    <div class="form-group text-left">
-                        <h6>Login:</h6>
-                        <input type="text" class="form-control" ng-model="formData.login"> 
-                        <h6>E-mail:</h6>
-                        <input type="email" class="form-control" ng-model="formData.email"> 
-                        <h6>Hasło:</h6>
-                        <input type="password" class="form-control" ng-model="formData.password"> 
-                    </div>
-                    <button type="submit" class="btn btn-primary font-awesome" ng-click="updateUser(formData._id)"><i class="fa fa-floppy-o" aria-hidden="true"></i> Zapisz</button>
-                    <button type="submit" class="btn btn-warning font-awesome" ng-click="cancelUser()"><i class="fa fa-ban" aria-hidden="true"></i> Anuluj</button>
-                </form>
-            </div>
-        </div>
-    </div>
-    
-    <div class="container">
-        <div class="py-4 row">
-            <div class="col-lg-6 offset-lg-3">
-                <div ng-if="status == 'info'" class="alert alert-success" role="alert">{{ message }}</div>
-                <div ng-if="status == 'error'" class="alert alert-danger" role="alert">{{ message }}</div>
-            </div>
-        </div>
-    </div>
+	<div class="container" ng-show="action == 'edit'">
+		<div class="py-4 row">
+			<div class="col-lg-4 offset-lg-4">
+				<form class="form">
+					<span class="form-title container"><i class="fa fa-user" aria-hidden="true"></i> Użytkownik</span>
+					<input type="hidden" ng-model="formData.ip">
+					<input type="hidden" ng-model="formData.token">
+					<div class="form-group text-left">
+						<h6>Login:</h6>
+						<input type="text" class="form-control" ng-model="formData.login" required> 
+						<h6>E-mail:</h6>
+						<input type="email" class="form-control" ng-model="formData.email" required> 
+						<h6>Hasło:</h6>
+						<input type="password" class="form-control" ng-model="formData.password" required> 
+					</div>
+					<button type="submit" class="btn btn-primary font-awesome" ng-click="updateUser(formData._id)"><i class="fa fa-floppy-o" aria-hidden="true"></i> Zapisz</button>
+					<button type="submit" class="btn btn-warning font-awesome" ng-click="cancelUser()"><i class="fa fa-ban" aria-hidden="true"></i> Anuluj</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container">
+		<div class="py-4 row">
+			<div class="col-lg-6 offset-lg-3">
+				<div ng-if="status == 'info'" class="alert alert-success" role="alert">{{ message }}</div>
+				<div ng-if="status == 'error'" class="alert alert-danger" role="alert">{{ message }}</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container" ng-show="action == 'dialog'">
+		<div class="py-4 row">
+			<div class="col-lg-6 offset-lg-3">
+				<div class="panel panel-dialog">
+					<div class="panel-heading">Usuwanie rekordu</div>
+					<div class="panel-body">
+						<p><div class="icon"><i class="fa fa-3x fa-trash-o" aria-hidden="true"></i></div></p>
+						<p>Uwaga! Czy na pewno chcesz usunąć wskazaną pozycję?</p>
+					</div>
+					<div class="panel-footer">
+						<a href="#" class="btn btn-danger" ng-click="deleteUser(id, true)">Skasuj</a>
+						<a href="#" class="btn btn-warning" ng-click="cancelUser()">Anuluj</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 </div>
