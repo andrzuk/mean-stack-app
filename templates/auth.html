@@ -8,11 +8,11 @@
 					<input type="hidden" ng-model="formData.ip">
 					<div class="form-group text-left">
 						<h6>Login:</h6>
-						<input type="text" id="register-name" class="form-control" ng-model="formData.login" ng-disabled="status == 'wait'"> 
+						<input type="text" id="register-name" class="form-control" ng-model="formData.login" ng-disabled="status == 'wait'" required> 
 						<h6>E-mail:</h6>
-						<input type="email" class="form-control" ng-model="formData.email" ng-disabled="status == 'wait'"> 
+						<input type="email" class="form-control" ng-model="formData.email" ng-disabled="status == 'wait'" required> 
 						<h6>Hasło:</h6>
-						<input type="password" class="form-control" ng-model="formData.password" ng-disabled="status == 'wait'"> 
+						<input type="password" class="form-control" ng-model="formData.password" ng-disabled="status == 'wait'" required> 
 					</div>
 					<hr>
 					<button type="submit" class="btn btn-primary btn-block font-awesome" ng-click="registerUser()" ng-disabled="status == 'wait'"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Zarejestruj</button>
@@ -29,9 +29,9 @@
 					<input type="hidden" ng-model="formData.ip">
 					<div class="form-group text-left">
 						<h6>Login:</h6>
-						<input type="text" id="login-name" class="form-control" ng-model="formData.login" ng-disabled="status == 'wait'"> 
+						<input type="text" id="login-name" class="form-control" ng-model="formData.login" ng-disabled="status == 'wait'" required> 
 						<h6>Hasło:</h6>
-						<input type="password" class="form-control" ng-model="formData.password" ng-disabled="status == 'wait'"> 
+						<input type="password" class="form-control" ng-model="formData.password" ng-disabled="status == 'wait'" required> 
 					</div>
 					<hr>
 					<button type="submit" class="btn btn-primary btn-block font-awesome" ng-click="loginUser()" ng-disabled="status == 'wait'"><i class="fa fa-sign-in" aria-hidden="true"></i> Zaloguj</button>
@@ -58,6 +58,7 @@
 					<div class="col-lg-6 py-1">
 						<button class="btn btn-primary btn-block font-awesome left-align" ng-click="getAppSettings()"><i class="fa fa-cog" aria-hidden="true"></i> Ustawienia</button>
 						<button class="btn btn-primary btn-block font-awesome left-align" ng-click="getAppVisitors()"><i class="fa fa-globe" aria-hidden="true"></i> Odwiedziny</button>
+						<button class="btn btn-primary btn-block font-awesome left-align" ng-click="getAppLogins()"><i class="fa fa-sign-in" aria-hidden="true"></i> Logowania</button>
 						<button class="btn btn-primary btn-block font-awesome left-align" ng-click="getAppBackup()"><i class="fa fa-database" aria-hidden="true"></i> Backup</button>
 						<button class="btn btn-danger btn-block font-awesome left-align" ng-click="logoutUser()"><i class="fa fa-sign-out" aria-hidden="true"></i> Wyloguj</button>
 					</div>

@@ -2,21 +2,21 @@ angular.module('imagesModule', [])
 
 .controller('imagesController', ['$rootScope', '$scope', '$http', '$location', function ($rootScope, $scope, $http, $location) {
 
-    $scope.images = [];
-    
-    $scope.getImages = function () {
-        $scope.action = 'list';
-        $http.get('/images', $rootScope.urlConfig).then(function (response) {
-            $scope.images = response.data;
-        });
-    };
+	$scope.images = [];
+	
+	$scope.getImages = function () {
+		$scope.action = 'list';
+		$http.get('/images', $rootScope.urlConfig).then(function (response) {
+			$scope.images = response.data;
+		});
+	};
 
-    $scope.newImage = function () {
-        $scope.action = 'new';
-        $scope.formData = {};
-    };
+	$scope.newImage = function () {
+		$scope.action = 'new';
+		$scope.formData = {};
+	};
 
-    $scope.createImage = function () {
+	$scope.createImage = function () {
 		if ($scope.formData.index && $scope.formData.file) {
 			$scope.action = 'list';
 			var fd = new FormData();
@@ -42,16 +42,16 @@ angular.module('imagesModule', [])
 				}, $rootScope.settings['messages_timeout']);
 			});
 		}
-    };
+	};
 
-    $scope.editImage = function (id) {
-        $scope.action = 'edit';
-        $http.get('/images/' + id, $rootScope.urlConfig).then(function (response) {
-            $scope.formData = response.data;
-        });
-    };
+	$scope.editImage = function (id) {
+		$scope.action = 'edit';
+		$http.get('/images/' + id, $rootScope.urlConfig).then(function (response) {
+			$scope.formData = response.data;
+		});
+	};
 
-    $scope.updateImage = function (id) {
+	$scope.updateImage = function (id) {
 		if ($scope.formData.index && $scope.formData.file) {
 			$scope.action = 'list';
 			var fd = new FormData();
@@ -77,16 +77,16 @@ angular.module('imagesModule', [])
 				}, $rootScope.settings['messages_timeout']);
 			});
 		}
-    };
+	};
 
-    $scope.previewImage = function (id) {
-        $scope.action = 'preview';
-        $http.get('/images/' + id, $rootScope.urlConfig).then(function (response) {
-            $scope.image = response.data;
-        });
-    };
+	$scope.previewImage = function (id) {
+		$scope.action = 'preview';
+		$http.get('/images/' + id, $rootScope.urlConfig).then(function (response) {
+			$scope.image = response.data;
+		});
+	};
 
-    $scope.deleteImage = function (id, confirmed) {
+	$scope.deleteImage = function (id, confirmed) {
 		if (!confirmed) {
 			$scope.id = id;
 			$scope.action = 'dialog';
@@ -106,10 +106,10 @@ angular.module('imagesModule', [])
 				}, $rootScope.settings['messages_timeout']);
 			});
 		}
-    };
+	};
 
-    $scope.cancelImage = function () {
-        $scope.action = 'list';
-    };
+	$scope.cancelImage = function () {
+		$scope.action = 'list';
+	};
 
 }]);

@@ -7,11 +7,14 @@ module.exports = function(params) {
 	
 	var token = require('./token.js')({ database: db, objectId: ObjectID });
 
-	router.get('/', function (req, res, next) {
+	router.get('/:excluded/:limit', function (req, res, next) {
 		token.checkAuth(req.headers, function(access) {
 			if (access) {
-				db.collection('settings', function (err, collection) {
-					collection.find().toArray(function (err, result) {
+				db.collection('logins', function (err, collection) {
+					collection.find({ ip: { $nin: req.params.excluded.split(', ') } })
+							  .sort({ date: -1 })
+							  .limit(parseInt(req.params.limit))
+							  .toArray(function (err, result) {
 						res.send(result);
 					});
 				});
@@ -25,7 +28,7 @@ module.exports = function(params) {
 	router.get('/:id', function (req, res, next) {
 		token.checkAuth(req.headers, function(access) {
 			if (access) {
-				db.collection('settings', function (err, collection) {
+				db.collection('logins', function (err, collection) {
 					collection.findOne({
 						_id: new ObjectID(req.params.id)
 					}, function (err, result) {
@@ -39,34 +42,14 @@ module.exports = function(params) {
 		});
 	});
 
-	router.post('/', function (req, res, next) {
-		token.checkAuth(req.headers, function(access) {
-			if (access) {
-				db.collection('settings').insertOne({
-					name: req.body.name,
-					value: req.body.value,
-					description: req.body.description,
-					date: Date.now()
-				}, function (err, result) {
-					res.send(result);
-				});
-			}
-			else {
-				res.json({});
-			}
-		});
-	});
-
-	router.put('/:id', function (req, res, next) {
+	router.put('/exclude/:ip', function (req, res, next) {
 		token.checkAuth(req.headers, function(access) {
 			if (access) {
 				db.collection('settings').updateOne({
-					_id: new ObjectID(req.params.id)
+					_id: new ObjectID(req.body.id)
 				}, {
 					$set: {
-						name: req.body.name,
-						value: req.body.value,
-						description: req.body.description,
+						value: req.body.value + ', ' + req.params.ip,
 						date: Date.now()
 					}
 				}, function (err, result) {
@@ -82,7 +65,7 @@ module.exports = function(params) {
 	router.delete('/:id', function (req, res, next) {
 		token.checkAuth(req.headers, function(access) {
 			if (access) {
-				db.collection('settings').removeOne({
+				db.collection('logins').removeOne({
 					_id: new ObjectID(req.params.id)
 				}, function (err, result) {
 					res.send(result);

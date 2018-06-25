@@ -2,23 +2,23 @@ angular.module('messagesModule', [])
 
 .controller('messagesController', ['$rootScope', '$scope', '$http', function ($rootScope, $scope, $http) {
 
-    $scope.messages = [];
-    
-    $scope.getMessages = function () {
-        $scope.action = 'list';
-        $http.get('/messages', $rootScope.urlConfig).then(function (response) {
-            $scope.messages = response.data;
-        });
-    };
+	$scope.messages = [];
+	
+	$scope.getMessages = function () {
+		$scope.action = 'list';
+		$http.get('/messages', $rootScope.urlConfig).then(function (response) {
+			$scope.messages = response.data;
+		});
+	};
 
-    $scope.editMessage = function (id) {
-        $scope.action = 'edit';
-        $http.get('/messages/' + id, $rootScope.urlConfig).then(function (response) {
-            $scope.formData = response.data;
-        });
-    };
+	$scope.editMessage = function (id) {
+		$scope.action = 'edit';
+		$http.get('/messages/' + id, $rootScope.urlConfig).then(function (response) {
+			$scope.formData = response.data;
+		});
+	};
 
-    $scope.updateMessage = function (id) {
+	$scope.updateMessage = function (id) {
 		if ($scope.formData.name && $scope.formData.email && $scope.formData.message) {
 			$scope.action = 'list';
 			$http.put('/messages/' + id, $scope.formData, $rootScope.urlConfig).then(function () {
@@ -34,9 +34,9 @@ angular.module('messagesModule', [])
 				}, $rootScope.settings['messages_timeout']);
 			});
 		}
-    };
+	};
 
-    $scope.deleteMessage = function (id, confirmed) {
+	$scope.deleteMessage = function (id, confirmed) {
 		if (!confirmed) {
 			$scope.id = id;
 			$scope.action = 'dialog';
@@ -56,10 +56,10 @@ angular.module('messagesModule', [])
 				}, $rootScope.settings['messages_timeout']);
 			});
 		}
-    };
+	};
 
-    $scope.cancelMessage = function () {
-        $scope.action = 'list';
-    };
+	$scope.cancelMessage = function () {
+		$scope.action = 'list';
+	};
 
 }]);

@@ -2,21 +2,21 @@ angular.module('settingsModule', [])
 
 .controller('settingsController', ['$rootScope', '$scope', '$http', function ($rootScope, $scope, $http) {
 
-    $scope.settings = [];
-    
-    $scope.getSettings = function () {
-        $scope.action = 'list';
-        $http.get('/settings', $rootScope.urlConfig).then(function (response) {
-            $scope.settings = response.data;
-        });
-    };
+	$scope.settings = [];
+	
+	$scope.getSettings = function () {
+		$scope.action = 'list';
+		$http.get('/settings', $rootScope.urlConfig).then(function (response) {
+			$scope.settings = response.data;
+		});
+	};
 
-    $scope.newSetting = function () {
-        $scope.action = 'new';
-        $scope.formData = {};
-    };
+	$scope.newSetting = function () {
+		$scope.action = 'new';
+		$scope.formData = {};
+	};
 
-    $scope.createSetting = function () {
+	$scope.createSetting = function () {
 		if ($scope.formData.name && $scope.formData.value && $scope.formData.description) {
 			$scope.action = 'list';
 			$http.post('/settings', $scope.formData, $rootScope.urlConfig).then(function () {
@@ -32,16 +32,16 @@ angular.module('settingsModule', [])
 				}, $rootScope.settings['messages_timeout']);
 			});
 		}
-    };
+	};
 
-    $scope.editSetting = function (id) {
-        $scope.action = 'edit';
-        $http.get('/settings/' + id, $rootScope.urlConfig).then(function (response) {
-            $scope.formData = response.data;
-        });
-    };
+	$scope.editSetting = function (id) {
+		$scope.action = 'edit';
+		$http.get('/settings/' + id, $rootScope.urlConfig).then(function (response) {
+			$scope.formData = response.data;
+		});
+	};
 
-    $scope.updateSetting = function (id) {
+	$scope.updateSetting = function (id) {
 		if ($scope.formData.name && $scope.formData.value && $scope.formData.description) {
 			$scope.action = 'list';
 			$http.put('/settings/' + id, $scope.formData, $rootScope.urlConfig).then(function () {
@@ -57,9 +57,9 @@ angular.module('settingsModule', [])
 				}, $rootScope.settings['messages_timeout']);
 			});
 		}
-    };
+	};
 
-    $scope.deleteSetting = function (id, confirmed) {
+	$scope.deleteSetting = function (id, confirmed) {
 		if (!confirmed) {
 			$scope.id = id;
 			$scope.action = 'dialog';
@@ -79,10 +79,10 @@ angular.module('settingsModule', [])
 				}, $rootScope.settings['messages_timeout']);
 			});
 		}
-    };
+	};
 
-    $scope.cancelSetting = function () {
-        $scope.action = 'list';
-    };
+	$scope.cancelSetting = function () {
+		$scope.action = 'list';
+	};
 
 }]);
