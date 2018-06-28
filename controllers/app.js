@@ -125,6 +125,7 @@ var app = angular.module('mainApp', ['authModule', 'pagesModule', 'usersModule',
 	$scope.getPanel = function() {
 		$rootScope.module = 'auth';
 		$rootScope.action = 'panel';
+		$rootScope.getStats();
 		$scope.status = null;
 		$scope.registerVisitor('admin-panel');
 	};

@@ -1,6 +1,8 @@
 angular.module('authModule', [])
 
 .controller('authController', ['$rootScope', '$scope', '$http', function ($rootScope, $scope, $http) {
+    
+	$scope.stats = {};
 
 	$rootScope.registerUser = function () {
 		$scope.status = 'wait';
@@ -13,6 +15,7 @@ angular.module('authModule', [])
 				$rootScope.urlConfig.headers["x-access-token"] = window.localStorage.getItem('authToken');
 				$scope.formData = {};
 				$rootScope.action = 'panel';
+				$rootScope.getStats();
 				$scope.message = 'Zostałeś pomyślnie zarejestrowany.';
 				$scope.status = 'info';
 			}
@@ -41,6 +44,7 @@ angular.module('authModule', [])
 				$rootScope.urlConfig.headers["x-access-token"] = window.localStorage.getItem('authToken');
 				$scope.formData = {};
 				$rootScope.action = 'panel';
+				$rootScope.getStats();
 				$scope.message = 'Zostałeś pomyślnie zalogowany.';
 				$scope.status = 'info';
 			}
@@ -79,6 +83,16 @@ angular.module('authModule', [])
 				$scope.status = null;
 				$('div.alert').fadeOut();
 			}, $rootScope.settings['messages_timeout']);
+		});
+	};
+    
+	$rootScope.getStats = function() {
+		$scope.stats = { messages: 0, logins: 0, visitors: 0 };
+		$http.get('/setting/visitors_excluded').then(function (response) {
+			$scope.excluded = response.data;
+			$http.get('/stats/' + $scope.excluded.value).then(function (response) {
+				$scope.stats = response.data;
+			});
 		});
 	};
 

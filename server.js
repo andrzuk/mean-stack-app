@@ -92,6 +92,26 @@ app.get('/setting/:name', function (req, res) {
 	});
 });
 
+app.get('/stats/:excluded', function (req, res) {
+	var stats = {};
+	db.collection('messages', function (err, collection) {
+		collection.count({ accept: { $ne: 'true' } }, function (err, result) {
+			stats.messages = result;
+			db.collection('logins', function (err, collection) {
+				collection.count({ ip: { $nin: req.params.excluded.split(', ') } }, function (err, result) {
+					stats.logins = result;
+					db.collection('visitors', function (err, collection) {
+						collection.count({ ip: { $nin: req.params.excluded.split(', ') } }, function (err, result) {
+							stats.visitors = result;
+							res.json(stats);
+						});
+					});
+				});
+			});
+		});
+	});
+});
+
 app.post('/visitor', function (req, res) {
 	if (req.body.ip !== null && req.body.url.length) {
 		db.collection('visitors').insertOne({

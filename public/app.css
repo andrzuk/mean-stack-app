@@ -143,3 +143,23 @@ div.panel-dialog div.panel-heading {
 div.panel-dialog div.panel-footer {
 	margin: 2em 0 0 0;
 }
+div.info-element {
+	border-left: 1px solid #ddd;
+	color: #090;
+}
+div.stat-heading {
+	font-size: 1.25em;
+	font-weight: bold;
+}
+div.stat-big {
+	font-size: 2em;
+	font-weight: bold;
+}
+span.stat-symbol {
+	float: left;
+	color: #f90;
+}
+span.stat-value {
+	float: right;
+	color: #c00;
+}
